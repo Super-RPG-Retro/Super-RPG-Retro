@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "av", "Element": "None", "Turns": 100, "Range": 1, "Location": "Caster", "Animation": 0, "Field": 0, "Group": "Self", "Gold": 0, "Level": 1, "MP": 30, "Description": "Avoid combat. Temporarily hide all mobs and stops them from spawning.", "Short_Description": "Temporarily avoid combat.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

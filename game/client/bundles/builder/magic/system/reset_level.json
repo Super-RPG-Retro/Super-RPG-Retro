@@ -1,0 +1,12 @@
+{"Stack_amount": 999, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "rs", "Element": "None", "Turns": 0, "Range": 1, "Location": "Caster", "Animation": 0, "Field": 0, "Group": "Self", "Gold": 0, "Level": 1, "MP": 0, "Description": "Resets dungeon level back to default.", "Short_Description": "Resets dungeon level back to default.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

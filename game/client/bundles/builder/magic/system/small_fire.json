@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "1D6", "Abbreviation": "sf", "Element": "Fire", "Turns": 1, "Range": 3, "Location": "Object", "Animation": 2, "Field": 0, "Group": "Attack", "Gold": 10, "Level": 5, "MP": 40, "Description": "Target: Any object. Burns a small hole in the selected target.", "Short_Description": "Burns a small hole in selected target.", 
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

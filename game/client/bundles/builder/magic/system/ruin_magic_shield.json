@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "1D10", "Abbreviation": "cs", "Element": "None", "Turns": 1, "Range": 3, "Location": "Grid", "Animation": 6, "Field": 0, "Group": "Support", "Gold": 450, "Level": 25, "MP": 150, "Description": "A good chance to disrupt a magic shield of an opponent. Roll a 6 or better to succeed", "Short_Description": "Chance to disrupt a magic shield.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

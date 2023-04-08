@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "pb", "Element": "Earth", "Turns": 44, "Range": 3, "Location": "Grid", "Animation": 3, "Field": 1, "Group": "Support", "Gold": 1000, "Level": 50, "MP": 575, "Description": "This rune causes an area to be contaminated with poisonous gas.", "Short_Description": "Contaminate area with poisonous gas.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

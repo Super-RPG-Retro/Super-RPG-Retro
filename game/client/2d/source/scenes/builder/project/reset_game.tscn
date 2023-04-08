@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://2d/source/scripts/builder/project/reset_game.gd" type="Script" id=1]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=2]
+[ext_resource path="res://2d/assets/themes/transparent-child.tres" type="Theme" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color( 0.352941, 0, 0, 1 )
+corner_detail = 1
+
+[node name="Node2D" type="Node2D" groups=["builder"]]
+script = ExtResource( 1 )
+
+[node name="Container" type="ScrollContainer" parent="."]
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 576.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+
+[node name="Grid" type="GridContainer" parent="Container"]
+margin_right = 950.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 200, 40 )
+columns = 2
+
+[node name="GameIDLabel" type="Label" parent="Container/Grid"]
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 222, 0 )
+text = "       Game ID."
+align = 2
+
+[node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_right = 950.0
+margin_bottom = 32.0
+
+[node name="GameIDspinbox" type="SpinBox" parent="Container/Grid/Grid2"]
+margin_right = 120.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 120, 0 )
+max_value = 9.0
+
+[node name="Label2" type="HBoxContainer" parent="Container/Grid/Grid2"]
+margin_left = 124.0
+margin_right = 124.0
+margin_bottom = 32.0
+alignment = 2
+
+[node name="GameTitle" type="Label" parent="Container/Grid"]
+margin_top = 36.0
+margin_right = 222.0
+margin_bottom = 58.0
+text = "Reset Game."
+align = 2
+valign = 1
+
+[node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 36.0
+margin_right = 950.0
+margin_bottom = 58.0
+alignment = 2
+
+[node name="Button" type="Button" parent="Container/Grid/Grid3"]
+margin_right = 86.0
+margin_bottom = 22.0
+custom_styles/normal = SubResource( 2 )
+text = "Confirm"
+
+[node name="Label3" type="Label" parent="Container/Grid/Grid3"]
+margin_left = 90.0
+margin_right = 724.0
+margin_bottom = 22.0
+text = "Reset all data (mobs, levels, etc)  back to default for this game ID."
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+margin_right = 550.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 550, 130 )
+theme = ExtResource( 3 )
+window_title = "Warning..."
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
+[connection signal="value_changed" from="Container/Grid/Grid2/GameIDspinbox" to="." method="_on_GameIDspinbox_value_changed"]
+[connection signal="pressed" from="Container/Grid/Grid3/Button" to="." method="_on_Button_reset_pressed"]
+[connection signal="confirmed" from="ConfirmDialog" to="." method="_on_confirm_dialog_confirmed"]

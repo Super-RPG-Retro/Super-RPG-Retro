@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://2d/assets/images/events/puzzles/block.png" type="Texture" id=1]
+
+[node name="Puzzle" type="Sprite" groups=["mobs"]]
+position = Vector2( 288, 224 )
+z_index = -1
+centered = false
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 16, 16 )
+hframes = 3

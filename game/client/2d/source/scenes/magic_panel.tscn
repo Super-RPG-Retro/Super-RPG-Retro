@@ -1,0 +1,263 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://2d/source/scripts/magic_panel/magic_panel.gd" type="Script" id=1]
+[ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=2]
+[ext_resource path="res://2d/assets/themes/theme_small_font.tres" type="Theme" id=4]
+[ext_resource path="res://2d/assets/images/cursor/rune_select2.png" type="Texture" id=5]
+[ext_resource path="res://audio/sound/buzz.ogg" type="AudioStream" id=6]
+[ext_resource path="res://2d/assets/images/arrows/arrow_small_up.png" type="Texture" id=7]
+[ext_resource path="res://2d/assets/images/rune_select1.png" type="Texture" id=8]
+[ext_resource path="res://audio/sound/click.ogg" type="AudioStream" id=9]
+[ext_resource path="res://2d/assets/images/arrows/arrow_small_down.png" type="Texture" id=10]
+[ext_resource path="res://2d/assets/images/units.png" type="Texture" id=11]
+[ext_resource path="res://2d/assets/images/units-overlay.png" type="Texture" id=12]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.156863, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_blend = true
+
+[node name="Node2D" type="Node2D" groups=["magic_panel"]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 135.0, 501.0 ],
+"_edit_vertical_guides_": [ 668.0, 604.0, 844.0 ]
+}
+
+[node name="Runes" type="Node2D" parent="."]
+position = Vector2( 0, 5 )
+
+[node name="ArrowUp" type="TextureRect" parent="Runes"]
+margin_left = 673.0
+margin_top = 130.0
+margin_right = 705.0
+margin_bottom = 162.0
+rect_scale = Vector2( 0.4, 0.4 )
+focus_neighbour_left = NodePath("../ButtonBuy")
+focus_neighbour_right = NodePath("../ArrowDown")
+focus_next = NodePath("../ArrowDown")
+focus_previous = NodePath("../ButtonBuy")
+focus_mode = 2
+texture = ExtResource( 7 )
+
+[node name="ArrowDown" type="TextureRect" parent="Runes"]
+margin_left = 691.0
+margin_top = 130.0
+margin_right = 723.0
+margin_bottom = 162.0
+rect_scale = Vector2( 0.4, 0.4 )
+focus_neighbour_left = NodePath("../ArrowUp")
+focus_neighbour_right = NodePath("../ButtonBuy")
+focus_next = NodePath("../ButtonBuy")
+focus_previous = NodePath("../ArrowUp")
+focus_mode = 2
+theme = ExtResource( 2 )
+texture = ExtResource( 10 )
+
+[node name="BG" type="Sprite" parent="Runes"]
+position = Vector2( 847, 202 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+
+[node name="Sprite1" type="TextureRect" parent="Runes"]
+margin_left = 746.0
+margin_top = 158.0
+margin_right = 781.0
+margin_bottom = 193.0
+
+[node name="Sprite2" type="TextureRect" parent="Runes"]
+margin_left = 780.0
+margin_top = 158.0
+margin_right = 815.0
+margin_bottom = 193.0
+
+[node name="Sprite3" type="TextureRect" parent="Runes"]
+margin_left = 814.0
+margin_top = 158.0
+margin_right = 849.0
+margin_bottom = 193.0
+
+[node name="Sprite4" type="TextureRect" parent="Runes"]
+margin_left = 848.0
+margin_top = 158.0
+margin_right = 883.0
+margin_bottom = 193.0
+
+[node name="Sprite5" type="TextureRect" parent="Runes"]
+margin_left = 882.0
+margin_top = 158.0
+margin_right = 917.0
+margin_bottom = 193.0
+
+[node name="Sprite6" type="TextureRect" parent="Runes"]
+margin_left = 916.0
+margin_top = 158.0
+margin_right = 951.0
+margin_bottom = 193.0
+
+[node name="Sprite7" type="TextureRect" parent="Runes"]
+margin_left = 950.0
+margin_top = 158.0
+margin_right = 985.0
+margin_bottom = 193.0
+
+[node name="Sprite8" type="TextureRect" parent="Runes"]
+margin_left = 984.0
+margin_top = 158.0
+margin_right = 1019.0
+margin_bottom = 193.0
+
+[node name="Sprite9" type="TextureRect" parent="Runes"]
+margin_left = 746.0
+margin_top = 192.0
+margin_right = 781.0
+margin_bottom = 227.0
+
+[node name="Sprite10" type="TextureRect" parent="Runes"]
+margin_left = 780.0
+margin_top = 192.0
+margin_right = 815.0
+margin_bottom = 227.0
+
+[node name="Sprite11" type="TextureRect" parent="Runes"]
+margin_left = 814.0
+margin_top = 192.0
+margin_right = 849.0
+margin_bottom = 227.0
+
+[node name="Sprite12" type="TextureRect" parent="Runes"]
+margin_left = 848.0
+margin_top = 192.0
+margin_right = 883.0
+margin_bottom = 227.0
+
+[node name="Sprite13" type="TextureRect" parent="Runes"]
+margin_left = 882.0
+margin_top = 192.0
+margin_right = 917.0
+margin_bottom = 227.0
+
+[node name="Sprite14" type="TextureRect" parent="Runes"]
+margin_left = 916.0
+margin_top = 192.0
+margin_right = 951.0
+margin_bottom = 227.0
+
+[node name="Sprite15" type="TextureRect" parent="Runes"]
+margin_left = 950.0
+margin_top = 192.0
+margin_right = 985.0
+margin_bottom = 227.0
+
+[node name="Sprite16" type="TextureRect" parent="Runes"]
+margin_left = 984.0
+margin_top = 192.0
+margin_right = 1019.0
+margin_bottom = 227.0
+
+[node name="Sprite17" type="TextureRect" parent="Runes"]
+margin_left = 746.0
+margin_top = 226.0
+margin_right = 781.0
+margin_bottom = 261.0
+
+[node name="Sprite18" type="TextureRect" parent="Runes"]
+margin_left = 780.0
+margin_top = 226.0
+margin_right = 815.0
+margin_bottom = 261.0
+
+[node name="Sprite19" type="TextureRect" parent="Runes"]
+margin_left = 814.0
+margin_top = 226.0
+margin_right = 849.0
+margin_bottom = 261.0
+
+[node name="Sprite20" type="TextureRect" parent="Runes"]
+margin_left = 848.0
+margin_top = 226.0
+margin_right = 883.0
+margin_bottom = 261.0
+
+[node name="Sprite21" type="TextureRect" parent="Runes"]
+margin_left = 882.0
+margin_top = 226.0
+margin_right = 917.0
+margin_bottom = 261.0
+
+[node name="Sprite22" type="TextureRect" parent="Runes"]
+margin_left = 916.0
+margin_top = 226.0
+margin_right = 951.0
+margin_bottom = 261.0
+
+[node name="Sprite23" type="TextureRect" parent="Runes"]
+margin_left = 950.0
+margin_top = 226.0
+margin_right = 985.0
+margin_bottom = 261.0
+
+[node name="Sprite24" type="TextureRect" parent="Runes"]
+margin_left = 984.0
+margin_top = 226.0
+margin_right = 1019.0
+margin_bottom = 261.0
+
+[node name="RuneSelect" type="AnimatedSprite" parent="Runes"]
+visible = false
+position = Vector2( 763, 243 )
+frames = SubResource( 2 )
+playing = true
+
+[node name="RuneBGoverlay" type="Sprite" parent="Runes"]
+position = Vector2( 847, 202 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+
+[node name="Title" type="Label" parent="Runes"]
+margin_left = 709.0
+margin_top = 126.0
+margin_right = 838.0
+margin_bottom = 144.0
+theme = ExtResource( 4 )
+
+[node name="SoundClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="SoundBuzz" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 0, 5 )
+z_index = 1
+z_as_relative = false
+
+[node name="RuneSummary" type="Panel" parent="Node2D"]
+margin_left = 676.0
+margin_top = 232.0
+margin_right = 1016.0
+margin_bottom = 259.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Node2D/RuneSummary"]
+margin_left = 5.0
+margin_top = 7.0
+margin_right = 331.0
+margin_bottom = 24.0
+
+[connection signal="mouse_entered" from="Runes/ArrowUp" to="." method="_on_rune_ArrowUp_mouse_entered"]
+[connection signal="mouse_exited" from="Runes/ArrowUp" to="." method="_on_rune_ArrowUp_mouse_exited"]
+[connection signal="mouse_entered" from="Runes/ArrowDown" to="." method="_on_rune_ArrowDown_mouse_entered"]
+[connection signal="mouse_exited" from="Runes/ArrowDown" to="." method="_on_rune_ArrowDown_mouse_exited"]

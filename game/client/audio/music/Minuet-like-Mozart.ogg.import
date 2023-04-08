@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Minuet-like-Mozart.ogg-ad0666c5b20e97e6df93a2beecf27494.oggstr"
+
+[deps]
+
+source_file="res://audio/music/Minuet-like-Mozart.ogg"
+dest_files=[ "res://.import/Minuet-like-Mozart.ogg-ad0666c5b20e97e6df93a2beecf27494.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

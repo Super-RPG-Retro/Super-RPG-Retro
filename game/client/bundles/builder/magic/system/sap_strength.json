@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "ss", "Element": "None", "Turns": 5, "Range": 3, "Location": "Grid", "Animation": 1, "Field": 0, "Group": "Support", "Gold": 20000, "Level": 90, "MP": 1500, "Description": "Sap the opponent's strength by temporarily disabling the creature's melee skill.", "Short_Description": "Sap the opponent's strength.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

@@ -1,0 +1,3354 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://2d/source/scenes/builder/next_event.tscn" type="PackedScene" id=3]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/m.png" type="Texture" id=4]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/b.png" type="Texture" id=5]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/8.png" type="Texture" id=6]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/e.png" type="Texture" id=7]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/l.png" type="Texture" id=8]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/12.png" type="Texture" id=9]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/10.png" type="Texture" id=10]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/j.png" type="Texture" id=11]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/c.png" type="Texture" id=12]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/9.png" type="Texture" id=13]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/3.png" type="Texture" id=14]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/k.png" type="Texture" id=15]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/6.png" type="Texture" id=16]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/empty.png" type="Texture" id=17]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/g.png" type="Texture" id=18]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/f.png" type="Texture" id=19]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/h.png" type="Texture" id=20]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/1.png" type="Texture" id=21]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/7.png" type="Texture" id=22]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/a.png" type="Texture" id=23]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/d.png" type="Texture" id=24]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/4.png" type="Texture" id=25]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/5.png" type="Texture" id=26]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/11.png" type="Texture" id=27]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/2.png" type="Texture" id=28]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/13.png" type="Texture" id=29]
+[ext_resource path="res://2d/assets/images/events/puzzles/builder_block0.png" type="Texture" id=30]
+[ext_resource path="res://2d/assets/images/events/puzzles/coordinates/i.png" type="Texture" id=31]
+[ext_resource path="res://2d/source/scripts/builder/events/puzzle.gd" type="Script" id=32]
+[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=33]
+[ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=34]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=35]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+
+[node name="Node2D" type="Node2D" groups=["builder"]]
+script = ExtResource( 32 )
+
+[node name="HeaderMenu" parent="." instance=ExtResource( 1 )]
+
+[node name="Container" type="ScrollContainer" parent="."]
+margin_left = 2.0
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 464.0
+mouse_filter = 2
+theme = ExtResource( 35 )
+custom_styles/bg = SubResource( 3 )
+scroll_horizontal_enabled = false
+
+[node name="Grid" type="GridContainer" parent="Container"]
+margin_right = 986.0
+margin_bottom = 1550.0
+rect_min_size = Vector2( 200, 100 )
+columns = 2
+
+[node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
+margin_right = 222.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 222, 0 )
+alignment = 2
+
+[node name="LabelMessage2" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_right = 986.0
+margin_bottom = 47.0
+theme = ExtResource( 33 )
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Most of these values are stored at hard drive builder_puzzle.txt. Deleting that file will restore most of these values back to default."
+autowrap = true
+
+[node name="KeepTheseNodesHidden" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 51.0
+margin_right = 222.0
+margin_bottom = 73.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/KeepTheseNodesHidden"]
+visible = false
+margin_left = 140.0
+margin_right = 259.0
+margin_bottom = 22.0
+focus_previous = NodePath("../../../ToTitle")
+text = "  Room Size."
+align = 2
+
+[node name="SpinboxEventRoomSize" type="SpinBox" parent="Container/Grid/KeepTheseNodesHidden" groups=["builder"]]
+visible = false
+margin_left = 161.0
+margin_right = 259.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 20.0
+value = 15.0
+editable = false
+
+[node name="RoomSizeLabel" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 51.0
+margin_right = 986.0
+margin_bottom = 73.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+text = "Puzzle rooms have a width/height of 15 units, excluding walls."
+
+[node name="EventNumber" type="Label" parent="Container/Grid"]
+margin_top = 82.0
+margin_right = 222.0
+margin_bottom = 104.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Event number."
+align = 2
+
+[node name="Grid8" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 77.0
+margin_right = 986.0
+margin_bottom = 109.0
+
+[node name="EventSpinbox" type="SpinBox" parent="Container/Grid/Grid8"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+max_value = 801.0
+page = 1.0
+value = 1.0
+
+[node name="LabelDescription6" type="Label" parent="Container/Grid/Grid8"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 742.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "  Changing the value here will change everything below this option."
+
+[node name="Dungeon" type="Label" parent="Container/Grid"]
+margin_top = 118.0
+margin_right = 222.0
+margin_bottom = 140.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+text = "Dungeon."
+align = 2
+
+[node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 113.0
+margin_right = 986.0
+margin_bottom = 145.0
+
+[node name="DungeonSpinbox" type="SpinBox" parent="Container/Grid/Grid4"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+page = 1.0
+value = 1.0
+
+[node name="LabelDescription7" type="Label" parent="Container/Grid/Grid4"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 448.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "  Event starts and ends at this level."
+
+[node name="Level" type="Label" parent="Container/Grid"]
+margin_top = 154.0
+margin_right = 222.0
+margin_bottom = 176.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+text = "Level."
+align = 2
+
+[node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 149.0
+margin_right = 986.0
+margin_bottom = 181.0
+
+[node name="LevelSpinbox" type="SpinBox" parent="Container/Grid/Grid1"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+page = 1.0
+value = 1.0
+
+[node name="LabelDescription" type="Label" parent="Container/Grid/Grid1"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 448.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "  Event starts and ends at this level."
+
+[node name="EventEnabled" type="Label" parent="Container/Grid"]
+margin_top = 210.0
+margin_right = 222.0
+margin_bottom = 232.0
+text = "Event Enabled."
+align = 2
+
+[node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 185.0
+margin_right = 986.0
+margin_bottom = 257.0
+
+[node name="EventEnabled" type="CheckButton" parent="Container/Grid/Grid5"]
+margin_right = 76.0
+margin_bottom = 72.0
+align = 2
+
+[node name="LabelDescription3" type="Label" parent="Container/Grid/Grid5"]
+margin_left = 80.0
+margin_right = 760.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 680, 0 )
+mouse_filter = 1
+text = "Is this event room enabled for this level? Event room is always room number 2. Room size is always minus 2 from current room size because walls are not displayed."
+autowrap = true
+
+[node name="ItemListTitle" type="Label" parent="Container/Grid"]
+margin_top = 292.0
+margin_right = 222.0
+margin_bottom = 314.0
+mouse_filter = 1
+text = "Solve for."
+align = 2
+
+[node name="Grid3" type="GridContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 261.0
+margin_right = 986.0
+margin_bottom = 346.0
+columns = 2
+
+[node name="ItemList" type="ItemList" parent="Container/Grid/Grid3"]
+margin_right = 225.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 225, 85 )
+items = [ "Yellow", null, false, "Red", null, false ]
+allow_reselect = true
+
+[node name="ItemListBody" type="Label" parent="Container/Grid/Grid3"]
+margin_left = 229.0
+margin_top = 19.0
+margin_right = 686.0
+margin_bottom = 66.0
+text = "  Puzzle will be solved when all blocks have this
+  color."
+
+[node name="MoveTotalTitle" type="Label" parent="Container/Grid"]
+margin_top = 355.0
+margin_right = 222.0
+margin_bottom = 377.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+text = "Move Total."
+align = 2
+
+[node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 350.0
+margin_right = 986.0
+margin_bottom = 382.0
+
+[node name="MoveTotalSpinbox" type="SpinBox" parent="Container/Grid/Grid2"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+page = 1.0
+value = 1.0
+
+[node name="MoveTotalBody" type="Label" parent="Container/Grid/Grid2"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 629.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = " The amount of moves it takes to complete this puzzle."
+
+[node name="Label" type="Label" parent="Container/Grid"]
+margin_top = 398.0
+margin_right = 222.0
+margin_bottom = 420.0
+mouse_filter = 1
+theme = ExtResource( 33 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="LabelDescription4" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 386.0
+margin_right = 986.0
+margin_bottom = 433.0
+mouse_filter = 1
+text = "Clicking a sprite below will change floor sprite to block1, block1 to block2 and block2 back to floor. Create the starting position of the  blocks for this level."
+autowrap = true
+
+[node name="Label2" type="Label" parent="Container/Grid"]
+margin_top = 449.0
+margin_right = 222.0
+margin_bottom = 471.0
+mouse_filter = 1
+theme = ExtResource( 33 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="LabelDescription5" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 437.0
+margin_right = 986.0
+margin_bottom = 484.0
+mouse_filter = 1
+text = "The is the layout when the level starts. Position the blocks in set number of moves to look like the layout at end."
+autowrap = true
+
+[node name="DontRemoveUsedForExtraPadding5" type="Label" parent="Container/Grid"]
+margin_top = 488.0
+margin_right = 222.0
+margin_bottom = 510.0
+mouse_filter = 1
+
+[node name="DontRemoveUsedForExtraPadding6" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 488.0
+margin_right = 986.0
+margin_bottom = 510.0
+mouse_filter = 1
+
+[node name="PuzzleStartRow0" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 514.0
+margin_right = 222.0
+margin_bottom = 536.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow0"]
+margin_right = 222.0
+margin_bottom = 22.0
+focus_previous = NodePath("../../../ToTitle")
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+autowrap = true
+
+[node name="PuzzleStartSpritesRow0" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 514.0
+margin_right = 986.0
+margin_bottom = 536.0
+
+[node name="CoordinatesEmpty" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_right = 32.0
+margin_bottom = 22.0
+texture = ExtResource( 17 )
+
+[node name="CoordinatesA" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 22.0
+texture = ExtResource( 23 )
+
+[node name="CoordinatesB" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 22.0
+texture = ExtResource( 5 )
+
+[node name="CoordinatesC" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 22.0
+texture = ExtResource( 12 )
+
+[node name="CoordinatesD" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 22.0
+texture = ExtResource( 24 )
+
+[node name="CoordinatesE" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 22.0
+texture = ExtResource( 7 )
+
+[node name="CoordinatesF" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 22.0
+texture = ExtResource( 19 )
+
+[node name="CoordinatesG" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 22.0
+texture = ExtResource( 18 )
+
+[node name="CoordinatesH" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 22.0
+texture = ExtResource( 20 )
+
+[node name="CoordinatesI" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 22.0
+texture = ExtResource( 31 )
+
+[node name="CoordinatesJ" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 22.0
+texture = ExtResource( 11 )
+
+[node name="CoordinatesK" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 22.0
+texture = ExtResource( 15 )
+
+[node name="CoordinatesL" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 22.0
+texture = ExtResource( 8 )
+
+[node name="CoordinatesM" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow0"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 22.0
+texture = ExtResource( 4 )
+
+[node name="PuzzleStartRow1" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 540.0
+margin_right = 222.0
+margin_bottom = 572.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow1"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow1" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 540.0
+margin_right = 986.0
+margin_bottom = 572.0
+
+[node name="Coordinates1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 21 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow1"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow2" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 576.0
+margin_right = 222.0
+margin_bottom = 608.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow2"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow2" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 576.0
+margin_right = 986.0
+margin_bottom = 608.0
+
+[node name="Coordinates2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 28 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow2"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow3" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 612.0
+margin_right = 222.0
+margin_bottom = 644.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow3"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow3" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 612.0
+margin_right = 986.0
+margin_bottom = 644.0
+
+[node name="Coordinates3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 14 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow3"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow4" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 648.0
+margin_right = 222.0
+margin_bottom = 680.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow4"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow4" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 648.0
+margin_right = 986.0
+margin_bottom = 680.0
+
+[node name="Coordinates4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 25 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow4"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow5" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 684.0
+margin_right = 222.0
+margin_bottom = 716.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow5"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow5" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 684.0
+margin_right = 986.0
+margin_bottom = 716.0
+
+[node name="Coordinates5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 26 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow5"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow6" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 720.0
+margin_right = 222.0
+margin_bottom = 752.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow6"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow6" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 720.0
+margin_right = 986.0
+margin_bottom = 752.0
+
+[node name="Coordinates6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 16 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow6"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow7" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 756.0
+margin_right = 222.0
+margin_bottom = 788.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow7"]
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 2 )
+text = "Start of level."
+align = 2
+valign = 1
+autowrap = true
+
+[node name="PuzzleStartSpritesRow7" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 756.0
+margin_right = 986.0
+margin_bottom = 788.0
+
+[node name="Coordinates7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 22 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow7"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow8" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 792.0
+margin_right = 222.0
+margin_bottom = 824.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow8"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow8" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 792.0
+margin_right = 986.0
+margin_bottom = 824.0
+
+[node name="Coordinates8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow8"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow9" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 828.0
+margin_right = 222.0
+margin_bottom = 860.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow9"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow9" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 828.0
+margin_right = 986.0
+margin_bottom = 860.0
+
+[node name="Coordinates9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 13 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow9"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow10" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 864.0
+margin_right = 222.0
+margin_bottom = 896.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow10"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow10" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 864.0
+margin_right = 986.0
+margin_bottom = 896.0
+
+[node name="Coordinates10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 10 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow10"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow11" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 900.0
+margin_right = 222.0
+margin_bottom = 932.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow11"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow11" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 900.0
+margin_right = 986.0
+margin_bottom = 932.0
+
+[node name="Coordinates11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 27 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow11"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow12" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 936.0
+margin_right = 222.0
+margin_bottom = 968.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow12"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow12" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 936.0
+margin_right = 986.0
+margin_bottom = 968.0
+
+[node name="Coordinates12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow12"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleStartRow13" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 972.0
+margin_right = 222.0
+margin_bottom = 1004.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleStartRow13"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleStartSpritesRow13" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 972.0
+margin_right = 986.0
+margin_bottom = 1004.0
+
+[node name="Coordinates13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 29 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleStartSpritesRow13"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="DontRemoveUsedForExtraPadding1" type="Label" parent="Container/Grid"]
+margin_top = 1008.0
+margin_right = 222.0
+margin_bottom = 1030.0
+mouse_filter = 1
+
+[node name="DontRemoveUsedForExtraPadding2" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1008.0
+margin_right = 986.0
+margin_bottom = 1030.0
+mouse_filter = 1
+
+[node name="PuzzleEndRow0" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1034.0
+margin_right = 222.0
+margin_bottom = 1056.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow0"]
+margin_right = 222.0
+margin_bottom = 22.0
+focus_previous = NodePath("../../../ToTitle")
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow0" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1034.0
+margin_right = 986.0
+margin_bottom = 1056.0
+
+[node name="CoordinatesEmpty" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_right = 32.0
+margin_bottom = 22.0
+texture = ExtResource( 17 )
+
+[node name="CoordinatesA" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 22.0
+texture = ExtResource( 23 )
+
+[node name="CoordinatesB" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 22.0
+texture = ExtResource( 5 )
+
+[node name="CoordinatesC" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 22.0
+texture = ExtResource( 12 )
+
+[node name="CoordinatesD" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 22.0
+texture = ExtResource( 24 )
+
+[node name="CoordinatesE" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 22.0
+texture = ExtResource( 7 )
+
+[node name="CoordinatesF" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 22.0
+texture = ExtResource( 19 )
+
+[node name="CoordinatesG" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 22.0
+texture = ExtResource( 18 )
+
+[node name="CoordinatesH" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 22.0
+texture = ExtResource( 20 )
+
+[node name="CoordinatesI" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 22.0
+texture = ExtResource( 31 )
+
+[node name="CoordinatesJ" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 22.0
+texture = ExtResource( 11 )
+
+[node name="CoordinatesK" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 22.0
+texture = ExtResource( 15 )
+
+[node name="CoordinatesL" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 22.0
+texture = ExtResource( 8 )
+
+[node name="CoordinatesM" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow0"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 22.0
+texture = ExtResource( 4 )
+
+[node name="PuzzleEndRow1" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1060.0
+margin_right = 222.0
+margin_bottom = 1092.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow1"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow1" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1060.0
+margin_right = 986.0
+margin_bottom = 1092.0
+
+[node name="Coordinates1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 21 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow1"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow2" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1096.0
+margin_right = 222.0
+margin_bottom = 1128.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow2"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow2" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1096.0
+margin_right = 986.0
+margin_bottom = 1128.0
+
+[node name="Coordinates2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 28 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow2"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow3" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1132.0
+margin_right = 222.0
+margin_bottom = 1164.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow3"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow3" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1132.0
+margin_right = 986.0
+margin_bottom = 1164.0
+
+[node name="Coordinates3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 14 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow3"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow4" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1168.0
+margin_right = 222.0
+margin_bottom = 1200.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow4"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow4" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1168.0
+margin_right = 986.0
+margin_bottom = 1200.0
+
+[node name="Coordinates4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 25 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow4"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow5" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1204.0
+margin_right = 222.0
+margin_bottom = 1236.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow5"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow5" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1204.0
+margin_right = 986.0
+margin_bottom = 1236.0
+
+[node name="Coordinates5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 26 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow5"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow6" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1240.0
+margin_right = 222.0
+margin_bottom = 1272.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow6"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow6" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1240.0
+margin_right = 986.0
+margin_bottom = 1272.0
+
+[node name="Coordinates6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 16 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow6"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow7" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1276.0
+margin_right = 222.0
+margin_bottom = 1308.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow7"]
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 2 )
+text = "End of level."
+align = 2
+valign = 1
+autowrap = true
+
+[node name="PuzzleEndSpritesRow7" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1276.0
+margin_right = 986.0
+margin_bottom = 1308.0
+
+[node name="Coordinates7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 22 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow7"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow8" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1312.0
+margin_right = 222.0
+margin_bottom = 1344.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow8"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow8" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1312.0
+margin_right = 986.0
+margin_bottom = 1344.0
+
+[node name="Coordinates8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow8"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow9" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1348.0
+margin_right = 222.0
+margin_bottom = 1380.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow9"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow9" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1348.0
+margin_right = 986.0
+margin_bottom = 1380.0
+
+[node name="Coordinates9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 13 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow9"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow10" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1384.0
+margin_right = 222.0
+margin_bottom = 1416.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow10"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow10" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1384.0
+margin_right = 986.0
+margin_bottom = 1416.0
+
+[node name="Coordinates10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 10 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow10"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow11" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1420.0
+margin_right = 222.0
+margin_bottom = 1452.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow11"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow11" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1420.0
+margin_right = 986.0
+margin_bottom = 1452.0
+
+[node name="Coordinates11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 27 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow11"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow12" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1456.0
+margin_right = 222.0
+margin_bottom = 1488.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow12"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow12" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1456.0
+margin_right = 986.0
+margin_bottom = 1488.0
+
+[node name="Coordinates12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow12"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="PuzzleEndRow13" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 1492.0
+margin_right = 222.0
+margin_bottom = 1524.0
+theme = ExtResource( 34 )
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Grid/PuzzleEndRow13"]
+margin_left = 222.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+focus_previous = NodePath("../../../ToTitle")
+custom_styles/normal = SubResource( 2 )
+align = 2
+valign = 1
+
+[node name="PuzzleEndSpritesRow13" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1492.0
+margin_right = 986.0
+margin_bottom = 1524.0
+
+[node name="Coordinates13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 29 )
+
+[node name="Block1" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block2" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block3" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block4" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block5" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block6" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block7" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block8" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block9" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block10" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block11" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block12" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="Block13" type="TextureRect" parent="Container/Grid/PuzzleEndSpritesRow13"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+texture = ExtResource( 30 )
+
+[node name="DontRemoveUsedForExtraPadding3" type="Label" parent="Container/Grid"]
+margin_top = 1528.0
+margin_right = 222.0
+margin_bottom = 1550.0
+mouse_filter = 1
+
+[node name="DontRemoveUsedForExtraPadding4" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 1528.0
+margin_right = 986.0
+margin_bottom = 1550.0
+mouse_filter = 1
+
+[node name="StatusBar" parent="." instance=ExtResource( 2 )]
+
+[node name="NextEvent" parent="." instance=ExtResource( 3 )]
+
+[connection signal="value_changed" from="Container/Grid/KeepTheseNodesHidden/SpinboxEventRoomSize" to="." method="_on_event_room_size_Spinbox_value_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid8/EventSpinbox" to="." method="_on_event_number_Spinbox_value_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid4/DungeonSpinbox" to="." method="_on_dungeon_number_Spinbox_value_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid1/LevelSpinbox" to="." method="_on_level_Spinbox_value_changed"]
+[connection signal="toggled" from="Container/Grid/Grid5/EventEnabled" to="." method="_on_EventEnabled_toggled"]
+[connection signal="item_selected" from="Container/Grid/Grid3/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="value_changed" from="Container/Grid/Grid2/MoveTotalSpinbox" to="." method="_on_move_total_Spinbox_value_changed"]
+[connection signal="tree_exiting" from="StatusBar" to="." method="_on_StatusBar_tree_exiting"]

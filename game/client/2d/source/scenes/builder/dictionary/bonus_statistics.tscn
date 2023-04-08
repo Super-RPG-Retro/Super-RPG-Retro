@@ -1,0 +1,388 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://2d/source/scripts/builder/dictionaries/player_statistics.gd" type="Script" id=3]
+[ext_resource path="res://2d/assets/themes/transparent-static.tres" type="Theme" id=4]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+
+[node name="Node2D" type="Node2D" groups=["builder"]]
+script = ExtResource( 3 )
+
+[node name="HeaderMenu" parent="." instance=ExtResource( 1 )]
+
+[node name="Container" type="ScrollContainer" parent="."]
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 576.0
+mouse_filter = 2
+theme = ExtResource( 5 )
+custom_styles/bg = SubResource( 1 )
+
+[node name="Grid" type="GridContainer" parent="Container"]
+margin_right = 881.0
+margin_bottom = 541.0
+rect_min_size = Vector2( 200, 40 )
+custom_constants/vseparation = 7
+custom_constants/hseparation = 13
+columns = 2
+
+[node name="LabelTitle" type="Label" parent="Container/Grid"]
+margin_top = 50.0
+margin_right = 222.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 222, 0 )
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.34902, 1, 1 )
+align = 2
+
+[node name="LabelBody" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_right = 881.0
+margin_bottom = 122.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+text = "The higher the value, the better the statistic. Bonus statistics increase by leveling player and also by using artifacts. Object statistics, at directories menu, are separate from this list. The overall statistic of the player is bonus statistic plus object statistic."
+autowrap = true
+
+[node name="CharismaLabel" type="Label" parent="Container/Grid"]
+margin_top = 134.0
+margin_right = 222.0
+margin_bottom = 156.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Charisma."
+align = 2
+
+[node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 129.0
+margin_right = 881.0
+margin_bottom = 161.0
+
+[node name="CharismaSpinBox" type="SpinBox" parent="Container/Grid/Grid1"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription" type="Label" parent="Container/Grid/Grid1"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 472.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Charisma aka Presence, Charm, Social."
+
+[node name="ConstitutionLabel" type="Label" parent="Container/Grid"]
+margin_top = 173.0
+margin_right = 222.0
+margin_bottom = 195.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Constitution."
+align = 2
+
+[node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 168.0
+margin_right = 881.0
+margin_bottom = 200.0
+alignment = 2
+
+[node name="ConstitutionSpinBox" type="SpinBox" parent="Container/Grid/Grid2"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription2" type="Label" parent="Container/Grid/Grid2"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 646.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Constitution aka Stamina, Endurance, Vitality, Recovery."
+
+[node name="DefenseLabel" type="Label" parent="Container/Grid"]
+margin_top = 212.0
+margin_right = 222.0
+margin_bottom = 234.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Defense."
+align = 2
+
+[node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 207.0
+margin_right = 881.0
+margin_bottom = 239.0
+
+[node name="DefenseSpinBox" type="SpinBox" parent="Container/Grid/Grid3"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription3" type="Label" parent="Container/Grid/Grid3"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 544.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Defense aka Resistance, Fortitude, Resilience."
+
+[node name="DexterityLabel" type="Label" parent="Container/Grid"]
+margin_top = 251.0
+margin_right = 222.0
+margin_bottom = 273.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Dexterity."
+align = 2
+
+[node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 246.0
+margin_right = 881.0
+margin_bottom = 278.0
+
+[node name="DexteritySpinBox" type="SpinBox" parent="Container/Grid/Grid4"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription4" type="Label" parent="Container/Grid/Grid4"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 508.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Dexterity aka Agility, Reflexes, Quickness."
+
+[node name="IntelligenceLabel" type="Label" parent="Container/Grid"]
+margin_top = 290.0
+margin_right = 222.0
+margin_bottom = 312.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Intelligence."
+align = 2
+
+[node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 285.0
+margin_right = 881.0
+margin_bottom = 317.0
+
+[node name="IntelligenceSpinBox" type="SpinBox" parent="Container/Grid/Grid5"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription5" type="Label" parent="Container/Grid/Grid5"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 513.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Intelligence aka Intellect, Mind, Knowledge."
+
+[node name="LuckLabel" type="Label" parent="Container/Grid"]
+margin_top = 329.0
+margin_right = 222.0
+margin_bottom = 351.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Luck."
+align = 2
+
+[node name="Grid6" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 324.0
+margin_right = 881.0
+margin_bottom = 356.0
+
+[node name="LuckSpinBox" type="SpinBox" parent="Container/Grid/Grid6"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription6" type="Label" parent="Container/Grid/Grid6"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 322.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Luck aka Fate, Chance."
+
+[node name="PerceptionLabel" type="Label" parent="Container/Grid"]
+margin_top = 368.0
+margin_right = 222.0
+margin_bottom = 390.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Perception."
+align = 2
+
+[node name="Grid7" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 363.0
+margin_right = 881.0
+margin_bottom = 395.0
+
+[node name="PerceptionSpinBox" type="SpinBox" parent="Container/Grid/Grid7"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription7" type="Label" parent="Container/Grid/Grid7"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 607.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Perception aka Alertness, Awareness, Cautiousness."
+
+[node name="StrengthLabel" type="Label" parent="Container/Grid"]
+margin_top = 407.0
+margin_right = 222.0
+margin_bottom = 429.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Strength."
+align = 2
+
+[node name="Grid8" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 402.0
+margin_right = 881.0
+margin_bottom = 434.0
+
+[node name="StrengthSpinBox" type="SpinBox" parent="Container/Grid/Grid8"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription8" type="Label" parent="Container/Grid/Grid8"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 500.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Strength aka Body, Might, Brawn, Power."
+
+[node name="WillpowerLabel" type="Label" parent="Container/Grid"]
+margin_top = 446.0
+margin_right = 222.0
+margin_bottom = 468.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Willpower."
+align = 2
+
+[node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 441.0
+margin_right = 881.0
+margin_bottom = 473.0
+
+[node name="WillpowerSpinBox" type="SpinBox" parent="Container/Grid/Grid9"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription9" type="Label" parent="Container/Grid/Grid9"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 567.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Willpower aka Sanity, Personality, Ego, Resolve."
+
+[node name="WisdomLabel" type="Label" parent="Container/Grid"]
+margin_top = 485.0
+margin_right = 222.0
+margin_bottom = 507.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Wisdom."
+align = 2
+
+[node name="Grid10" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 480.0
+margin_right = 881.0
+margin_bottom = 512.0
+
+[node name="WisdomSpinBox" type="SpinBox" parent="Container/Grid/Grid10"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+max_value = 999.0
+
+[node name="LabelDescription10" type="Label" parent="Container/Grid/Grid10"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 493.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "Wisdom aka Spirit, Wits, Psyche, Sense."
+
+[node name="EmptyTitle" type="Label" parent="Container/Grid"]
+margin_top = 519.0
+margin_right = 222.0
+margin_bottom = 541.0
+focus_previous = NodePath("../../../ToTitle")
+align = 2
+
+[node name="EmptyBody" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 519.0
+margin_right = 881.0
+margin_bottom = 541.0
+mouse_filter = 1
+
+[node name="StatusBar" parent="." instance=ExtResource( 2 )]
+
+[node name="AcceptDialogRename" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -340.0
+margin_top = -65.0
+margin_right = 210.0
+margin_bottom = 65.0
+theme = ExtResource( 4 )
+popup_exclusive = true
+dialog_autowrap = true
+
+[node name="AcceptDialogReturnToBuilderHome" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -340.0
+margin_top = -65.0
+margin_right = 210.0
+margin_bottom = 65.0
+theme = ExtResource( 4 )
+popup_exclusive = true
+dialog_autowrap = true
+
+[connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
+[connection signal="value_changed" from="Container/Grid/Grid1/CharismaSpinBox" to="." method="_on_SpinBox_charisma_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid2/ConstitutionSpinBox" to="." method="_on_SpinBox_constitution_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid3/DefenseSpinBox" to="." method="_on_SpinBox_defense_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid4/DexteritySpinBox" to="." method="_on_SpinBox_dexterity_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid5/IntelligenceSpinBox" to="." method="_on_SpinBox_intelligence_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid6/LuckSpinBox" to="." method="_on_SpinBox_juck_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid7/PerceptionSpinBox" to="." method="_on_SpinBox_perception_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid8/StrengthSpinBox" to="." method="_on_SpinBox_strength_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid9/WillpowerSpinBox" to="." method="_on_SpinBox_willpower_changed"]
+[connection signal="value_changed" from="Container/Grid/Grid10/WisdomSpinBox" to="." method="_on_SpinBox_wisdom_changed"]
+[connection signal="focus_exited" from="AcceptDialogRename" to="." method="_on_AcceptDialog_focus_exited"]
+[connection signal="modal_closed" from="AcceptDialogRename" to="." method="_on_AcceptDialog_modal_closed"]
+[connection signal="popup_hide" from="AcceptDialogRename" to="." method="_on_AcceptDialog_popup_hide"]
+[connection signal="confirmed" from="AcceptDialogReturnToBuilderHome" to="." method="_on_AcceptDialog_return_to_builder_home_confirmed"]

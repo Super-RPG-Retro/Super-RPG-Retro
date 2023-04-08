@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://bundles/assets/images/player_characters/maxim.png" type="Texture" id=1]
+[ext_resource path="res://2d/source/scripts/mouse_commands/tiles.gd" type="Script" id=2]
+[ext_resource path="res://2d/assets/themes/theme_very_small_font.tres" type="Theme" id=3]
+[ext_resource path="res://2d/assets/themes/theme_small_font.tres" type="Theme" id=4]
+[ext_resource path="res://2d/source/scenes/scene_header.tscn" type="PackedScene" id=5]
+[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=6]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=7]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0.172549, 0.843137 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0.172549, 0.843137 )
+
+[node name="Overview" type="Node2D" groups=["tile_summary"]]
+visible = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [ 16.0 ]
+}
+
+[node name="MarginPanel" type="Panel" parent="."]
+visible = false
+margin_left = 1.0
+margin_top = 35.0
+margin_right = 8.0
+margin_bottom = 600.0
+theme = ExtResource( 6 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
+anchor_right = 35.0
+margin_left = 8.0
+margin_top = 35.0
+margin_right = 1050.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 525 )
+custom_styles/bg = SubResource( 3 )
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+visible = false
+margin_right = 660.0
+margin_bottom = 565.0
+rect_min_size = Vector2( 660, 565 )
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_right = 660.0
+margin_bottom = 565.0
+rect_min_size = Vector2( 660, 565 )
+theme = ExtResource( 6 )
+bbcode_enabled = true
+
+[node name="TileImage" type="Sprite" parent="ScrollContainer/GridContainer/Label"]
+visible = false
+position = Vector2( 588, 34 )
+scale = Vector2( 1.4, 1.4 )
+z_index = 4096
+texture = ExtResource( 1 )
+centered = false
+hframes = 3
+
+[node name="TileSummary" type="Label" parent="."]
+visible = false
+margin_left = 440.0
+margin_top = 288.0
+margin_right = 480.0
+margin_bottom = 310.0
+theme = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 2
+
+[node name="Timer" type="Timer" parent="TileSummary"]
+
+[node name="MouseSummary" type="Panel" parent="."]
+visible = false
+margin_left = 633.0
+margin_top = 260.0
+margin_right = 855.0
+margin_bottom = 331.0
+input_pass_on_modal_close_click = false
+theme = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MouseSummary"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 27.0
+theme = ExtResource( 3 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 1
+custom_constants/shadow_offset_y = 0
+custom_constants/shadow_as_outline = 2
+uppercase = true
+
+[node name="SceneHeader" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="Label" parent="SceneHeader" index="2"]
+text = "Tile Summary"
+
+[editable path="SceneHeader"]

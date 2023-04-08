@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "3D12", "Abbreviation": "ma", "Element": "Earth", "Turns": 10, "Range": 5, "Location": "Grid", "Animation": 5, "Field": 1, "Group": "Attack", "Gold": 2500, "Level": 70, "MP": 980, "Description": "Create a fatal wave of a mudslide.", "Short_Description": "Fatal wave of a mudslide.",
+	"Units":	   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],}

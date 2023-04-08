@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "wg", "Element": "Earth", "Turns": 70, "Range": 5, "Location": "Grid", "Animation": 5, "Field": 0, "Group": "Support", "Gold": 2000, "Level": 55, "MP": 600, "Description": "All seeds that are lying dormant in an area quickly sprout then grow into full-sized plants.", "Short_Description": "Block path with plants.",
+	"Units":	   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],}

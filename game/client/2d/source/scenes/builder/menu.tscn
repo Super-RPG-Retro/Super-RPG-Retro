@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://2d/source/scripts/builder/menu/menu_project.gd" type="Script" id=1]
+[ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=2]
+[ext_resource path="res://2d/source/scripts/builder/menu/menu_dictionaries.gd" type="Script" id=3]
+[ext_resource path="res://2d/source/scenes/scene_header.tscn" type="PackedScene" id=4]
+[ext_resource path="res://2d/source/scripts/builder/menu/menu_audio.gd" type="Script" id=5]
+[ext_resource path="res://2d/source/scripts/builder/menu/menu.gd" type="Script" id=6]
+[ext_resource path="res://2d/assets/themes/panel_blue.tres" type="Theme" id=7]
+[ext_resource path="res://2d/source/scripts/builder/menu/menu_events.gd" type="Script" id=8]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_top = 30.0
+margin_right = 1024.0
+margin_bottom = 79.0
+theme = ExtResource( 7 )
+
+[node name="MenuProject" type="MenuButton" parent="."]
+margin_left = 9.0
+margin_top = 46.0
+margin_right = 118.0
+margin_bottom = 74.0
+focus_mode = 2
+theme = ExtResource( 2 )
+action_mode = 1
+group = SubResource( 1 )
+text = "Project"
+flat = false
+switch_on_hover = true
+script = ExtResource( 1 )
+
+[node name="MenuDictionaries" type="MenuButton" parent="."]
+margin_left = 126.0
+margin_top = 46.0
+margin_right = 254.0
+margin_bottom = 74.0
+focus_mode = 2
+theme = ExtResource( 2 )
+action_mode = 1
+group = SubResource( 1 )
+text = "Dictionaries"
+flat = false
+switch_on_hover = true
+script = ExtResource( 3 )
+
+[node name="MenuEvents" type="MenuButton" parent="."]
+margin_left = 262.0
+margin_top = 46.0
+margin_right = 358.0
+margin_bottom = 74.0
+focus_mode = 2
+theme = ExtResource( 2 )
+action_mode = 1
+group = SubResource( 1 )
+text = "Events"
+flat = false
+switch_on_hover = true
+script = ExtResource( 8 )
+
+[node name="MenuAudio" type="MenuButton" parent="."]
+margin_left = 366.0
+margin_top = 46.0
+margin_right = 449.0
+margin_bottom = 74.0
+focus_mode = 2
+theme = ExtResource( 2 )
+action_mode = 1
+group = SubResource( 1 )
+text = "Audio"
+flat = false
+switch_on_hover = true
+script = ExtResource( 5 )
+
+[node name="SceneHeader" parent="." instance=ExtResource( 4 )]
+
+[node name="Label" parent="SceneHeader" index="1"]
+margin_left = 8.0
+margin_right = 1016.0
+text = "Builder"
+
+[node name="Underline" parent="SceneHeader" index="2"]
+points = PoolVector2Array( 1024, 0, 512.05, 0, 433.572, 0, 0, 0 )
+
+[connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
+[connection signal="tree_exiting" from="MenuProject" to="MenuProject" method="_on_MenuProject_tree_exiting"]
+[connection signal="child_exiting_tree" from="MenuDictionaries" to="MenuDictionaries" method="_on_exiting_tree"]
+[connection signal="child_exiting_tree" from="MenuEvents" to="MenuEvents" method="_on_exiting_tree"]
+[connection signal="child_exiting_tree" from="MenuAudio" to="MenuAudio" method="_on_exiting_tree"]
+
+[editable path="SceneHeader"]

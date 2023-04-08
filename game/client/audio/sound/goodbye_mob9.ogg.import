@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/goodbye_mob9.ogg-659ba184a5a4e235196a7252d36bdfbe.oggstr"
+
+[deps]
+
+source_file="res://audio/sound/goodbye_mob9.ogg"
+dest_files=[ "res://.import/goodbye_mob9.ogg-659ba184a5a4e235196a7252d36bdfbe.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

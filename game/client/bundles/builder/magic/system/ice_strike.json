@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "2D6", "Abbreviation": "is", "Element": "Air", "Turns": 1, "Range": 3, "Location": "Ordinal", "Animation": 4, "Field": 0, "Group": "Attack", "Gold": 800, "Level": 30, "MP": 250, "Description": "Strike your target with blocks of ice.", "Short_Description": "Strike target with blocks of ice.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

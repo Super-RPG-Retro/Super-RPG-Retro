@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "3D12", "Abbreviation": "st", "Element": "Earth", "Turns": 1, "Range": 5, "Location": "Grid", "Animation": 6, "Field": 0, "Group": "Support", "Gold": 1100, "Level": 60, "MP": 830, "Description": "A shower of different size stones bombard all opponent within a large area.", "Short_Description": "Bombard with different size stones.",
+	"Units":	   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],}

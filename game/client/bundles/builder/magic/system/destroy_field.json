@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "1D10", "Abbreviation": "df", "Element": "None", "Turns": 1, "Range": 5, "Location": "Grid", "Animation": 1, "Field": 0, "Group": "Attack", "Gold": 700, "Level": 40, "MP": 280, "Description": "Chance to destroy any field such as a trap or a breath attacks by certain creatures. Roll a 6 or better to succeed.", "Short_Description": "Destroy any field.", 
+	"Units":	   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],}

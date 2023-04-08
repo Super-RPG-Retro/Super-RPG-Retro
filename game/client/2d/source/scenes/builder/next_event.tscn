@@ -1,0 +1,146 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://2d/source/scripts/builder/next_event.gd" type="Script" id=1]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 1 )
+
+[node name="NextEvent" type="ScrollContainer"]
+margin_top = 480.0
+margin_right = 1024.0
+margin_bottom = 576.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+scroll_horizontal_enabled = false
+script = ExtResource( 1 )
+
+[node name="Grid" type="GridContainer" parent="."]
+margin_right = 1000.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 200, 40 )
+columns = 2
+
+[node name="MarginLabel" type="Label" parent="Grid"]
+margin_right = 222.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 222, 0 )
+custom_colors/font_color = Color( 0, 0.666667, 0, 1 )
+
+[node name="LabelDescription2" type="Label" parent="Grid"]
+margin_left = 226.0
+margin_right = 1000.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0, 0.666667, 0, 1 )
+text = " Next Event number is the same value as this scene's event number."
+
+[node name="DungeonNumber" type="Label" parent="Grid"]
+margin_top = 31.0
+margin_right = 222.0
+margin_bottom = 53.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Dungeon."
+align = 2
+
+[node name="Grid1" type="HBoxContainer" parent="Grid"]
+margin_left = 226.0
+margin_top = 26.0
+margin_right = 1000.0
+margin_bottom = 58.0
+
+[node name="DungeonNumberSpinbox" type="SpinBox" parent="Grid/Grid1"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+max_value = 8.0
+page = 1.0
+value = 1.0
+
+[node name="LabelDescription5" type="Label" parent="Grid/Grid1"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 605.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = " The dungeon number of the next event / sub event."
+
+[node name="LevelNumberLable" type="Label" parent="Grid"]
+margin_top = 67.0
+margin_right = 222.0
+margin_bottom = 89.0
+focus_previous = NodePath("../../../ToTitle")
+text = "Level."
+align = 2
+
+[node name="Grid2" type="HBoxContainer" parent="Grid"]
+margin_left = 226.0
+margin_top = 62.0
+margin_right = 1000.0
+margin_bottom = 94.0
+
+[node name="LevelNumberSpinbox" type="SpinBox" parent="Grid/Grid2"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 50, 0 )
+min_value = 1.0
+page = 1.0
+value = 1.0
+
+[node name="LabelDescription" type="Label" parent="Grid/Grid2"]
+margin_left = 102.0
+margin_top = 5.0
+margin_right = 566.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = " The level number of the next event / sub event."
+
+[node name="Label" type="Label" parent="Grid"]
+margin_top = 124.0
+margin_right = 222.0
+margin_bottom = 171.0
+text = "Select Next Event or finalize."
+align = 2
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Grid"]
+margin_left = 226.0
+margin_top = 98.0
+margin_right = 1000.0
+margin_bottom = 198.0
+
+[node name="ItemList" type="ItemList" parent="Grid/HBoxContainer"]
+margin_right = 230.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 230, 100 )
+items = [ "- End Event", null, false, "- Give Reward", null, false, "Event Story", null, false, "Event Locked Doors", null, false, "Puzzles", null, false, "Hunting Tasks", null, false, "Inventory", null, false ]
+allow_reselect = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Grid/HBoxContainer"]
+margin_left = 234.0
+margin_top = 1.0
+margin_right = 774.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 540, 0 )
+text = "  Select what do to after player completes this scene. Next event level number and dungeon number wil be ignored when selecting an item with a minus symbol in front of it (finalizing)."
+autowrap = true
+
+[node name="EmptyLabel" type="Label" parent="Grid"]
+margin_top = 202.0
+margin_right = 222.0
+margin_bottom = 224.0
+
+[node name="Label2" type="Label" parent="Grid"]
+margin_left = 226.0
+margin_top = 202.0
+margin_right = 1000.0
+margin_bottom = 224.0
+
+[connection signal="value_changed" from="Grid/Grid1/DungeonNumberSpinbox" to="." method="_on_dungeon_number_Spinbox_value_changed"]
+[connection signal="value_changed" from="Grid/Grid2/LevelNumberSpinbox" to="." method="_on_level_number_Spinbox_value_changed"]
+[connection signal="item_selected" from="Grid/HBoxContainer/ItemList" to="." method="_on_ItemList_item_selected"]

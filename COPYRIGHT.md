@@ -1,0 +1,1 @@
+Super RPG Retro, copyright (c) 2022-2023 by Kal. M. G.

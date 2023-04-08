@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/plainchant-recorder-trio.ogg-dc28bfc506ff4626d7326e0c1a2ba12f.oggstr"
+
+[deps]
+
+source_file="res://audio/music/plainchant-recorder-trio.ogg"
+dest_files=[ "res://.import/plainchant-recorder-trio.ogg-dc28bfc506ff4626d7326e0c1a2ba12f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

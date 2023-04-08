@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "2D8", "Abbreviation": "fw", "Element": "Fire", "Turns": 4, "Range": 4, "Location": "Ordinal", "Animation": 2, "Field": 1, "Group": "Support", "Gold": 850, "Level": 45, "MP": 225, "Description": "Out of the caster's hand comes a stream of searing fire.", "Short_Description": "Stream of searing fire.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

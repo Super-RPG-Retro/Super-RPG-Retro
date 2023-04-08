@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://2d/source/scripts/boot_splash/progress_bar.gd" type="Script" id=1]
+[ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=2]
+[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=3]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0588235, 0.333333, 0.454902, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_detail = 5
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 512.0 ]
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_top = 368.0
+margin_right = 1024.0
+margin_bottom = 472.0
+theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 320.0
+margin_top = 20.0
+margin_right = 704.0
+margin_bottom = 42.0
+theme = ExtResource( 3 )
+align = 1
+valign = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel"]
+margin_left = 320.0
+margin_top = 50.0
+margin_right = 704.0
+margin_bottom = 86.0
+theme = ExtResource( 2 )
+min_value = 1.0
+max_value = 402.0
+value = 1.0
+
+[node name="TimerObjectsDisplayPanel" type="Timer" parent="."]
+
+[node name="TimerMagicDisplayPanel" type="Timer" parent="."]
+
+[node name="PressStart" type="Label" parent="."]
+visible = false
+margin_left = 399.0
+margin_top = 488.0
+margin_right = 513.0
+margin_bottom = 510.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 3 )
+text = "Press Start"
+
+[connection signal="timeout" from="TimerObjectsDisplayPanel" to="." method="_on_timer_objects_display_panel_timeout"]
+[connection signal="timeout" from="TimerMagicDisplayPanel" to="." method="_on_timer_magic_display_panel_timeout"]

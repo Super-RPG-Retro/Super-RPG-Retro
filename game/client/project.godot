@@ -1,0 +1,185 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Super RPG Retro client"
+run/main_scene="res://2d/source/scenes/boot_splash/splash.tscn"
+boot_splash/show_image=false
+boot_splash/image="res://2d/assets/images/title.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
+
+[autoload]
+
+Builder="*res://singletons/builder/builder.gd"
+Builder_playing="*res://singletons/builder/builder_playing.gd"
+Variables="*res://singletons/variables.gd"
+Settings="*res://singletons/settings.gd"
+Enum="*res://singletons/enum.gd"
+Filesystem="*res://singletons/filesystem.gd"
+Common="*res://singletons/common.gd"
+Json="*res://singletons/json.gd"
+Clock="*res://singletons/clock.gd"
+P="*res://singletons/p.gd"
+Inventory="*res://singletons/inventory.gd"
+Tiles="*res://singletons/tiles.gd"
+Preload="*res://singletons/preload.gd"
+
+[display]
+
+window/size/width=1236
+window/size/height=720
+window/size/resizable=false
+window/size/always_on_top=true
+window/dpi/allow_hidpi=true
+window/stretch/aspect="keep"
+window/stretch/shrink=1.21
+
+[global]
+
+fulls=false
+screen=false
+hds=false
+hdr=false
+main=false
+filter=false
+mipmaps=true
+spl=false
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": true,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+ogg_vorbis={
+"loop": true,
+"loop_offset": 0
+}
+
+[input]
+
+ui_focus_next={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_focus_prev={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_page_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_z_key={
+"deadzone": 0.49,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_new={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_save={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_load={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_delete={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_play={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right_mouse_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ui_left_mouse_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=1000000
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/shadows/filter_mode=0
+quality/reflections/high_quality_ggx=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+quality/dynamic_fonts/use_oversampling=false

@@ -1,0 +1,3 @@
+This image (background.png) was resized and renamed from the original.
+
+This image originally from dungeon craft stone soup and was either released under the CC0 license (https://creativecommons.org/publicdomain/zero/1.0/) or released under the GNU GENERAL PUBLIC LICENSE V2+ unless otherwise specified. However, the licensing situation may be complex, especially for older pieces. For information regarding the licenses of dungeon craft stone soup tiles and artwork, see https://github.com/crawl/tiles

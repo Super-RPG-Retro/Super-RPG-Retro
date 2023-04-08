@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 2, "Dice": "None", "Abbreviation": "ms", "Element": "None", "Turns": 20, "Range": 0, "Location": "Caster", "Animation": 6, "Field": 0, "Group": "Self", "Gold": 450, "Level": 20, "MP": 80, "Description": "An invisible barrier of magical force protects against melee attacks, giving you immunity to magic missiles.", "Short_Description": "Immunity to magic missiles.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

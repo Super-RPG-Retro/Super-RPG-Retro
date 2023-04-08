@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "None", "Abbreviation": "mw", "Element": "All", "Turns": 15, "Range": 5, "Location": "Cardinal", "Animation": 5, "Field": 0, "Group": "Support", "Gold": 2000, "Level": 65, "MP": 780, "Description": "Floor tiles in front of the caster will form a wall. Only the caster can walk through the wall.", "Short_Description": "Floor tiles form a wall.",
+	"Units":	   [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],}

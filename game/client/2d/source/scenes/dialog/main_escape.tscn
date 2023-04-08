@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://2d/assets/themes/transparent-static.tres" type="Theme" id=1]
+[ext_resource path="res://2d/source/scripts/dialog/main_escape.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+z_index = 4096
+z_as_relative = false
+script = ExtResource( 2 )
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+rect_min_size = Vector2( 550, 130 )
+focus_mode = 2
+theme = ExtResource( 1 )
+dialog_text = "Return to main menu?"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_ConfirmDialog_confirmed"]

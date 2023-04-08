@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "4D8", "Abbreviation": "si", "Element": "Ice", "Turns": 8, "Range": 5, "Location": "Ordinal", "Animation": 4, "Field": 1, "Group": "Attack", "Gold": 7500, "Level": 70, "MP": 1170, "Description": "Fight with storms of ice and cold.", "Short_Description": "Fight with ice and cold.",
+	"Units":	   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],}

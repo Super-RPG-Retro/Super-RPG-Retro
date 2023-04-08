@@ -1,0 +1,351 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://2d/source/scenes/scene_header.tscn" type="PackedScene" id=1]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=2]
+[ext_resource path="res://audio/sound/teleport.ogg" type="AudioStream" id=3]
+[ext_resource path="res://2d/source/scenes/difficulty_level.tscn" type="PackedScene" id=5]
+[ext_resource path="res://2d/assets/images/title_background.jpg" type="Texture" id=6]
+[ext_resource path="res://2d/source/scripts/settings/system.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.831373 )
+
+[node name="Node2D" type="Node2D" groups=["settings_system"]]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_vertical_guides_": [ 1017.0, 150.0 ]
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+texture = ExtResource( 6 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="AmbientWind" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="AmbientWater" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="Container" type="ScrollContainer" parent="."]
+margin_left = 16.0
+margin_top = 135.0
+margin_right = 1008.0
+margin_bottom = 584.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+follow_focus = true
+
+[node name="Grid" type="GridContainer" parent="Container"]
+margin_right = 1358.0
+margin_bottom = 826.0
+rect_min_size = Vector2( 200, 40 )
+custom_constants/vseparation = 15
+columns = 2
+
+[node name="Music" type="CheckButton" parent="Container/Grid"]
+margin_right = 335.0
+margin_bottom = 40.0
+pressed = true
+text = "Music"
+align = 2
+
+[node name="Label1" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 9.0
+margin_right = 1358.0
+margin_bottom = 31.0
+text = "  Enable music globally."
+
+[node name="Sound" type="CheckButton" parent="Container/Grid"]
+margin_top = 55.0
+margin_right = 335.0
+margin_bottom = 95.0
+pressed = true
+text = "Sound"
+align = 2
+
+[node name="Label3" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 64.0
+margin_right = 1358.0
+margin_bottom = 86.0
+text = "  Enable Sound globally."
+
+[node name="Ambient" type="CheckButton" parent="Container/Grid"]
+margin_top = 110.0
+margin_right = 335.0
+margin_bottom = 150.0
+pressed = true
+text = "Ambient"
+align = 2
+
+[node name="Label4" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 119.0
+margin_right = 1358.0
+margin_bottom = 141.0
+text = "  Enable wind and water drop sounds."
+
+[node name="Randomize2dMaze" type="CheckButton" parent="Container/Grid"]
+margin_top = 165.0
+margin_right = 335.0
+margin_bottom = 205.0
+pressed = true
+text = "Random 2D Mazes"
+align = 2
+
+[node name="Label6" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 174.0
+margin_right = 1358.0
+margin_bottom = 196.0
+text = "  Use a random seed to generate the 2D dungeon?"
+
+[node name="GridChild" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 220.0
+margin_right = 335.0
+margin_bottom = 252.0
+alignment = 2
+
+[node name="GameSeedLabel" type="Label" parent="Container/Grid/GridChild"]
+margin_left = 11.0
+margin_top = 5.0
+margin_right = 131.0
+margin_bottom = 27.0
+text = " Game Seed "
+align = 2
+
+[node name="GameSeedSpinbox" type="SpinBox" parent="Container/Grid/GridChild"]
+margin_left = 135.0
+margin_right = 335.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 200, 0 )
+focus_mode = 2
+max_value = 1e+09
+
+[node name="Label7" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 225.0
+margin_right = 1358.0
+margin_bottom = 247.0
+text = "  Dungeons will be procedurally generated using this seed"
+
+[node name="GridChild3" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 267.0
+margin_right = 335.0
+margin_bottom = 339.0
+alignment = 2
+
+[node name="PlayerStatsPanelSize" type="Label" parent="Container/Grid/GridChild3"]
+margin_left = 7.0
+margin_top = 25.0
+margin_right = 231.0
+margin_bottom = 47.0
+text = "	Player Stats Panel Size"
+align = 2
+
+[node name="PlayerStatsPanelSizeSpinbox" type="SpinBox" parent="Container/Grid/GridChild3"]
+margin_left = 235.0
+margin_top = 20.0
+margin_right = 335.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 100, 0 )
+focus_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 3.0
+
+[node name="Label8" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 267.0
+margin_right = 1358.0
+margin_bottom = 339.0
+text = "  The size of the player stats panel. 0:Magic panel and Inventory
+  panel shown. 1:Magic panel hidden. 2:Inventory panel hidden.
+  3:Both magic panel and inventory panel are hidden."
+
+[node name="MiniClient" type="CheckButton" parent="Container/Grid"]
+margin_top = 354.0
+margin_right = 335.0
+margin_bottom = 394.0
+pressed = true
+text = "Mini Client"
+align = 2
+
+[node name="Label10" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 363.0
+margin_right = 1358.0
+margin_bottom = 385.0
+text = "  Show more of the main map by showing less of the client panel."
+
+[node name="HideChatFeatures" type="CheckButton" parent="Container/Grid"]
+margin_top = 409.0
+margin_right = 335.0
+margin_bottom = 449.0
+text = "Hide Chat Features"
+align = 2
+
+[node name="Label11" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 418.0
+margin_right = 1358.0
+margin_bottom = 440.0
+text = "  Show the connect to server buttom, public room buttom and the private room button at the client panel?"
+
+[node name="RuneGuides" type="CheckButton" parent="Container/Grid"]
+margin_top = 464.0
+margin_right = 335.0
+margin_bottom = 504.0
+theme = ExtResource( 2 )
+pressed = true
+text = "Rune Guides"
+align = 2
+
+[node name="Label12" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 473.0
+margin_right = 1358.0
+margin_bottom = 495.0
+text = "  Show guide images on map where a rune can be casted."
+
+[node name="AutomaticRuneCasting" type="CheckButton" parent="Container/Grid"]
+margin_top = 519.0
+margin_right = 335.0
+margin_bottom = 559.0
+theme = ExtResource( 2 )
+text = "Automatic Rune Casting"
+align = 2
+
+[node name="Label15" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 528.0
+margin_right = 1358.0
+margin_bottom = 550.0
+text = "  Off: Cast the rune at the main map. On: Instant rune casting"
+
+[node name="HideStoneWalls" type="CheckButton" parent="Container/Grid"]
+margin_top = 574.0
+margin_right = 335.0
+margin_bottom = 614.0
+theme = ExtResource( 2 )
+text = "Hide Stone Walls"
+align = 2
+
+[node name="Label19" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 583.0
+margin_right = 1358.0
+margin_bottom = 605.0
+text = "  Hide the dungeon corridor stone walls?"
+
+[node name="RemoveExtraStoneWalls" type="CheckButton" parent="Container/Grid"]
+margin_top = 629.0
+margin_right = 335.0
+margin_bottom = 669.0
+theme = ExtResource( 2 )
+pressed = true
+text = "Remove Extra Stone Walls"
+align = 2
+
+[node name="Label20" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 638.0
+margin_right = 1358.0
+margin_bottom = 660.0
+text = "  Try to show only the stone walls that parameter the corridor?"
+
+[node name="RemoveLevelBorder" type="CheckButton" parent="Container/Grid"]
+margin_top = 684.0
+margin_right = 335.0
+margin_bottom = 724.0
+theme = ExtResource( 2 )
+text = "Remove Level Border"
+align = 2
+
+[node name="Label21" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 693.0
+margin_right = 1358.0
+margin_bottom = 715.0
+text = "  Remove every one tile wide Stone tile that borders the level."
+
+[node name="UseLargeTiles" type="CheckButton" parent="Container/Grid"]
+margin_top = 739.0
+margin_right = 335.0
+margin_bottom = 779.0
+theme = ExtResource( 2 )
+pressed = true
+text = "Use Large Tiles"
+align = 2
+
+[node name="Label22" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 748.0
+margin_right = 1358.0
+margin_bottom = 770.0
+text = "  Should the graphics at the dungeon map be displayed larger?"
+
+[node name="GridChild2" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 794.0
+margin_right = 335.0
+margin_bottom = 826.0
+alignment = 2
+
+[node name="CorridorLengthBetweenRooms" type="Label" parent="Container/Grid/GridChild2"]
+margin_left = 81.0
+margin_top = 5.0
+margin_right = 231.0
+margin_bottom = 27.0
+theme = ExtResource( 2 )
+text = "Corridor Length"
+align = 2
+
+[node name="CorridorLengthSpinBox" type="SpinBox" parent="Container/Grid/GridChild2"]
+margin_left = 235.0
+margin_right = 335.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+focus_mode = 2
+min_value = 3.0
+max_value = 12.0
+value = 6.0
+
+[node name="Label24" type="Label" parent="Container/Grid"]
+margin_left = 339.0
+margin_top = 799.0
+margin_right = 1358.0
+margin_bottom = 821.0
+text = "  Higher value can increase the corridor distance between rooms."
+
+[node name="DifficultyLevel" parent="." instance=ExtResource( 5 )]
+
+[node name="SceneHeader" parent="." instance=ExtResource( 1 )]
+
+[node name="Label" parent="SceneHeader" index="1"]
+margin_left = 8.0
+margin_right = 1032.0
+text = ""
+
+[connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
+[connection signal="toggled" from="Container/Grid/Music" to="." method="_on_MusicEnabled_toggled"]
+[connection signal="toggled" from="Container/Grid/Sound" to="." method="_on_Sound_toggled"]
+[connection signal="toggled" from="Container/Grid/Ambient" to="." method="_on_Ambient_toggled"]
+[connection signal="toggled" from="Container/Grid/Randomize2dMaze" to="." method="_on_randomize_2d_maze_Enabled_toggled"]
+[connection signal="value_changed" from="Container/Grid/GridChild/GameSeedSpinbox" to="." method="_on_GameSeedSpinbox_value_changed"]
+[connection signal="value_changed" from="Container/Grid/GridChild3/PlayerStatsPanelSizeSpinbox" to="." method="_on_player_stats_panel_size_Spinbox_value_changed"]
+[connection signal="toggled" from="Container/Grid/MiniClient" to="." method="_on_mini_client_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/HideChatFeatures" to="." method="_on_hide_chat_features_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/RuneGuides" to="." method="_on_rune_guides_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/AutomaticRuneCasting" to="." method="_on_automatic_rune_casting_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/HideStoneWalls" to="." method="_on_hide_stone_walls_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/RemoveExtraStoneWalls" to="." method="_on_remove_extra_stone_walls_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/RemoveLevelBorder" to="." method="_on_remove_level_border_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/UseLargeTiles" to="." method="_on_use_large_tiles_Enabled_toggled"]
+[connection signal="value_changed" from="Container/Grid/GridChild2/CorridorLengthSpinBox" to="." method="_on_corridor_length_between_rooms_SpinBox_value_changed"]
+
+[editable path="SceneHeader"]

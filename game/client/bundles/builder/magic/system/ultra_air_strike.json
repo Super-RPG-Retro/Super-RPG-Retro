@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "5D10", "Abbreviation": "ua", "Element": "Ice", "Turns": 10, "Range": 5, "Location": "Grid", "Animation": 6, "Field": 1, "Group": "Attack", "Gold": 15000, "Level": 85, "MP": 1400, "Description": "Use the air element at full power to simultaneously strike a large dungeon region.", "Short_Description": "Air element at full power.",
+	"Units":	   [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+					0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+					1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],}

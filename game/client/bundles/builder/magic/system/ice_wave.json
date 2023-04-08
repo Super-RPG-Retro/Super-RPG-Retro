@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "2D8", "Abbreviation": "iw", "Element": "Air", "Turns": 3, "Range": 4, "Location": "Ordinal", "Animation": 4, "Field": 1, "Group": "Attack", "Gold": 850, "Level": 45, "MP": 225, "Description": "Ice Wave of freezing air can attack all opponents.", "Short_Description": "Ice Wave of freezing air.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

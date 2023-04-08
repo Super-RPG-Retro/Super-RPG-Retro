@@ -1,0 +1,316 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://3d/assets/meshlibs/museum.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://3d/scripts/button_hover.gd" type="Script" id=2]
+[ext_resource path="res://3d/scripts/camera_movement.gd" type="Script" id=3]
+[ext_resource path="res://3d/scripts/mouse_coordinates.gd" type="Script" id=4]
+[ext_resource path="res://3d/scripts/button_normal.gd" type="Script" id=5]
+[ext_resource path="res://3d/scripts/button_selected.gd" type="Script" id=6]
+[ext_resource path="res://3d/assets/images/portal1.png" type="Texture" id=7]
+[ext_resource path="res://3d/assets/images/button_hover.png" type="Texture" id=8]
+[ext_resource path="res://3d/assets/images/button_selected.png" type="Texture" id=9]
+[ext_resource path="res://3d/assets/images/button_normal.png" type="Texture" id=10]
+[ext_resource path="res://bundles/assets/fonts/xolonium/Xolonium_size_14.tres" type="DynamicFont" id=11]
+[ext_resource path="res://audio/sound/teleport.ogg" type="AudioStream" id=12]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 0.5, 2, 0.5 )
+
+[sub_resource type="SphereShape" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.313726, 0, 0.286275, 1 )
+
+[sub_resource type="CylinderMesh" id=5]
+material = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=6]
+
+[sub_resource type="CylinderMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderMesh" id=9]
+material = SubResource( 8 )
+
+[sub_resource type="CubeMesh" id=18]
+
+[sub_resource type="Skin" id=21]
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 0, 0.933333, 0, 1 )
+
+[sub_resource type="CubeMesh" id=15]
+material = SubResource( 14 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0, 0.933333, 0, 1 )
+
+[sub_resource type="CubeMesh" id=17]
+material = SubResource( 16 )
+
+[sub_resource type="CubeMesh" id=22]
+
+[sub_resource type="SpatialMaterial" id=23]
+albedo_color = Color( 0.652344, 0.652344, 0.652344, 1 )
+roughness = 0.0
+
+[sub_resource type="ProceduralSky" id=19]
+ground_energy = 1.25
+
+[sub_resource type="Environment" id=20]
+background_mode = 3
+background_sky = SubResource( 19 )
+background_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+background_energy = 1.3
+ambient_light_energy = 0.5
+fog_enabled = true
+fog_color = Color( 0, 0.0313726, 0.0666667, 1 )
+fog_sun_color = Color( 0, 0.00392157, 0.0509804, 1 )
+fog_sun_amount = 1.0
+ssao_enabled = true
+ssao_quality = 2
+dof_blur_near_enabled = true
+
+[node name="Node2D" type="Node2D"]
+z_index = -10
+
+[node name="Viewport" type="ViewportContainer" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 660.0
+margin_bottom = 409.0
+
+[node name="Viewport" type="Viewport" parent="Viewport"]
+size = Vector2( 628, 375 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Spatial" type="Spatial" parent="Viewport/Viewport"]
+
+[node name="Floor" type="GridMap" parent="Viewport/Viewport/Spatial"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 9, 5, 0, 10, 5, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0, 6, 6, 0, 7, 6, 0, 8, 6, 0, 9, 6, 0, 10, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 9, 7, 0, 10, 7, 0, 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Ceiling" type="GridMap" parent="Viewport/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 9, 5, 0, 10, 5, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0, 6, 6, 0, 7, 6, 0, 8, 6, 0, 9, 6, 0, 10, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 9, 7, 0, 10, 7, 0, 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="MainMap" type="GridMap" parent="Viewport/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 0, 1, 0, 10, 1, 0, 0, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 8, 2, 0, 10, 2, 0, 0, 3, 0, 2, 3, 0, 8, 3, 0, 10, 3, 0, 0, 4, 0, 2, 4, 0, 4, 4, 1, 5, 4, 1, 8, 4, 0, 10, 4, 0, 0, 5, 0, 2, 5, 0, 4, 5, 1, 8, 5, 0, 10, 5, 0, 0, 6, 0, 2, 6, 0, 4, 6, 1, 5, 6, 1, 8, 6, 0, 10, 6, 0, 0, 7, 0, 2, 7, 0, 4, 7, 1, 6, 7, 0, 8, 7, 0, 10, 7, 0, 0, 8, 0, 2, 8, 0, 8, 8, 0, 10, 8, 0, 0, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 8, 9, 0, 10, 9, 0, 0, 10, 0, 10, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Player" type="KinematicBody" parent="Viewport/Viewport/Spatial/MainMap" groups=["library_player"]]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 4, 3, 1, 21 )
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/Player"]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="Viewport/Viewport/Spatial/MainMap/Player"]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, -0.0726995, 0.233206 )
+doppler_tracking = 1
+current = true
+fov = 47.7111
+near = 0.1
+far = 50.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/Viewport/Spatial/MainMap/Player"]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="torcNorth1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
+transform = Transform( -8.14603e-09, 0, -0.05, 0, 0.5, 0, 0.05, 0, -8.14603e-09, 10.993, 0.886, 10.05 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1"]
+transform = Transform( 1.8, 0, -2.6977e-14, 0, 0.3, 0, 2.6977e-14, 0, 1.8, 1.05504e-06, 0.5, -8.03037e-07 )
+mesh = SubResource( 7 )
+
+[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1/light"]
+transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
+mesh = SubResource( 9 )
+
+[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1"]
+transform = Transform( 20, 0, -1.47793e-12, 0, 2, 0, 1.47793e-12, 0, 20, 0, 1, 0 )
+light_energy = 5.0
+omni_attenuation = 10.0
+
+[node name="torcSouth1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
+transform = Transform( -8.14603e-09, 0, 0.05, 0, 0.5, 0, -0.05, 0, -8.14603e-09, 11.02, 0.9, 11.95 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1"]
+transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
+mesh = SubResource( 7 )
+
+[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1/light"]
+transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
+mesh = SubResource( 9 )
+
+[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+light_energy = 5.0
+omni_attenuation = 10.0
+
+[node name="torchEast1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
+transform = Transform( -0.05, 0, -1.62921e-08, 0, 0.5, 0, 1.62921e-08, 0, -0.05, 7.95, 0.89, 9.017 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchEast1"]
+transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
+mesh = SubResource( 7 )
+
+[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchEast1/light"]
+transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
+mesh = SubResource( 9 )
+
+[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torchEast1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+light_energy = 5.0
+omni_attenuation = 10.0
+
+[node name="torchWest1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
+transform = Transform( 0.05, 0, 0, 0, 0.5, 0, 0, 0, 0.05, 10.05, 0.89, 11.03 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchWest1"]
+transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
+mesh = SubResource( 7 )
+
+[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchWest1/light"]
+transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
+mesh = SubResource( 9 )
+
+[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torchWest1"]
+transform = Transform( 20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 1, 0 )
+light_energy = 5.0
+omni_attenuation = 10.0
+
+[node name="museum" type="MeshInstance" parent="Viewport/Viewport/Spatial"]
+transform = Transform( 0.05, 0, 0, 0, 0.5, 0, 0, 0, 0.93, 8, 3, 13 )
+mesh = SubResource( 18 )
+skin = SubResource( 21 )
+skeleton = NodePath("")
+
+[node name="bprderLeft" type="MeshInstance" parent="Viewport/Viewport/Spatial/museum"]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.0263158, 4.76837e-06, 0, -1 )
+mesh = SubResource( 15 )
+
+[node name="borderRight" type="MeshInstance" parent="Viewport/Viewport/Spatial/museum"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.027, -1, 0, 1.027 )
+mesh = SubResource( 17 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/Viewport/Spatial/museum"]
+transform = Transform( -1.5299e-08, 0, 0.5, 0, 0.7, 0, -0.35, 0, -2.18557e-08, -3, 0, 0 )
+offset = Vector2( 174, -1 )
+texture = ExtResource( 7 )
+
+[node name="Label3D" type="Label3D" parent="Viewport/Viewport/Spatial/museum"]
+transform = Transform( 4.37114e-08, 8.74228e-08, -1, 8.74228e-08, 1, 8.74228e-08, 1, -8.74228e-08, 4.37114e-08, -3, 0, 0 )
+offset = Vector2( -25, 38 )
+modulate = Color( 0.980392, 0.921569, 0, 1 )
+text = "Enter dungeon Insects at level 1 for free?"
+font = ExtResource( 11 )
+horizontal_alignment = 0
+uppercase = true
+line_spacing = 4.0
+autowrap = true
+width = 120.0
+__meta__ = {
+"_editor_description_": "y value moves in opposite direction. a negative y value will move label down, not up."
+}
+
+[node name="ButtonNormal" type="Sprite3D" parent="Viewport/Viewport/Spatial/museum" groups=["button_normal"]]
+transform = Transform( 4.17371e-09, 0, -0.5, 0, 0.7, 0, 0.35, 0, 5.96244e-09, -3, 0, 0 )
+offset = Vector2( 91, -105 )
+texture = ExtResource( 10 )
+script = ExtResource( 5 )
+
+[node name="ButtonHover" type="Sprite3D" parent="Viewport/Viewport/Spatial/museum" groups=["button_hover"]]
+transform = Transform( 4.17371e-09, 0, -0.5, 0, 0.7, 0, 0.35, 0, 5.96244e-09, -3, 0, 0 )
+offset = Vector2( 91, -105 )
+texture = ExtResource( 8 )
+script = ExtResource( 2 )
+
+[node name="ButtonSelected" type="Sprite3D" parent="Viewport/Viewport/Spatial/museum" groups=["button_selected"]]
+transform = Transform( 4.17371e-09, 0, -0.5, 0, 0.7, 0, 0.35, 0, 5.96244e-09, -3, 0, 0 )
+offset = Vector2( 91, -105 )
+texture = ExtResource( 9 )
+script = ExtResource( 6 )
+
+[node name="Pillar1" type="Spatial" parent="Viewport/Viewport/Spatial"]
+transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.92, 2.25, 11 )
+
+[node name="PillarBottom" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="PillarTop" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="PillarMiddle" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
+transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="Pillar2" type="Spatial" parent="Viewport/Viewport/Spatial"]
+transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.92, 2.25, 15 )
+
+[node name="PillarBottom" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="PillarTop" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="PillarMiddle" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
+transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 23 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Viewport"]
+environment = SubResource( 20 )
+
+[node name="MouseCoordinates" type="Node2D" parent="Viewport"]
+script = ExtResource( 4 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="Viewport"]
+stream = ExtResource( 12 )

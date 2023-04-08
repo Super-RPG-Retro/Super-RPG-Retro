@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/medieval-quest.ogg-2e5b2218aeb05cdce849d3f10c3e10a8.oggstr"
+
+[deps]
+
+source_file="res://audio/music/medieval-quest.ogg"
+dest_files=[ "res://.import/medieval-quest.ogg-2e5b2218aeb05cdce849d3f10c3e10a8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

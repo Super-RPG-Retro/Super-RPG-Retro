@@ -1,0 +1,12 @@
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "3D10", "Abbreviation": "fb", "Element": "Fire", "Turns": 1, "Range": 4, "Location": "Ordinal", "Animation": 2, "Field": 0, "Group": "Support", "Gold": 1600, "Level": 55, "MP": 560, "Description": "A massive fiery ball that can hit the opponent with immense power. Much effective against opponents of the element earth.", "Short_Description": "A massive fiery ball.",
+	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+					0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+					0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],}

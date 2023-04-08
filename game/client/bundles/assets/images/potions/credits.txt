@@ -1,0 +1,2 @@
+
+The majority of dungeon craft stone soup tiles and artwork found in this folder are released under the CC0 license (https://creativecommons.org/publicdomain/zero/1.0/), and new dungeon craft stone soup tiles and artwork found in this folder are released under the GNU GENERAL PUBLIC LICENSE V2+ unless otherwise specified. However, the licensing situation may be complex, especially for older pieces. For information regarding the licenses of dungeon craft stone soup tiles and artwork, see https://github.com/crawl/tiles

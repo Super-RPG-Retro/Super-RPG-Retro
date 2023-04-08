@@ -1,0 +1,242 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=1]
+[ext_resource path="res://2d/source/scripts/builder/project/edit.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+
+[node name="Node2D" type="Node2D" groups=["builder"]]
+script = ExtResource( 2 )
+
+[node name="Container" type="ScrollContainer" parent="."]
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 576.0
+rect_clip_content = false
+mouse_filter = 2
+theme = ExtResource( 1 )
+custom_styles/bg = SubResource( 1 )
+scroll_horizontal_enabled = false
+
+[node name="Grid" type="GridContainer" parent="Container"]
+margin_right = 874.0
+margin_bottom = 463.0
+rect_min_size = Vector2( 200, 40 )
+columns = 2
+
+[node name="GameIDLabel" type="Label" parent="Container/Grid"]
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 27.0
+text = "Game ID."
+align = 2
+
+[node name="GameIDspinbox" type="SpinBox" parent="Container/Grid"]
+margin_left = 226.0
+margin_right = 346.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 0.0
+step = 0.0
+
+[node name="GameTitle" type="Label" parent="Container/Grid"]
+margin_top = 41.0
+margin_right = 222.0
+margin_bottom = 63.0
+text = "Title of Game."
+align = 2
+valign = 1
+
+[node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 36.0
+margin_right = 874.0
+margin_bottom = 68.0
+
+[node name="GameTitleLineEdit" type="LineEdit" parent="Container/Grid/Grid3"]
+margin_right = 120.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label3" type="Label" parent="Container/Grid/Grid3"]
+margin_left = 124.0
+margin_top = 5.0
+margin_right = 648.0
+margin_bottom = 27.0
+size_flags_horizontal = 0
+text = "Refers to the game ID while constrction set is enabled."
+
+[node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 72.0
+margin_right = 222.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 222, 0 )
+alignment = 2
+
+[node name="Label8" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 72.0
+margin_right = 874.0
+margin_bottom = 94.0
+custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
+
+[node name="Grid11" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 98.0
+margin_right = 222.0
+margin_bottom = 120.0
+alignment = 2
+
+[node name="Label11" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 98.0
+margin_right = 874.0
+margin_bottom = 120.0
+text = ">>> Important. Please read. <<<"
+
+[node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 124.0
+margin_right = 222.0
+margin_bottom = 171.0
+alignment = 2
+
+[node name="UpdateMobs" type="Label" parent="Container/Grid/Grid5"]
+margin_left = 222.0
+margin_top = 12.0
+margin_right = 222.0
+margin_bottom = 34.0
+align = 2
+valign = 1
+
+[node name="Label5" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 124.0
+margin_right = 874.0
+margin_bottom = 171.0
+custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
+text = "Remember to update the json dictionaries at directory mobs after editing other json dictionaries here at builder."
+autowrap = true
+
+[node name="UpdateMobs2" type="Label" parent="Container/Grid"]
+margin_top = 225.0
+margin_right = 222.0
+margin_bottom = 247.0
+align = 2
+valign = 1
+
+[node name="Label4" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 175.0
+margin_right = 874.0
+margin_bottom = 297.0
+text = "Dungeons use the Mobs directory and not Mobs1 and Mobs2.  All enabled mobs are searched in Mobs1 and Mobs2. Once found, that mobs is copied to the Mobs directory for faster level loading. If enabled mobs for dungeon 3, level 2, then Mobs directory will
+look like, builder_data/objects/data/1/mobs/3/2/mobs/."
+valign = 1
+autowrap = true
+
+[node name="UpdateMobs" type="Label" parent="Container/Grid"]
+margin_top = 304.0
+margin_right = 222.0
+margin_bottom = 326.0
+text = "  Update Mobs."
+align = 2
+valign = 1
+
+[node name="UpdateMobsButton" type="Button" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 301.0
+margin_right = 346.0
+margin_bottom = 329.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Update"
+
+[node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 333.0
+margin_right = 222.0
+margin_bottom = 355.0
+alignment = 2
+
+[node name="Label9" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 333.0
+margin_right = 874.0
+margin_bottom = 355.0
+custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
+
+[node name="UpdateArtifacts" type="Label" parent="Container/Grid"]
+margin_top = 384.0
+margin_right = 222.0
+margin_bottom = 406.0
+align = 2
+valign = 1
+
+[node name="Label7" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 359.0
+margin_right = 874.0
+margin_bottom = 431.0
+text = "All json dictionary files will be scanned and searched for the is_artifact feature. If that is_artifact feature is enabled then that json file will be copyed to the artifacts directory. Only 50 artifacts will be processed."
+valign = 1
+autowrap = true
+
+[node name="UpdateArtifacts2" type="Label" parent="Container/Grid"]
+margin_top = 438.0
+margin_right = 222.0
+margin_bottom = 460.0
+text = "  Update Artifacts."
+align = 2
+valign = 1
+
+[node name="UpdateArtifactsButton" type="Button" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 435.0
+margin_right = 346.0
+margin_bottom = 463.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Update"
+
+[node name="ConfirmUpdateMobsDialog" type="ConfirmationDialog" parent="."]
+margin_right = 550.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 550, 130 )
+theme = ExtResource( 1 )
+dialog_text = "Update mobs directory? If you have lots of builder data directories, the time to complete this feature could take awhile."
+dialog_autowrap = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ConfirmUpdateArtifactsDialog" type="ConfirmationDialog" parent="."]
+margin_right = 550.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 550, 130 )
+theme = ExtResource( 1 )
+dialog_text = "Update artifacts data?"
+dialog_autowrap = true
+
+[connection signal="tree_exiting" from="." to="." method="_on_MenuDungeons_tree_exiting"]
+[connection signal="focus_exited" from="Container/Grid/GameTitle" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/GameTitle" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="text_changed" from="Container/Grid/Grid3/GameTitleLineEdit" to="." method="_on_GameTitleLineEdit_text_changed"]
+[connection signal="focus_exited" from="Container/Grid/Grid5/UpdateMobs" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/Grid5/UpdateMobs" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="focus_exited" from="Container/Grid/UpdateMobs2" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/UpdateMobs2" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="focus_exited" from="Container/Grid/UpdateMobs" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/UpdateMobs" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="pressed" from="Container/Grid/UpdateMobsButton" to="." method="_on_UpdateMobsButton_pressed"]
+[connection signal="focus_exited" from="Container/Grid/UpdateArtifacts" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/UpdateArtifacts" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="focus_exited" from="Container/Grid/UpdateArtifacts2" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/UpdateArtifacts2" to="." method="_on_GameTitle_mouse_exited"]
+[connection signal="pressed" from="Container/Grid/UpdateArtifactsButton" to="." method="_on_UpdateArtifactsButton_pressed"]
+[connection signal="confirmed" from="ConfirmUpdateMobsDialog" to="." method="_on_mobs_AcceptDialog_confirmed"]
+[connection signal="confirmed" from="ConfirmUpdateArtifactsDialog" to="." method="_on_artifacts_AcceptDialog_confirmed"]
