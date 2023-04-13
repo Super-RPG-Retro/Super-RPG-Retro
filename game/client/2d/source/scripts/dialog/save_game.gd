@@ -21,6 +21,16 @@ func _ready():
 	_confirmation_dialog.popup_centered()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+
+# without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
+func _process(_delta):
+	if visible == true:
+		get_tree().call_group("magic_panel", "rune_summary_visible_false")
+		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
+		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("tile_summary", "unit_text_clear")
+		
+
 func save_game():
 	Variables._child_scene_open = false
 	

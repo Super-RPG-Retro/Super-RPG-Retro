@@ -21,7 +21,7 @@ scroll_horizontal_enabled = false
 
 [node name="Grid" type="GridContainer" parent="Container"]
 margin_right = 874.0
-margin_bottom = 463.0
+margin_bottom = 513.0
 rect_min_size = Vector2( 200, 40 )
 columns = 2
 
@@ -85,23 +85,10 @@ margin_right = 874.0
 margin_bottom = 94.0
 custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
 
-[node name="Grid11" type="HBoxContainer" parent="Container/Grid"]
-margin_top = 98.0
-margin_right = 222.0
-margin_bottom = 120.0
-alignment = 2
-
-[node name="Label11" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 98.0
-margin_right = 874.0
-margin_bottom = 120.0
-text = ">>> Important. Please read. <<<"
-
 [node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
-margin_top = 124.0
+margin_top = 98.0
 margin_right = 222.0
-margin_bottom = 171.0
+margin_bottom = 145.0
 alignment = 2
 
 [node name="UpdateMobs" type="Label" parent="Container/Grid/Grid5"]
@@ -114,90 +101,113 @@ valign = 1
 
 [node name="Label5" type="Label" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 124.0
+margin_top = 98.0
 margin_right = 874.0
-margin_bottom = 171.0
+margin_bottom = 145.0
 custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
-text = "Remember to update the json dictionaries at directory mobs after editing other json dictionaries here at builder."
+text = "Remember to click this update after enabling an objects at dictionaries menu here at builder."
 autowrap = true
 
 [node name="UpdateMobs2" type="Label" parent="Container/Grid"]
-margin_top = 225.0
+margin_top = 199.0
 margin_right = 222.0
-margin_bottom = 247.0
+margin_bottom = 221.0
 align = 2
 valign = 1
 
 [node name="Label4" type="Label" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 175.0
+margin_top = 149.0
 margin_right = 874.0
-margin_bottom = 297.0
-text = "Dungeons use the Mobs directory and not Mobs1 and Mobs2.  All enabled mobs are searched in Mobs1 and Mobs2. Once found, that mobs is copied to the Mobs directory for faster level loading. If enabled mobs for dungeon 3, level 2, then Mobs directory will
-look like, builder_data/objects/data/1/mobs/3/2/mobs/."
+margin_bottom = 271.0
+text = "Dungeons use the Mobs directory and not Mobs1 and Mobs2.  All enabled mobs are searched in Mobs1 and Mobs2. Once found, that mobs is copied to the Mobs directory for faster level loading. If enabled elephant for dungeon 3, level 2, then Mobs directory will
+look like, builder_data/objects/data/1/mobs/3/2/elephant/."
 valign = 1
 autowrap = true
 
 [node name="UpdateMobs" type="Label" parent="Container/Grid"]
-margin_top = 304.0
+margin_top = 278.0
 margin_right = 222.0
-margin_bottom = 326.0
+margin_bottom = 300.0
 text = "  Update Mobs."
 align = 2
 valign = 1
 
 [node name="UpdateMobsButton" type="Button" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 301.0
+margin_top = 275.0
 margin_right = 346.0
-margin_bottom = 329.0
+margin_bottom = 303.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Update"
 
 [node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
-margin_top = 333.0
+margin_top = 307.0
 margin_right = 222.0
-margin_bottom = 355.0
+margin_bottom = 329.0
 alignment = 2
 
 [node name="Label9" type="Label" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 333.0
+margin_top = 307.0
 margin_right = 874.0
-margin_bottom = 355.0
+margin_bottom = 329.0
 custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
 
-[node name="UpdateArtifacts" type="Label" parent="Container/Grid"]
-margin_top = 384.0
+[node name="Grid6" type="HBoxContainer" parent="Container/Grid"]
+margin_top = 333.0
 margin_right = 222.0
-margin_bottom = 406.0
+margin_bottom = 380.0
+alignment = 2
+
+[node name="UpdateMobs" type="Label" parent="Container/Grid/Grid6"]
+margin_left = 222.0
+margin_top = 12.0
+margin_right = 222.0
+margin_bottom = 34.0
+align = 2
+valign = 1
+
+[node name="Label6" type="Label" parent="Container/Grid"]
+margin_left = 226.0
+margin_top = 333.0
+margin_right = 874.0
+margin_bottom = 380.0
+custom_colors/font_color = Color( 0.980392, 0, 0.462745, 1 )
+text = "Remember to click this update after editing is_artifact at dictionaries menu here at builder."
+autowrap = true
+
+[node name="UpdateArtifacts" type="Label" parent="Container/Grid"]
+margin_top = 421.0
+margin_right = 222.0
+margin_bottom = 443.0
 align = 2
 valign = 1
 
 [node name="Label7" type="Label" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 359.0
+margin_top = 384.0
 margin_right = 874.0
-margin_bottom = 431.0
+margin_bottom = 481.0
 text = "All json dictionary files will be scanned and searched for the is_artifact feature. If that is_artifact feature is enabled then that json file will be copyed to the artifacts directory. Only 50 artifacts will be processed."
 valign = 1
 autowrap = true
 
 [node name="UpdateArtifacts2" type="Label" parent="Container/Grid"]
-margin_top = 438.0
+margin_top = 488.0
 margin_right = 222.0
-margin_bottom = 460.0
+margin_bottom = 510.0
 text = "  Update Artifacts."
 align = 2
 valign = 1
 
 [node name="UpdateArtifactsButton" type="Button" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 435.0
+margin_top = 485.0
 margin_right = 346.0
-margin_bottom = 463.0
+margin_bottom = 513.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -233,6 +243,8 @@ dialog_autowrap = true
 [connection signal="focus_exited" from="Container/Grid/UpdateMobs" to="." method="_on_GameTitle_focus_exited"]
 [connection signal="mouse_exited" from="Container/Grid/UpdateMobs" to="." method="_on_GameTitle_mouse_exited"]
 [connection signal="pressed" from="Container/Grid/UpdateMobsButton" to="." method="_on_UpdateMobsButton_pressed"]
+[connection signal="focus_exited" from="Container/Grid/Grid6/UpdateMobs" to="." method="_on_GameTitle_focus_exited"]
+[connection signal="mouse_exited" from="Container/Grid/Grid6/UpdateMobs" to="." method="_on_GameTitle_mouse_exited"]
 [connection signal="focus_exited" from="Container/Grid/UpdateArtifacts" to="." method="_on_GameTitle_focus_exited"]
 [connection signal="mouse_exited" from="Container/Grid/UpdateArtifacts" to="." method="_on_GameTitle_mouse_exited"]
 [connection signal="focus_exited" from="Container/Grid/UpdateArtifacts2" to="." method="_on_GameTitle_focus_exited"]

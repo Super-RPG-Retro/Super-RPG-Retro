@@ -267,12 +267,13 @@ func _input(event):
 		# this makes the square box that highlights the tile move currectly with the mouse cursor. without this code, the square box would change to a different tile but the mouse cursor might not be located at that tile or the mouse cursor might be offset to that tile.
 		get_tree().call_group("unit_description", "change_mouse_to_player_offset")
 		
-		if Settings._system.small_client_panel == false:
-			_3d.get_node("Viewport/Viewport").size.y = 375
-		else:
-			_3d.get_node("Viewport/Viewport").size.y = 455
+		if _3d != null:
+			if Settings._system.small_client_panel == false:
+				_3d.get_node("Viewport/Viewport").size.y = 375
+			else:
+				_3d.get_node("Viewport/Viewport").size.y = 455
 			
-		
+		 
 	elif Variables._trigger_commands == Enum.Trigger_commands.Unit_description && _show_tile_summary == true:
 		get_tree().call_group("unit_description", "tile_summary")
 	
@@ -339,7 +340,7 @@ func add_scenes():
 			
 			_2d_map_main.get_node("WorldViewport").size = Vector2(1024, 512)
 							
-			_2d_map_main.get_node("TextureRect").rect_position = Vector2( -365, -115)
+			#_2d_map_main.get_node("TextureRect").rect_position = Vector2( -365, -115)
 			_2d_map_main.get_node("TextureRect").rect_scale = Vector2( 8, 8 )
 			
 		_2d_map_main.visible = true
@@ -371,8 +372,10 @@ func add_scenes():
 		_2d_map_mini = _2d_map_main.duplicate(0)
 		add_child(_2d_map_mini)
 			
-		_2d_map_mini.get_node("TextureRect").rect_scale = Vector2( 1.97, 2.02 ) # not perfect here but looks perfect at scene. should not change value.
-		_2d_map_mini.get_node("TextureRect").set_position(Vector2( 672, 421 ))
+		_2d_map_mini.get_node("TextureRect").rect_scale = Vector2( 1.99, 2.05 ) # not perfect here but looks perfect at scene. should not change value.
+		
+		_2d_map_mini.get_node("TextureRect").set_position(Vector2( 672, 419 ))
+		
 		_2d_map_mini.visible = true
 	
 	
@@ -478,6 +481,9 @@ func toggle_client_chat_panel():
 		_client.get_node(_client_size).rect_size.y = 84
 		
 		_2d_map_main.get_node("TextureRect").rect_position = Vector2( -365, -76)
+		
+		#if Settings._system.use_large_tiles == false:
+		#	_2d_map_main.get_node("TextureRect").rect_position.y -= 12
 		
 	else:
 		_client.get_node("MarginContainer").margin_top = 418

@@ -78,12 +78,12 @@ script = ExtResource( 5 )
 
 [node name="SceneHeader" parent="." instance=ExtResource( 4 )]
 
-[node name="Label" parent="SceneHeader" index="1"]
+[node name="Label" parent="SceneHeader" index="2"]
 margin_left = 8.0
 margin_right = 1016.0
 text = "Builder"
 
-[node name="Underline" parent="SceneHeader" index="2"]
+[node name="Underline" parent="SceneHeader" index="3"]
 points = PoolVector2Array( 1024, 0, 512.05, 0, 433.572, 0, 0, 0 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]

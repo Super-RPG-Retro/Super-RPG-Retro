@@ -12,6 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
+var _extra_room_size = 0
+
 # total available levels for each dungeon. this var is passed to Builder._data.level_number
 onready var _level_number = $Container/Grid/Grid1/LevelSpinbox
 
@@ -73,7 +75,10 @@ func _ready():
 
 	var _work_but_this_var_is_not_yet_used = dimensions()
 
-
+	if _extra_room_size == 0:
+		_level_size.value += 1
+	
+	
 func _process(_delta):
 	if Builder._data.starting_level == _level_number.value:
 		_starting_level.pressed = true
@@ -220,14 +225,13 @@ func dimensions() -> bool:
 	if _room_total.value >= 10:
 		_math = float(str(_room_total.value / 10))
 	
-	var _extra_room_size = 0
-	
 	# the size of the event room added to the calculations.
 	if Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] > 0:
-		_extra_room_size = 3.3  - (_room_size_max.value / 10)
+		_extra_room_size = 3.4  - int(_room_size_max.value / 10)
 	
 	# this is the main calculations so keep the room evenly space between the corridors. when the room total increases, _math will have a greater value the lesser the value of the room total. the reason is that when the room is small, an increase to the room size will need to be great so that 1 extra room can be placed on the map. whereas, when the map is big, a minor increase of the map will create enought regions for many rooms to be placed on the map. therefore, _math is used to adjust the map based on the size of its total map in tiles.
 	_tiles = int(((_room_size_max.value * _room_total.value) * (3.3 - _math)) + _extra_room_size * Settings._system.corridor_length_between_rooms)
+	
 		
 	# is there enought tiles for the requested level dimensions?
 	if _level_size.value <= _tiles:
@@ -235,7 +239,10 @@ func dimensions() -> bool:
 	
 		# level_size might need updating because at general_events, room size might have changed.
 		_read_code = false
+		
+		# this + 1 is needed. without this code, spinbox could decrease level size to a value below its minimum value.
 		_level_size.value = _tiles + 1
+		
 		_on_LevelSizeSpinbox_value_changed(_tiles)
 		_read_code = true
 		

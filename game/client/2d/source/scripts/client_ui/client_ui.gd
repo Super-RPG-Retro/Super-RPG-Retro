@@ -45,6 +45,11 @@ onready var _host_address = $Panel/VBoxContainer/Send/ButtonPanel/HostAddress
 # used to delay the wait a turn feature.
 onready var _timer_wait_turn = $TimerGameTurn
 
+onready var _hide_tile_top = get_parent().get_parent().get_parent().get_node("PanelTileHideTop")
+
+onready var _hide_tile_bottom = get_parent().get_parent().get_parent().get_node("PanelTileHideButtom")
+
+
 func _ready():
 	if Settings._system.hide_chat_features == true:
 		_room_public.visible = false
@@ -193,6 +198,17 @@ func _input(event):
 		_on_listen_button_pressed()
 		_input_client.text = ""
 		return
+
+
+func should_hide_tile_panel_be_visible():
+	_hide_tile_top.visible = false
+	_hide_tile_bottom.visible = false
+	
+	if Settings._system.small_client_panel == false:
+		if Settings._system.use_large_tiles == false:
+			_hide_tile_top.visible = true
+			_hide_tile_bottom.visible = true
+	
 
 func _focus_none():
 	_listen_button.focus_mode = FOCUS_NONE

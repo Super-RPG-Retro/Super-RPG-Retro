@@ -99,13 +99,15 @@ func player_stats_panel_size():
 	else:
 		get_node("Inventory").visible = true
 	
-	
+
+# this func is called when a dialog box displays
 func inventory_summary_visible_false():
 	if Variables._child_scene_open == true:
 		return
 		
 	$Node2D/InventorySummary.visible = false
-
+	$Inventory/InventorySelect.visible = false
+	
 
 # draw Inventory to scene.
 func draw_inventory_icons(_group: int = 1):

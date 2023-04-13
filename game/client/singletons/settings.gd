@@ -62,6 +62,9 @@ var _game = {
 	# current level of the dungeon the player is at.  
 	"level_number": 0,
 	
+	# Enabled: Continue from saved game. Disabled: All data will be deleted. Player must start from the beginning again. Select this option for a major difficulty score increase.
+	"can_continue_saved_game": true,
+	
 	# NOTE. remember to add the next element also at the bottom of this file, at _reset_game() func.	
 }
 
@@ -145,6 +148,7 @@ func _reset_game():
 		"down_ladder_always_shown": true,
 		"return_to_last_level": false,
 		"level_number": 0,
+		"can_continue_saved_game": true,
 	}
 
 

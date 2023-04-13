@@ -56,6 +56,10 @@ func _process(_delta):
 	if Settings._game.down_ladder_always_shown == false:
 		P._stats_loaded.difficulty_score += 30
 		
+	if Settings._game.can_continue_saved_game == false:
+		P._stats_loaded.difficulty_score += 700
+		
+		
 	# the longer the mobs follows player, the more difficult it is, so this value gives more for a higher value.
 	P._stats_loaded.difficulty_score += Settings._game.mobs_dead_distance
 	

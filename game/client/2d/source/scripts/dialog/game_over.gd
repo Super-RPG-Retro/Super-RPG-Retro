@@ -14,12 +14,23 @@ extends Node2D
 
 onready var _game_over_dialog = $GameOverDialog
 onready var _data_removed_dialog = $DataRemovedDialog
+var _timer = Timer.new()
 
 func _ready():
+	_game_over_dialog.grab_focus()
 	_game_over_dialog.popup_centered()
 	_data_removed_dialog.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+
+# without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
+func _process(_delta):
+	if visible == true:
+		get_tree().call_group("magic_panel", "rune_summary_visible_false")
+		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
+		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("tile_summary", "unit_text_clear")
+		
 
 func _on_AcceptDialog_modal_closed():
 	close()
@@ -61,6 +72,10 @@ func _save_data():
 	# player lost game. clear score data from player's recent game so that player cannot resume a saved game using that score data because it would be to easy to get another high score.
 	P._stats_loaded.Score = 0
 	
+	if Settings._game.can_continue_saved_game == true:
+		_on_DataRemoved_AcceptDialog_popup_hide()
+		return
+	
 	var _does_file_exist
 	var _does_file_exist2 # verification of data.
 	
@@ -77,7 +92,6 @@ func _save_data():
 	
 	# if file existed and was removed then show dialog box.
 	if _does_file_exist == true && _does_file_exist2 == false:
-		var _timer = Timer.new()
 		_timer.wait_time = 0.2
 		_timer.connect("timeout", self, "_on_timer_timeout") 
 		add_child(_timer)
@@ -91,7 +105,6 @@ func _save_data():
 		_data_removed_dialog.popup_centered()
 		
 	else:
-		var _timer = Timer.new()
 		_timer.wait_time = 0.2
 		_timer.connect("timeout", self, "_on_timer_timeout") 
 		add_child(_timer)

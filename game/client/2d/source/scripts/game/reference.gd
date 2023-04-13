@@ -81,11 +81,19 @@ class Item extends Reference:
 	
 # define a class to hold the mobs information.
 class Mobs extends Reference:
+	var _move_tile = Vector2(0, 0)
+	
 	# mob goodbye/hit timer.
 	var timer = Timer.new()
 	
 	# this var is used at tiles.gd to display tile information. this var is either "item", "mobs" or "player". 
 	var _type = ""
+	
+	# how does this object move. follows player, moves in opposite direction of player...
+	var _movement_type:int = Enum.Movement_type.Target_player
+	
+	# this holds the last direction the mob moved in. 0:left, 1:up, 2:right, 3:down.
+	var _movement_direction:int = 0
 	
 	# this will hold a reference to the mobs scene.
 	var _sprite_scene
@@ -201,6 +209,8 @@ class Mobs extends Reference:
 		
 		_xp_given = int(Json.d[str(Builder_playing._config.game_id)]["mobs"][_name].XP_given + Settings._game.difficulty_level)
 		
+		_movement_type = Json.d[str(Builder_playing._config.game_id)]["mobs"][_name].Movement_type
+		
 		# set invisible if any mobs are to far from mobs starting position.
 		_dead_at_tile_distance_from_start	= Settings._game.mobs_dead_distance
 		
@@ -299,76 +309,270 @@ class Mobs extends Reference:
 			
 	
 	# mobs movement.			
-	func act(game, mobs):
+	# _dx and _dy is player's movement. 0: no movement. -1 left or up. 1: right or down
+	func act(game, mobs, _dx:int, _dy:int):
 		# don't do anything with this mobs if mobs is not visible.
 		if !_sprite_scene.visible:
 			return
-
+			
 		# get the points the player and mobs are at. this is the mobs location.
 		var my_point = game._mobs_pathfinding.get_closest_point(Vector3(tile.x, tile.y, 0))
 		
 		var player_point = game._mobs_pathfinding.get_closest_point(Vector3(game._player_tile.x, game._player_tile.y, 0))
-		
+	
 		# then we try to find a path between them.
 		var path = game._mobs_pathfinding.get_point_path(my_point, player_point)
 		
+		#if path:			
+		# exit this func and try next move if player is standing on a mob. if this is true then mob respawned at player's position. mob will be seen standing with player but no errors will be giving because of this return.
+		# cannot stand on mob at corridor. enter this function regardless of path size because mob might be running from player.
+		if path.size() <= 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y)) != Enum.Tile.Floor:
+			return
 		
-		if path:			
-			# exit this func and try next move if player is standing on a mob. if this is true then mob respawned at player's position. mob will be seen standing with player but no errors will be giving because of this return.
-			if path.size() <= 1:
-				return
+		# if mob stands still, return if player is not next to mob. else mob will attack.
+		if path.size() > 2 && _movement_type == Enum.Movement_type.Stationary:
+			return
+		
+		
+		# path between them should be 2 tiles long. This assures that mobs will not be in the same tile as player.
+		#assert(path.size() > 1)
+		
+		# mobs only moves 1 tile at a time.
+		_move_tile = Vector2(tile.x, tile.y)
+		
+		# types of movement that a mob can do.
+		_mob_movement_type(game, path, _dx, _dy)
+		
+		# if a haste rune is in effect, set the min speed that mobs can move. the lower the value, the slower the move to next tile will be because mobs is set to only move when normal _move_speed equals _move_speed_max.
+		if Variables._is_haste_enabled == true:
+			if P._move_speed == 2:
+				_move_speed_min = 2
+			if P._move_speed == 3:
+				_move_speed_min = 1
+		
+		# if haste rune is not enabled then set back the min move speed.
+		else:
+			_move_speed_min = 3
+		
+		# increment the move speed. if move speed equals move speed max, as set below this code block, the mobs will then move. clamp statement assures that the normal move speed (_move_speed) does not have a greater value than _move_speed_max.	
+		if _move_speed != null:
+			_move_speed += 1
+			_move_speed = clamp(_move_speed, _move_speed_min, _move_speed_max)
+		
+		if game.player.frame == 1: # player is invisible...
+			_move_tile = Vector2(path[0].x, path[0].y)
 			
-			# path between them should be 2 tiles long. This assures that mobs will not be in the same tile as player.
-			assert(path.size() > 1)
+			# ...but touches mob. set player back to normal so that player can receive damage from mob.
+			if path.size() == 2:
+				game.player.frame = 0
+		
+		# minus one because the value will be set to P._move_speed_min at next loop.
+		if _move_speed == _move_speed_max:
+			_move_speed = _move_speed_min - 1
+		else:
+			_move_tile = Vector2(path[0].x, path[0].y)
+			
+		 # if mobs wants to move to the player then give player damage.
+		if _move_tile == game._player_tile && timer.time_left == 0:
+			game.player.get_node("Damage").damage_player(1)
+		
+		else:
+			# else, move the mobs to the player if at not blocked position.
+			var blocked = false
+			for other_mobs in game.mobs:
+				if other_mobs.tile == _move_tile:
+					blocked = true
+			
+			if mobs.tile == _move_tile:
+				blocked = true
 						
-			# mobs only moves 1 tile at a time.
-			var move_tile = Vector2(path[1].x, path[1].y)
-			
-			# if a haste rune is in effect, set the min speed that mobs can move. the lower the value, the slower the move to next tile will be because mobs is set to only move when normal _move_speed equals _move_speed_max.
-			if Variables._is_haste_enabled == true:
-				if P._move_speed == 2:
-					_move_speed_min = 2
-				if P._move_speed == 3:
-					_move_speed_min = 1
-			
-			# if haste rune is not enabled then set back the min move speed.
-			else:
-				_move_speed_min = 3
-			
-			# increment the move speed. if move speed equals move speed max, as set below this code block, the mobs will then move. clamp statement assures that the normal move speed (_move_speed) does not have a greater value than _move_speed_max.	
-			if _move_speed != null:
-				_move_speed += 1
-				_move_speed = clamp(_move_speed, _move_speed_min, _move_speed_max)
-			
-			
-			if game.player.frame == 1:
-				move_tile = Vector2(path[0].x, path[0].y)
+			if !blocked && timer.time_left == 0 && !_sprite_scene.get_node("AnimationPlayer").is_playing():
+				if _dx == 0 && _dy == 0 && _movement_type == Enum.Movement_type.Avoid_player:
+					pass
 				
-				if path.size() == 2:
-					game.player.frame = 0
+				if _dx == 0 && _dy == 0 && _movement_type == Enum.Movement_type.Run_away_from_player:
+					pass
+					
+				else:
+					tile = _move_tile
+	
+	# type of movement that a mob can do.
+	func _mob_movement_type(game, path:PoolVector3Array, _dx:int, _dy:int):
+		if _movement_type == Enum.Movement_type.Run_away_from_player:
+			if game._player_tile.x < tile.x && tile.x - game._player_tile.x == 1 && game._player_tile.y < tile.y && tile.y - game._player_tile.y == 1 || game._player_tile.x > tile.x && game._player_tile.x - tile.x == 1 && game._player_tile.y < tile.y && tile.y - game._player_tile.y == 1:
+				_dx = 0
+				_dy = 0
+								
+			elif game._player_tile.x < tile.x && tile.x - game._player_tile.x == 1 && tile.y < game._player_tile.y && game._player_tile.y - tile.y == 1 || game._player_tile.x > tile.x && game._player_tile.x - tile.x == 1 && tile.y < game._player_tile.y && game._player_tile.y - tile.y == 1:
+				_dx = 0
+				_dy = 0
+								
 			
-			# minus one because the value will be set to P._move_speed_min at next loop.
-			if _move_speed == _move_speed_max:
-				_move_speed = _move_speed_min - 1
-			else:
-				move_tile = Vector2(path[0].x, path[0].y)
+		if _movement_type == Enum.Movement_type.Avoid_player:
+			var _xl = 1000
+			if game._player_tile.x <= tile.x:
+				_xl = game._player_tile.x - tile.x
+			
+			var _xr = 1000
+			if game._player_tile.x >= tile.x:
+				_xr = tile.x - game._player_tile.x
+			
+			var _yl = 1000
+			if game._player_tile.y <= tile.y:
+				_yl = game._player_tile.y - tile.y
+			
+			var _yr = 1000
+			if game._player_tile.y >= tile.y:
+				_yr = tile.y - game._player_tile.y
 				
-			 # if mobs wants to move to the player then give player damage.
-			if move_tile == game._player_tile && timer.time_left == 0:
-				game.player.get_node("Damage").damage_player(1)
+				
+			if _xl > _xr && _xl > _yl && _xl > _yr:
+				_dx = 1
+				_dy = 0
+			elif _xr > _xl && _xr > _yl && _xr > _yr:
+				_dx = -1
+				_dy = 0
+				
+			elif _yl > _yr && _yl > _xl && _yl > _xr:
+				_dx = 0
+				_dy = 1
+			elif _yr > _yl && _yr > _xl && _yr > _xr:
+				_dx = 0
+				_dy = -1
+		
+		if _movement_type == Enum.Movement_type.Stationary || _movement_type == Enum.Movement_type.Target_player:
+			_move_tile = Vector2(path[1].x, path[1].y)
+		
+		if _movement_type == Enum.Movement_type.Random_movement:
+			randomize()
+			var _ra = int(rand_range(0, 4)) 
 			
-			else:
-				# else, move the mobs to the player if at not blocked position.
+			if _ra == 0:
+				_dx = -1
+				_dy = 0
+			
+			if _ra == 1:
+				_dx = 1
+				_dy = 0
+				
+			if _ra == 2:
+				_dx = 0
+				_dy = -1
+				
+			if _ra == 3:
+				_dx = 0
+				_dy = 1
+				
+		
+		if _movement_type == Enum.Movement_type.Trace_walls:
+			# if game is not using Floor_rooms, change this mob movement type to random. this code is needed because mobs would run outside of room, braking the trace wall movement.
+			if game.tile_map.get_cellv(Vector2(tile.x, tile.y)) != Enum.Tile.Floor_rooms:
+				_movement_type = Enum.Movement_type.Random_movement
+			
+			if _movement_direction == 0:
 				var blocked = false
 				for other_mobs in game.mobs:
-					if other_mobs.tile == move_tile:
+					if other_mobs.tile.x == tile.x - 1 && other_mobs.tile.y == tile.y:
 						blocked = true
 				
-				if mobs.tile == move_tile:
-					blocked = true
-							
-				if !blocked && timer.time_left == 0 && !_sprite_scene.get_node("AnimationPlayer").is_playing():
-					tile = move_tile
+				if blocked == true:
+					_movement_direction = 1
+				
+				elif game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+					_dx = 1 # this value will be reversed before mob is moved.
+					_dy = 0
+				
+				else:
+					_movement_direction = 1
+					
+			if _movement_direction == 1:
+				var blocked = false
+				for other_mobs in game.mobs:
+					if other_mobs.tile.x == tile.x && other_mobs.tile.y == tile.y - 1:
+						blocked = true
+				
+				if blocked == true:
+					_movement_direction = 2
+				
+				elif game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
+					_dx = 0
+					_dy = 1
+				
+				else:
+					_movement_direction = 2
+			
+			if _movement_direction == 2:
+				var blocked = false
+				for other_mobs in game.mobs:
+					if other_mobs.tile.x == tile.x + 1 && other_mobs.tile.y == tile.y:
+						blocked = true
+				
+				if blocked == true:
+					_movement_direction = 3
+				
+				elif game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
+					_dx = -1
+					_dy = 0
+				
+				else:
+					_movement_direction = 3
+					
+			if _movement_direction == 3:
+				var blocked = false
+				for other_mobs in game.mobs:
+					if other_mobs.tile.x == tile.x && other_mobs.tile.y == tile.y + 1:
+						blocked = true
+				
+				if blocked == true:
+					_movement_direction = 0
+				
+				elif game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
+					_dx = 0
+					_dy = -1
+				
+				else:
+					_movement_direction = 0
+			
+			# this dupicate is needed here so that the mob does not pause movement. without this code, when mob moving in down direction fails the mob does not move to this left.
+			if _movement_direction == 0:
+				var blocked = false
+				for other_mobs in game.mobs:
+					if other_mobs.tile.x == tile.x - 1 && other_mobs.tile.y == tile.y:
+						blocked = true
+				
+				if blocked == true:
+					_movement_direction = 1
+				
+				elif game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+					_dx = 1 # this value will be reversed before mob is moved.
+					_dy = 0
+				
+				else:
+					_movement_direction = 1
+			
+		
+		if _movement_type == Enum.Movement_type.Avoid_player || _movement_type == Enum.Movement_type.Run_away_from_player || _movement_type == Enum.Movement_type.Random_movement || _movement_type == Enum.Movement_type.Trace_walls:
+			# player did not move.
+			if _dx == 0 && _dy == 0:
+				# no mob movement.
+				_move_tile = Vector2(tile.x, tile.y)
+				
+			# left.
+			if _dx == -1 && game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor || _dx == -1 && game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
+				_move_tile = Vector2(tile.x + 1, tile.y)
+			
+			# right.
+			if _dx == 1 && game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor || _dx == 1 && game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+				_move_tile = Vector2(tile.x - 1, tile.y)
+			
+			# up.
+			if _dy == -1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor || _dy == -1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
+				_move_tile = Vector2(tile.x, tile.y + 1)
+			
+			# down.
+			if _dy == 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor || _dy == 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
+				_move_tile = Vector2(tile.x, tile.y - 1)
+					
 
 # puzzle is blocks in only one room when enabled. blocks are displayed on the floor. each block is red on one side and yellow on the other, the object is to move the blocks around, making them appear to be all one color, but in so many turns. puzzle uses room 1. that room is 15 x 15 tiles wide,
 class Puzzle extends Reference:

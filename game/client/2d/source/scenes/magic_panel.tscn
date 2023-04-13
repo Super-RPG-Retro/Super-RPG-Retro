@@ -218,6 +218,7 @@ margin_bottom = 261.0
 visible = false
 position = Vector2( 763, 243 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="RuneBGoverlay" type="Sprite" parent="Runes"]

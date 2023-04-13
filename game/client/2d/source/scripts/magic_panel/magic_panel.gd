@@ -116,6 +116,14 @@ func _input(event):
 					return
 
 
+# this func is called when a dialog box displays.
+func rune_summary_visible_false():
+	if Variables._child_scene_open == true:
+		return
+		
+	$Node2D/RuneSummary.visible = false
+	$Runes/RuneSelect.visible = false
+	
 func player_stats_panel_size():
 	# hide the magic panel scene if true.
 	if Settings._system.player_stats_panel_size == 1 || Settings._system.player_stats_panel_size == 3:

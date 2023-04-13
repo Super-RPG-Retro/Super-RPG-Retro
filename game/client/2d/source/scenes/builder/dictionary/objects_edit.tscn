@@ -25,8 +25,8 @@ theme = ExtResource( 6 )
 custom_styles/bg = SubResource( 1 )
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 975.0
-margin_bottom = 1554.0
+margin_right = 989.0
+margin_bottom = 2330.0
 rect_min_size = Vector2( 200, 40 )
 custom_constants/vseparation = 7
 custom_constants/hseparation = 13
@@ -41,9 +41,9 @@ mouse_filter = 1
 custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
 align = 2
 
-[node name="LabelBody" type="Label" parent="Container/Grid"]
+[node name="LabelDescription" type="Label" parent="Container/Grid"]
 margin_left = 235.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 72.0
 mouse_filter = 1
 custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
@@ -62,7 +62,7 @@ align = 2
 [node name="Grid2" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 79.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 164.0
 columns = 2
 
@@ -90,7 +90,7 @@ align = 2
 [node name="GridContainer" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 171.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 203.0
 columns = 6
 
@@ -140,7 +140,7 @@ align = 2
 [node name="GridContainer21" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 210.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 250.0
 columns = 6
 
@@ -169,7 +169,7 @@ align = 2
 [node name="GridContainer25" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 257.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 379.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -204,7 +204,7 @@ align = 2
 [node name="GridContainer18" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 386.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 408.0
 columns = 6
 
@@ -224,7 +224,7 @@ align = 2
 [node name="GridContainer22" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 415.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 447.0
 columns = 6
 
@@ -265,7 +265,7 @@ align = 2
 [node name="GridContainer19" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 454.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 486.0
 columns = 6
 
@@ -320,7 +320,7 @@ align = 2
 [node name="GridContainer20" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 493.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 525.0
 columns = 6
 
@@ -370,7 +370,7 @@ align = 2
 [node name="GridContainer27" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 532.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 637.0
 columns = 6
 
@@ -378,7 +378,7 @@ columns = 6
 margin_right = 420.0
 margin_bottom = 105.0
 rect_min_size = Vector2( 420, 105 )
-items = [ "Stationary", null, false, "Target player", null, false, "Opposite direction of player's movement", null, false, "Run away from player", null, false, "Random movement", null, false, "Trace walls", null, false ]
+items = [ "Target player", null, false, "Stationary", null, false, "Avoid player", null, false, "Run away from player", null, false, "Random movement", null, false, "Trace walls", null, false ]
 allow_reselect = true
 
 [node name="Label" type="Label" parent="Container/Grid/GridContainer27"]
@@ -401,24 +401,284 @@ align = 2
 [node name="TextEditDescription" type="TextEdit" parent="Container/Grid"]
 margin_left = 235.0
 margin_top = 644.0
-margin_right = 975.0
+margin_right = 989.0
 margin_bottom = 784.0
 rect_min_size = Vector2( 660, 140 )
 wrap_enabled = true
 
-[node name="Label16" type="Label" parent="Container/Grid"]
-margin_top = 796.0
+[node name="EmptyLabelTitle" type="Label" parent="Container/Grid"]
+margin_top = 791.0
 margin_right = 222.0
-margin_bottom = 818.0
+margin_bottom = 813.0
+mouse_filter = 1
+align = 2
+
+[node name="EmptyLabelDescription" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 791.0
+margin_right = 989.0
+margin_bottom = 813.0
+mouse_filter = 1
+
+[node name="Label38" type="Label" parent="Container/Grid"]
+margin_top = 820.0
+margin_right = 222.0
+margin_bottom = 842.0
+mouse_filter = 1
+align = 2
+
+[node name="Label39" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 820.0
+margin_right = 989.0
+margin_bottom = 842.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+text = "Can this mob cast the following spells on player?"
+
+[node name="Label29" type="Label" parent="Container/Grid"]
+margin_top = 858.0
+margin_right = 222.0
+margin_bottom = 880.0
+mouse_filter = 1
+text = "Spell Poison."
+align = 2
+
+[node name="GridContainer29" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 849.0
+margin_right = 989.0
+margin_bottom = 889.0
+columns = 6
+
+[node name="SpinBoxSpellPoison" type="CheckButton" parent="Container/Grid/GridContainer29"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer29"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Hp slowly decreases. Player's attack is weakened."
+autowrap = true
+
+[node name="Label30" type="Label" parent="Container/Grid"]
+margin_top = 905.0
+margin_right = 222.0
+margin_bottom = 927.0
+mouse_filter = 1
+text = "Spell Slow."
+align = 2
+
+[node name="GridContainer30" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 896.0
+margin_right = 989.0
+margin_bottom = 936.0
+columns = 6
+
+[node name="SpinBoxSpellSlow" type="CheckButton" parent="Container/Grid/GridContainer30"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer30"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Increase the time between player's attacks."
+autowrap = true
+
+[node name="Label31" type="Label" parent="Container/Grid"]
+margin_top = 952.0
+margin_right = 222.0
+margin_bottom = 974.0
+mouse_filter = 1
+text = "Spell Sleep."
+align = 2
+
+[node name="GridContainer31" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 943.0
+margin_right = 989.0
+margin_bottom = 983.0
+columns = 6
+
+[node name="SpinBoxSpellSleep" type="CheckButton" parent="Container/Grid/GridContainer31"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer31"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Lowers player's guard. A good hit will wake player up."
+autowrap = true
+
+[node name="Label32" type="Label" parent="Container/Grid"]
+margin_top = 999.0
+margin_right = 222.0
+margin_bottom = 1021.0
+mouse_filter = 1
+text = "Spell Chaos."
+align = 2
+
+[node name="GridContainer32" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 990.0
+margin_right = 989.0
+margin_bottom = 1030.0
+columns = 6
+
+[node name="SpinBoxSpellChaos" type="CheckButton" parent="Container/Grid/GridContainer32"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer32"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Confuses you into attacking allies."
+autowrap = true
+
+[node name="Label33" type="Label" parent="Container/Grid"]
+margin_top = 1046.0
+margin_right = 222.0
+margin_bottom = 1068.0
+mouse_filter = 1
+text = "Spell Blind."
+align = 2
+
+[node name="GridContainer33" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 1037.0
+margin_right = 989.0
+margin_bottom = 1077.0
+columns = 6
+
+[node name="SpinBoxSpellBlind" type="CheckButton" parent="Container/Grid/GridContainer33"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer33"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Player cannot see well. It is hard to hit mobs."
+autowrap = true
+
+[node name="Label34" type="Label" parent="Container/Grid"]
+margin_top = 1093.0
+margin_right = 222.0
+margin_bottom = 1115.0
+mouse_filter = 1
+text = "Spell Lock."
+align = 2
+
+[node name="GridContainer34" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 1084.0
+margin_right = 989.0
+margin_bottom = 1124.0
+columns = 6
+
+[node name="SpinBoxSpellLock" type="CheckButton" parent="Container/Grid/GridContainer34"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer34"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Player can't use any techniques."
+autowrap = true
+
+[node name="Label35" type="Label" parent="Container/Grid"]
+margin_top = 1140.0
+margin_right = 222.0
+margin_bottom = 1162.0
+mouse_filter = 1
+text = "Spell Stop"
+align = 2
+
+[node name="GridContainer35" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 1131.0
+margin_right = 989.0
+margin_bottom = 1171.0
+columns = 6
+
+[node name="SpinBoxSpellStop" type="CheckButton" parent="Container/Grid/GridContainer35"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+custom_constants/check_vadjust = 0
+custom_constants/hseparation = 0
+align = 2
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer35"]
+margin_left = 104.0
+margin_top = 9.0
+margin_right = 754.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 650, 0 )
+text = "Immobilizes and disables player."
+autowrap = true
+
+[node name="Label40" type="Label" parent="Container/Grid"]
+margin_top = 1192.0
+margin_right = 222.0
+margin_bottom = 1214.0
+mouse_filter = 1
+align = 2
+
+[node name="Label41" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 1178.0
+margin_right = 989.0
+margin_bottom = 1228.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+text = "A statistic is stronger the higher its value."
+valign = 2
+
+[node name="Label16" type="Label" parent="Container/Grid"]
+margin_top = 1240.0
+margin_right = 222.0
+margin_bottom = 1262.0
 mouse_filter = 1
 text = "Charisma."
 align = 2
 
 [node name="GridContainer14" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 791.0
-margin_right = 975.0
-margin_bottom = 823.0
+margin_top = 1235.0
+margin_right = 989.0
+margin_bottom = 1267.0
 columns = 6
 
 [node name="SpinBoxCharisma" type="SpinBox" parent="Container/Grid/GridContainer14"]
@@ -430,25 +690,23 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer14"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 474.0
 margin_bottom = 27.0
-mouse_filter = 1
-text = "   "
-align = 2
+text = "Charisma aka Presence, Charm, Social."
 
 [node name="Label4" type="Label" parent="Container/Grid"]
-margin_top = 835.0
+margin_top = 1279.0
 margin_right = 222.0
-margin_bottom = 857.0
+margin_bottom = 1301.0
 mouse_filter = 1
 text = "Constitution."
 align = 2
 
 [node name="GridContainer2" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 830.0
-margin_right = 975.0
-margin_bottom = 862.0
+margin_top = 1274.0
+margin_right = 989.0
+margin_bottom = 1306.0
 columns = 6
 
 [node name="SpinBoxConstitution" type="SpinBox" parent="Container/Grid/GridContainer2"]
@@ -460,25 +718,23 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer2"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 648.0
 margin_bottom = 27.0
-mouse_filter = 1
-text = "   "
-align = 2
+text = "Constitution aka Stamina, Endurance, Vitality, Recovery."
 
 [node name="Label5" type="Label" parent="Container/Grid"]
-margin_top = 874.0
+margin_top = 1318.0
 margin_right = 222.0
-margin_bottom = 896.0
+margin_bottom = 1340.0
 mouse_filter = 1
 text = "Defense."
 align = 2
 
 [node name="GridContainer3" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 869.0
-margin_right = 975.0
-margin_bottom = 901.0
+margin_top = 1313.0
+margin_right = 989.0
+margin_bottom = 1345.0
 columns = 6
 
 [node name="SpinBoxDefense" type="SpinBox" parent="Container/Grid/GridContainer3"]
@@ -490,25 +746,23 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer3"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 546.0
 margin_bottom = 27.0
-mouse_filter = 1
-text = "   "
-align = 2
+text = "Defense aka Resistance, Fortitude, Resilience."
 
 [node name="Label6" type="Label" parent="Container/Grid"]
-margin_top = 913.0
+margin_top = 1357.0
 margin_right = 222.0
-margin_bottom = 935.0
+margin_bottom = 1379.0
 mouse_filter = 1
 text = "Dexterity."
 align = 2
 
 [node name="GridContainer4" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 908.0
-margin_right = 975.0
-margin_bottom = 940.0
+margin_top = 1352.0
+margin_right = 989.0
+margin_bottom = 1384.0
 columns = 6
 
 [node name="SpinBoxDexterity" type="SpinBox" parent="Container/Grid/GridContainer4"]
@@ -520,25 +774,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer4"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 510.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Dexterity aka Agility, Reflexes, Quickness."
 align = 2
 
 [node name="Label7" type="Label" parent="Container/Grid"]
-margin_top = 952.0
+margin_top = 1396.0
 margin_right = 222.0
-margin_bottom = 974.0
+margin_bottom = 1418.0
 mouse_filter = 1
 text = "Intelligence."
 align = 2
 
 [node name="GridContainer5" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 947.0
-margin_right = 975.0
-margin_bottom = 979.0
+margin_top = 1391.0
+margin_right = 989.0
+margin_bottom = 1423.0
 columns = 6
 
 [node name="SpinBoxIntelligence" type="SpinBox" parent="Container/Grid/GridContainer5"]
@@ -550,25 +804,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer5"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 515.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Intelligence aka Intellect, Mind, Knowledge."
 align = 2
 
 [node name="Label8" type="Label" parent="Container/Grid"]
-margin_top = 991.0
+margin_top = 1435.0
 margin_right = 222.0
-margin_bottom = 1013.0
+margin_bottom = 1457.0
 mouse_filter = 1
 text = "Luck."
 align = 2
 
 [node name="GridContainer6" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 986.0
-margin_right = 975.0
-margin_bottom = 1018.0
+margin_top = 1430.0
+margin_right = 989.0
+margin_bottom = 1462.0
 columns = 6
 
 [node name="SpinBoxLuck" type="SpinBox" parent="Container/Grid/GridContainer6"]
@@ -580,25 +834,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer6"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 324.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Luck aka Fate, Chance."
 align = 2
 
 [node name="Label9" type="Label" parent="Container/Grid"]
-margin_top = 1030.0
+margin_top = 1474.0
 margin_right = 222.0
-margin_bottom = 1052.0
+margin_bottom = 1496.0
 mouse_filter = 1
 text = "Perception."
 align = 2
 
 [node name="GridContainer7" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1025.0
-margin_right = 975.0
-margin_bottom = 1057.0
+margin_top = 1469.0
+margin_right = 989.0
+margin_bottom = 1501.0
 columns = 6
 
 [node name="SpinBoxPerception" type="SpinBox" parent="Container/Grid/GridContainer7"]
@@ -610,25 +864,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer7"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 609.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Perception aka Alertness, Awareness, Cautiousness."
 align = 2
 
 [node name="Label10" type="Label" parent="Container/Grid"]
-margin_top = 1069.0
+margin_top = 1513.0
 margin_right = 222.0
-margin_bottom = 1091.0
+margin_bottom = 1535.0
 mouse_filter = 1
 text = "Strength."
 align = 2
 
 [node name="GridContainer8" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1064.0
-margin_right = 975.0
-margin_bottom = 1096.0
+margin_top = 1508.0
+margin_right = 989.0
+margin_bottom = 1540.0
 columns = 6
 
 [node name="SpinBoxStrength" type="SpinBox" parent="Container/Grid/GridContainer8"]
@@ -640,25 +894,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer8"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 502.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Strength aka Body, Might, Brawn, Power."
 align = 2
 
 [node name="Label11" type="Label" parent="Container/Grid"]
-margin_top = 1108.0
+margin_top = 1552.0
 margin_right = 222.0
-margin_bottom = 1130.0
+margin_bottom = 1574.0
 mouse_filter = 1
 text = "Willpower."
 align = 2
 
 [node name="GridContainer9" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1103.0
-margin_right = 975.0
-margin_bottom = 1135.0
+margin_top = 1547.0
+margin_right = 989.0
+margin_bottom = 1579.0
 columns = 6
 
 [node name="SpinBoxWillpower" type="SpinBox" parent="Container/Grid/GridContainer9"]
@@ -670,25 +924,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer9"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 569.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Willpower aka Sanity, Personality, Ego, Resolve."
 align = 2
 
 [node name="Label12" type="Label" parent="Container/Grid"]
-margin_top = 1147.0
+margin_top = 1591.0
 margin_right = 222.0
-margin_bottom = 1169.0
+margin_bottom = 1613.0
 mouse_filter = 1
 text = "Wisdom."
 align = 2
 
 [node name="GridContainer10" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1142.0
-margin_right = 975.0
-margin_bottom = 1174.0
+margin_top = 1586.0
+margin_right = 989.0
+margin_bottom = 1618.0
 columns = 6
 
 [node name="SpinBoxWisdom" type="SpinBox" parent="Container/Grid/GridContainer10"]
@@ -700,25 +954,43 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer10"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 122.0
+margin_right = 495.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   "
+text = "Wisdom aka Spirit, Wits, Psyche, Sense."
 align = 2
 
-[node name="Label28" type="Label" parent="Container/Grid"]
-margin_top = 1186.0
+[node name="Label42" type="Label" parent="Container/Grid"]
+margin_top = 1639.0
 margin_right = 222.0
-margin_bottom = 1208.0
+margin_bottom = 1661.0
+mouse_filter = 1
+align = 2
+
+[node name="Label43" type="Label" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 1625.0
+margin_right = 989.0
+margin_bottom = 1675.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+text = "Miscellaneous settings."
+valign = 2
+
+[node name="Label28" type="Label" parent="Container/Grid"]
+margin_top = 1687.0
+margin_right = 222.0
+margin_bottom = 1709.0
 mouse_filter = 1
 text = "Stack amount."
 align = 2
 
 [node name="GridContainer28" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1181.0
-margin_right = 975.0
-margin_bottom = 1213.0
+margin_top = 1682.0
+margin_right = 989.0
+margin_bottom = 1714.0
 columns = 6
 
 [node name="SpinBoxAmount" type="SpinBox" parent="Container/Grid/GridContainer28"]
@@ -730,25 +1002,25 @@ max_value = 999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer28"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 689.0
+margin_right = 671.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Maximum amount a player can have is 999 unless set here."
+text = "Maximum amount a player can have is 999 unless set here."
 align = 2
 
 [node name="Label13" type="Label" parent="Container/Grid"]
-margin_top = 1225.0
+margin_top = 1726.0
 margin_right = 222.0
-margin_bottom = 1247.0
+margin_bottom = 1748.0
 mouse_filter = 1
 text = "Selling Price."
 align = 2
 
 [node name="GridContainer11" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1220.0
-margin_right = 975.0
-margin_bottom = 1252.0
+margin_top = 1721.0
+margin_right = 989.0
+margin_bottom = 1753.0
 columns = 6
 
 [node name="SpinBoxSellingPrice" type="SpinBox" parent="Container/Grid/GridContainer11"]
@@ -760,28 +1032,28 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer11"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 321.0
+margin_right = 303.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   In store selling price."
+text = "In store selling price."
 align = 2
 
 [node name="Label20" type="Label" parent="Container/Grid"]
-margin_top = 1264.0
+margin_top = 1765.0
 margin_right = 222.0
-margin_bottom = 1286.0
+margin_bottom = 1787.0
 mouse_filter = 1
 text = "Purchase Price."
 align = 2
 
 [node name="GridContainer23" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1259.0
-margin_right = 975.0
-margin_bottom = 1291.0
+margin_top = 1760.0
+margin_right = 989.0
+margin_bottom = 1792.0
 columns = 6
 
-[node name="SpinBoxBuyingPrice" type="SpinBox" parent="Container/Grid/GridContainer23"]
+[node name="SpinBoxPurchasePrice" type="SpinBox" parent="Container/Grid/GridContainer23"]
 margin_right = 100.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 100, 0 )
@@ -790,25 +1062,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer23"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 471.0
+margin_right = 453.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   In store purchase price for this item."
+text = "In store purchase price for this item."
 align = 2
 
 [node name="Label26" type="Label" parent="Container/Grid"]
-margin_top = 1303.0
+margin_top = 1804.0
 margin_right = 222.0
-margin_bottom = 1325.0
+margin_bottom = 1826.0
 mouse_filter = 1
 text = "Drop Gold."
 align = 2
 
 [node name="GridContainer26" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1298.0
-margin_right = 975.0
-margin_bottom = 1330.0
+margin_top = 1799.0
+margin_right = 989.0
+margin_bottom = 1831.0
 columns = 6
 
 [node name="SpinBoxDropGold" type="SpinBox" parent="Container/Grid/GridContainer26"]
@@ -820,25 +1092,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer26"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 536.0
+margin_right = 518.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   The amount of gold dropped with this item."
+text = "The amount of gold dropped with this item."
 align = 2
 
 [node name="Label14" type="Label" parent="Container/Grid"]
-margin_top = 1342.0
+margin_top = 1843.0
 margin_right = 222.0
-margin_bottom = 1364.0
+margin_bottom = 1865.0
 mouse_filter = 1
 text = "HP Max."
 align = 2
 
 [node name="GridContainer12" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1337.0
-margin_right = 975.0
-margin_bottom = 1369.0
+margin_top = 1838.0
+margin_right = 989.0
+margin_bottom = 1870.0
 columns = 6
 
 [node name="SpinBoxHpMax" type="SpinBox" parent="Container/Grid/GridContainer12"]
@@ -850,25 +1122,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer12"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 374.0
+margin_right = 356.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Hit points maximum value."
+text = "Hit points maximum value."
 align = 2
 
 [node name="Label15" type="Label" parent="Container/Grid"]
-margin_top = 1381.0
+margin_top = 1882.0
 margin_right = 222.0
-margin_bottom = 1403.0
+margin_bottom = 1904.0
 mouse_filter = 1
 text = "HP."
 align = 2
 
 [node name="GridContainer13" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1376.0
-margin_right = 975.0
-margin_bottom = 1408.0
+margin_top = 1877.0
+margin_right = 989.0
+margin_bottom = 1909.0
 columns = 6
 
 [node name="SpinBoxHp" type="SpinBox" parent="Container/Grid/GridContainer13"]
@@ -880,25 +1152,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer13"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 296.0
+margin_right = 278.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Current hit points."
+text = "Current hit points."
 align = 2
 
 [node name="Label17" type="Label" parent="Container/Grid"]
-margin_top = 1420.0
+margin_top = 1921.0
 margin_right = 222.0
-margin_bottom = 1442.0
+margin_bottom = 1943.0
 mouse_filter = 1
 text = "MP Max."
 align = 2
 
 [node name="GridContainer15" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1415.0
-margin_right = 975.0
-margin_bottom = 1447.0
+margin_top = 1916.0
+margin_right = 989.0
+margin_bottom = 1948.0
 columns = 6
 
 [node name="SpinBoxMpMax" type="SpinBox" parent="Container/Grid/GridContainer15"]
@@ -910,25 +1182,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer15"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 403.0
+margin_right = 385.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Magic points maximum value."
+text = "Magic points maximum value."
 align = 2
 
 [node name="Label18" type="Label" parent="Container/Grid"]
-margin_top = 1459.0
+margin_top = 1960.0
 margin_right = 222.0
-margin_bottom = 1481.0
+margin_bottom = 1982.0
 mouse_filter = 1
 text = "MP."
 align = 2
 
 [node name="GridContainer16" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1454.0
-margin_right = 975.0
-margin_bottom = 1486.0
+margin_top = 1955.0
+margin_right = 989.0
+margin_bottom = 1987.0
 columns = 6
 
 [node name="SpinBoxMp" type="SpinBox" parent="Container/Grid/GridContainer16"]
@@ -940,25 +1212,25 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer16"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 327.0
+margin_right = 309.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Current magic points."
+text = "Current magic points."
 align = 2
 
 [node name="Label19" type="Label" parent="Container/Grid"]
-margin_top = 1498.0
+margin_top = 1999.0
 margin_right = 222.0
-margin_bottom = 1520.0
+margin_bottom = 2021.0
 mouse_filter = 1
 text = "  XP Given."
 align = 2
 
 [node name="GridContainer17" type="GridContainer" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 1493.0
-margin_right = 975.0
-margin_bottom = 1525.0
+margin_top = 1994.0
+margin_right = 989.0
+margin_bottom = 2026.0
 columns = 6
 
 [node name="SpinBoxXpGiven" type="SpinBox" parent="Container/Grid/GridContainer17"]
@@ -970,22 +1242,177 @@ max_value = 9999.0
 [node name="Label" type="Label" parent="Container/Grid/GridContainer17"]
 margin_left = 104.0
 margin_top = 5.0
-margin_right = 595.0
+margin_right = 577.0
 margin_bottom = 27.0
 mouse_filter = 1
-text = "   Experience points given after a successful battle."
+text = "Experience points given after a successful battle."
 align = 2
 
-[node name="GridContainer24" type="GridContainer" parent="Container/Grid"]
-margin_top = 1532.0
+[node name="Label36" type="Label" parent="Container/Grid"]
+margin_top = 2038.0
 margin_right = 222.0
-margin_bottom = 1554.0
+margin_bottom = 2060.0
+mouse_filter = 1
+text = "Task Amount."
+align = 2
+
+[node name="GridContainer36" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 2033.0
+margin_right = 989.0
+margin_bottom = 2065.0
+columns = 6
+
+[node name="SpinBoxTaskAmount" type="SpinBox" parent="Container/Grid/GridContainer36"]
+margin_right = 100.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+max_value = 999.0
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer36"]
+margin_left = 104.0
+margin_top = 5.0
+margin_right = 489.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "The amount needed to claim the reward."
+align = 2
+
+[node name="Label37" type="Label" parent="Container/Grid"]
+margin_top = 2077.0
+margin_right = 222.0
+margin_bottom = 2099.0
+mouse_filter = 1
+text = "Task Gold."
+align = 2
+
+[node name="GridContainer37" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 2072.0
+margin_right = 989.0
+margin_bottom = 2104.0
+columns = 6
+
+[node name="SpinBoxTaskGold" type="SpinBox" parent="Container/Grid/GridContainer37"]
+margin_right = 100.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+max_value = 9999.0
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer37"]
+margin_left = 104.0
+margin_top = 5.0
+margin_right = 687.0
+margin_bottom = 27.0
+mouse_filter = 1
+text = "The amount of gold given to player when the task is claimed."
+align = 2
+
+[node name="Label44" type="Label" parent="Container/Grid"]
+margin_top = 2136.0
+margin_right = 222.0
+margin_bottom = 2158.0
+mouse_filter = 1
+text = "Healing Power."
+align = 2
+
+[node name="GridContainer38" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 2111.0
+margin_right = 989.0
+margin_bottom = 2183.0
+columns = 6
+
+[node name="SpinBoxHealingPower" type="SpinBox" parent="Container/Grid/GridContainer38"]
+margin_top = 20.0
+margin_right = 100.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 4
+max_value = 9.0
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer38"]
+margin_left = 104.0
+margin_right = 754.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 650, 0 )
+mouse_filter = 1
+text = "The healing amount given to mob increases the higher the healing power. A value of 0 disables healing. A mob must have a healing potion for this feature to work."
+autowrap = true
+
+[node name="Label45" type="Label" parent="Container/Grid"]
+margin_top = 2195.0
+margin_right = 222.0
+margin_bottom = 2217.0
+mouse_filter = 1
+text = "Healing Potions."
+align = 2
+
+[node name="GridContainer39" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 2190.0
+margin_right = 989.0
+margin_bottom = 2222.0
+columns = 6
+
+[node name="SpinBoxHealingPotions" type="SpinBox" parent="Container/Grid/GridContainer39"]
+margin_right = 100.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 4
+max_value = 99.0
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer39"]
+margin_left = 104.0
+margin_top = 5.0
+margin_right = 754.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 650, 0 )
+mouse_filter = 1
+text = "How many healing potions does this mob have?"
+autowrap = true
+
+[node name="Label46" type="Label" parent="Container/Grid"]
+margin_top = 2254.0
+margin_right = 222.0
+margin_bottom = 2276.0
+mouse_filter = 1
+text = "Equipable?"
+align = 2
+
+[node name="GridContainer40" type="GridContainer" parent="Container/Grid"]
+margin_left = 235.0
+margin_top = 2229.0
+margin_right = 989.0
+margin_bottom = 2301.0
+columns = 6
+
+[node name="CheckButtonEquipable" type="CheckButton" parent="Container/Grid/GridContainer40"]
+margin_top = 16.0
+margin_right = 100.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Container/Grid/GridContainer40"]
+margin_left = 104.0
+margin_right = 754.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 650, 0 )
+mouse_filter = 1
+text = "Is this dictionary item equipable? Rarely you would need to enable this feature for mobs but for other categories you might need to enable this feature."
+autowrap = true
+
+[node name="GridContainer24" type="GridContainer" parent="Container/Grid"]
+margin_top = 2308.0
+margin_right = 222.0
+margin_bottom = 2330.0
 columns = 6
 
 [node name="EmptyLabelTitle" type="Label" parent="Container/Grid/GridContainer24"]
 margin_bottom = 22.0
 
-[node name="EmptyLabelBody" type="Label" parent="Container/Grid/GridContainer24"]
+[node name="EmptyLabelDescription" type="Label" parent="Container/Grid/GridContainer24"]
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 22.0
@@ -1026,6 +1453,13 @@ dialog_autowrap = true
 [connection signal="value_changed" from="Container/Grid/GridContainer20/SpinBoxAtLevelTo" to="." method="_on_SpinBox_at_level_to_changed"]
 [connection signal="item_selected" from="Container/Grid/GridContainer27/MovementTypeItemList" to="." method="_on_movement_type_ItemList_item_selected"]
 [connection signal="mouse_exited" from="Container/Grid/TextEditDescription" to="." method="_on_text_edit_description_mouse_exited"]
+[connection signal="toggled" from="Container/Grid/GridContainer29/SpinBoxSpellPoison" to="." method="_on_SpinBox_Spell_Poison_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer30/SpinBoxSpellSlow" to="." method="_on_SpinBox_Spell_Slow_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer31/SpinBoxSpellSleep" to="." method="_on_SpinBox_Spell_Sleep_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer32/SpinBoxSpellChaos" to="." method="_on_SpinBox_Spell_Chaos_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer33/SpinBoxSpellBlind" to="." method="_on_SpinBox_Spell_Blind_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer34/SpinBoxSpellLock" to="." method="_on_SpinBox_Spell_Lock_toggled"]
+[connection signal="toggled" from="Container/Grid/GridContainer35/SpinBoxSpellStop" to="." method="_on_SpinBox_Spell_Stop_toggled"]
 [connection signal="value_changed" from="Container/Grid/GridContainer14/SpinBoxCharisma" to="." method="_on_SpinBox_charisma_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer2/SpinBoxConstitution" to="." method="_on_SpinBox_Constitution_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer3/SpinBoxDefense" to="." method="_on_SpinBox_Defense_changed"]
@@ -1038,13 +1472,18 @@ dialog_autowrap = true
 [connection signal="value_changed" from="Container/Grid/GridContainer10/SpinBoxWisdom" to="." method="_on_SpinBox_Wisdom_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer28/SpinBoxAmount" to="." method="_on_SpinBox_Amount_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer11/SpinBoxSellingPrice" to="." method="_on_SpinBox_selling_price_changed"]
-[connection signal="value_changed" from="Container/Grid/GridContainer23/SpinBoxBuyingPrice" to="." method="_on_SpinBox_buying_price_changed"]
+[connection signal="value_changed" from="Container/Grid/GridContainer23/SpinBoxPurchasePrice" to="." method="_on_SpinBox_purchase_price_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer26/SpinBoxDropGold" to="." method="_on_SpinBox_drop_gold_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer12/SpinBoxHpMax" to="." method="_on_SpinBox_HP_max_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer13/SpinBoxHp" to="." method="_on_SpinBox_HP_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer15/SpinBoxMpMax" to="." method="_on_SpinBox_MP_max_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer16/SpinBoxMp" to="." method="_on_SpinBox_MP_changed"]
 [connection signal="value_changed" from="Container/Grid/GridContainer17/SpinBoxXpGiven" to="." method="_on_SpinBox_XP_Given_changed"]
+[connection signal="value_changed" from="Container/Grid/GridContainer36/SpinBoxTaskAmount" to="." method="_on_SpinBox_Task_Amount_value_changed"]
+[connection signal="value_changed" from="Container/Grid/GridContainer37/SpinBoxTaskGold" to="." method="_on_SpinBox_Task_Gold_value_changed"]
+[connection signal="value_changed" from="Container/Grid/GridContainer38/SpinBoxHealingPower" to="." method="_on_SpinBox_Healing_Power_value_changed"]
+[connection signal="value_changed" from="Container/Grid/GridContainer39/SpinBoxHealingPotions" to="." method="_on_SpinBox_Healing_Potions_value_changed"]
+[connection signal="toggled" from="Container/Grid/GridContainer40/CheckButtonEquipable" to="." method="_on_CheckButton_Equipable_toggled"]
 [connection signal="focus_exited" from="AcceptDialogRename" to="." method="_on_AcceptDialog_focus_exited"]
 [connection signal="modal_closed" from="AcceptDialogRename" to="." method="_on_AcceptDialog_modal_closed"]
 [connection signal="popup_hide" from="AcceptDialogRename" to="." method="_on_AcceptDialog_popup_hide"]

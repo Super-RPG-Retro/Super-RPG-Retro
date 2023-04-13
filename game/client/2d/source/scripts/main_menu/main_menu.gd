@@ -60,10 +60,11 @@ func _input(event):
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
+			var _s = OS.execute(".//super_rpg_retro_end_task.bat", [], false)
 			get_tree().quit() 
 			
 func _quit():
-	OS.execute(".//super_rpg_retro_end_task.bat", [], false)
+	var _s = OS.execute(".//super_rpg_retro_end_task.bat", [], false)
 	get_tree().quit() 
 
 

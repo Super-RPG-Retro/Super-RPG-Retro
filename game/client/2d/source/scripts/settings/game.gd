@@ -55,7 +55,9 @@ func _ready():
 	if Settings._game.return_to_last_level == true:
 		get_node("Container/Grid/ReturnToLastLevel").set_pressed(true)
 
-		
+	if Settings._game.can_continue_saved_game == false:
+		get_node("Container/Grid/CanContinueSavedGame").set_pressed(false)
+			
 	get_node("Container/Grid/GridChild2/MobsDeadDistanceSpinbox").value = Settings._game.mobs_dead_distance
 	
 	get_node("Container/Grid/GridChild3/RespawnTurnElapsesSpinbox").value = Settings._game.respawn_turn_elapses
@@ -176,3 +178,7 @@ func _on_return_to_last_level_Enabled_toggled(button_pressed):
 
 func _on_Node2D_tree_exiting():
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
+
+
+func _on_continue_saved_game_Enabled_toggled(button_pressed):
+	Settings._game.can_continue_saved_game = button_pressed

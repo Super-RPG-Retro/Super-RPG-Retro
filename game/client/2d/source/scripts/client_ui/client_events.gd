@@ -51,7 +51,8 @@ func _ready():
 	
 
 func resize_item_list():
-	print(Settings._system.small_client_panel)
+	get_tree().call_group("client", "should_hide_tile_panel_be_visible")
+			
 	if Settings._system.small_client_panel == false:
 		_item_list.rect_min_size.y = 144
 		_item_list.rect_size.y = 144

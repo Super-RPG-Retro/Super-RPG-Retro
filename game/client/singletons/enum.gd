@@ -25,7 +25,7 @@ enum ALPHABET {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v,
 enum Select_items {Event_prize, Event_hunting_tasks, Event_inventory, Event_story}
 
 # the movement type of an object, such as mobs. for example, does to mobs move towards player, move opposite of player, etc.
-enum Movement_type {Stationary, Target_player, Opposite_direction_of_players_movement, Run_away_from_player, Random_movement, Trace_walls}
+enum Movement_type {Target_player, Stationary, Avoid_player, Run_away_from_player, Random_movement, Trace_walls}
 
 # at builder "dictionary new" if selecting new weapon at the builder dictionary menu, this weapon enum will be set to a var.
 enum Builder_dictionary {mobs, mobs1, mobs2, weapon, armor, book, gold, scroll, ring, food, wand, amulet}
@@ -41,3 +41,4 @@ enum selected {Paper, Potion}
 
 enum Puzzle_sounds {Puzzle_block_move, Puzzle_failed, Puzzle_success}
 
+enum Mobs_movement_type {Target_player, Stationary, Opposite_direction_of_player, Run_away_from_player, Random_movement, Trace_walls}

@@ -39,43 +39,45 @@ custom_styles/bg = SubResource( 1 )
 follow_focus = true
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 1077.0
-margin_bottom = 928.0
+margin_right = 959.0
+margin_bottom = 1030.0
 rect_min_size = Vector2( 200, 40 )
 custom_constants/vseparation = 15
 columns = 2
 
 [node name="UseClock" type="CheckButton" parent="Container/Grid"]
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 355, 0 )
 pressed = true
 text = "Time System"
 align = 2
 
 [node name="Label1" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 9.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 31.0
-text = "  Trigger events based on time. Dungeons can get dark at night."
+rect_min_size = Vector2( 600, 0 )
+text = "Trigger events based on time. Dungeons can get dark at night."
 
 [node name="GridChild" type="HBoxContainer" parent="Container/Grid"]
 margin_top = 55.0
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 87.0
 alignment = 2
 
 [node name="DifficultyLabel" type="Label" parent="Container/Grid/GridChild"]
-margin_left = 17.0
+margin_left = 18.0
 margin_top = 5.0
-margin_right = 250.0
+margin_right = 251.0
 margin_bottom = 27.0
 text = "           General Difficulty"
 align = 2
 
 [node name="DifficultySpinbox" type="SpinBox" parent="Container/Grid/GridChild"]
-margin_left = 254.0
-margin_right = 354.0
+margin_left = 255.0
+margin_right = 355.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 100, 0 )
 focus_mode = 2
@@ -84,15 +86,15 @@ max_value = 5.0
 value = 1.0
 
 [node name="Label2" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 60.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 82.0
-text = "  1: Easy. 5: Extremely difficult."
+text = "1: Easy. 5: Extremely difficult."
 
 [node name="RespawnDirectSight" type="CheckButton" parent="Container/Grid"]
 margin_top = 102.0
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 142.0
 theme = ExtResource( 3 )
 pressed = true
@@ -100,30 +102,31 @@ text = "Respawn Direct Sight"
 align = 2
 
 [node name="Label3" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 111.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 133.0
-text = "  On: Mobs chase when they see you: Off: Chase anytime."
+text = "On: Mobs chase when they see you: Off: Chase anytime."
 
 [node name="VisibilityMap" type="CheckButton" parent="Container/Grid"]
 margin_top = 157.0
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 197.0
 theme = ExtResource( 3 )
 text = "Visibility Map"
 align = 2
 
 [node name="Label4" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 166.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 188.0
-text = "  A black map hiding unexplored dungeon areas."
+text = "A black map hiding unexplored dungeon areas."
+autowrap = true
 
 [node name="ShowMobsDoorClosed" type="CheckButton" parent="Container/Grid"]
 margin_top = 212.0
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 252.0
 theme = ExtResource( 3 )
 pressed = true
@@ -131,15 +134,16 @@ text = "Show Mobs Door Closed"
 align = 2
 
 [node name="Label5" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 221.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 243.0
-text = "  Mobs are seen in room when room door is closed?"
+text = "Mobs are seen in room when room door is closed?"
+autowrap = true
 
 [node name="ShowItemDoorClosed" type="CheckButton" parent="Container/Grid"]
 margin_top = 267.0
-margin_right = 354.0
+margin_right = 355.0
 margin_bottom = 307.0
 theme = ExtResource( 3 )
 pressed = true
@@ -147,60 +151,65 @@ text = "Show Item Door Closed"
 align = 2
 
 [node name="Label6" type="Label" parent="Container/Grid"]
-margin_left = 358.0
+margin_left = 359.0
 margin_top = 276.0
-margin_right = 1077.0
+margin_right = 959.0
 margin_bottom = 298.0
-text = "  Items are seen in room when room door is closed?"
+text = "Items are seen in room when room door is closed?"
+autowrap = true
 
 [node name="GridChild2" type="HBoxContainer" parent="Container/Grid"]
 margin_top = 322.0
-margin_right = 354.0
-margin_bottom = 354.0
+margin_right = 355.0
+margin_bottom = 369.0
 alignment = 2
 
 [node name="MobsDeadDistanceLabel" type="Label" parent="Container/Grid/GridChild2"]
-margin_left = 29.0
-margin_top = 5.0
-margin_right = 250.0
-margin_bottom = 27.0
+margin_left = 30.0
+margin_top = 12.0
+margin_right = 251.0
+margin_bottom = 34.0
 text = "    Mobs Dead Distance"
 align = 2
 
 [node name="MobsDeadDistanceSpinbox" type="SpinBox" parent="Container/Grid/GridChild2"]
-margin_left = 254.0
-margin_right = 354.0
-margin_bottom = 32.0
+margin_left = 255.0
+margin_top = 7.0
+margin_right = 355.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 100, 0 )
 focus_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 min_value = 10.0
 max_value = 80.0
 value = 10.0
 
 [node name="Label12" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 327.0
-margin_right = 1077.0
-margin_bottom = 349.0
-text = "  Mobs are dead when they are this many units from their starting position."
+margin_left = 359.0
+margin_top = 322.0
+margin_right = 959.0
+margin_bottom = 369.0
+text = "Mobs are dead when they are this many units from their starting position."
+autowrap = true
 
 [node name="GridChild3" type="HBoxContainer" parent="Container/Grid"]
-margin_top = 369.0
-margin_right = 354.0
-margin_bottom = 401.0
+margin_top = 384.0
+margin_right = 355.0
+margin_bottom = 416.0
 alignment = 2
 
 [node name="RespawnTurnElapsesLabel" type="Label" parent="Container/Grid/GridChild3"]
-margin_left = 21.0
+margin_left = 22.0
 margin_top = 5.0
-margin_right = 250.0
+margin_right = 251.0
 margin_bottom = 27.0
 text = "  Respawn Turn Elapses"
 align = 2
 
 [node name="RespawnTurnElapsesSpinbox" type="SpinBox" parent="Container/Grid/GridChild3"]
-margin_left = 254.0
-margin_right = 354.0
+margin_left = 255.0
+margin_right = 355.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 100, 0 )
 focus_mode = 2
@@ -209,130 +218,145 @@ max_value = 80.0
 value = 10.0
 
 [node name="Label13" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 374.0
-margin_right = 1077.0
-margin_bottom = 396.0
-text = "  mobs will respawn after these many game turn elapses."
+margin_left = 359.0
+margin_top = 389.0
+margin_right = 959.0
+margin_bottom = 411.0
+text = "mobs will respawn after these many game turn elapses."
+autowrap = true
 
 [node name="NormalDoorsExist" type="CheckButton" parent="Container/Grid"]
-margin_top = 416.0
-margin_right = 354.0
-margin_bottom = 488.0
+margin_top = 431.0
+margin_right = 355.0
+margin_bottom = 503.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Normal Doors Exists"
 align = 2
 
 [node name="Label8" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 416.0
-margin_right = 1077.0
-margin_bottom = 488.0
-text = "  Off: Mobs will run out of the room. Major difficulty increase.
-  On: \"Room Ceiling\" will be turned off. This option is ignored if
-  \"Keep Mobs In Room\" is on."
+margin_left = 359.0
+margin_top = 431.0
+margin_right = 959.0
+margin_bottom = 503.0
+text = "Off: Mobs will run out of the room. Major difficulty increase. On: \"Room Ceiling\" will be turned off. This option is ignored if \"Keep Mobs In Room\" is on."
+autowrap = true
 
 [node name="RoomCeiling" type="CheckButton" parent="Container/Grid"]
-margin_top = 503.0
-margin_right = 354.0
-margin_bottom = 575.0
+margin_top = 518.0
+margin_right = 355.0
+margin_bottom = 590.0
 theme = ExtResource( 3 )
 text = "Room Ceiling"
 align = 2
 
 [node name="Label7" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 503.0
-margin_right = 1077.0
-margin_bottom = 575.0
-text = "  Should a black ceiling be placed overtop of a dungeon room?
-  If this option is on and \"Keep Mobs In Room\" is off then
-  mobs will run around in the corridor."
+margin_left = 359.0
+margin_top = 518.0
+margin_right = 959.0
+margin_bottom = 590.0
+text = "Should a black ceiling be placed overtop of a dungeon room? If this option is on and \"Keep Mobs In Room\" is off then mobs will run around in the corridor."
+autowrap = true
 
 [node name="DifferentFloorTiles" type="CheckButton" parent="Container/Grid"]
-margin_top = 590.0
-margin_right = 354.0
-margin_bottom = 637.0
+margin_top = 605.0
+margin_right = 355.0
+margin_bottom = 652.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Different Floor Tiles"
 align = 2
 
 [node name="Label9" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 590.0
-margin_right = 1077.0
-margin_bottom = 637.0
-text = "  When this option is disabled, mobs will not stay in room.
-  Turning off this option will turn off \"Room Ceiling\"."
+margin_left = 359.0
+margin_top = 605.0
+margin_right = 959.0
+margin_bottom = 652.0
+text = "When this option is disabled, mobs will not stay in room. Turning off this option will turn off \"Room Ceiling\"."
+autowrap = true
 
 [node name="KeepMobsInRoom" type="CheckButton" parent="Container/Grid"]
-margin_top = 652.0
-margin_right = 354.0
-margin_bottom = 699.0
+margin_top = 667.0
+margin_right = 355.0
+margin_bottom = 714.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Keep Mobs In Room"
 align = 2
 
 [node name="Label10" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 652.0
-margin_right = 1077.0
-margin_bottom = 699.0
-text = "  Should mobs be forced to stay in their rooms? Turning on
-  this option will set the \"Different Floor Tiles\" option to on."
+margin_left = 359.0
+margin_top = 667.0
+margin_right = 959.0
+margin_bottom = 714.0
+text = "Should mobs be forced to stay in their rooms? Turning on this option will set the \"Different Floor Tiles\" option to on."
+autowrap = true
 
 [node name="UseBattleSystem" type="CheckButton" parent="Container/Grid"]
-margin_top = 714.0
-margin_right = 354.0
-margin_bottom = 786.0
+margin_top = 729.0
+margin_right = 355.0
+margin_bottom = 801.0
 theme = ExtResource( 3 )
 text = "Use Battle System"
 align = 2
 
 [node name="Label11" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 714.0
-margin_right = 1077.0
-margin_bottom = 786.0
-text = "  In battle, if this is true, bumping into mobs will not take nor
-  give damage. Instead, use a graphical display where you can
-  use buttons to fight, defend, magic or run."
+margin_left = 359.0
+margin_top = 729.0
+margin_right = 959.0
+margin_bottom = 801.0
+text = "In battle, if this is true, bumping into mobs will not take nor give damage. Instead, use a graphical display where you can use buttons to fight, defend, magic or run."
+autowrap = true
 
 [node name="DownLadderAlwaysShown" type="CheckButton" parent="Container/Grid"]
-margin_top = 801.0
-margin_right = 354.0
-margin_bottom = 841.0
+margin_top = 816.0
+margin_right = 355.0
+margin_bottom = 856.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Down Ladder Always Shown"
 align = 2
 
 [node name="Label14" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 810.0
-margin_right = 1077.0
-margin_bottom = 832.0
-text = "  Show down ladder when room ceiling is enabled?"
+margin_left = 359.0
+margin_top = 825.0
+margin_right = 959.0
+margin_bottom = 847.0
+text = "Show down ladder when room ceiling is enabled?"
+autowrap = true
 
 [node name="ReturnToLastLevel" type="CheckButton" parent="Container/Grid"]
-margin_top = 856.0
-margin_right = 354.0
-margin_bottom = 928.0
+margin_top = 871.0
+margin_right = 355.0
+margin_bottom = 943.0
 theme = ExtResource( 3 )
 text = "Return To Last Level"
 align = 2
 
 [node name="Label23" type="Label" parent="Container/Grid"]
-margin_left = 358.0
-margin_top = 856.0
-margin_right = 1077.0
-margin_bottom = 928.0
-text = "  After continuing game play, player will... False: return to start
-  of game. True: return to start of last level. Game data will will
-  not be deleted."
+margin_left = 359.0
+margin_top = 871.0
+margin_right = 959.0
+margin_bottom = 943.0
+text = "After continuing game play, player will... False: return to start of game. True: return to start of last level. Game data will will not be deleted."
+autowrap = true
+
+[node name="CanContinueSavedGame" type="CheckButton" parent="Container/Grid"]
+margin_top = 958.0
+margin_right = 355.0
+margin_bottom = 1030.0
+theme = ExtResource( 3 )
+pressed = true
+text = "Can Continue Saved Game"
+align = 2
+
+[node name="Label24" type="Label" parent="Container/Grid"]
+margin_left = 359.0
+margin_top = 958.0
+margin_right = 959.0
+margin_bottom = 1030.0
+text = "Enabled: Continue from saved game. Disabled: All data will be deleted. Player must start from the beginning again. Select this option for a major difficulty score increase."
+autowrap = true
 
 [node name="DifficultyLevel" parent="." instance=ExtResource( 4 )]
 
@@ -343,7 +367,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label" parent="SceneHeader" index="1"]
+[node name="Label" parent="SceneHeader" index="2"]
 margin_left = 8.0
 margin_right = 1024.0
 text = "Configuration Game"
@@ -351,7 +375,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ButtonExit" parent="SceneHeader" index="3"]
+[node name="ButtonExit" parent="SceneHeader" index="4"]
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -382,5 +406,6 @@ text = "After you save your game, you will not be able to return to this scene."
 [connection signal="toggled" from="Container/Grid/UseBattleSystem" to="." method="_on_use_battle_system_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/DownLadderAlwaysShown" to="." method="_on_down_ladder_always_shown_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/ReturnToLastLevel" to="." method="_on_return_to_last_level_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/CanContinueSavedGame" to="." method="_on_continue_saved_game_Enabled_toggled"]
 
 [editable path="SceneHeader"]

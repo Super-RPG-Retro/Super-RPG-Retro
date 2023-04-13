@@ -48,7 +48,7 @@ custom_styles/bg = SubResource( 5 )
 scroll_horizontal_enabled = false
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 1024.0
+margin_right = 1012.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 200, 40 )
 size_flags_horizontal = 3
@@ -122,7 +122,7 @@ scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
 [node name="Grid2" type="GridContainer" parent="Container2"]
-margin_right = 1024.0
+margin_right = 1012.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 200, 40 )
 size_flags_horizontal = 3
@@ -155,16 +155,16 @@ valign = 1
 
 [node name="PlayButton" type="Label" parent="Container2/Grid2"]
 margin_left = 556.0
-margin_right = 608.0
+margin_right = 603.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 32, 0 )
 theme = ExtResource( 2 )
-text = "Pllay."
+text = "Play."
 valign = 1
 
 [node name="StopButton" type="Label" parent="Container2/Grid2"]
-margin_left = 612.0
-margin_right = 663.0
+margin_left = 607.0
+margin_right = 658.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 32, 0 )
 theme = ExtResource( 2 )
@@ -172,7 +172,7 @@ text = "Stop."
 valign = 1
 
 [node name="Padding2" type="Label" parent="Container2/Grid2"]
-margin_left = 667.0
+margin_left = 662.0
 margin_right = 1024.0
 margin_bottom = 22.0
 size_flags_horizontal = 3

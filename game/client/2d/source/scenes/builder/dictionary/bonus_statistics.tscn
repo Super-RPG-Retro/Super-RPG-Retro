@@ -45,7 +45,7 @@ margin_right = 881.0
 margin_bottom = 122.0
 mouse_filter = 1
 custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
-text = "The higher the value, the better the statistic. Bonus statistics increase by leveling player and also by using artifacts. Object statistics, at directories menu, are separate from this list. The overall statistic of the player is bonus statistic plus object statistic."
+text = "A statistic is stronger the higher its value. Bonus statistics increase by leveling player and also by using artifacts. Object statistics, at directories menu, are separate from this list. The overall statistic of the player is bonus statistic plus object statistic."
 autowrap = true
 
 [node name="CharismaLabel" type="Label" parent="Container/Grid"]

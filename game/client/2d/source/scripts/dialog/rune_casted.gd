@@ -16,9 +16,19 @@ onready var _accept_dialog = $AcceptDialog
 
 
 func _ready():
+	_accept_dialog.grab_focus()
 	_accept_dialog.popup_centered()
 	_accept_dialog.visible = false
 
+
+# without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
+func _process(_delta):
+	if visible == true:
+		get_tree().call_group("magic_panel", "rune_summary_visible_false")
+		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
+		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("tile_summary", "unit_text_clear")
+		
 
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || (event.is_action_pressed("ui_accept", true)):

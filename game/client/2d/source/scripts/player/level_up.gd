@@ -16,6 +16,8 @@ onready var _accept_dialog = $AcceptDialog
 
 
 func _ready():
+	_accept_dialog.grab_focus()	
+	
 	for _i in range(0, 2000):
 		if 	P._xp >= P._xp_level[_i] && _i > P._level - 1:
 			$AcceptDialog.dialog_text = "Congratulations, you are now level " + str(_i + 1) + ".\r\nYou need " + str(P._xp_level[_i + 1] - P._xp) + " more xp for your next level." 
@@ -30,3 +32,13 @@ func _ready():
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
 			break
+
+
+# without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
+func _process(_delta):
+	if visible == true:
+		get_tree().call_group("magic_panel", "rune_summary_visible_false")
+		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
+		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("tile_summary", "unit_text_clear")
+		

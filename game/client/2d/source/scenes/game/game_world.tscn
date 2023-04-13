@@ -210,6 +210,8 @@ viewport_path = NodePath("WorldViewport")
 
 [node name="Node2D" type="Node2D"]
 __meta__ = {
+"_edit_horizontal_guides_": [ 506.0 ],
+"_edit_vertical_guides_": [ 844.0 ],
 "_editor_description_": " "
 }
 
@@ -311,6 +313,13 @@ rect_scale = Vector2( 2, 2 )
 texture = SubResource( 8 )
 expand = true
 stretch_mode = 1
+
+[node name="MiniMapCenterIndicator" type="Panel" parent="."]
+visible = false
+margin_left = 839.0
+margin_top = 501.0
+margin_right = 849.0
+margin_bottom = 511.0
 
 [connection signal="timeout" from="WorldViewport/GameWorld/Unit/Timer" to="WorldViewport/GameWorld/Unit" method="_on_Timer_timeout"]
 [connection signal="timeout" from="WorldViewport/GameWorld/TimerDelayMove" to="WorldViewport/GameWorld" method="_on_timer_delay_move_timeout"]

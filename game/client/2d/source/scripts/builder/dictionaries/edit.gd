@@ -32,6 +32,22 @@ onready var _image_sprite 	= $Container/Grid/GridContainer/Sprite
 
 onready var _dictionary_description = $Container/Grid/TextEditDescription
 
+
+onready var _spell_poison = $Container/Grid/GridContainer29/SpinBoxSpellPoison
+
+onready var _spell_slow = $Container/Grid/GridContainer30/SpinBoxSpellSlow
+
+onready var _spell_sleep = $Container/Grid/GridContainer31/SpinBoxSpellSleep
+
+onready var _spell_chaos = $Container/Grid/GridContainer32/SpinBoxSpellChaos
+
+onready var _spell_blind = $Container/Grid/GridContainer33/SpinBoxSpellBlind
+
+onready var _spell_lock = $Container/Grid/GridContainer34/SpinBoxSpellLock
+
+onready var _spell_stop = $Container/Grid/GridContainer35/SpinBoxSpellStop
+
+
 #Charisma aka Presence, Charm, Social.
 onready var _charisma = $Container/Grid/GridContainer14/SpinBoxCharisma
 
@@ -61,6 +77,7 @@ onready var _willpower = $Container/Grid/GridContainer9/SpinBoxWillpower
 # Wisdom aka Spirit, Wits, Psyche, Sense.
 onready var _wisdom = $Container/Grid/GridContainer10/SpinBoxWisdom
 
+
 # Maximum amount a player can have is 999 unless set here.
 onready var _stack_amount = $Container/Grid/GridContainer28/SpinBoxAmount
 
@@ -68,7 +85,7 @@ onready var _stack_amount = $Container/Grid/GridContainer28/SpinBoxAmount
 onready var _selling_price = $Container/Grid/GridContainer11/SpinBoxSellingPrice
 
 # if this object is at store.
-onready var _buying_price = $Container/Grid/GridContainer23/SpinBoxBuyingPrice
+onready var _purchase_price = $Container/Grid/GridContainer23/SpinBoxPurchasePrice
 
 # The amount of gold dropped with this item.
 onready var _drop_gold = $Container/Grid/GridContainer26/SpinBoxDropGold
@@ -115,6 +132,16 @@ onready var _enabled = $Container/Grid/GridContainer21/CheckButtonEnabled
 
 # Best to disable this object if using it as an artifact.
 onready var _is_artifact = $Container/Grid/GridContainer25/IsArtifactEnabled
+
+onready var _task_amount = $Container/Grid/GridContainer36/SpinBoxTaskAmount
+
+onready var _task_gold = $Container/Grid/GridContainer37/SpinBoxTaskGold
+
+onready var _healing_power = $Container/Grid/GridContainer38/SpinBoxHealingPower
+
+onready var _healing_potions = $Container/Grid/GridContainer39/SpinBoxHealingPotions
+
+onready var _equipable = $Container/Grid/GridContainer40/CheckButtonEquipable
 
 # the builder menu.
 onready var _menu = null
@@ -225,6 +252,20 @@ func display_values():
 	
 	
 func refresh_data():	
+	_spell_poison.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"]
+	
+	_spell_slow.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"]
+	
+	_spell_sleep.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"]
+	
+	_spell_chaos.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"]
+	
+	_spell_blind.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"]
+	
+	_spell_lock.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"]
+	
+	_spell_stop.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"]
+	
 	# this is all the values that can be changed. most of them are SpinBox.
 	_dictionary_description.text = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"]
 	
@@ -252,7 +293,7 @@ func refresh_data():
 	
 	_selling_price.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Selling_price"])
 	
-	_buying_price.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Buying_price"])
+	_purchase_price.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"])
 	
 	_drop_gold.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Drop_gold"])
 	
@@ -279,6 +320,17 @@ func refresh_data():
 	_movement_type.select(int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"]), true)
 	
 	_is_artifact.pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"])
+	
+	_task_amount.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"]
+
+	_task_gold.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"]
+
+	_healing_power.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"]
+	
+	_healing_potions.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"]
+	
+	_equipable.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"]
+
 	
 	if _is_artifact.pressed == true:
 		_enabled.pressed = false
@@ -512,12 +564,12 @@ func _on_SpinBox_selling_price_changed(value):
 		save_stats()
 	
 	
-func _on_SpinBox_buying_price_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Buying_price"] = value
+func _on_SpinBox_purchase_price_changed(value):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"] = value
 
 	if _runtime == false:
 		save_stats()
-
+		
 
 func _on_SpinBox_HP_max_changed(value):
 	# this stops hp value from a value greater than hp_max
@@ -732,3 +784,86 @@ func _on_movement_type_ItemList_item_selected(index):
 	if _runtime == false:
 		save_stats()
 	
+
+func _on_SpinBox_Spell_Poison_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Slow_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Sleep_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Chaos_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Blind_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Lock_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Spell_Stop_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"] = button_pressed
+	
+	if _runtime == false:
+		save_stats()
+	
+
+func _on_SpinBox_Task_Amount_value_changed(value):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"] = value
+
+	if _runtime == false:
+		save_stats()
+
+
+func _on_SpinBox_Task_Gold_value_changed(value):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"] = value
+
+	if _runtime == false:
+		save_stats()
+
+
+func _on_SpinBox_Healing_Power_value_changed(value):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"] = value
+
+	if _runtime == false:
+		save_stats()
+
+
+func _on_SpinBox_Healing_Potions_value_changed(value):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"] = value
+
+	if _runtime == false:
+		save_stats()
+
+
+func _on_CheckButton_Equipable_toggled(button_pressed):
+	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"] = button_pressed
+
+	if _runtime == false:
+		save_stats()

@@ -192,7 +192,8 @@ func overview(p_node, e_node, i_node, t_node):
 	_overview_text.rect_position.x = 10
 	_overview_text.rect_position.y = 10
 	_overview_text.visible = true
-	
+
+# hides tile text.	
 func unit_text_clear():	
 	get_node("MarginPanel").visible = false
 	get_node("TileSummary").text = ""	

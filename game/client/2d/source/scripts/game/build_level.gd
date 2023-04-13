@@ -98,7 +98,7 @@ func build_level():
 			
 	connect_rooms()
 	
-	# room 0 is puzzle room.
+	# array element 0, room 1, is a puzzle room.
 	var start_room = game.rooms[1]
 	
 	# place player in random room, excluding the outer most tiles because those are walls
@@ -302,10 +302,15 @@ func _add_icons(_id):
 
 
 
-# pick a room,to place mobs in to excluding the first room, also exclude puzzle room if mobs at puzzle room not enabled.	
+# pick a room,to place mobs in but excluding the first room if that room is a puzzle room.	
 func current_room():
 	var room:Rect2
-	room = game.rooms[1 + randi() % (game.rooms.size() - 1)]
+	
+	# change to % (game.rooms.size() - 1 to exclude mobs at down ladder room.
+	if game._puzzle_room_dimension > 0:
+		room = game.rooms[1 + randi() % (game.rooms.size())]
+	else:
+		room = game.rooms[randi() % (game.rooms.size())]
 		
 	return room
 	

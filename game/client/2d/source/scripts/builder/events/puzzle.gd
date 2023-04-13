@@ -262,7 +262,7 @@ func _on_EventEnabled_toggled(button_pressed):
 		
 		var _extra_room_size = 0
 		if Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] > 0:
-			_extra_room_size = 3.3 - (int(float(Builder._data.room_size_max[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number]) / 10))
+			_extra_room_size = 3.4 - int(Builder._data.room_size_max[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number]) / 10
 			
 		
 		Builder._data.level_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] =  int(((Builder._data.room_size_max[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] * _room_total) * (3.3 - _math)) + _extra_room_size * Settings._system.corridor_length_between_rooms)

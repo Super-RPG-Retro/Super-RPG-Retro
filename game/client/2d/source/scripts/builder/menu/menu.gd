@@ -42,6 +42,9 @@ func _process(_delta):
 	else:
 		$MenuDictionaries.disabled = false
 		$MenuEvents.disabled = false
+	
+	if Settings._system.music == false:
+		$MenuAudio.disabled = true
 		
 		
 func _on_Node2D_tree_exiting():

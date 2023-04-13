@@ -1,5 +1,6 @@
 ### Summary
-This game is currently a work in progress.
+This game is currently a work in progress. Programmed in Godot. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4).
+
 
 
 ![This image shows the main menu, where the user loads game data or saves game data.](https://github.com/Super-RPG-Retro/Super-RPG-Retro/blob/main/images/main_menu_scene.png)
@@ -52,11 +53,6 @@ This game is currently a work in progress.
 * Instant battle or turn based battle system.
 * Can Show the down ladder when room ceiling is enabled.
 * Option for player to return to last level or start of dungeon.
-
-
-
-This game is a work-in-progress. Programmed in Godot. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4).
-
 
 
 ### Installation.

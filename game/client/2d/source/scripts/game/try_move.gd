@@ -118,11 +118,19 @@ func try_move(dx, dy):
 		Enum.Tile.Stone:
 			if Settings._system.sound == true && 	Variables._wait_a_turn == -1:
 				get_tree().call_group("game_audio", "start_walk_timer")
-		
+			
+			# This is needed for a few mob movement types so that the mobs will not move when player stands still.
+			dx = 0
+			dy = 0
+	
 		Enum.Tile.Wall:
 			if Settings._system.sound == true && 	Variables._wait_a_turn == -1:
 				get_tree().call_group("game_audio", "start_walk_timer")
 			
+			# This is needed for a few mob movement types so that the mobs will not move when player stands still.
+			dx = 0
+			dy = 0
+	
 		Enum.Tile.Floor:
 			# if player is holding a puzzle block. move any block that was over player's head to a different tile.
 			for blocks in game.puzzle_blocks:
@@ -290,7 +298,7 @@ func try_move(dx, dy):
 		
 	# mobs movement.
 	for mobs in game.mobs:
-		mobs.act(game, mobs)	
+		mobs.act(game, mobs, dx, dy)	
 	
 	# this var is set at impair_vision()
 	if Variables._potion_impair_vision_turns > 0:

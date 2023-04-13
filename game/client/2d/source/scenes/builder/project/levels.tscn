@@ -23,7 +23,7 @@ custom_styles/bg = SubResource( 1 )
 
 [node name="Grid" type="GridContainer" parent="Container"]
 margin_right = 996.0
-margin_bottom = 569.0
+margin_bottom = 594.0
 rect_min_size = Vector2( 200, 40 )
 columns = 2
 
@@ -266,9 +266,9 @@ mouse_filter = 1
 text = "Total item amount at this level."
 
 [node name="LabelHideRandomCorridor" type="Label" parent="Container/Grid"]
-margin_top = 321.0
+margin_top = 333.0
 margin_right = 222.0
-margin_bottom = 368.0
+margin_bottom = 380.0
 focus_previous = NodePath("../../../ToTitle")
 text = "Hide Random Corridor?"
 align = 2
@@ -278,35 +278,35 @@ autowrap = true
 margin_left = 226.0
 margin_top = 296.0
 margin_right = 996.0
-margin_bottom = 393.0
+margin_bottom = 418.0
 
 [node name="CheckButtonHideRandomCorridor" type="CheckButton" parent="Container/Grid/Grid13"]
 margin_right = 76.0
-margin_bottom = 97.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 50, 0 )
 
 [node name="Label" type="Label" parent="Container/Grid/Grid13"]
 margin_left = 80.0
 margin_right = 770.0
-margin_bottom = 97.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 690, 0 )
 mouse_filter = 1
-text = "for this feature to work, Set hide_stone_walls to true. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors."
+text = "for this feature to work, Set settings hide_stone_walls to true. Hide a corridor that starts at room one and ends at a random room. Only a random value from 0 to 3 for rooms 1 to 4  are used. When creating the corridors, room 5 is excluded since that room is used to create the corridors."
 autowrap = true
 
 [node name="LabelStoreItems" type="Label" parent="Container/Grid"]
-margin_top = 406.0
+margin_top = 431.0
 margin_right = 222.0
-margin_bottom = 428.0
+margin_bottom = 453.0
 focus_previous = NodePath("../../../ToTitle")
 text = "An item store?"
 align = 2
 
 [node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 397.0
+margin_top = 422.0
 margin_right = 996.0
-margin_bottom = 437.0
+margin_bottom = 462.0
 
 [node name="CheckButtonStoreItems" type="CheckButton" parent="Container/Grid/Grid9"]
 margin_right = 76.0
@@ -322,18 +322,18 @@ mouse_filter = 1
 text = "Is the store that sells only items enabled?"
 
 [node name="LabelStoreArmor" type="Label" parent="Container/Grid"]
-margin_top = 450.0
+margin_top = 475.0
 margin_right = 222.0
-margin_bottom = 472.0
+margin_bottom = 497.0
 focus_previous = NodePath("../../../ToTitle")
 text = "An armor store?"
 align = 2
 
 [node name="Grid10" type="HBoxContainer" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 441.0
+margin_top = 466.0
 margin_right = 996.0
-margin_bottom = 481.0
+margin_bottom = 506.0
 
 [node name="CheckButtonStoreArmor" type="CheckButton" parent="Container/Grid/Grid10"]
 margin_right = 76.0
@@ -349,18 +349,18 @@ mouse_filter = 1
 text = "Is the store that sells only armor enabled?"
 
 [node name="LabelStoreWeapons" type="Label" parent="Container/Grid"]
-margin_top = 494.0
+margin_top = 519.0
 margin_right = 222.0
-margin_bottom = 516.0
+margin_bottom = 541.0
 focus_previous = NodePath("../../../ToTitle")
 text = "A weapon store?"
 align = 2
 
 [node name="Grid11" type="HBoxContainer" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 485.0
+margin_top = 510.0
 margin_right = 996.0
-margin_bottom = 525.0
+margin_bottom = 550.0
 
 [node name="CheckButtonStoreWeapons" type="CheckButton" parent="Container/Grid/Grid11"]
 margin_right = 76.0
@@ -376,18 +376,18 @@ mouse_filter = 1
 text = "Is the store that sells only weapons enabled?"
 
 [node name="LabelSavePoint" type="Label" parent="Container/Grid"]
-margin_top = 538.0
+margin_top = 563.0
 margin_right = 222.0
-margin_bottom = 560.0
+margin_bottom = 585.0
 focus_previous = NodePath("../../../ToTitle")
 text = "Save Point Enabled?"
 align = 2
 
 [node name="Grid12" type="HBoxContainer" parent="Container/Grid"]
 margin_left = 226.0
-margin_top = 529.0
+margin_top = 554.0
 margin_right = 996.0
-margin_bottom = 569.0
+margin_bottom = 594.0
 
 [node name="CheckButtonSavePoint" type="CheckButton" parent="Container/Grid/Grid12"]
 margin_right = 76.0
