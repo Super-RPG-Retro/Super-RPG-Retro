@@ -552,12 +552,12 @@ func builder_load_data():
 	
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_bonus_statistics.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_starting_statistics.txt")
 	
 	if _temp != null:
-		Builder._bonus_statistics = _temp 
+		Builder._starting_statistics = _temp 
 		
-	Builder_playing._statistics = Builder._bonus_statistics.duplicate(true)
+	Builder_playing._statistics = Builder._starting_statistics.duplicate(true)
 	
 	
 	Builder_playing._event_inventory.data 				= Builder._event_inventory.data.duplicate(true)
@@ -662,7 +662,7 @@ func builder_save_data():
 	
 	Filesystem.save("user://saved_data/builder_audio_music.txt", Builder._audio_music.data)
 	
-	Filesystem.save("user://saved_data/builder_bonus_statistics.txt", Builder._bonus_statistics)
+	Filesystem.save("user://saved_data/builder_starting_statistics.txt", Builder._starting_statistics)
 
 
 # these are the builder vars used while playing. these vars are loaded here from disk.

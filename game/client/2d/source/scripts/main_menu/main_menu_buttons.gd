@@ -230,12 +230,12 @@ func _save_game_data():
 	# save stats
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P._stats_loaded)	
 	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt", Hud._loaded)	
+		
 	_on_saved_ID_spinBox_value_changed(Variables._id_of_saved_game)
 	
 	get_tree().call_group("main_menu", "disable_settings_game_scene")
-	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
-	
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
 		
@@ -266,6 +266,24 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	
 	_temp = null
 	
+	# load hud dictionary using the Variables._id_of_loaded_game var.
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/hud.txt")
+	
+	if _temp != null:		
+		Hud._loaded = _temp	
+			
+	_temp = null
+	
+	# load stats
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt")
+		
+	if _temp != null:
+		Hud._saved = _temp
+	
+	
+	_temp = null
+	
+	# load stats dictionary using the Variables._id_of_loaded_game var.
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt")
 	
 	if _temp != null:		
@@ -371,7 +389,7 @@ func _on_ButtonPlay_pressed():
 		
 		var _temp = null
 		
-		# if this is a new game then start game at the starting dungeon level. to determine if this is a new game, try to load a file. if file does not exists then _temp will remain null.
+		# if this is a new game then start game at the starting dungeon level. to determine if this is a new game, try to load a file. if file does not exist then _temp will remain null.
 		_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 			
 		if _temp == null:
@@ -437,8 +455,16 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	# this is the last saved id. when the program loads or player returns to title, this data will be used to load the last saved game.
 	Filesystem.save("user://saved_data/id_of_saved_game.txt", Variables._id_of_saved_game)	
 	
-	# load stats
-	var _temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
+	var _temp = null
+	
+	# save hud dictionary
+	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt")
+	if _temp != null:
+		Hud._saved = _temp
+	
+	
+	# save stats dictionary
+	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 	if _temp != null:
 		P._stats_saved = _temp
 		

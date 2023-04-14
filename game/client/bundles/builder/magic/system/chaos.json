@@ -1,4 +1,4 @@
-{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "1D8", "Abbreviation": "sl", "Element": "None", "Turns": 5, "Range": 3, "Location": "grid", "Animation": 5, "Field": 0, "Group": "Attack", "Gold": 0, "Level": 20, "MP": 150, "Description": "Chance to put someone to sleep.", "Short_Description": "Chance to put someone to sleep.",
+{"Stack_amount": 10, "Strength": 0, "Defense": 0, "Dice": "1D8", "Abbreviation": "ch", "Element": "None", "Turns": 5, "Range": 3, "Location": "grid", "Animation": 5, "Field": 0, "Group": "Attack", "Gold": 0, "Level": 20, "MP": 150, "Description": "Confuses mobs into attacking allies.", "Short_Description": "Confuses mobs into attacking allies.",
 	"Units":	   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,

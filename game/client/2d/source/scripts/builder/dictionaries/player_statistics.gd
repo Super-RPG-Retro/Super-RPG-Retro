@@ -48,58 +48,58 @@ onready var _menu = null
 
 func _ready():
 	Variables._at_scene = Enum.Scene.Builder
-	Variables._scene_title = "Builder: Bonus Statistics."
+	Variables._scene_title = "Builder: Starting Statistics."
 	
-	_charisma.value = Builder._bonus_statistics.Charisma
-	_constitution.value = Builder._bonus_statistics.Constitution
-	_defense.value = Builder._bonus_statistics.Defense
-	_dexterity.value = Builder._bonus_statistics.Dexterity
-	_intelligence.value = Builder._bonus_statistics.Intelligence
-	_luck.value = Builder._bonus_statistics.Luck
-	_perception.value = Builder._bonus_statistics.Perception
-	_strength.value = Builder._bonus_statistics.Strength
-	_willpower.value = Builder._bonus_statistics.Willpower
-	_wisdom.value = Builder._bonus_statistics.Wisdom
+	_charisma.value = Builder._starting_statistics.Charisma
+	_constitution.value = Builder._starting_statistics.Constitution
+	_defense.value = Builder._starting_statistics.Defense
+	_dexterity.value = Builder._starting_statistics.Dexterity
+	_intelligence.value = Builder._starting_statistics.Intelligence
+	_luck.value = Builder._starting_statistics.Luck
+	_perception.value = Builder._starting_statistics.Perception
+	_strength.value = Builder._starting_statistics.Strength
+	_willpower.value = Builder._starting_statistics.Willpower
+	_wisdom.value = Builder._starting_statistics.Wisdom
 	
 
 func _on_SpinBox_charisma_changed(value):
-	Builder._bonus_statistics.Charisma = value
+	Builder._starting_statistics.Charisma = value
 		
 
 func _on_SpinBox_constitution_changed(value):
-	Builder._bonus_statistics.Constitution = value
+	Builder._starting_statistics.Constitution = value
 	
 	
 func _on_SpinBox_defense_changed(value):
-	Builder._bonus_statistics.Defense = value
+	Builder._starting_statistics.Defense = value
 
 	
 func _on_SpinBox_dexterity_changed(value):
-	Builder._bonus_statistics.Dexterity = value
+	Builder._starting_statistics.Dexterity = value
 	
 	
 func _on_SpinBox_intelligence_changed(value):
-	Builder._bonus_statistics.Intelligence = value
+	Builder._starting_statistics.Intelligence = value
 	
 	
 func _on_SpinBox_juck_changed(value):
-	Builder._bonus_statistics.Luck = value
+	Builder._starting_statistics.Luck = value
 	
 	
 func _on_SpinBox_perception_changed(value):
-	Builder._bonus_statistics.Perception = value
+	Builder._starting_statistics.Perception = value
 	
 	
 func _on_SpinBox_strength_changed(value):
-	Builder._bonus_statistics.Strength = value
+	Builder._starting_statistics.Strength = value
 	
 	
 func _on_SpinBox_willpower_changed(value):
-	Builder._bonus_statistics.Willpower = value
+	Builder._starting_statistics.Willpower = value
 	
 	
 func _on_SpinBox_wisdom_changed(value):
-	Builder._bonus_statistics.Wisdom = value
+	Builder._starting_statistics.Wisdom = value
 
 	
 func _return_to_main_menu():

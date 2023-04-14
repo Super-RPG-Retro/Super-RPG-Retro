@@ -11,7 +11,6 @@ You should have received a copy of the GNU Affero General Public License along w
 """
 
 # P.gd. player stats variables.
-# the keys (Username, gold, ect) must not start with an uppercase letter nor be sorted. 
 # MAX stat value should not go beyond 999, or else the code will trancate it back to 999.
 
 #HD = willpower. ev = Dexterity. hp = hit points. ac - defence. 
@@ -21,7 +20,7 @@ extends Node
 
 # player stats and stats_saved directories will be created from this directory.
 var _stats_data = {
-		"Gold": 3000,
+		"Class": "",
 		"Strength": 0,
 		"Defense": 0,
 		"Constitution": 0,
@@ -40,14 +39,10 @@ var _stats_data = {
 		"MP": mp,
 		"XP": 0,
 		"XP_next": 0,
-		"Score": 0,
-		"Turns": 0,
-		"Class": "",
-		"difficulty_score": 0,
-		"Food": 100,
+		
 	}
 
-# player's "loaded" stats refers to data for the "saved" panel at main menu screen. stats equals bonus stats plus object stats.
+# player's "loaded" stats refers to data for the "saved" panel at main menu screen. stats equals starting stats plus starting stats plus object stats.
 var _stats_loaded = {}
 
 # player's "saved" stats refers to data for the "saved" panel at main menu screen.
@@ -84,11 +79,7 @@ var	_mp_max
 var	_mp
 var	_xp
 var	_xp_next
-var	_gold
-var _score
-var _turns
-var	_level
-var _food
+var	_level # current level of player.
 
 var hp = 20
 var hp_max = 20
@@ -130,28 +121,24 @@ func reset():
 	_mp 		= _stats_loaded.MP
 	_xp 		= _stats_loaded.XP
 	_xp_next	= _stats_loaded.XP_next
-	_gold 		= _stats_loaded.Gold
-	_score 		= _stats_loaded.Score
-	_turns 		= _stats_loaded.Turns
 	_level 		= _stats_loaded.Level
-	_food 		= _stats_loaded.Food	
 	_move_speed = _move_speed
 
 
-func _bonus_statistics():
-	var _bonus_dictionary = {
-		"Gold": 3000,
-		"Strength": Builder._bonus_statistics.Strength,
-		"Defense": Builder._bonus_statistics.Defense,
-		"Constitution": Builder._bonus_statistics.Constitution,
-		"Dexterity": Builder._bonus_statistics.Dexterity,
-		"Intelligence": Builder._bonus_statistics.Intelligence,
+func _starting_statistics():
+	var _starting_dictionary = {
+		"Class": "",
+		"Strength": Builder._starting_statistics.Strength,
+		"Defense": Builder._starting_statistics.Defense,
+		"Constitution": Builder._starting_statistics.Constitution,
+		"Dexterity": Builder._starting_statistics.Dexterity,
+		"Intelligence": Builder._starting_statistics.Intelligence,
 		"Level": 1,
-		"Charisma": Builder._bonus_statistics.Charisma,
-		"Wisdom": Builder._bonus_statistics.Wisdom,
-		"Willpower": Builder._bonus_statistics.Willpower,
-		"Perception": Builder._bonus_statistics.Perception,
-		"Luck": Builder._bonus_statistics.Luck,
+		"Charisma": Builder._starting_statistics.Charisma,
+		"Wisdom": Builder._starting_statistics.Wisdom,
+		"Willpower": Builder._starting_statistics.Willpower,
+		"Perception": Builder._starting_statistics.Perception,
+		"Luck": Builder._starting_statistics.Luck,
 		"Username": "Athena",
 		"HP_max": hp_max,
 		"HP": hp,
@@ -159,25 +146,21 @@ func _bonus_statistics():
 		"MP": mp,
 		"XP": 0,
 		"XP_next": 0,
-		"Score": 0,
-		"Turns": 0,
-		"Class": "",
-		"difficulty_score": 0,
-		"Food": 100,
+		
 	}
 	
-	return _bonus_dictionary
+	return _starting_dictionary
 
 	
 func _reset_data():
-	_stats_loaded = _bonus_statistics()
+	_stats_loaded = _starting_statistics()
 	reset()
 	
 	get_tree().call_group("main_loop", "clamp_p_vars")
 
 
 func _reset_saved_data():
-	_stats_saved = _bonus_statistics()
+	_stats_saved = _starting_statistics()
 	get_tree().call_group("main_loop", "clamp_p_vars_saved")
 	
 	

@@ -299,7 +299,7 @@ func pickup_items():
 			# do any event after an item is picked up.
 			if item._item_id == 0:
 				P._hp += 2
-				P._stats_loaded.Score += 1
+				Hud._loaded.Score += 1
 				player.get_node("Damage").damage_player(0)
 				
 			else:

@@ -16,8 +16,9 @@ onready var _coordinates_label = $CoordinatesLabel
 onready var _clock_sprite = $ClockSprite
 onready var _clock_label = $ClockLabel
 
+
 func _ready():
-	$ScoreLabel.text = str(P._stats_loaded.Score)
+	$ScoreLabel.text = str(Hud._loaded.Score)
 	
 	# start at library
 	if Variables._at_library == true:
@@ -49,8 +50,8 @@ func clock():
 func _process(_delta):
 	label_text()
 	_clock_label.text = Variables._time
-	$GoldLabel.text = str(P._gold)
-	$FoodLabel.text = str(P._food)
+	$GoldLabel.text = str(Hud._loaded.Gold)
+	$FoodLabel.text = str(Hud._loaded.Food)
 	
 	
 func _unhandled_input(event: InputEvent):
@@ -63,7 +64,7 @@ func _unhandled_input(event: InputEvent):
 	if Variables._child_scene_open == true:
 		return
 		
-	$ScoreLabel.text = str(P._stats_loaded.Score)
+	$ScoreLabel.text = str(Hud._loaded.Score)
 	
 	if Variables._at_library == false:
 		$DungeonSprite.visible = true
@@ -71,19 +72,19 @@ func _unhandled_input(event: InputEvent):
 		
 		if event.is_action_pressed("ui_up", true):
 			Variables._compass = "N"
-			P._stats_loaded.Turns += 1
+			Hud._loaded.Turns += 1
 			
 		elif event.is_action_pressed("ui_down", true):
 			Variables._compass = "S"
-			P._stats_loaded.Turns += 1
+			Hud._loaded.Turns += 1
 			
 		elif event.is_action_pressed("ui_left", true):
 			Variables._compass = "W"
-			P._stats_loaded.Turns += 1
+			Hud._loaded.Turns += 1
 		
 		elif event.is_action_pressed("ui_right", true):
 			Variables._compass = "E"
-			P._stats_loaded.Turns += 1
+			Hud._loaded.Turns += 1
 				
 	elif Variables._compass_update == true:
 		$DungeonSprite.visible = false

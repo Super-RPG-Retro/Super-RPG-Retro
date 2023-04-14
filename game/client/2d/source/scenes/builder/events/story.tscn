@@ -167,7 +167,7 @@ margin_top = 210.0
 margin_right = 222.0
 margin_bottom = 257.0
 mouse_filter = 1
-text = "Select an mobs to hunt."
+text = "The category for this story."
 align = 2
 autowrap = true
 
@@ -231,12 +231,13 @@ mouse_filter = 1
 align = 2
 
 [node name="ItemListTitleRemove" type="Label" parent="Container/Grid"]
-margin_top = 395.0
+margin_top = 383.0
 margin_right = 222.0
-margin_bottom = 417.0
+margin_bottom = 430.0
 mouse_filter = 1
-text = "Hunt this mobs."
+text = "The object representing the story."
 align = 2
+autowrap = true
 
 [node name="Grid7" type="GridContainer" parent="Container/Grid"]
 margin_left = 226.0
@@ -310,12 +311,12 @@ margin_bottom = 546.0
 mouse_filter = 1
 text = "This could be the discription of object or mobs chat, etc,"
 
-[node name="StoryLable" type="Label" parent="Container/Grid"]
+[node name="StoryLabel" type="Label" parent="Container/Grid"]
 margin_top = 615.0
 margin_right = 222.0
 margin_bottom = 637.0
 focus_previous = NodePath("../../../ToTitle")
-text = "Story."
+text = "The story."
 align = 2
 
 [node name="StoryTextEdit" type="TextEdit" parent="Container/Grid"]

@@ -29,7 +29,7 @@ func update_visibility_map():
 
 func process_icons():
 	for icon in game.icons:
-		if game._player_tile == icon.tile && icon._id == 0:
+		if game._player_tile == icon.tile && icon._id == 3:
 			Variables._child_scene_open = true
 			get_tree().call_group("game_ui", "save_game")
 

@@ -23,12 +23,6 @@ onready var _event_number = $Container/Grid/Grid9/EventSpinbox
 
 onready var _event_enabled = $Container/Grid/Grid11/EventEnabled
 
-# Reach this number to claim reward.
-onready var _mobs_hunt_number = $Container/Grid/Grid8/MobsHuntNumberSpinbox
-
-#Claiming the reward will give this amount of gold to player.
-onready var _reward_gold_amount = $Container/Grid/Grid10/RewardGoldAmountSpinbox
-
 # the builder menu.
 onready var _menu = null
 
@@ -73,10 +67,6 @@ func _on_event_number_Spinbox_value_changed(value):
 		_event_enabled.pressed = true
 	else:
 		_event_enabled.pressed = false	
-	
-	_mobs_hunt_number.value = Builder._event_tasks.data.mobs_hunt_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number] + 1
-	
-	_reward_gold_amount.value = Builder._event_tasks.data.reward_gold_amount[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number]
 	
 
 func _on_EventEnabled_toggled(button_pressed):
@@ -148,16 +138,6 @@ func _on_prize_item_list_remove_Button_pressed():
 
 		else:
 			_i += 1
-
-
-	
-func _on_mobs_hunt_number_Spinbox_value_changed(value):
-	# update the builder event_enabled data. 	
-	Builder._event_tasks.data.mobs_hunt_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number] = value - 1
-	
-	
-func _on_reward_gold_amount_Spinbox_value_changed(button_pressed):
-	Builder._event_tasks.data.reward_gold_amount[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number] = button_pressed
 	
 
 func _on_Node2D_tree_exiting():

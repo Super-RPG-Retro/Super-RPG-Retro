@@ -54,7 +54,7 @@ func _physics_process(_delta):
 			
 	if Input.is_action_pressed("ui_down") and _camera_movement == 0 and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._compass_update = true
-		P._stats_loaded.Turns += 1
+		Hud._loaded.Turns += 1
 		
 		if targetRotation == 0:
 			_movement_direction.z += amountMove
@@ -70,7 +70,7 @@ func _physics_process(_delta):
 	# the player is not moving when moveUp value is false. if everything is ok then player can move.
 	if Input.is_action_pressed("ui_up") and _camera_movement == 0 and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._compass_update = true
-		P._stats_loaded.Turns += 1
+		Hud._loaded.Turns += 1
 		
 		# godot has a word bug that they might not ever fix. in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
 		if targetRotation == 0:

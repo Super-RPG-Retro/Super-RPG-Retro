@@ -1,5 +1,5 @@
 ### Summary
-This game is currently a work in progress. Programmed in Godot. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4).
+This game is currently a work in progress. Programmed in Godot. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Music copyright Jim Paterson, https://www.mfiles.co.uk/. Used for Super RPG Retro with his permission.
 
 
 
@@ -10,7 +10,7 @@ This game is currently a work in progress. Programmed in Godot. Help make this a
 
 
 
-* 55 magic. 999 maximum runes cab be stacked for each magic.
+* 61 magic. 999 maximum runes cab be stacked for each magic.
 * 460 item can be used at inventory.
 * 678 mobs.
 * 99 levels in every dungeon.
@@ -53,7 +53,7 @@ This game is currently a work in progress. Programmed in Godot. Help make this a
 * Instant battle or turn based battle system.
 * Can Show the down ladder when room ceiling is enabled.
 * Option for player to return to last level or start of dungeon.
-
+* Option to continue saved game.
 
 ### Installation.
 users_dir = C:\Users\your_name\AppData\Roaming\Godot\app_userdata\Super RPG Retro client\

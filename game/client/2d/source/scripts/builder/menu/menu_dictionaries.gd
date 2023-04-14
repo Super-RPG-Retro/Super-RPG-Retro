@@ -57,7 +57,7 @@ func _ready():
 	_menu_rooms.add_submenu_item("Objects Edit", "Edit" + Variables._menu_padding)
 	
 	_menu_rooms.add_item("Artifacts" 	+ Variables._menu_padding)
-	_menu_rooms.add_item("Player Statistics" 	+ Variables._menu_padding)
+	_menu_rooms.add_item("Starting Statistics" 	+ Variables._menu_padding)
 	
 	_menu_rooms_sub.connect("id_pressed", self, "_on_menu_rooms_sub_item_pressed1")
 	_menu_rooms_sub2.connect("id_pressed", self, "_on_menu_rooms_sub_item_pressed2")
@@ -91,7 +91,7 @@ func _on_menu_rooms_item_pressed(ID):
 			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/artifacts.tscn")
 	
 		3:		
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/bonus_statistics.tscn")
+			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/starting_statistics.tscn")
 	
 	
 func _on_exiting_tree(_node):

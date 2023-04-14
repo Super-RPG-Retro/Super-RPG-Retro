@@ -613,7 +613,7 @@ margin_top = 9.0
 margin_right = 754.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 650, 0 )
-text = "Player can't use any techniques."
+text = "Player can not use any techniques."
 autowrap = true
 
 [node name="Label35" type="Label" parent="Container/Grid"]

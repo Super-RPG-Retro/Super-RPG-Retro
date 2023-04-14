@@ -10,7 +10,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-# for stats definition, see root/stats.txt of this game. 
+# for player's stats, P._stats_data. 
 # this file has all none-player dictionaries.
 		
 extends Node
@@ -47,6 +47,12 @@ var mobs: Dictionary = {} #used in game.
 # Level 	 	refers to what level is needed to buy that rune.
 	
 var _magic = {
+	"blind":					{},
+	"chaos":					{},
+	"lock":						{},
+	"poison":					{},
+	"stop":						{},
+	"slow":						{},
 	"avoid":					{},
 	"sleep":					{},
 	"miracle":					{},

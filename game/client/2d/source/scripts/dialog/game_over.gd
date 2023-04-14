@@ -60,17 +60,17 @@ func _save_data():
 	
 	# if user's stats score is within the top 10 high scores.
 	for _i in range (10):
-		if P._stats_loaded.Score > Variables._high_score_scores[_i]:
+		if Hud._loaded.Score > Variables._high_score_scores[_i]:
 			Variables._high_score_names.insert(_i, P._stats_loaded.Username)
-			Variables._high_score_scores.insert(_i, P._stats_loaded.Score)
-			Variables._high_score_turns.insert(_i, P._stats_loaded.Turns)
+			Variables._high_score_scores.insert(_i, Hud._loaded.Score)
+			Variables._high_score_turns.insert(_i, Hud._loaded.Turns)
 			
 			break
 			
 	Filesystem.save_array_high_scores()
 	
 	# player lost game. clear score data from player's recent game so that player cannot resume a saved game using that score data because it would be to easy to get another high score.
-	P._stats_loaded.Score = 0
+	Hud._loaded.Score = 0
 	
 	if Settings._game.can_continue_saved_game == true:
 		_on_DataRemoved_AcceptDialog_popup_hide()

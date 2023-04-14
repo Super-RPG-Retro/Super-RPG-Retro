@@ -21,8 +21,6 @@ var data = {
 	"file_path_json":		[], # json file path.
 	"image_texture":		[], # json image.
 	"directory_name":		[], # eg, mobs1, gold, weapon,
-	"mobs_hunt_number":		[], # Reach this number to claim reward.
-	"reward_gold_amount":	[],
 	"is_finished":			[],
 }
 
@@ -35,8 +33,6 @@ func init():
 	"file_path_json":		[],
 	"image_texture":		[],
 	"directory_name":		[],
-	"mobs_hunt_number":	[],
-	"reward_gold_amount":	[],
 	"is_finished":			[],
 	
 	}
@@ -50,8 +46,6 @@ func all_array_append():
 		data.file_path_json.append([])
 		data.image_texture.append([])
 		data.directory_name.append([])
-		data.mobs_hunt_number.append([])
-		data.reward_gold_amount.append([])
 		data.is_finished.append([])
 		
 		# dungeon level number.
@@ -61,8 +55,6 @@ func all_array_append():
 			data.file_path_json[w].append([])
 			data.image_texture[w].append([])
 			data.directory_name[w].append([])
-			data.mobs_hunt_number[w].append([])
-			data.reward_gold_amount[w].append([])
 			data.is_finished[w].append([])
 			
 			# 8 dungeons times 100 levels is the total events (800 + 3). 803 value is plenty of events for the game.
@@ -72,8 +64,6 @@ func all_array_append():
 				data.file_path_json[w][x].append([])
 				data.image_texture[w][x].append([])
 				data.directory_name[w][x].append([])
-				data.mobs_hunt_number[w][x].append(0)
-				data.reward_gold_amount[w][x].append(0)
 				data.is_finished[w][x].append(0)
 			
 				# directory index
@@ -90,8 +80,6 @@ func reset_game():
 	data.file_path_json.clear()
 	data.image_texture.clear()
 	data.directory_name.clear()
-	data.mobs_hunt_number.clear()
-	data.reward_gold_amount.clear()
 	data.is_finished.clear()
 	
 	# recreate the arrays in this func.

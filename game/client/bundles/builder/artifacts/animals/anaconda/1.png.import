@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-e958c37e454b09bb03bb183f383da807.stex"
+path="res://.import/1.png-c849c1bfd1af4d7a6bbabd50f9c3b0b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bundles/builder/artifacts/animals/ball_python/1.png"
-dest_files=[ "res://.import/1.png-e958c37e454b09bb03bb183f383da807.stex" ]
+source_file="res://bundles/builder/artifacts/animals/anaconda/1.png"
+dest_files=[ "res://.import/1.png-c849c1bfd1af4d7a6bbabd50f9c3b0b5.stex" ]
 
 [params]
 

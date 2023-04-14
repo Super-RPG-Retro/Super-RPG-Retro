@@ -42,6 +42,9 @@ func save_game():
 	#save stats
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P._stats_loaded)	
 	P._stats_saved = P._stats_loaded
+	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/hud.txt", Hud._loaded)	
+	Hud._saved = Hud._loaded
 
 	get_tree().call_group("move", "update_visibility_map")
 	
@@ -71,8 +74,6 @@ func p_to_stats():
 	P._stats_loaded.Willpower = P._wil
 	P._stats_loaded.Perception = P._per
 	P._stats_loaded.Luck = P._luc
-
-	P._stats_loaded.Gold = P._gold
 	P._stats_loaded.Level = P._level
 
 

@@ -18,53 +18,53 @@ func _ready():
 
 
 func _process(_delta):
-	P._stats_loaded.difficulty_score = 0
+	Hud._loaded.difficulty_score = 0
 	
 	# calculate the value of the difficulty score.
-	P._stats_loaded.difficulty_score += int(Settings._game.difficulty_level) * 300
+	Hud._loaded.difficulty_score += int(Settings._game.difficulty_level) * 300
 	
 	if Settings._game.clock == true:
-		P._stats_loaded.difficulty_score += 200
+		Hud._loaded.difficulty_score += 200
 	
 	if Settings._game.respawn_direct_sight == true:
-		P._stats_loaded.difficulty_score += 50
+		Hud._loaded.difficulty_score += 50
 		
 	if Settings._game.visibility_map == true:
-		P._stats_loaded.difficulty_score += 75
+		Hud._loaded.difficulty_score += 75
 		
 	if Settings._game.show_mobs_when_door_closed == false:
-		P._stats_loaded.difficulty_score += 50
+		Hud._loaded.difficulty_score += 50
 		
 	if Settings._game.show_item_when_door_closed == false:
-		P._stats_loaded.difficulty_score += 25
+		Hud._loaded.difficulty_score += 25
 	
 	if Settings._game.room_ceiling == true:
-		P._stats_loaded.difficulty_score += 100
+		Hud._loaded.difficulty_score += 100
 	
 	if Settings._game.normal_doors_exist == false:
-		P._stats_loaded.difficulty_score += 300
+		Hud._loaded.difficulty_score += 300
 	
 	if Settings._game.different_floor_tiles == true:
-		P._stats_loaded.difficulty_score += 50	
+		Hud._loaded.difficulty_score += 50	
 	
 	if Settings._game.keep_mobs_in_room == false:
-		P._stats_loaded.difficulty_score += 150
+		Hud._loaded.difficulty_score += 150
 	
 	if Settings._game.use_battle_system == true:
-		P._stats_loaded.difficulty_score += 400
+		Hud._loaded.difficulty_score += 400
 	
 	if Settings._game.down_ladder_always_shown == false:
-		P._stats_loaded.difficulty_score += 30
+		Hud._loaded.difficulty_score += 30
 		
 	if Settings._game.can_continue_saved_game == false:
-		P._stats_loaded.difficulty_score += 700
+		Hud._loaded.difficulty_score += 700
 		
 		
 	# the longer the mobs follows player, the more difficult it is, so this value gives more for a higher value.
-	P._stats_loaded.difficulty_score += Settings._game.mobs_dead_distance
+	Hud._loaded.difficulty_score += Settings._game.mobs_dead_distance
 	
-	P._stats_loaded.difficulty_score -= Settings._game.respawn_turn_elapses
+	Hud._loaded.difficulty_score -= Settings._game.respawn_turn_elapses
 
 				
-	$LabelValue.text = str(P._stats_loaded.difficulty_score)
+	$LabelValue.text = str(Hud._loaded.difficulty_score)
 

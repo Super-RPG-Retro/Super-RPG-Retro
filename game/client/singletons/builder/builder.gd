@@ -130,7 +130,7 @@ var _event_parent = {
 }
 
 
-var _bonus_statistics = {
+var _starting_statistics = {
 	"Charisma": 			0,
 	"Constitution": 		0,
 	"Defense": 				0,
@@ -202,8 +202,8 @@ func init_vars_event_parent():
 	}
 
 
-func init_vars_bonus_statistics():
-	_bonus_statistics = {
+func init_vars_starting_statistics():
+	_starting_statistics = {
 	"Charisma": 			0,
 	"Constitution": 		0,
 	"Defense": 				0,
@@ -400,7 +400,7 @@ func reset_game(x: int):
 	
 	Filesystem.save("user://saved_data/builder_next_event_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._next_event)
 	
-	Filesystem.save("user://saved_data/builder_bonus_statistics.txt", Builder._bonus_statistics)
+	Filesystem.save("user://saved_data/builder_starting_statistics.txt", Builder._starting_statistics)
 	
 
 # initiates these arrays by creating array elements.	
@@ -415,7 +415,7 @@ func _all_init():
 	_event_inventory.init()
 	_dictionary_artifacts.init()
 	_audio_music.init()
-	init_vars_bonus_statistics()
+	init_vars_starting_statistics()
 
 
 func _exit_tree():

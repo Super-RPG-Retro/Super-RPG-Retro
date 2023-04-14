@@ -111,14 +111,11 @@ func clamp_p_vars():
 	P._xp_next = clamp(P._xp_next, 0, 99999999999999)
 	P._stats_loaded.XP_next = clamp(P._stats_loaded.XP_next, 0, 99999999999999)
 	
-	P._gold = clamp(P._gold, 0, 9999999999)
-	P._stats_loaded.Gold = clamp(P._stats_loaded.Gold, 0, 9999999999)
+	Hud._loaded.Gold = clamp(Hud._loaded.Gold, 0, 9999999999)
 	
-	P._score = clamp(P._score, 0, 9999999999)
-	P._stats_loaded.Score = clamp(P._stats_loaded.Score, 0, 9999999999)
+	Hud._loaded.Score = clamp(Hud._loaded.Score, 0, 9999999999)
 	
-	P._turns = clamp(P._turns, 0, 99999999999999)
-	P._stats_loaded.Turns = clamp(P._stats_loaded.Turns, 0, 99999999999999)
+	Hud._loaded.Turns = clamp(Hud._loaded.Turns, 0, 99999999999999)
 	
 	P._str = clamp(P._str, 0, 999)
 	P._stats_loaded.Strength = clamp(P._stats_loaded.Strength, 0, 999)
@@ -164,11 +161,11 @@ func clamp_p_vars_saved():
 	
 	P._stats_saved.XP_next = clamp(P._stats_saved.XP_next, 0, 99999999999999)
 	
-	P._stats_saved.Gold = clamp(P._stats_saved.Gold, 0, 9999999999)
+	Hud._saved.Gold = clamp(Hud._saved.Gold, 0, 9999999999)
 	
-	P._stats_saved.Score = clamp(P._stats_saved.Score, 0, 9999999999)
+	Hud._saved.Score = clamp(Hud._saved.Score, 0, 9999999999)
 	
-	P._stats_saved.Turns = clamp(P._stats_saved.Turns, 0, 99999999999999)
+	Hud._saved.Turns = clamp(Hud._saved.Turns, 0, 99999999999999)
 	
 	P._stats_saved.Strength = clamp(P._stats_saved.Strength, 0, 999)
 	

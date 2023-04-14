@@ -88,7 +88,7 @@ func _ready():
 	_scroll.get_h_scrollbar().modulate = Color(0, 0, 0, 0)
 	_item_list.select(0) # select the first index in the list.
 	
-	_gold_total.text = str(P._gold)	
+	_gold_total.text = str(Hud._loaded.Gold)	
 	_total_price.text = "0"
 	
 	_on_ButtonSort_pressed()
