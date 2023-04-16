@@ -61,7 +61,7 @@ func _save_data():
 	# if user's stats score is within the top 10 high scores.
 	for _i in range (10):
 		if Hud._loaded.Score > Variables._high_score_scores[_i]:
-			Variables._high_score_names.insert(_i, P._stats_loaded.Username)
+			Variables._high_score_names.insert(_i, P.character_number["0"]["_stats_loaded"].Username)
 			Variables._high_score_scores.insert(_i, Hud._loaded.Score)
 			Variables._high_score_turns.insert(_i, Hud._loaded.Turns)
 			

@@ -306,7 +306,7 @@ func _on_text_entered(_text):
 		text = ""
 	
 	else:	
-		_room_public.text += "\n" + P._stats_loaded.Username + ": " + text
+		_room_public.text += "\n" + P.character_number["0"]["_stats_loaded"].Username + ": " + text
 				
 		# name of user that is sending the text.
 		Json._client_text["sender"] = P._name

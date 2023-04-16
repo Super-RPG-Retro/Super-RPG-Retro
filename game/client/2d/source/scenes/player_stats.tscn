@@ -26,20 +26,10 @@ margin_right = 1019.0
 margin_bottom = 268.0
 theme = ExtResource( 7 )
 
-[node name="UsernameTextLabel" type="RichTextLabel" parent="Background"]
-margin_top = 4.0
-margin_right = 125.0
-margin_bottom = 26.0
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "[right]Name[/right]"
-text = "Name"
-scroll_active = false
-
 [node name="UsernameValueLabel" type="RichTextLabel" parent="Background"]
-margin_left = 131.0
+margin_left = 59.0
 margin_top = 4.0
-margin_right = 339.0
+margin_right = 306.0
 margin_bottom = 26.0
 custom_colors/default_color = Color( 0.27451, 0.666667, 0.27451, 1 )
 scroll_active = false

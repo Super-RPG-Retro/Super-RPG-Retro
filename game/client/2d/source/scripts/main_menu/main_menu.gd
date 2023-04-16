@@ -51,9 +51,9 @@ func _ready():
 	Common._game_title()
 	
 func _process(_delta):
-	_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P._stats_loaded.Strength + P._stats_loaded.Defense + P._stats_loaded.Constitution + P._stats_loaded.Dexterity + P._stats_loaded.Intelligence + P._stats_loaded.Charisma + P._stats_loaded.Wisdom + P._stats_loaded.Willpower + P._stats_loaded.Perception + P._stats_loaded.Luck).pad_zeros(4) + "."
+	_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_number["0"]["_stats_loaded"].Strength + P.character_number["0"]["_stats_loaded"].Defense + P.character_number["0"]["_stats_loaded"].Constitution + P.character_number["0"]["_stats_loaded"].Dexterity + P.character_number["0"]["_stats_loaded"].Intelligence + P.character_number["0"]["_stats_loaded"].Charisma + P.character_number["0"]["_stats_loaded"].Wisdom + P.character_number["0"]["_stats_loaded"].Willpower + P.character_number["0"]["_stats_loaded"].Perception + P.character_number["0"]["_stats_loaded"].Luck).pad_zeros(4) + "."
 
-	_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P._stats_saved.Strength + P._stats_saved.Defense + P._stats_saved.Constitution + P._stats_saved.Dexterity + P._stats_saved.Intelligence + P._stats_saved.Charisma + P._stats_saved.Wisdom + P._stats_saved.Willpower + P._stats_saved.Perception + P._stats_saved.Luck).pad_zeros(4) + "."
+	_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_number["0"]["_stats_saved"].Strength + P.character_number["0"]["_stats_saved"].Defense + P.character_number["0"]["_stats_saved"].Constitution + P.character_number["0"]["_stats_saved"].Dexterity + P.character_number["0"]["_stats_saved"].Intelligence + P.character_number["0"]["_stats_saved"].Charisma + P.character_number["0"]["_stats_saved"].Wisdom + P.character_number["0"]["_stats_saved"].Willpower + P.character_number["0"]["_stats_saved"].Perception + P.character_number["0"]["_stats_saved"].Luck).pad_zeros(4) + "."
 	
 	
 func _input(event):	

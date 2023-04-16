@@ -94,22 +94,22 @@ func _game_title():
 
 func clamp_p_vars():
 	P._hp = clamp(P._hp, 0, 9999)
-	P._stats_loaded.HP = clamp(P._stats_loaded.HP, 0, 9999)
+	P.character_number["0"]["_stats_loaded"].HP = clamp(P.character_number["0"]["_stats_loaded"].HP, 0, 9999)
 	
 	P._hp_max = clamp(P._hp_max, 0, 9999)
-	P._stats_loaded.HP_max = clamp(P._stats_loaded.HP_max, 0, 9999)
+	P.character_number["0"]["_stats_loaded"].HP_max = clamp(P.character_number["0"]["_stats_loaded"].HP_max, 0, 9999)
 	
 	P._mp = clamp(P._mp, 0, 9999)
-	P._stats_loaded.MP = clamp(P._stats_loaded.MP, 0, 9999)
+	P.character_number["0"]["_stats_loaded"].MP = clamp(P.character_number["0"]["_stats_loaded"].MP, 0, 9999)
 	
 	P._mp_max = clamp(P._mp, 0, 9999)
-	P._stats_loaded.MP_max = clamp(P._stats_loaded.MP_max, 0, 9999)
+	P.character_number["0"]["_stats_loaded"].MP_max = clamp(P.character_number["0"]["_stats_loaded"].MP_max, 0, 9999)
 		
 	P._xp = clamp(P._xp, 0, 99999999999999)
-	P._stats_loaded.XP = clamp(P._stats_loaded.XP, 0, 99999999999999)
+	P.character_number["0"]["_stats_loaded"].XP = clamp(P.character_number["0"]["_stats_loaded"].XP, 0, 99999999999999)
 	
 	P._xp_next = clamp(P._xp_next, 0, 99999999999999)
-	P._stats_loaded.XP_next = clamp(P._stats_loaded.XP_next, 0, 99999999999999)
+	P.character_number["0"]["_stats_loaded"].XP_next = clamp(P.character_number["0"]["_stats_loaded"].XP_next, 0, 99999999999999)
 	
 	Hud._loaded.Gold = clamp(Hud._loaded.Gold, 0, 9999999999)
 	
@@ -118,48 +118,48 @@ func clamp_p_vars():
 	Hud._loaded.Turns = clamp(Hud._loaded.Turns, 0, 99999999999999)
 	
 	P._str = clamp(P._str, 0, 999)
-	P._stats_loaded.Strength = clamp(P._stats_loaded.Strength, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Strength = clamp(P.character_number["0"]["_stats_loaded"].Strength, 0, 999)
 	
 	P._def = clamp(P._def, 0, 999)
-	P._stats_loaded.Defense = clamp(P._stats_loaded.Defense, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Defense = clamp(P.character_number["0"]["_stats_loaded"].Defense, 0, 999)
 	
 	P._con = clamp(P._con, 0, 999)
-	P._stats_loaded.Constitution = clamp(P._stats_loaded.Constitution, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Constitution = clamp(P.character_number["0"]["_stats_loaded"].Constitution, 0, 999)
 	
 	P._dex = clamp(P._dex, 0, 999)
-	P._stats_loaded.Dexterity = clamp(P._stats_loaded.Dexterity, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Dexterity = clamp(P.character_number["0"]["_stats_loaded"].Dexterity, 0, 999)
 	
 	P._int = clamp(P._int, 0, 999)
-	P._stats_loaded.Intelligence = clamp(P._stats_loaded.Intelligence, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Intelligence = clamp(P.character_number["0"]["_stats_loaded"].Intelligence, 0, 999)
 	
 	P._cha = clamp(P._cha, 0, 999)
-	P._stats_loaded.Charisma = clamp(P._stats_loaded.Charisma, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Charisma = clamp(P.character_number["0"]["_stats_loaded"].Charisma, 0, 999)
 	
 	P._wis = clamp(P._wis, 0, 999)
-	P._stats_loaded.Wisdom = clamp(P._stats_loaded.Wisdom, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Wisdom = clamp(P.character_number["0"]["_stats_loaded"].Wisdom, 0, 999)
 	
 	P._wil = clamp(P._wil, 0, 999)
-	P._stats_loaded.Willpower = clamp(P._stats_loaded.Willpower, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Willpower = clamp(P.character_number["0"]["_stats_loaded"].Willpower, 0, 999)
 	
 	P._per = clamp(P._per, 0, 999)
-	P._stats_loaded.Perception = clamp(P._stats_loaded.Perception, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Perception = clamp(P.character_number["0"]["_stats_loaded"].Perception, 0, 999)
 	
 	P._luc = clamp(P._luc, 0, 999)
-	P._stats_loaded.Luck = clamp(P._stats_loaded.Luck, 0, 999)
+	P.character_number["0"]["_stats_loaded"].Luck = clamp(P.character_number["0"]["_stats_loaded"].Luck, 0, 999)
 	
 
 func clamp_p_vars_saved():
-	P._stats_saved.HP = clamp(P._stats_saved.HP, 0, 9999)
+	P.character_number["0"]["_stats_saved"].HP = clamp(P.character_number["0"]["_stats_saved"].HP, 0, 9999)
 	
-	P._stats_saved.HP_max = clamp(P._stats_saved.HP_max, 0, 9999)
+	P.character_number["0"]["_stats_saved"].HP_max = clamp(P.character_number["0"]["_stats_saved"].HP_max, 0, 9999)
 	
-	P._stats_saved.MP = clamp(P._stats_saved.MP, 0, 9999)
+	P.character_number["0"]["_stats_saved"].MP = clamp(P.character_number["0"]["_stats_saved"].MP, 0, 9999)
 	
-	P._stats_saved.MP_max = clamp(P._stats_saved.MP_max, 0, 9999)
+	P.character_number["0"]["_stats_saved"].MP_max = clamp(P.character_number["0"]["_stats_saved"].MP_max, 0, 9999)
 		
-	P._stats_saved.XP = clamp(P._stats_saved.XP, 0, 99999999999999)
+	P.character_number["0"]["_stats_saved"].XP = clamp(P.character_number["0"]["_stats_saved"].XP, 0, 99999999999999)
 	
-	P._stats_saved.XP_next = clamp(P._stats_saved.XP_next, 0, 99999999999999)
+	P.character_number["0"]["_stats_saved"].XP_next = clamp(P.character_number["0"]["_stats_saved"].XP_next, 0, 99999999999999)
 	
 	Hud._saved.Gold = clamp(Hud._saved.Gold, 0, 9999999999)
 	
@@ -167,25 +167,25 @@ func clamp_p_vars_saved():
 	
 	Hud._saved.Turns = clamp(Hud._saved.Turns, 0, 99999999999999)
 	
-	P._stats_saved.Strength = clamp(P._stats_saved.Strength, 0, 999)
+	P.character_number["0"]["_stats_saved"].Strength = clamp(P.character_number["0"]["_stats_saved"].Strength, 0, 999)
 	
-	P._stats_saved.Defense = clamp(P._stats_saved.Defense, 0, 999)
+	P.character_number["0"]["_stats_saved"].Defense = clamp(P.character_number["0"]["_stats_saved"].Defense, 0, 999)
 	
-	P._stats_saved.Constitution = clamp(P._stats_saved.Constitution, 0, 999)
+	P.character_number["0"]["_stats_saved"].Constitution = clamp(P.character_number["0"]["_stats_saved"].Constitution, 0, 999)
 	
-	P._stats_saved.Dexterity = clamp(P._stats_saved.Dexterity, 0, 999)
+	P.character_number["0"]["_stats_saved"].Dexterity = clamp(P.character_number["0"]["_stats_saved"].Dexterity, 0, 999)
 	
-	P._stats_saved.Intelligence = clamp(P._stats_saved.Intelligence, 0, 999)
+	P.character_number["0"]["_stats_saved"].Intelligence = clamp(P.character_number["0"]["_stats_saved"].Intelligence, 0, 999)
 	
-	P._stats_saved.Charisma = clamp(P._stats_saved.Charisma, 0, 999)
+	P.character_number["0"]["_stats_saved"].Charisma = clamp(P.character_number["0"]["_stats_saved"].Charisma, 0, 999)
 	
-	P._stats_saved.Wisdom = clamp(P._stats_saved.Wisdom, 0, 999)
+	P.character_number["0"]["_stats_saved"].Wisdom = clamp(P.character_number["0"]["_stats_saved"].Wisdom, 0, 999)
 	
-	P._stats_saved.Willpower = clamp(P._stats_saved.Willpower, 0, 999)
+	P.character_number["0"]["_stats_saved"].Willpower = clamp(P.character_number["0"]["_stats_saved"].Willpower, 0, 999)
 	
-	P._stats_saved.Perception = clamp(P._stats_saved.Perception, 0, 999)
+	P.character_number["0"]["_stats_saved"].Perception = clamp(P.character_number["0"]["_stats_saved"].Perception, 0, 999)
 	
-	P._stats_saved.Luck = clamp(P._stats_saved.Luck, 0, 999)
+	P.character_number["0"]["_stats_saved"].Luck = clamp(P.character_number["0"]["_stats_saved"].Luck, 0, 999)
 
 
 # tile position of player.

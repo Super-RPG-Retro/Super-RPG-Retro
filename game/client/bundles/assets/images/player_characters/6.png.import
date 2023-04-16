@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tia.png-5b049d0e559f38658a61568fd97c8b29.stex"
+path="res://.import/6.png-82ea31870eaf9894dc299c4cf9ea5502.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bundles/assets/images/player_characters/tia.png"
-dest_files=[ "res://.import/tia.png-5b049d0e559f38658a61568fd97c8b29.stex" ]
+source_file="res://bundles/assets/images/player_characters/6.png"
+dest_files=[ "res://.import/6.png-82ea31870eaf9894dc299c4cf9ea5502.stex" ]
 
 [params]
 

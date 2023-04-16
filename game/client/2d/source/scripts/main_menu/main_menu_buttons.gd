@@ -56,7 +56,7 @@ func _ready():
 	
 	var _temp = null
 		
-	P._stats_saved.Username = P._stats_loaded.Username
+	P.character_number["0"]["_stats_saved"].Username = P.character_number["0"]["_stats_loaded"].Username
 	
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
@@ -151,9 +151,9 @@ func _on_new_confirmation_dialog():
 	Settings._reset_game()
 	
 	P._xp_next = P._xp_level[P._level]
-	P._stats_loaded.XP_next = P._xp_next
-	P._stats_loaded.Username = _username_line_edit.text
-	P._stats_saved.Username = _username_line_edit.text	
+	P.character_number["0"]["_stats_loaded"].XP_next = P._xp_next
+	P.character_number["0"]["_stats_loaded"].Username = _username_line_edit.text
+	P.character_number["0"]["_stats_saved"].Username = _username_line_edit.text	
 	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_loaded", "stats_empty")
@@ -168,9 +168,9 @@ func _on_ButtonSave_pressed():
 	
 	if Variables._is_loaded_id_panel_visible == false:
 		P._xp_next = P._xp_level[P._level]
-		P._stats_loaded.XP_next = P._xp_next
-		P._stats_loaded.Username = _username_line_edit.text
-		P._stats_saved.Username = _username_line_edit.text	
+		P.character_number["0"]["_stats_loaded"].XP_next = P._xp_next
+		P.character_number["0"]["_stats_loaded"].Username = _username_line_edit.text
+		P.character_number["0"]["_stats_saved"].Username = _username_line_edit.text	
 		
 		_save_game_data()
 		
@@ -222,13 +222,17 @@ func _save_game_data():
 	
 	Variables._is_this_new_data = false
 	Filesystem.save("user://saved_data/is_this_new_data.txt", false)
-
-	P._stats_saved = P._stats_loaded
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P._stats_loaded.Username)
+	print(P.character_number["0"])
+	
+	for _i in range (7):
+		P.character_number[str(_i)]["_stats_saved"] = P.character_number[str(_i)]["_stats_loaded"]
+	
+	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_number["0"]["_stats_loaded"].Username)
 	
 	# save stats
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P._stats_loaded)	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_number)	
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt", Hud._loaded)	
 		
@@ -287,7 +291,7 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt")
 	
 	if _temp != null:		
-		P._stats_loaded = _temp	
+		P.character_number = _temp	
 			
 	_temp = null
 	
@@ -295,13 +299,13 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 		
 	if _temp != null:
-		P._stats_saved = _temp
+		P.character_number = _temp
 				
-		P._hp_max = P._stats_loaded.HP_max
-		P._hp = P._stats_loaded.HP
-		P._level = P._stats_loaded.Level
-		P._xp = P._stats_loaded.XP
-		P._xp_next = P._stats_loaded.XP_next
+		P._hp_max = P.character_number["0"]["_stats_loaded"].HP_max
+		P._hp = P.character_number["0"]["_stats_loaded"].HP
+		P._level = P.character_number["0"]["_stats_loaded"].Level
+		P._xp = P.character_number["0"]["_stats_loaded"].XP
+		P._xp_next = P.character_number["0"]["_stats_loaded"].XP_next
 		
 		
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
@@ -415,7 +419,7 @@ func _on_LineEdit_text_changed(_text):
 
 	_username_line_edit.caret_position = old_caret_position
 	
-	P._stats_saved.Username = _text
+	P.character_number["0"]["_stats_saved"].Username = _text
 	
 
 func _on_EmptyUsernameDialog_modal_closed():
@@ -466,7 +470,7 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	# save stats dictionary
 	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 	if _temp != null:
-		P._stats_saved = _temp
+		P.character_number = _temp
 		
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 		

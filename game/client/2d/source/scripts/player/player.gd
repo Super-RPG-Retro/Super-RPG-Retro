@@ -13,7 +13,7 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Sprite
 
 onready var _type = ""
-onready var _name = P._stats_loaded.Username
+onready var _name = P.character_number["0"]["_stats_loaded"].Username
 onready var tile = Vector2(0,  0)
 
 

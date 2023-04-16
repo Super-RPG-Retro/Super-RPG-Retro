@@ -12,35 +12,13 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
-# Charisma aka Presence, Charm, Social.
-onready var _charisma = $Container/Grid/Grid1/CharismaSpinBox
+onready var _grid = $Container/Grid
 
-# Constitution aka Stamina, Endurance, Vitality, Recovery.
-onready var _constitution = $Container/Grid/Grid2/ConstitutionSpinBox
-
-# Defense aka Resistance, Fortitude, Resilience.
-onready var _defense = $Container/Grid/Grid3/DefenseSpinBox
-
-# Dexterity aka Agility, Reflexes, Quickness.
-onready var _dexterity = $Container/Grid/Grid4/DexteritySpinBox
-
-# Intelligence aka Intellect, Mind, Knowledge.
-onready var _intelligence = $Container/Grid/Grid5/IntelligenceSpinBox
-
-# Luck aka Fate, Chance.
-onready var _luck = $Container/Grid/Grid6/LuckSpinBox
-
-# Perception aka Alertness, Awareness, Cautiousness.
-onready var _perception = $Container/Grid/Grid7/PerceptionSpinBox
-
-# Strength aka Body, Might, Brawn, Power.
-onready var _strength = $Container/Grid/Grid8/StrengthSpinBox
-
-# Willpower aka Sanity, Personality, Ego, Resolve.
-onready var _willpower = $Container/Grid/Grid9/WillpowerSpinBox
-
-# Wisdom aka Spirit, Wits, Psyche, Sense.
-onready var _wisdom = $Container/Grid/Grid10/WisdomSpinBox
+var _label 			= []
+var _empty 			= []
+var _grid_child 	= []
+var _spin_box 		= []
+var _description 	= []
 
 # the builder menu.
 onready var _menu = null
@@ -50,57 +28,110 @@ func _ready():
 	Variables._at_scene = Enum.Scene.Builder
 	Variables._scene_title = "Builder: Starting Statistics."
 	
-	_charisma.value = Builder._starting_statistics.Charisma
-	_constitution.value = Builder._starting_statistics.Constitution
-	_defense.value = Builder._starting_statistics.Defense
-	_dexterity.value = Builder._starting_statistics.Dexterity
-	_intelligence.value = Builder._starting_statistics.Intelligence
-	_luck.value = Builder._starting_statistics.Luck
-	_perception.value = Builder._starting_statistics.Perception
-	_strength.value = Builder._starting_statistics.Strength
-	_willpower.value = Builder._starting_statistics.Willpower
-	_wisdom.value = Builder._starting_statistics.Wisdom
-	
-
-func _on_SpinBox_charisma_changed(value):
-	Builder._starting_statistics.Charisma = value
+	_draw_skill_values()
 		
 
-func _on_SpinBox_constitution_changed(value):
-	Builder._starting_statistics.Constitution = value
+func _draw_skill_values():
+	# at nodes to grid.
+	_label			= []
+	_empty			= []
+	_grid_child 	= []
+	_spin_box 		= []
+	_description 	= []
 	
+	var _i = -1
 	
-func _on_SpinBox_defense_changed(value):
-	Builder._starting_statistics.Defense = value
+	for _p in range (7): # player
+		# empty.
+		_empty.append([])
+		_empty[_p] = Label.new()
+		_empty[_p].text = ""
+		_empty[_p].rect_size.y = 32
+		_grid.add_child(_empty[_p])
+		
+		# player name
+		_label.append([])
+		_label[_p] = Label.new()
+		_label[_p].text = P.character_name[str(_p)]
+		_label[_p].autowrap = true
+		_label[_p].add_color_override("font_color", Color("#0054ff")) # blue 
+		_grid.add_child(_label[_p])
+		
+		for _s in range (10): # stats.
+			_i += 1
+			
+			# stat name,
+			_label.append([])
+			_label[_i] = Label.new()
+			_label[_i].text = Variables.s[str(_s)]
+			_label[_i].autowrap = true
+			_label[_i].align = HALIGN_RIGHT
+			_grid.add_child(_label[_i])
+			
+			_grid_child.append([])
+			_grid_child[_i] = HBoxContainer.new()
+			_grid_child[_i].rect_min_size.x = 750
+			_grid_child[_i].rect_size.y = 32
+			_grid.add_child(_grid_child[_i])
+			
+			# stat value.
+			_spin_box.append([])
+			_spin_box[_i] = SpinBox.new()
+			_spin_box[_i].min_value = 0
+			_spin_box[_i].max_value = 200
+			_spin_box[_i].value = Builder._starting_statistics[Variables.s[str(_s)]][_p]
+			_spin_box[_i].rect_size.x = 100
+			_spin_box[_i].rect_min_size.x = 50
+			_grid_child[_i].add_child(_spin_box[_i])
+			
+			# stat description.
+			_description.append([])
+			_description[_i] = Label.new()
+			_description[_i].text = Variables.s_desc[str(_s)]
+			_description[_i].autowrap = true
+			_description[_i].rect_min_size.x = 545
+			_description[_i].rect_size.y = 32
+			_description[_i].align = HALIGN_LEFT
+			_grid_child[_i].add_child(_description[_i])
+			
+			
+			# mouse exited.
+			if _spin_box[_i].is_connected("mouse_exited", self, "_on_mouse_exited"):
+				_spin_box[_i].disconnect("mouse_exited", self, "_on_mouse_exited", [_s, _p, _i])
+				
+			# create the signal.
+			var _y = _spin_box[_i].connect("mouse_exited", self, "_on_mouse_exited", [_s, _p, _i])
+			
+			#_draw_magic_values()
+			
+		#used as a padding between player character names.
+		# empty.
+		_empty.append([])
+		_empty[_p] = Label.new()
+		_empty[_p].text = ""
+		_empty[_p].rect_size.y = 32
+		_grid.add_child(_empty[_p])
+		
+		# empty.
+		_empty.append([])
+		_empty[_p] = Label.new()
+		_empty[_p].text = ""
+		_empty[_p].rect_size.y = 32
+		_grid.add_child(_empty[_p])
 
-	
-func _on_SpinBox_dexterity_changed(value):
-	Builder._starting_statistics.Dexterity = value
-	
-	
-func _on_SpinBox_intelligence_changed(value):
-	Builder._starting_statistics.Intelligence = value
-	
-	
-func _on_SpinBox_juck_changed(value):
-	Builder._starting_statistics.Luck = value
-	
-	
-func _on_SpinBox_perception_changed(value):
-	Builder._starting_statistics.Perception = value
-	
-	
-func _on_SpinBox_strength_changed(value):
-	Builder._starting_statistics.Strength = value
-	
-	
-func _on_SpinBox_willpower_changed(value):
-	Builder._starting_statistics.Willpower = value
-	
-	
-func _on_SpinBox_wisdom_changed(value):
-	Builder._starting_statistics.Wisdom = value
 
+func _draw_magic_values():
+	# at nodes to grid.
+	_label			= []
+	_empty			= []
+	_grid_child 	= []
+	_spin_box 		= []
+	_description 	= []
+	
+
+func _on_mouse_exited(_s, _p, _i):
+	Builder._starting_statistics[Variables.s[str(_s)]][_p] = _spin_box[_i].value
+	
 	
 func _return_to_main_menu():
 	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")

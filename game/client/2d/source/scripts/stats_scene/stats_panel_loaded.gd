@@ -141,7 +141,7 @@ func stats_text_all_update():
 	_stats_text_all_column1_label.bbcode_enabled = true
 	_stats_text_all_column2_label.bbcode_enabled = true
 	
-	for d in P._stats_loaded.keys():
+	for d in P.character_number["0"]["_stats_loaded"].keys():
 		i += 1
 		if i <= 5:
 			if d == "Gold":
@@ -194,20 +194,20 @@ func stats_value_all_update(_x: int = 0):
 		_player_gain_a_level.visible = false
 	
 	# display xp_next at stats.
-	if P._stats_loaded.Level < 99:
+	if P.character_number["0"]["_stats_loaded"].Level < 99:
 		_xp_next_value_label.text = str(P._xp_level[P._level])	
 	
 	# display the username on the stats panel.	
-	if get_node_or_null("Background/UsernameValueLabel") != null && P._stats_loaded.Username != "":
+	if get_node_or_null("Background/UsernameValueLabel") != null && P.character_number["0"]["_stats_loaded"].Username != "":
 		_username_value_label = get_node_or_null("Background/UsernameValueLabel")
-		_username_value_label.text = P._stats_loaded.Username[0].to_upper() + P._stats_loaded.Username.substr(1,-1)
+		_username_value_label.text = P.character_number["0"]["_stats_loaded"].Username[0].to_upper() + P.character_number["0"]["_stats_loaded"].Username.substr(1,-1) + " - " + P.character_name["0"]
 	
 	# display the xp on the stats panel.
 	_xp_value_label.text = str(P._xp)
 	_xp_next_value_label.text = str(P._xp_next)
 	
 	# prepare to display the rest of the stats, such as, str, def, int.
-	P._stats_loaded.Level = P._level
+	P.character_number["0"]["_stats_loaded"].Level = P._level
 	
 	var i = -1
 	_stats_value_all_column1_label.bbcode_enabled = true
@@ -217,7 +217,7 @@ func stats_value_all_update(_x: int = 0):
 	_stats_value_all_column2_label.bbcode_text = ""
 	
 	# add the stats values, such as, str value, def value.
-	for d in P._stats_loaded.values():
+	for d in P.character_number["0"]["_stats_loaded"].values():
 		i += 1
 		if i <= 5:
 			if i == 0:

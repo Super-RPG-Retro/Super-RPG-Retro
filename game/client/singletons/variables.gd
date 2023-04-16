@@ -54,6 +54,34 @@ var _music = {
 	"14": "game-music2.mid",
 }
 
+# stats name.
+var s:Dictionary = {
+	"0": "Charisma",
+	"1": "Constitution",
+	"2": "Defense",
+	"3": "Dexterity",
+	"4": "Intelligence",
+	"5": "Luck",
+	"6": "Perception",
+	"7": "Strength",
+	"8": "Willpower",
+	"9": "Wisdom",
+}
+
+# stats description.
+var s_desc:Dictionary = {
+	"0": "Charisma aka Presence, Charm, Social.",
+	"1": "Constitution aka Stamina, Endurance, Vitality, Recovery.",
+	"2": "Defense aka Resistance, Fortitude, Resilience.",
+	"3": "Dexterity aka Agility, Reflexes, Quickness.",
+	"4": "Intelligence aka Intellect, Mind, Knowledge.",
+	"5": "Luck aka Fate, Chance.",
+	"6": "Perception aka Alertness, Awareness, Cautiousness.",
+	"7": "Strength aka Body, Might, Brawn, Power.",
+	"8": "Willpower aka Sanity, Personality, Ego, Resolve.",
+	"9": "Wisdom aka Spirit, Wits, Psyche, Sense.",
+}
+
 # this is the max value of the game id's at main menu SpidBox node.
 var _game_id_max_value = 99
 

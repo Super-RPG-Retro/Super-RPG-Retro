@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://bundles/assets/images/player_characters/maxim.png" type="Texture" id=1]
+[ext_resource path="res://bundles/assets/images/player_characters/0.png" type="Texture" id=1]
 [ext_resource path="res://2d/source/scripts/mouse_commands/tiles.gd" type="Script" id=2]
 [ext_resource path="res://2d/assets/themes/theme_very_small_font.tres" type="Theme" id=3]
 [ext_resource path="res://2d/assets/themes/theme_small_font.tres" type="Theme" id=4]

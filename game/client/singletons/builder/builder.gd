@@ -131,16 +131,16 @@ var _event_parent = {
 
 
 var _starting_statistics = {
-	"Charisma": 			0,
-	"Constitution": 		0,
-	"Defense": 				0,
-	"Dexterity": 			0,
-	"Intelligence": 		0,
-	"Luck": 				0,
-	"Perception": 			0,
-	"Strength": 			0,
-	"Willpower": 			0,
-	"Wisdom":				0,
+	"Charisma": 			[0,0,0,0,0,0,0],
+	"Constitution": 		[0,0,0,0,0,0,0],
+	"Defense": 				[0,0,0,0,0,0,0],
+	"Dexterity": 			[0,0,0,0,0,0,0],
+	"Intelligence": 		[0,0,0,0,0,0,0],
+	"Luck": 				[0,0,0,0,0,0,0],
+	"Perception": 			[0,0,0,0,0,0,0],
+	"Strength": 			[0,0,0,0,0,0,0],
+	"Willpower": 			[0,0,0,0,0,0,0],
+	"Wisdom":				[0,0,0,0,0,0,0],
 }
 
 
@@ -203,22 +203,22 @@ func init_vars_event_parent():
 
 
 func init_vars_starting_statistics():
-	_starting_statistics = {
-	"Charisma": 			0,
-	"Constitution": 		0,
-	"Defense": 				0,
-	"Dexterity": 			0,
-	"Intelligence": 		0,
-	"Luck": 				0,
-	"Perception": 			0,
-	"Strength": 			0,
-	"Willpower": 			0,
-	"Wisdom": 				0,
+	_starting_statistics = {	
+	"Charisma": 			[0,0,0,0,0,0,0],
+	"Constitution": 		[0,0,0,0,0,0,0],
+	"Defense": 				[0,0,0,0,0,0,0],
+	"Dexterity": 			[0,0,0,0,0,0,0],
+	"Intelligence": 		[0,0,0,0,0,0,0],
+	"Luck": 				[0,0,0,0,0,0,0],
+	"Perception": 			[0,0,0,0,0,0,0],
+	"Strength": 			[0,0,0,0,0,0,0],
+	"Willpower": 			[0,0,0,0,0,0,0],
+	"Wisdom":				[0,0,0,0,0,0,0],
 	
 }
 
 
-func all_array_append():	
+func all_array_append():
 	for x in range (Variables._total_builder_data_directories):
 		# game id.
 		_data.level_size.append([])

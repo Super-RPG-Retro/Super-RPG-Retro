@@ -24,7 +24,7 @@ custom_styles/bg = SubResource( 1 )
 
 [node name="Grid" type="GridContainer" parent="Container"]
 margin_right = 975.0
-margin_bottom = 466.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 200, 40 )
 custom_constants/vseparation = 7
 custom_constants/hseparation = 13
@@ -49,298 +49,18 @@ custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
 text = "A statistic is stronger the higher its value. The total of each statistic of the player equals starting statistic plus bonus statistic plus object statistic."
 autowrap = true
 
-[node name="CharismaLabel" type="Label" parent="Container/Grid"]
-margin_top = 59.0
-margin_right = 222.0
-margin_bottom = 81.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Charisma."
-align = 2
-
-[node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 54.0
-margin_right = 975.0
-margin_bottom = 86.0
-
-[node name="CharismaSpinBox" type="SpinBox" parent="Container/Grid/Grid1"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription" type="Label" parent="Container/Grid/Grid1"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 472.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Charisma aka Presence, Charm, Social."
-
-[node name="ConstitutionLabel" type="Label" parent="Container/Grid"]
-margin_top = 98.0
-margin_right = 222.0
-margin_bottom = 120.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Constitution."
-align = 2
-
-[node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 93.0
-margin_right = 975.0
-margin_bottom = 125.0
-
-[node name="ConstitutionSpinBox" type="SpinBox" parent="Container/Grid/Grid2"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription2" type="Label" parent="Container/Grid/Grid2"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 646.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Constitution aka Stamina, Endurance, Vitality, Recovery."
-
-[node name="DefenseLabel" type="Label" parent="Container/Grid"]
-margin_top = 137.0
-margin_right = 222.0
-margin_bottom = 159.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Defense."
-align = 2
-
-[node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 132.0
-margin_right = 975.0
-margin_bottom = 164.0
-
-[node name="DefenseSpinBox" type="SpinBox" parent="Container/Grid/Grid3"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription3" type="Label" parent="Container/Grid/Grid3"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 544.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Defense aka Resistance, Fortitude, Resilience."
-
-[node name="DexterityLabel" type="Label" parent="Container/Grid"]
-margin_top = 176.0
-margin_right = 222.0
-margin_bottom = 198.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Dexterity."
-align = 2
-
-[node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 171.0
-margin_right = 975.0
-margin_bottom = 203.0
-
-[node name="DexteritySpinBox" type="SpinBox" parent="Container/Grid/Grid4"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription4" type="Label" parent="Container/Grid/Grid4"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 508.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Dexterity aka Agility, Reflexes, Quickness."
-
-[node name="IntelligenceLabel" type="Label" parent="Container/Grid"]
-margin_top = 215.0
-margin_right = 222.0
-margin_bottom = 237.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Intelligence."
-align = 2
-
-[node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 210.0
-margin_right = 975.0
-margin_bottom = 242.0
-
-[node name="IntelligenceSpinBox" type="SpinBox" parent="Container/Grid/Grid5"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription5" type="Label" parent="Container/Grid/Grid5"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 513.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Intelligence aka Intellect, Mind, Knowledge."
-
-[node name="LuckLabel" type="Label" parent="Container/Grid"]
-margin_top = 254.0
-margin_right = 222.0
-margin_bottom = 276.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Luck."
-align = 2
-
-[node name="Grid6" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 249.0
-margin_right = 975.0
-margin_bottom = 281.0
-
-[node name="LuckSpinBox" type="SpinBox" parent="Container/Grid/Grid6"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription6" type="Label" parent="Container/Grid/Grid6"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 322.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Luck aka Fate, Chance."
-
-[node name="PerceptionLabel" type="Label" parent="Container/Grid"]
-margin_top = 293.0
-margin_right = 222.0
-margin_bottom = 315.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Perception."
-align = 2
-
-[node name="Grid7" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 288.0
-margin_right = 975.0
-margin_bottom = 320.0
-
-[node name="PerceptionSpinBox" type="SpinBox" parent="Container/Grid/Grid7"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription7" type="Label" parent="Container/Grid/Grid7"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 607.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Perception aka Alertness, Awareness, Cautiousness."
-
-[node name="StrengthLabel" type="Label" parent="Container/Grid"]
-margin_top = 332.0
-margin_right = 222.0
-margin_bottom = 354.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Strength."
-align = 2
-
-[node name="Grid8" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 327.0
-margin_right = 975.0
-margin_bottom = 359.0
-
-[node name="StrengthSpinBox" type="SpinBox" parent="Container/Grid/Grid8"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription8" type="Label" parent="Container/Grid/Grid8"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 500.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Strength aka Body, Might, Brawn, Power."
-
-[node name="WillpowerLabel" type="Label" parent="Container/Grid"]
-margin_top = 371.0
-margin_right = 222.0
-margin_bottom = 393.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Willpower."
-align = 2
-
-[node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 366.0
-margin_right = 975.0
-margin_bottom = 398.0
-
-[node name="WillpowerSpinBox" type="SpinBox" parent="Container/Grid/Grid9"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription9" type="Label" parent="Container/Grid/Grid9"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 567.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Willpower aka Sanity, Personality, Ego, Resolve."
-
-[node name="WisdomLabel" type="Label" parent="Container/Grid"]
-margin_top = 410.0
-margin_right = 222.0
-margin_bottom = 432.0
-focus_previous = NodePath("../../../ToTitle")
-text = "Wisdom."
-align = 2
-
-[node name="Grid10" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 405.0
-margin_right = 975.0
-margin_bottom = 437.0
-
-[node name="WisdomSpinBox" type="SpinBox" parent="Container/Grid/Grid10"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
-max_value = 999.0
-
-[node name="LabelDescription10" type="Label" parent="Container/Grid/Grid10"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 493.0
-margin_bottom = 27.0
-mouse_filter = 1
-text = "Wisdom aka Spirit, Wits, Psyche, Sense."
-
 [node name="EmptyTitle" type="Label" parent="Container/Grid"]
-margin_top = 444.0
+margin_top = 54.0
 margin_right = 222.0
-margin_bottom = 466.0
+margin_bottom = 76.0
 focus_previous = NodePath("../../../ToTitle")
 align = 2
 
 [node name="EmptyBody" type="Label" parent="Container/Grid"]
 margin_left = 235.0
-margin_top = 444.0
+margin_top = 54.0
 margin_right = 975.0
-margin_bottom = 466.0
+margin_bottom = 76.0
 mouse_filter = 1
 
 [node name="StatusBar" parent="." instance=ExtResource( 2 )]
@@ -372,16 +92,6 @@ popup_exclusive = true
 dialog_autowrap = true
 
 [connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
-[connection signal="value_changed" from="Container/Grid/Grid1/CharismaSpinBox" to="." method="_on_SpinBox_charisma_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid2/ConstitutionSpinBox" to="." method="_on_SpinBox_constitution_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid3/DefenseSpinBox" to="." method="_on_SpinBox_defense_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid4/DexteritySpinBox" to="." method="_on_SpinBox_dexterity_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid5/IntelligenceSpinBox" to="." method="_on_SpinBox_intelligence_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid6/LuckSpinBox" to="." method="_on_SpinBox_juck_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid7/PerceptionSpinBox" to="." method="_on_SpinBox_perception_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid8/StrengthSpinBox" to="." method="_on_SpinBox_strength_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid9/WillpowerSpinBox" to="." method="_on_SpinBox_willpower_changed"]
-[connection signal="value_changed" from="Container/Grid/Grid10/WisdomSpinBox" to="." method="_on_SpinBox_wisdom_changed"]
 [connection signal="focus_exited" from="AcceptDialogRename" to="." method="_on_AcceptDialog_focus_exited"]
 [connection signal="modal_closed" from="AcceptDialogRename" to="." method="_on_AcceptDialog_modal_closed"]
 [connection signal="popup_hide" from="AcceptDialogRename" to="." method="_on_AcceptDialog_popup_hide"]

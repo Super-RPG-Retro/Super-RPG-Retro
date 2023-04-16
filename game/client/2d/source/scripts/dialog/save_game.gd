@@ -37,11 +37,13 @@ func save_game():
 	# put stats into one dictionary then save data in binary format so that nobody can edit that file.
 	p_to_stats()
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt", P._stats_loaded.Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt", P.character_number["0"]["_stats_loaded"].Username)
 		
 	#save stats
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P._stats_loaded)	
-	P._stats_saved = P._stats_loaded
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P.character_number)
+	
+	for _i in range (7):
+		P.character_number[str(_i)]["_stats_saved"] = P.character_number[str(_i)]["_stats_loaded"]
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/hud.txt", Hud._loaded)	
 	Hud._saved = Hud._loaded
@@ -55,26 +57,26 @@ func save_game():
 	
 # put game stats into one dictionary.
 func p_to_stats():
-	P._stats_loaded.Username = P._name
+	P.character_number["0"]["_stats_loaded"].Username = P._name
 	
-	P._stats_loaded.HP_max = P._hp_max
-	P._stats_loaded.HP = P._hp
-	P._stats_loaded.MP_max = P._mp_max
-	P._stats_loaded.MP = P._mp
-	P._stats_loaded.XP = P._xp
-	P._stats_loaded.XP_next = P._xp_next
+	P.character_number["0"]["_stats_loaded"].HP_max = P._hp_max
+	P.character_number["0"]["_stats_loaded"].HP = P._hp
+	P.character_number["0"]["_stats_loaded"].MP_max = P._mp_max
+	P.character_number["0"]["_stats_loaded"].MP = P._mp
+	P.character_number["0"]["_stats_loaded"].XP = P._xp
+	P.character_number["0"]["_stats_loaded"].XP_next = P._xp_next
 	
-	P._stats_loaded.Strength = P._str
-	P._stats_loaded.Defense = P._def
-	P._stats_loaded.Constitution = P._con
-	P._stats_loaded.Dexterity = P._dex
-	P._stats_loaded.Intelligence = P._int
-	P._stats_loaded.Charisma = P._cha
-	P._stats_loaded.Wisdom = P._wis
-	P._stats_loaded.Willpower = P._wil
-	P._stats_loaded.Perception = P._per
-	P._stats_loaded.Luck = P._luc
-	P._stats_loaded.Level = P._level
+	P.character_number["0"]["_stats_loaded"].Strength = P._str
+	P.character_number["0"]["_stats_loaded"].Defense = P._def
+	P.character_number["0"]["_stats_loaded"].Constitution = P._con
+	P.character_number["0"]["_stats_loaded"].Dexterity = P._dex
+	P.character_number["0"]["_stats_loaded"].Intelligence = P._int
+	P.character_number["0"]["_stats_loaded"].Charisma = P._cha
+	P.character_number["0"]["_stats_loaded"].Wisdom = P._wis
+	P.character_number["0"]["_stats_loaded"].Willpower = P._wil
+	P.character_number["0"]["_stats_loaded"].Perception = P._per
+	P.character_number["0"]["_stats_loaded"].Luck = P._luc
+	P.character_number["0"]["_stats_loaded"].Level = P._level
 
 
 func _on_ConfirmationDialog_confirmed():

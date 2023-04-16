@@ -253,7 +253,7 @@ rect_min_size = Vector2( 500, 111 )
 select_mode = 1
 allow_reselect = true
 max_columns = 2
-fixed_icon_size = Vector2( 32, 32 )
+fixed_icon_size = Vector2( 96, 96 )
 
 [node name="ItemListBody" type="Label" parent="Container/Grid/Grid7"]
 margin_left = 504.0

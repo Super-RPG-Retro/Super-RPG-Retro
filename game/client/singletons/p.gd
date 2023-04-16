@@ -17,6 +17,39 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+# player characters.
+var character_name:Dictionary = {
+	"0": "Maxim",
+	"1": "Artea",
+	"2": "Dekar",
+	"3": "Guy",
+	"4": "Lexis",
+	"5": "Selan",
+	"6": "Tia",	
+		
+}
+
+# c = player character number.
+var character_number = {
+	"0": {},	
+	"1": {},
+	"2": {},
+	"3": {},
+	"4": {},
+	"5": {},
+	"6": {},
+}
+
+# player's class.
+var class_list = {
+	"0": "Archer",
+	"1": "Druid",
+	"2": "Knight",
+	"3": "Paladin",
+	"4": "Rogue",
+	"5": "Sorcerer",
+	"6": "Warrior",
+}
 
 # player stats and stats_saved directories will be created from this directory.
 var _stats_data = {
@@ -92,6 +125,14 @@ var _xp_level = []
 var _move_speed = 0
 
 
+func _ready():
+	for _id in range (8):
+		character_number[str(_id)] = { 
+			_stats_loaded = {},
+			_stats_saved = {}
+		 }
+
+	
 func reset():
 	_name = _stats_loaded.Username
 	_cha		= _stats_loaded.Charisma
@@ -125,20 +166,20 @@ func reset():
 	_move_speed = _move_speed
 
 
-func _starting_statistics():
+func _starting_statistics(_id):
 	var _starting_dictionary = {
 		"Class": "",
-		"Strength": Builder._starting_statistics.Strength,
-		"Defense": Builder._starting_statistics.Defense,
-		"Constitution": Builder._starting_statistics.Constitution,
-		"Dexterity": Builder._starting_statistics.Dexterity,
-		"Intelligence": Builder._starting_statistics.Intelligence,
+		"Strength": Builder._starting_statistics.Strength[_id],
+		"Defense": Builder._starting_statistics.Defense[_id],
+		"Constitution": Builder._starting_statistics.Constitution[_id],
+		"Dexterity": Builder._starting_statistics.Dexterity[_id],
+		"Intelligence": Builder._starting_statistics.Intelligence[_id],
 		"Level": 1,
-		"Charisma": Builder._starting_statistics.Charisma,
-		"Wisdom": Builder._starting_statistics.Wisdom,
-		"Willpower": Builder._starting_statistics.Willpower,
-		"Perception": Builder._starting_statistics.Perception,
-		"Luck": Builder._starting_statistics.Luck,
+		"Charisma": Builder._starting_statistics.Charisma[_id],
+		"Wisdom": Builder._starting_statistics.Wisdom[_id],
+		"Willpower": Builder._starting_statistics.Willpower[_id],
+		"Perception": Builder._starting_statistics.Perception[_id],
+		"Luck": Builder._starting_statistics.Luck[_id],
 		"Username": "Athena",
 		"HP_max": hp_max,
 		"HP": hp,
@@ -148,19 +189,27 @@ func _starting_statistics():
 		"XP_next": 0,
 		
 	}
-	
+
+		
 	return _starting_dictionary
 
 	
 func _reset_data():
-	_stats_loaded = _starting_statistics()
+	for _id in range (7):
+		_stats_loaded = _starting_statistics(_id)
+		character_number[str(_id)]["_stats_loaded"].merge(_stats_loaded, true)
+	
 	reset()
 	
 	get_tree().call_group("main_loop", "clamp_p_vars")
 
 
 func _reset_saved_data():
-	_stats_saved = _starting_statistics()
+	for _id in range (7):
+		_stats_saved = _starting_statistics(_id)
+		character_number[str(_id)]["_stats_saved"].merge(_stats_saved, true)
+		
+	
 	get_tree().call_group("main_loop", "clamp_p_vars_saved")
 	
 	

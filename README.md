@@ -10,12 +10,12 @@ This game is currently a work in progress. Programmed in Godot. Help make this a
 
 
 
-* 61 magic. 999 maximum runes cab be stacked for each magic.
+* 61 magic. 999 maximum runes can be stacked for each magic.
 * 460 item can be used at inventory.
 * 678 mobs.
 * 99 levels in every dungeon.
 * 8 dungeons.
-* both 3d and 2d used in game.
+* Both 3d and 2d used in game.
 * 10 player statistics such as str, def.
 * 999 is the maximum value of a statistic.
 * 99 is the maximum level a player can have.
@@ -35,7 +35,7 @@ This game is currently a work in progress. Programmed in Godot. Help make this a
 * Cast the rune at the main map or have instant rune casting.
 * Hide the dungeon corridor stone walls?
 * Try to show only the stone walls that parameter the corridor?
-* Remove every one tile wide Stone tile that borders the level.
+* Remove every one tile wide stone tile that borders the level.
 * Should the graphics at the dungeon map be displayed larger?
 * Higher value can increase the corridor distance between rooms.
 * Every game can have a different "Difficulty level" value.
@@ -59,7 +59,7 @@ This game is currently a work in progress. Programmed in Godot. Help make this a
 users_dir = C:\Users\your_name\AppData\Roaming\Godot\app_userdata\Super RPG Retro client\
 builders_dir = c:\super_rpg_retro\game\client\bundles
 
-The first time you run the game, the save_data directory at users_dir will be created. That directory holds all the configurations of the game. 
+The first time you run the game, the save_data directory at users_dir is created. That directory has all game configurations in it. 
 
 This game has a builders feature accessed from within the game. The builder feature is a game construction kit, also known as a game maker. That feature is accessed from the main menu of the game from a button called builder. You can create a dungeon that holds 99 levels, set room size for a dungeon level, set the corridor size for a level, set the amount of mobs in a dungeon, set the music for each scene and lots more.
 

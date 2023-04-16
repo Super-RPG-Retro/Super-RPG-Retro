@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/artea.png-b7299caddc3592b3494e1be1479d9b8d.stex"
+path="res://.import/0.png-40381e804b939c8f471be8d2b2391078.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bundles/assets/images/player_characters/artea.png"
-dest_files=[ "res://.import/artea.png-b7299caddc3592b3494e1be1479d9b8d.stex" ]
+source_file="res://bundles/assets/images/player_characters/0.png"
+dest_files=[ "res://.import/0.png-40381e804b939c8f471be8d2b2391078.stex" ]
 
 [params]
 
