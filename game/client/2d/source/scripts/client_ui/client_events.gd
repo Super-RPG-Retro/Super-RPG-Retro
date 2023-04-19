@@ -13,6 +13,10 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node
 
 onready var _room_public = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPublic")
+onready var _room_private = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPrivate")
+onready var _room_commands = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomCommands")
+onready var _room_game = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomGame")
+
 onready var _item_list = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/ItemList")
 onready var _listen_button = get_parent().get_node("Panel/VBoxContainer/Send/ButtonPanel/ListenButton")
 
@@ -54,12 +58,17 @@ func resize_item_list():
 	get_tree().call_group("client", "should_hide_tile_panel_be_visible")
 			
 	if Settings._system.small_client_panel == false:
-		_item_list.rect_min_size.y = 144
-		_item_list.rect_size.y = 144
-				
+		_item_list.rect_min_size.y = 142
+		_item_list.rect_size.y = 142
+		
 	else:
 		_item_list.rect_min_size.y = 64
 		_item_list.rect_size.y = 64
+	
+	_room_public.rect_min_size.y = _item_list.rect_size.y
+	_room_private.rect_min_size.y = _item_list.rect_size.y
+	_room_commands.rect_min_size.y = _item_list.rect_size.y
+	_room_game.rect_min_size.y = _item_list.rect_size.y
 
 
 func _client_close_request(code, reason):
@@ -116,9 +125,7 @@ func _client_data_received(_id = 1):
 		
 		for _i in range (_arr.size() - 1):
 			_item_list.add_item(" " + _arr[_i], null, true)
-		
-		print(_arr)
-		
+	
 	if str(_d["text"]) != "":
 		_room_public.text += "\n" + str(_d["sender"]) + ": " + str(_d["text"])
 	

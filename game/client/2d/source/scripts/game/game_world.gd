@@ -157,7 +157,6 @@ func _ready():
 			Builder_playing._event_puzzles.data.event_number = _i
 			break
 	
-	
 	build.build_level()
 	
 	if Variables._potion_impair_vision_turns > 0:
@@ -322,10 +321,12 @@ func potion_impair_vision():
 	$Player/Impairment.visible = true 
 	get_tree().call_group("potion_panel", "set_label", 1, Variables._potion_impair_vision_turns)
 
+
 func potion_healing():
 	Variables._potion_healing_turns += 10
 	Variables._potion_healing_turns = clamp(Variables._potion_healing_turns, 1, 999)
 	get_tree().call_group("potion_panel", "set_label", 2, Variables._potion_healing_turns)
+
 
 func potion_poison():
 	Variables._potion_poison_turns += 10

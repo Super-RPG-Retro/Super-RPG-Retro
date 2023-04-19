@@ -30,6 +30,8 @@ onready var _room_public = $Panel/VBoxContainer/HBoxContainer/RoomPublic
 # this room is used when doing a system command.
 onready var _room_commands = $Panel/VBoxContainer/HBoxContainer/RoomCommands
 
+onready var _item_list = $Panel/VBoxContainer/HBoxContainer/ItemList
+
 # while playing the game, text about the battle or event is placed here.
 onready var _room_game = $Panel/VBoxContainer/HBoxContainer/RoomGame
 
@@ -70,7 +72,9 @@ func _ready():
 	if Variables._child_scene_open == true:
 		_input_client.focus_mode = FOCUS_NONE
 		_input_client.set_editable(false)
-
+	
+	_item_list.visible = false
+	_room_commands.rect_min_size.x = 650
 
 func _input(event):	
 	# if child scene is not open and there is a keyboard key pressed...
@@ -281,29 +285,41 @@ func _on_button_public_pressed():
 	reset_all_button_nodes()
 	
 	_room_public.visible = true
+	_room_public.rect_min_size.y = _item_list.rect_size.y
+	_room_public.rect_min_size.x = 461
 	_button_public.pressed = true
-	
+	_item_list.visible = true
+		
 	
 func _on_button_private_pressed():
 	hide_all_room_nodes()
 	reset_all_button_nodes()
 	
 	_room_private.visible = true
+	_room_private.rect_min_size.y = _item_list.rect_size.y
+	_room_private.rect_min_size.x = 461
 	_button_private.pressed = true
+	_item_list.visible = true
 	
-
+	
 func _on_button_commands_pressed():
 	hide_all_room_nodes()
 	reset_all_button_nodes()
 	
 	_room_commands.visible = true
+	_room_commands.rect_min_size.y = _item_list.rect_size.y
+	_room_commands.rect_min_size.x = 650
 	_button_commands.pressed = true
-		
-
+	_item_list.visible = false
+	
+	
 func _on_button_game_pressed():
 	hide_all_room_nodes()
 	reset_all_button_nodes()
 	
 	_room_game.visible = true
+	_room_game.rect_min_size.y = _item_list.rect_size.y
+	_room_game.rect_min_size.x = 650
 	_button_game.pressed = true
+	_item_list.visible = false
 	

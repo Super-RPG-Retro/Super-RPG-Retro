@@ -552,13 +552,12 @@ func builder_load_data():
 	
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_starting_statistics.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_starting_skills.txt")
 	
 	if _temp != null:
-		Builder._starting_statistics = _temp 
+		Builder._starting_skills = _temp 
 		
-	Builder_playing._statistics = Builder._starting_statistics.duplicate(true)
-	
+	Builder_playing._starting_skills = Builder._starting_skills.duplicate(true)	
 	
 	Builder_playing._event_inventory.data 				= Builder._event_inventory.data.duplicate(true)
 
@@ -623,7 +622,7 @@ func builder_playing_load_data():
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/artifacts.txt")
 	
 	if _temp != null:
-		Builder_playing._dictionary_artifacts  = _temp
+		Builder_playing._dictionary_artifacts.data  = _temp
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/music.txt")
@@ -632,10 +631,10 @@ func builder_playing_load_data():
 		Builder_playing._audio_music = _temp
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/statistics.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/dictionary_starting_skills.txt")
 	
 	if _temp != null:
-		Builder_playing._statistics = _temp
+		Builder_playing._starting_skills = _temp
 
 
 # save all builder data.
@@ -662,7 +661,7 @@ func builder_save_data():
 	
 	Filesystem.save("user://saved_data/builder_audio_music.txt", Builder._audio_music.data)
 	
-	Filesystem.save("user://saved_data/builder_starting_statistics.txt", Builder._starting_statistics)
+	Filesystem.save("user://saved_data/builder_starting_skills.txt", Builder._starting_skills)
 
 
 # these are the builder vars used while playing. these vars are loaded here from disk.
@@ -681,11 +680,11 @@ func builder_playing_save_data():
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/next_event.txt", Builder_playing._next_event)
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/artifacts.txt", Builder_playing._dictionary_artifacts )
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/artifacts.txt", Builder_playing._dictionary_artifacts.data)
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/music.txt", Builder_playing._audio_music )
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/statistics.txt", Builder_playing._statistics)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/dictionary_starting_skills.txt", Builder_playing._starting_skills)
 
 
 func _delete_game_data():

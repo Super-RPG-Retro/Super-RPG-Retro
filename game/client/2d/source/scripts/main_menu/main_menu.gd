@@ -13,11 +13,9 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node2D
 
 onready var _game_data_text = $GameData/stats/Text
-onready var _background = $Background
 
 onready var _game_data_loaded = $GameDataLoaded/Stats/Text
 onready var _game_data_saved = $GameDataSaved/Stats/Text
-
 
 
 func _ready():
@@ -44,18 +42,24 @@ func _ready():
 			Settings._system.seed_current = Common.get_random_number()
 	
 	Common._music_play()
-	#Builder.reset_config()
-	#Builder._all_init()	
-	#Builder.all_array_append()
 	Filesystem.builder_load_data()
 	Common._game_title()
 	
+	
 func _process(_delta):
-	_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_number["0"]["_stats_loaded"].Strength + P.character_number["0"]["_stats_loaded"].Defense + P.character_number["0"]["_stats_loaded"].Constitution + P.character_number["0"]["_stats_loaded"].Dexterity + P.character_number["0"]["_stats_loaded"].Intelligence + P.character_number["0"]["_stats_loaded"].Charisma + P.character_number["0"]["_stats_loaded"].Wisdom + P.character_number["0"]["_stats_loaded"].Willpower + P.character_number["0"]["_stats_loaded"].Perception + P.character_number["0"]["_stats_loaded"].Luck).pad_zeros(4) + "."
+	if Variables._id_of_loaded_game_temp != Variables._id_of_loaded_game:
+		_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_number[str(P._number)]["_stats_loaded"].Strength + P.character_number[str(P._number)]["_stats_loaded"].Defense + P.character_number[str(P._number)]["_stats_loaded"].Constitution + P.character_number[str(P._number)]["_stats_loaded"].Dexterity + P.character_number[str(P._number)]["_stats_loaded"].Intelligence + P.character_number[str(P._number)]["_stats_loaded"].Charisma + P.character_number[str(P._number)]["_stats_loaded"].Wisdom + P.character_number[str(P._number)]["_stats_loaded"].Willpower + P.character_number[str(P._number)]["_stats_loaded"].Perception + P.character_number[str(P._number)]["_stats_loaded"].Luck).pad_zeros(4) + "."
 
-	_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_number["0"]["_stats_saved"].Strength + P.character_number["0"]["_stats_saved"].Defense + P.character_number["0"]["_stats_saved"].Constitution + P.character_number["0"]["_stats_saved"].Dexterity + P.character_number["0"]["_stats_saved"].Intelligence + P.character_number["0"]["_stats_saved"].Charisma + P.character_number["0"]["_stats_saved"].Wisdom + P.character_number["0"]["_stats_saved"].Willpower + P.character_number["0"]["_stats_saved"].Perception + P.character_number["0"]["_stats_saved"].Luck).pad_zeros(4) + "."
+		Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
+		
+	# do not update this unless mouse is at right side of scene.
+	#right side of scene.
+	if Variables._mouse_cursor_position.x > 512 && Variables._id_of_saved_game != Variables._id_of_saved_game_temp:
+		_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_number[str(P._number)]["_stats_saved"].Strength + P.character_number[str(P._number)]["_stats_saved"].Defense + P.character_number[str(P._number)]["_stats_saved"].Constitution + P.character_number[str(P._number)]["_stats_saved"].Dexterity + P.character_number[str(P._number)]["_stats_saved"].Intelligence + P.character_number[str(P._number)]["_stats_saved"].Charisma + P.character_number[str(P._number)]["_stats_saved"].Wisdom + P.character_number[str(P._number)]["_stats_saved"].Willpower + P.character_number[str(P._number)]["_stats_saved"].Perception + P.character_number[str(P._number)]["_stats_saved"].Luck).pad_zeros(4) + "."
 	
-	
+		Variables._id_of_saved_game_temp = Variables._id_of_saved_game
+		
+		
 func _input(event):	
 	# listen for ESC to exit app
 	if(event.is_pressed()):

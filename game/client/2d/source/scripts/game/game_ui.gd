@@ -642,10 +642,17 @@ func cursor():
 		if Variables._at_library == false:
 			get_tree().call_group("game_world", "unit_description")
 		
-	
+
+# change the image of the object. tiles.gd calls this func.
+# _texture: 		the object's texture, sprite image.
+# _is_player:	is this object a player or a mob?
 func mouse_command_image(_texture, _is_player: bool):
 	if _is_player == true:
-		_tile_summary.get_node(_tile_image).hframes = 3
+		if P._number == 0:
+			_tile_summary.get_node(_tile_image).hframes = 3
+		else:
+			_tile_summary.get_node(_tile_image).hframes = 1
+		
 	else:
 		_tile_summary.get_node(_tile_image).hframes = 1	
 	

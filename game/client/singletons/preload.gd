@@ -83,6 +83,7 @@ const _puzzle_block_move  = preload("res://audio/sound/puzzle_block_move.ogg")
 const _puzzle_failed  = preload("res://audio/sound/puzzle_failed.ogg")
 const _puzzle_success = preload("res://audio/sound/puzzle_success.ogg")
 
+const bar_gray = preload("res://2d/assets/images/healthbar_gray.png")
 const bar_red = preload("res://2d/assets/images/healthbar_red.png")
 const bar_blue = preload("res://2d/assets/images/healthbar_blue.png")
 const bar_yellow = preload("res://2d/assets/images/healthbar_yellow.png")

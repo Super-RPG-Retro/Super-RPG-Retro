@@ -63,7 +63,7 @@ func overview(p_node, e_node, i_node, t_node):
 			node = p_node
 		
 			_is_player = true
-			_texture = load("res://2d/assets/images/player.png")
+			_texture = load("res://bundles/assets/images/player_characters/" + str(P._number) + ".png")
 			
 		if _type == "mobs":
 			node = e_node
@@ -74,23 +74,23 @@ func overview(p_node, e_node, i_node, t_node):
 		get_tree().call_group("game_ui", "mouse_command_image", _texture, _is_player)
 		
 		# player and mobs share these vars.
-		var _str
-		var _def 
-		var _con 
-		var	_dex
-		var	_int
-		var	_cha
-		var	_wis
-		var	_wil
-		var	_per
-		var	_luc
-		var _hp_max
-		var _hp 
-		var _mp_max
-		var _mp
-		var _gold
-		var _level
-		var _xp
+		var _str:int 	= 0
+		var _def:int 	= 0 
+		var _con:int 	= 0
+		var	_dex:int 	= 0
+		var	_int:int 	= 0
+		var	_cha:int 	= 0
+		var	_wis:int 	= 0
+		var	_wil:int 	= 0
+		var	_per:int 	= 0
+		var	_luc:int 	= 0
+		var _hp_max:int = 0
+		var _hp:int 	= 0
+		var _mp_max:int = 0
+		var _mp:int 	= 0
+		var _gold:int 	= 0
+		var _level:int 	= 0
+		var _xp:int 	= 0
 		
 		# display the text of the overview panel.
 		if _type == "player":
@@ -108,7 +108,7 @@ func overview(p_node, e_node, i_node, t_node):
 			_hp = P._hp 
 			_mp_max = P._mp_max
 			_mp = P._mp
-			_gold = P._gold
+			_gold = Hud._gold
 			_level = P._level
 			_xp = P._xp
 		

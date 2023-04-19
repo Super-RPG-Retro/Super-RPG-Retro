@@ -56,7 +56,7 @@ func _ready():
 	
 	var _temp = null
 		
-	P.character_number["0"]["_stats_saved"].Username = P.character_number["0"]["_stats_loaded"].Username
+	P.character_number[str(P._number)]["_stats_saved"].Username = P.character_number[str(P._number)]["_stats_loaded"].Username
 	
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
@@ -134,6 +134,7 @@ func _input(event):
 			_on_ButtonPlay_pressed()
 		
 func _on_ButtonNew_pressed():
+	Variables._id_of_loaded_game_temp = -1
 	_scene_unfocused_panel.visible = true
 	
 	_new_confirmation_dialog.dialog_text = "New game at Game ID " + str(_saved_id.value) + "?"
@@ -151,15 +152,18 @@ func _on_new_confirmation_dialog():
 	Settings._reset_game()
 	
 	P._xp_next = P._xp_level[P._level]
-	P.character_number["0"]["_stats_loaded"].XP_next = P._xp_next
-	P.character_number["0"]["_stats_loaded"].Username = _username_line_edit.text
-	P.character_number["0"]["_stats_saved"].Username = _username_line_edit.text	
+	P.character_number[str(P._number)]["_stats_loaded"].XP_next = P._xp_next
+	P.character_number[str(P._number)]["_stats_loaded"].Username = _username_line_edit.text
+	P.character_number[str(P._number)]["_stats_saved"].Username = _username_line_edit.text	
 	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_loaded", "stats_empty")
 		
 # later rename .res to .user. res uses the programs folder while .user uses the system folder. note that user:// will not work everywhere. iOS and Android won't allow it at all. you could define the prefix in a global variable and then use user:// for testing and user:// when exporting.
 func _on_ButtonSave_pressed():
+	Variables._id_of_saved_game_temp = -1
+	Variables._id_of_loaded_game_temp = -1
+	
 	var _temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/is_this_new_data.txt")
 	
@@ -168,9 +172,9 @@ func _on_ButtonSave_pressed():
 	
 	if Variables._is_loaded_id_panel_visible == false:
 		P._xp_next = P._xp_level[P._level]
-		P.character_number["0"]["_stats_loaded"].XP_next = P._xp_next
-		P.character_number["0"]["_stats_loaded"].Username = _username_line_edit.text
-		P.character_number["0"]["_stats_saved"].Username = _username_line_edit.text	
+		P.character_number[str(P._number)]["_stats_loaded"].XP_next = P._xp_next
+		P.character_number[str(P._number)]["_stats_loaded"].Username = _username_line_edit.text
+		P.character_number[str(P._number)]["_stats_saved"].Username = _username_line_edit.text	
 		
 		_save_game_data()
 		
@@ -223,13 +227,11 @@ func _save_game_data():
 	Variables._is_this_new_data = false
 	Filesystem.save("user://saved_data/is_this_new_data.txt", false)
 	
-	print(P.character_number["0"])
-	
 	for _i in range (7):
 		P.character_number[str(_i)]["_stats_saved"] = P.character_number[str(_i)]["_stats_loaded"]
 	
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_number["0"]["_stats_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_number[str(P._number)]["_stats_loaded"].Username)
 	
 	# save stats
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_number)	
@@ -244,6 +246,8 @@ func _save_game_data():
 	
 		
 func _on_ButtonLoad_pressed(_bypass:bool = false):
+	Variables._id_of_loaded_game_temp = -1	
+	
 	if _bypass == false:
 		
 		# determine if game exists.
@@ -300,14 +304,14 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 		
 	if _temp != null:
 		P.character_number = _temp
-				
-		P._hp_max = P.character_number["0"]["_stats_loaded"].HP_max
-		P._hp = P.character_number["0"]["_stats_loaded"].HP
-		P._level = P.character_number["0"]["_stats_loaded"].Level
-		P._xp = P.character_number["0"]["_stats_loaded"].XP
-		P._xp_next = P.character_number["0"]["_stats_loaded"].XP_next
+		print("7 ", P._hp)		
+		P._hp_max = P.character_number[str(P._number)]["_stats_loaded"].HP_max
+		P._hp = P.character_number[str(P._number)]["_stats_loaded"].HP
+		P._level = P.character_number[str(P._number)]["_stats_loaded"].Level
+		P._xp = P.character_number[str(P._number)]["_stats_loaded"].XP
+		P._xp_next = P.character_number[str(P._number)]["_stats_loaded"].XP_next
 		
-		
+		print("8 ", P._hp)
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 			
@@ -326,6 +330,8 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	
 		
 func _on_ButtonDelete_pressed():
+	Variables._id_of_saved_game_temp = -1
+	
 	# determine if file was removed
 	var _file = File.new()
 	var	_does_file_exist = _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
@@ -400,8 +406,9 @@ func _on_ButtonPlay_pressed():
 			Settings._game.level_number = Builder._data.starting_level - 1
 		
 		Filesystem.builder_playing_load_data()
-	
+		
 		var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+		
 
 func _on_LineEdit_text_changed(_text):
 	# get the caret position and clear the line edit. the new line edit _text will be searched using regex for valid characters.
@@ -419,7 +426,7 @@ func _on_LineEdit_text_changed(_text):
 
 	_username_line_edit.caret_position = old_caret_position
 	
-	P.character_number["0"]["_stats_saved"].Username = _text
+	P.character_number[str(P._number)]["_stats_saved"].Username = _text
 	
 
 func _on_EmptyUsernameDialog_modal_closed():
@@ -455,6 +462,7 @@ func _on_SaveConfirmationDialog_confirmed():
 func _on_saved_ID_spinBox_value_changed(_value):
 	_saved_id.value = _value
 	Variables._id_of_saved_game = _value
+	Variables._id_of_saved_game_temp = -1
 	
 	# this is the last saved id. when the program loads or player returns to title, this data will be used to load the last saved game.
 	Filesystem.save("user://saved_data/id_of_saved_game.txt", Variables._id_of_saved_game)	
@@ -477,7 +485,9 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	else:
 		
 		get_tree().call_group("stats_saved", "stats_saved_empty")
-
+	
+	Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
+	
 
 func _on_NoDataDialog_confirmed():
 	if _scene_unfocused_panel != null:

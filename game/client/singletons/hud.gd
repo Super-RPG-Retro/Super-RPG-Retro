@@ -12,11 +12,11 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
-var	_gold
-var _score
-var _turns
+var	_gold 		= 0
+var _score 		= 0
+var _turns 		= 0
 var	_level # current level of player.
-var _food
+var _food 		= 10
 
 var _loaded = {
 	"Gold":					0,

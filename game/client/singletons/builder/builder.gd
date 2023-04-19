@@ -130,7 +130,7 @@ var _event_parent = {
 }
 
 
-var _starting_statistics = {
+var _starting_skills = {
 	"Charisma": 			[0,0,0,0,0,0,0],
 	"Constitution": 		[0,0,0,0,0,0,0],
 	"Defense": 				[0,0,0,0,0,0,0],
@@ -141,6 +141,12 @@ var _starting_statistics = {
 	"Strength": 			[0,0,0,0,0,0,0],
 	"Willpower": 			[0,0,0,0,0,0,0],
 	"Wisdom":				[0,0,0,0,0,0,0],
+	"HP_max":				[10,10,10,10,10,10,10],	
+	"HP":					[10,10,10,10,10,10,10],
+	"MP_max":				[0,0,0,0,0,0,0],	
+	"MP":					[0,0,0,0,0,0,0],
+	"XP":					[0,0,0,0,0,0,0],
+	"XP_next":				[16,16,16,16,16,16,16],
 }
 
 
@@ -200,22 +206,6 @@ func init_vars_event_parent():
 	"accepting_text":		[],	
 	
 	}
-
-
-func init_vars_starting_statistics():
-	_starting_statistics = {	
-	"Charisma": 			[0,0,0,0,0,0,0],
-	"Constitution": 		[0,0,0,0,0,0,0],
-	"Defense": 				[0,0,0,0,0,0,0],
-	"Dexterity": 			[0,0,0,0,0,0,0],
-	"Intelligence": 		[0,0,0,0,0,0,0],
-	"Luck": 				[0,0,0,0,0,0,0],
-	"Perception": 			[0,0,0,0,0,0,0],
-	"Strength": 			[0,0,0,0,0,0,0],
-	"Willpower": 			[0,0,0,0,0,0,0],
-	"Wisdom":				[0,0,0,0,0,0,0],
-	
-}
 
 
 func all_array_append():
@@ -400,7 +390,7 @@ func reset_game(x: int):
 	
 	Filesystem.save("user://saved_data/builder_next_event_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._next_event)
 	
-	Filesystem.save("user://saved_data/builder_starting_statistics.txt", Builder._starting_statistics)
+	Filesystem.save("user://saved_data/builder_starting_skills.txt", Builder._starting_skills)
 	
 
 # initiates these arrays by creating array elements.	
@@ -415,8 +405,7 @@ func _all_init():
 	_event_inventory.init()
 	_dictionary_artifacts.init()
 	_audio_music.init()
-	init_vars_starting_statistics()
-
+	
 
 func _exit_tree():
 	_event_inventory.queue_free()
@@ -424,7 +413,7 @@ func _exit_tree():
 	_event_puzzles.queue_free()
 	_event_story.queue_free()
 	_event_tasks.queue_free()
-	
+
 	_dictionary_artifacts.queue_free()
 	_audio_music.queue_free()
 	

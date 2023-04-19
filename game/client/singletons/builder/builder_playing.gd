@@ -32,7 +32,7 @@ var _next_event 				= Builder._next_event.duplicate(true)
 
 var _event_parent 				= Builder._event_parent.duplicate(true)
 
-var _statistics 				= Builder._starting_statistics.duplicate(true)
+var _starting_skills 				= Builder._starting_skills.duplicate(true)
 
 
 func _exit_tree():

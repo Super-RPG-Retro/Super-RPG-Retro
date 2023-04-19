@@ -213,7 +213,7 @@ var _child_scene_open: bool = false;
 # when true the listen button will be triggered.
 var _trigger_listen_button: bool = false;
 
-# after the enum Builder_dictionary is set to this var, a switch statement is used with this var to determibe if for example, mobs code or weapon code should be outputted,
+# after the enum Builder_dictionary is set to this var, a match statement is used with this var to determibe if for example, mobs code or weapon code should be outputted,
 var _dictionary_name: String = ""
 var _dictionary_index: int = 0
 
@@ -222,10 +222,15 @@ var _mouse_cursor_position = Vector2(0, 0)
 
 # this is the id refers to the saved panel.
 var _id_of_saved_game: int = 0
+
+# if this value does not equal Variables._id_of_saved_game, the stats total will be updated.
+var _id_of_saved_game_temp:int = -1
+
 var _is_saved_id_panel_visible:bool = false
 
 # this is the last saved game id. this var will be used to load that data from file.
 var _id_of_loaded_game: int = 0
+var _id_of_loaded_game_temp:int = -1
 var _is_loaded_id_panel_visible:bool = false
 
 # this var is used to determine if the current game data should delete the Saved ID visibility map data. If this var is true then all data from Saved ID will be deleted prior to saving it, or if the data should overwrite only the stats.

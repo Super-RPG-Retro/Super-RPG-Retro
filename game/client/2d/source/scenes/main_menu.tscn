@@ -46,7 +46,7 @@ margin_right = 956.0
 margin_bottom = 283.0
 rect_min_size = Vector2( 0, 268 )
 
-[node name="ButtonExit" parent="GameDataLoaded" index="3"]
+[node name="ButtonExit" parent="GameDataLoaded" index="1"]
 visible = false
 
 [node name="Stats" type="Node2D" parent="GameDataLoaded"]
@@ -79,7 +79,7 @@ margin_right = 988.0
 margin_bottom = 610.0
 rect_min_size = Vector2( 0, 268 )
 
-[node name="ButtonExit" parent="GameDataSaved" index="3"]
+[node name="ButtonExit" parent="GameDataSaved" index="1"]
 visible = false
 
 [node name="Stats" type="Node2D" parent="GameDataSaved"]

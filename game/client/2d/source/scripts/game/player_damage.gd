@@ -20,39 +20,41 @@ func _ready():
 	pass
 
 func damage_player(dmg):
+	print("1 ",P._hp)
 	if Variables._child_scene_open == false:
 		P._hp = max(0, P._hp - dmg)
+	
+	print("2 ",P._hp)
+	
 	
 	if P._hp > P._hp_max:
 			P._hp = P._hp_max
 	
 	if P._mp > P._mp_max:
 			P._mp = P._mp_max
-			
-	# loaded stats panel.
-	get_tree().call_group("stats_loaded","damage")
 	
 	get_parent().get_node("EntityChildScene/HP").rect_size.x = game.TILE_SIZE * P._hp / P._hp_max
 	
 	if get_parent().get_node("EntityChildScene/HP").rect_size.x > game.TILE_SIZE:
 		get_parent().get_node("EntityChildScene/HP").rect_size.x = game.TILE_SIZE
 	
-	if P._hp >= P._hp_max * 0.7:
-		get_parent().get_node("EntityChildScene/HP").color = Color("00007d")
-			
+	get_parent().get_node("EntityChildScene/HP").color = Color("00007d")
+	
 	if P._hp < P._hp_max * 0.7:
 		get_parent().get_node("EntityChildScene/HP").color = Color("7d7d00")
-		
+					
 	if P._hp < P._hp_max * 0.35:
 		get_parent().get_node("EntityChildScene/HP").color = Color("7d0000")
-
+	
 	game.get_node("Player/AnimationPlayer").play("hit")
-
-				
+	
+	# loaded stats panel.
+	get_tree().call_group("stats_loaded","damage")
+	print("3 ", P._hp)
 	if P._hp == 0:
 		game.get_node("Player/AnimationPlayer").play("goodbye")
 		Variables._game_over = true
-
+	print("4 ", P._hp)
 
 func start_timer_yield():
 	timer_yield.start(.5)

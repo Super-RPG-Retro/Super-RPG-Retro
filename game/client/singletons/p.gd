@@ -20,12 +20,12 @@ extends Node
 # player characters.
 var character_name:Dictionary = {
 	"0": "Maxim",
-	"1": "Artea",
+	"1": "Tia",
 	"2": "Dekar",
 	"3": "Guy",
-	"4": "Lexis",
-	"5": "Selan",
-	"6": "Tia",	
+	"4": "Selan",
+	"5": "Lexis",
+	"6": "Artea",	
 		
 }
 
@@ -39,6 +39,9 @@ var character_number = {
 	"5": {},
 	"6": {},
 }
+
+# current character number.
+var _number = 0
 
 # player's class.
 var class_list = {
@@ -70,8 +73,8 @@ var _stats_data = {
 		"HP": hp,
 		"MP_max": mp_max,
 		"MP": mp,
-		"XP": 0,
-		"XP_next": 0,
+		"XP": _xp,
+		"XP_next": _xp_next,
 		
 	}
 
@@ -106,18 +109,18 @@ var	_artifact_wil
 var	_wis
 var	_artifact_wis
 
-var	_hp_max
-var	_hp
-var	_mp_max
-var	_mp
-var	_xp
-var	_xp_next
-var	_level # current level of player.
+var	_hp_max		= 20
+var	_hp			= 20
+var	_mp_max		= 20
+var	_mp			= 20
+var	_xp			= 0
+var	_xp_next	= 16
+var	_level 		= 1 # current level of player.
 
-var hp = 20
-var hp_max = 20
-var mp = 20
-var mp_max = 20
+var hp 			= 20
+var hp_max 		= 20
+var mp 			= 20
+var mp_max 		= 20
 
 # this holds the player's experience points per level.
 var _xp_level = []
@@ -166,27 +169,27 @@ func reset():
 	_move_speed = _move_speed
 
 
-func _starting_statistics(_id):
+func _starting_skills(_id):
 	var _starting_dictionary = {
 		"Class": "",
-		"Strength": Builder._starting_statistics.Strength[_id],
-		"Defense": Builder._starting_statistics.Defense[_id],
-		"Constitution": Builder._starting_statistics.Constitution[_id],
-		"Dexterity": Builder._starting_statistics.Dexterity[_id],
-		"Intelligence": Builder._starting_statistics.Intelligence[_id],
+		"Strength": Builder._starting_skills.Strength[_id],
+		"Defense": Builder._starting_skills.Defense[_id],
+		"Constitution": Builder._starting_skills.Constitution[_id],
+		"Dexterity": Builder._starting_skills.Dexterity[_id],
+		"Intelligence": Builder._starting_skills.Intelligence[_id],
 		"Level": 1,
-		"Charisma": Builder._starting_statistics.Charisma[_id],
-		"Wisdom": Builder._starting_statistics.Wisdom[_id],
-		"Willpower": Builder._starting_statistics.Willpower[_id],
-		"Perception": Builder._starting_statistics.Perception[_id],
-		"Luck": Builder._starting_statistics.Luck[_id],
+		"Charisma": Builder._starting_skills.Charisma[_id],
+		"Wisdom": Builder._starting_skills.Wisdom[_id],
+		"Willpower": Builder._starting_skills.Willpower[_id],
+		"Perception": Builder._starting_skills.Perception[_id],
+		"Luck": Builder._starting_skills.Luck[_id],
 		"Username": "Athena",
-		"HP_max": hp_max,
-		"HP": hp,
-		"MP_max": mp_max,
-		"MP": mp,
-		"XP": 0,
-		"XP_next": 0,
+		"HP_max": Builder._starting_skills.HP_max[_id],
+		"HP": Builder._starting_skills.HP[_id],
+		"MP_max": Builder._starting_skills.MP_max[_id],
+		"MP": Builder._starting_skills.MP[_id],
+		"XP": Builder._starting_skills.XP[_id],
+		"XP_next": Builder._starting_skills.XP_next[_id],
 		
 	}
 
@@ -196,7 +199,7 @@ func _starting_statistics(_id):
 	
 func _reset_data():
 	for _id in range (7):
-		_stats_loaded = _starting_statistics(_id)
+		_stats_loaded = _starting_skills(_id)
 		character_number[str(_id)]["_stats_loaded"].merge(_stats_loaded, true)
 	
 	reset()
@@ -206,7 +209,7 @@ func _reset_data():
 
 func _reset_saved_data():
 	for _id in range (7):
-		_stats_saved = _starting_statistics(_id)
+		_stats_saved = _starting_skills(_id)
 		character_number[str(_id)]["_stats_saved"].merge(_stats_saved, true)
 		
 	
