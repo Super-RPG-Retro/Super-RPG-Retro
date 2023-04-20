@@ -52,12 +52,10 @@ func _input(event):
 				$Node2D/RuneSummary.rect_position.y = get_global_mouse_position().y + 26
 					
 				$Node2D/RuneSummary.visible = true
-				$Node2D/RuneSummary/Label.visible = true	
 				
 			else:
 				$Node2D/RuneSummary.visible = false
-				$Node2D/RuneSummary/Label.visible = false		
-			
+				
 			if get_node("Runes/RuneSelect").visible == true && Variables._mouse_cursor_position.x <= 529:
 				get_node("Runes/RuneSelect").visible = false
 				
@@ -118,12 +116,11 @@ func _input(event):
 
 # this func is called when a dialog box displays.
 func rune_summary_visible_false():
-	if Variables._child_scene_open == true:
-		return
-		
-	$Node2D/RuneSummary.visible = false
-	$Runes/RuneSelect.visible = false
-	
+	if $Node2D/RuneSummary.visible == true:
+		$Node2D/RuneSummary.visible = false
+		$Runes/RuneSelect.visible = false
+
+
 func player_stats_panel_size():
 	# hide the magic panel scene if true.
 	if Settings._system.player_stats_panel_size == 1 || Settings._system.player_stats_panel_size == 3:

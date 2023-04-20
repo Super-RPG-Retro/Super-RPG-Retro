@@ -20,12 +20,8 @@ func _ready():
 	pass
 
 func damage_player(dmg):
-	print("1 ",P._hp)
 	if Variables._child_scene_open == false:
-		P._hp = max(0, P._hp - dmg)
-	
-	print("2 ",P._hp)
-	
+		P._hp = max(0, P._hp - dmg)	
 	
 	if P._hp > P._hp_max:
 			P._hp = P._hp_max
@@ -50,12 +46,12 @@ func damage_player(dmg):
 	
 	# loaded stats panel.
 	get_tree().call_group("stats_loaded","damage")
-	print("3 ", P._hp)
+	
 	if P._hp == 0:
 		game.get_node("Player/AnimationPlayer").play("goodbye")
 		Variables._game_over = true
-	print("4 ", P._hp)
-
+	
+	
 func start_timer_yield():
 	timer_yield.start(.5)
 

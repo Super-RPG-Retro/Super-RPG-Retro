@@ -304,14 +304,13 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 		
 	if _temp != null:
 		P.character_number = _temp
-		print("7 ", P._hp)		
+			
 		P._hp_max = P.character_number[str(P._number)]["_stats_loaded"].HP_max
 		P._hp = P.character_number[str(P._number)]["_stats_loaded"].HP
 		P._level = P.character_number[str(P._number)]["_stats_loaded"].Level
 		P._xp = P.character_number[str(P._number)]["_stats_loaded"].XP
 		P._xp_next = P.character_number[str(P._number)]["_stats_loaded"].XP_next
 		
-		print("8 ", P._hp)
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 			
@@ -433,13 +432,13 @@ func _on_EmptyUsernameDialog_modal_closed():
 	_scene_unfocused_panel.visible = false
 
 
-func _on_DeleteGameDialog_modal_closed():
-	_scene_unfocused_panel.visible = false
-
-	
 func _on_EmptyUsernameDialog_hide():
 	if _scene_unfocused_panel != null:
 		_scene_unfocused_panel.visible = false
+
+
+func _on_DeleteGameDialog_modal_closed():
+	_scene_unfocused_panel.visible = false
 
 
 func _on_DeleteGameDialog_hide():
@@ -486,7 +485,6 @@ func _on_saved_ID_spinBox_value_changed(_value):
 		
 		get_tree().call_group("stats_saved", "stats_saved_empty")
 	
-	Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
 	
 
 func _on_NoDataDialog_confirmed():

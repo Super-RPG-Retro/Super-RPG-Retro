@@ -44,7 +44,8 @@ func cycle():
 		_raw_value -= 0.0005 * 2
 	elif Variables._time_is_day == true && _raw_value < 1:
 		_raw_value += 0.0005 * 2
-			
+	
+	# midnight	
 	if _raw_value <= 0:
 		_full_moon += 1
 		if _full_moon == _full_moon_at_this_number + 1:
@@ -52,11 +53,10 @@ func cycle():
 			
 		Variables._time_is_day = true
 		_ticks_timestamp = 0
-		
+	
+	# noon
 	if _raw_value >= 1:
 		Variables._time_is_day = false
-		
-		print("midnight")
 	
 	convertSectoDay(_time_ratio * _ticks_timestamp)
 	

@@ -50,8 +50,7 @@ func _input(event):
 				$Node2D/InventorySummary.rect_position.y = get_global_mouse_position().y + 24
 		
 				$Node2D/InventorySummary.visible = true
-				$Node2D/InventorySummary/Label.visible = true
-							
+				
 			else:
 				$Node2D/InventorySummary.visible = false
 		

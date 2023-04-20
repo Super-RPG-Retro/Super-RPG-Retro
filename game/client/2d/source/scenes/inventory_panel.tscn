@@ -296,7 +296,6 @@ __meta__ = {
 visible = false
 position = Vector2( 763, 243 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="InventoryBGoverlay" type="Sprite" parent="Inventory"]

@@ -30,7 +30,7 @@ var character_name:Dictionary = {
 }
 
 # c = player character number.
-var character_number = {
+var character_number:Dictionary = {
 	"0": {},	
 	"1": {},
 	"2": {},
@@ -41,10 +41,10 @@ var character_number = {
 }
 
 # current character number.
-var _number = 0
+var _number:int = 0
 
 # player's class.
-var class_list = {
+var class_list:Dictionary = {
 	"0": "Archer",
 	"1": "Druid",
 	"2": "Knight",
@@ -56,25 +56,25 @@ var class_list = {
 
 # player stats and stats_saved directories will be created from this directory.
 var _stats_data = {
-		"Class": "",
-		"Strength": 0,
-		"Defense": 0,
+		"Class": 		"",
+		"Strength":		0,
+		"Defense": 		0,
 		"Constitution": 0,
-		"Dexterity": 0,
+		"Dexterity": 	0,
 		"Intelligence": 0,
-		"Level": 1,
-		"Charisma": 0,
-		"Wisdom": 0,
-		"Willpower": 0,
-		"Perception": 0,
-		"Luck": 0,
-		"Username": "Athena",
-		"HP_max": hp_max,
-		"HP": hp,
-		"MP_max": mp_max,
-		"MP": mp,
-		"XP": _xp,
-		"XP_next": _xp_next,
+		"Level": 		0,
+		"Charisma": 	0,
+		"Wisdom": 		0,
+		"Willpower": 	0,
+		"Perception": 	0,
+		"Luck": 		0,
+		"Username": 	"Athena",
+		"HP_max": 		_hp_max,
+		"HP": 			_hp,
+		"MP_max": 		_mp_max,
+		"MP": 			_mp,
+		"XP": 			_xp,
+		"XP_next": 		_xp_next,
 		
 	}
 
@@ -117,11 +117,6 @@ var	_xp			= 0
 var	_xp_next	= 16
 var	_level 		= 1 # current level of player.
 
-var hp 			= 20
-var hp_max 		= 20
-var mp 			= 20
-var mp_max 		= 20
-
 # this holds the player's experience points per level.
 var _xp_level = []
 
@@ -129,7 +124,7 @@ var _move_speed = 0
 
 
 func _ready():
-	for _id in range (8):
+	for _id in range (character_number.size()):
 		character_number[str(_id)] = { 
 			_stats_loaded = {},
 			_stats_saved = {}
@@ -138,58 +133,51 @@ func _ready():
 	
 func reset():
 	_name = _stats_loaded.Username
+	
 	_cha		= _stats_loaded.Charisma
-	_artifact_cha	= Builder._dictionary_artifacts.data.Charisma
 	_con 		= _stats_loaded.Constitution
-	_artifact_con 	= Builder._dictionary_artifacts.data.Constitution
 	_def 		= _stats_loaded.Defense
-	_artifact_def 	= Builder._dictionary_artifacts.data.Defense
 	_dex 		= _stats_loaded.Dexterity
-	_artifact_dex 	= Builder._dictionary_artifacts.data.Dexterity
 	_int 		= _stats_loaded.Intelligence
-	_artifact_int 	= Builder._dictionary_artifacts.data.Intelligence
 	_luc 		= _stats_loaded.Luck
-	_artifact_luc 	= Builder._dictionary_artifacts.data.Luck
 	_per 		= _stats_loaded.Perception
-	_artifact_per 	= Builder._dictionary_artifacts.data.Perception
 	_str 		= _stats_loaded.Strength
-	_artifact_str 	= Builder._dictionary_artifacts.data.Strength
 	_wil 		= _stats_loaded.Willpower
-	_artifact_wil 	= Builder._dictionary_artifacts.data.Willpower
 	_wis 		= _stats_loaded.Wisdom
+	
+	_artifact_cha	= Builder._dictionary_artifacts.data.Charisma
+	_artifact_con 	= Builder._dictionary_artifacts.data.Constitution
+	_artifact_def 	= Builder._dictionary_artifacts.data.Defense
+	_artifact_dex 	= Builder._dictionary_artifacts.data.Dexterity
+	_artifact_int 	= Builder._dictionary_artifacts.data.Intelligence
+	_artifact_luc 	= Builder._dictionary_artifacts.data.Luck
+	_artifact_per 	= Builder._dictionary_artifacts.data.Perception
+	_artifact_str 	= Builder._dictionary_artifacts.data.Strength
+	_artifact_wil 	= Builder._dictionary_artifacts.data.Willpower
 	_artifact_wis 	= Builder._dictionary_artifacts.data.Wisdom
 	
-	_hp_max 	= _stats_loaded.HP_max
-	_hp 		= _stats_loaded.HP
-	_mp_max 	= _stats_loaded.MP_max
-	_mp 		= _stats_loaded.MP
-	_xp 		= _stats_loaded.XP
-	_xp_next	= _stats_loaded.XP_next
-	_level 		= _stats_loaded.Level
-	_move_speed = _move_speed
-
 
 func _starting_skills(_id):
 	var _starting_dictionary = {
-		"Class": "",
-		"Strength": Builder._starting_skills.Strength[_id],
-		"Defense": Builder._starting_skills.Defense[_id],
+		"Class": 		"",
+		"Strength": 	Builder._starting_skills.Strength[_id],
+		"Defense": 		Builder._starting_skills.Defense[_id],
 		"Constitution": Builder._starting_skills.Constitution[_id],
-		"Dexterity": Builder._starting_skills.Dexterity[_id],
+		"Dexterity": 	Builder._starting_skills.Dexterity[_id],
 		"Intelligence": Builder._starting_skills.Intelligence[_id],
-		"Level": 1,
-		"Charisma": Builder._starting_skills.Charisma[_id],
-		"Wisdom": Builder._starting_skills.Wisdom[_id],
-		"Willpower": Builder._starting_skills.Willpower[_id],
-		"Perception": Builder._starting_skills.Perception[_id],
-		"Luck": Builder._starting_skills.Luck[_id],
-		"Username": "Athena",
-		"HP_max": Builder._starting_skills.HP_max[_id],
-		"HP": Builder._starting_skills.HP[_id],
-		"MP_max": Builder._starting_skills.MP_max[_id],
-		"MP": Builder._starting_skills.MP[_id],
-		"XP": Builder._starting_skills.XP[_id],
-		"XP_next": Builder._starting_skills.XP_next[_id],
+		"Level": 		0,
+		"Charisma": 	Builder._starting_skills.Charisma[_id],
+		"Wisdom": 		Builder._starting_skills.Wisdom[_id],
+		"Willpower": 	Builder._starting_skills.Willpower[_id],
+		"Perception": 	Builder._starting_skills.Perception[_id],
+		"Luck": 		Builder._starting_skills.Luck[_id],
+		"Username": 	"Athena",
+		"HP_max": 		Builder._starting_skills.HP_max[_id],
+		"HP": 			Builder._starting_skills.HP[_id],
+		"MP_max": 		Builder._starting_skills.MP_max[_id],
+		"MP": 			Builder._starting_skills.MP[_id],
+		"XP": 			Builder._starting_skills.XP[_id],
+		"XP_next": 		Builder._starting_skills.XP_next[_id],
 		
 	}
 
@@ -198,7 +186,7 @@ func _starting_skills(_id):
 
 	
 func _reset_data():
-	for _id in range (7):
+	for _id in range (character_number.size()):
 		_stats_loaded = _starting_skills(_id)
 		character_number[str(_id)]["_stats_loaded"].merge(_stats_loaded, true)
 	
@@ -208,7 +196,7 @@ func _reset_data():
 
 
 func _reset_saved_data():
-	for _id in range (7):
+	for _id in range (character_number.size()):
 		_stats_saved = _starting_skills(_id)
 		character_number[str(_id)]["_stats_saved"].merge(_stats_saved, true)
 		
@@ -223,17 +211,15 @@ func reset_var():
 	_reset_saved_data()
 
 	reset()
-
+	
 	
 func xp_table():
 	_xp_level.clear()
+	_xp_level.push_back(0)
 	
-	for _i in range(0, 99):
-		_xp_level.push_back(int((_i * _i * _i * _i * _i) * 0.999999 / 2 * 15 / 0.5))
+	for _i in range(1, 999):
+		_xp_level.push_back(int(float(_i * _i * _i / 2.0 * 12.0 / 0.5)) + 17)
 		
 		_xp_level[_i] += int(_xp_level[_i] * (float(0.2 * Settings._game.difficulty_level)))
 		
-
-	#_xp_level[1] = 2
-	#_xp_level[2] = 5
 	#print(_xp_level)

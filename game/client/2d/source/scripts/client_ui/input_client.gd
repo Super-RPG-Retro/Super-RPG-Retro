@@ -53,7 +53,9 @@ func _on_mouse_entered():
 func _on_text_entered(_text):
 	if Variables._child_scene_open == true:
 		return
-		
+	
+	get_tree().call_group("magic_panel", "rune_summary_visible_false")
+	
 	Variables._bypass_wait_a_turn = true
 	Variables._keyboard_tab_pressed = true 
 	Variables._wait_a_turn = -2
