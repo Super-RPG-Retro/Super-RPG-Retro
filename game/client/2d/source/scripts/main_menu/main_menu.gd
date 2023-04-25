@@ -18,7 +18,7 @@ onready var _game_data_loaded = $GameDataLoaded/Stats/Text
 onready var _game_data_saved = $GameDataSaved/Stats/Text
 
 
-func _ready():
+func _init():
 	Variables._at_scene = Enum.Scene.Main_Menu
 	Variables._scene_title = "Welcome to Super RPG Retro."
 	
@@ -32,6 +32,12 @@ func _ready():
 	Variables._compass_update = true
 	Variables._host_is_connected = false
 	
+	Common._music_play()
+	Filesystem.builder_load_data()
+	Common._game_title()
+
+
+func _ready():
 	# load the settings system file.
 	var _temp = Filesystem.load_dictionary("user://saved_data/settings_system.txt")
 	
@@ -41,23 +47,24 @@ func _ready():
 	if Settings._system.randomize_2d_maze == true:
 			Settings._system.seed_current = Common.get_random_number()
 	
-	Common._music_play()
-	Filesystem.builder_load_data()
-	Common._game_title()
-	
 	
 func _process(_delta):
 	if Variables._id_of_loaded_game_temp != Variables._id_of_loaded_game:
-		_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_number[str(P._number)]["_stats_loaded"].Strength + P.character_number[str(P._number)]["_stats_loaded"].Defense + P.character_number[str(P._number)]["_stats_loaded"].Constitution + P.character_number[str(P._number)]["_stats_loaded"].Dexterity + P.character_number[str(P._number)]["_stats_loaded"].Intelligence + P.character_number[str(P._number)]["_stats_loaded"].Charisma + P.character_number[str(P._number)]["_stats_loaded"].Wisdom + P.character_number[str(P._number)]["_stats_loaded"].Willpower + P.character_number[str(P._number)]["_stats_loaded"].Perception + P.character_number[str(P._number)]["_stats_loaded"].Luck).pad_zeros(4) + "."
-
-		Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
+		_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_stats[str(P._number)]["_loaded"].Strength + P.character_stats[str(P._number)]["_loaded"].Defense + P.character_stats[str(P._number)]["_loaded"].Constitution + P.character_stats[str(P._number)]["_loaded"].Dexterity + P.character_stats[str(P._number)]["_loaded"].Intelligence + P.character_stats[str(P._number)]["_loaded"].Charisma + P.character_stats[str(P._number)]["_loaded"].Wisdom + P.character_stats[str(P._number)]["_loaded"].Willpower + P.character_stats[str(P._number)]["_loaded"].Perception + P.character_stats[str(P._number)]["_loaded"].Luck).pad_zeros(4) + "."
 		
-	# do not update this unless mouse is at right side of scene.
-	#right side of scene.
-	if Variables._mouse_cursor_position.x > 512 && Variables._id_of_saved_game != Variables._id_of_saved_game_temp:
-		_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_number[str(P._number)]["_stats_saved"].Strength + P.character_number[str(P._number)]["_stats_saved"].Defense + P.character_number[str(P._number)]["_stats_saved"].Constitution + P.character_number[str(P._number)]["_stats_saved"].Dexterity + P.character_number[str(P._number)]["_stats_saved"].Intelligence + P.character_number[str(P._number)]["_stats_saved"].Charisma + P.character_number[str(P._number)]["_stats_saved"].Wisdom + P.character_number[str(P._number)]["_stats_saved"].Willpower + P.character_number[str(P._number)]["_stats_saved"].Perception + P.character_number[str(P._number)]["_stats_saved"].Luck).pad_zeros(4) + "."
+		get_tree().call_group("stats_loaded", "_update_stats")
+		
+		Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
 	
+	if Variables._id_of_saved_game != Variables._id_of_saved_game_temp:
+		_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_stats[str(P._number)]["_saved"].Strength + P.character_stats[str(P._number)]["_saved"].Defense + P.character_stats[str(P._number)]["_saved"].Constitution + P.character_stats[str(P._number)]["_saved"].Dexterity + P.character_stats[str(P._number)]["_saved"].Intelligence + P.character_stats[str(P._number)]["_saved"].Charisma + P.character_stats[str(P._number)]["_saved"].Wisdom + P.character_stats[str(P._number)]["_saved"].Willpower + P.character_stats[str(P._number)]["_saved"].Perception + P.character_stats[str(P._number)]["_saved"].Luck).pad_zeros(4) + "."
+		
+		get_tree().call_group("stats_saved", "_update_stats")
+		
 		Variables._id_of_saved_game_temp = Variables._id_of_saved_game
+		
+		if get_node(".").visible == false:
+			get_node(".").visible = true
 		
 		
 func _input(event):	
@@ -65,11 +72,14 @@ func _input(event):
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
 			var _s = OS.execute(".//super_rpg_retro_end_task.bat", [], false)
-			get_tree().quit() 
-			
+			_quit() 
+
+
 func _quit():
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P.character_stats)
+	
 	var _s = OS.execute(".//super_rpg_retro_end_task.bat", [], false)
-	get_tree().quit() 
+	#get_tree().quit() 
 
 
 # Changing this value will change the game id value. This value is saved as part of the saved filename. a value of 2 means that game number 2 can be saved, loaded or deleted. 

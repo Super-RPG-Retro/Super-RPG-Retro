@@ -81,13 +81,13 @@ Failing to delete the above subdirectories will crash the game because no config
 
 Every time you add another magic to a .json file or every time you add or change a builder variable, you need to delete files from the users_dir and for game_id_dir all directories with that id number so that the correct data can be created at users_dir.
 
-builder system files are files that can be edited. Those files are copied then saved in binary format at splash scene. The system files are for the admin to create features while the binary files are for in game playing. Nobody can change a setting in the binary file so no cheating can be made. remove the system files from hard drive when the game in finished.
+Builder system files are files that can be edited. Those files are copied then saved in binary format at splash scene. The system files are for the admin to create features while the binary files are for in game playing. Nobody can change a setting in the binary file so no cheating can be made. remove the system files from hard drive when the game in finished.
 
 
 
 ### Notes.
-this software is using godot 3.5.
-if game crashes, search for TODO and read everything.
+This software is using godot 3.5.
+If game crashes, search for TODO and read everything.
 
 A good practice to increase performance of your code:
 
@@ -104,17 +104,17 @@ for _i in array
 or...
 for name in dictionary.
 
-sound jitters in html5 builds in edge browser. that issue should be fixed soon. just ignore the bug. only a few people are experiencing it. 
+Sound jitters in html5 builds in edge browser. that issue should be fixed soon. just ignore the bug. only a few people are experiencing it. 
 
-html5 needs a mouse click on screen before the title music plays. it is a browser security issue that will not change.
+HTML5 needs a mouse click on screen before the title music plays. it is a browser security issue that will not change.
 
-mobs will never respawn if player is outside of room. mobs will only respawn when player is in that room and only after so many game turns have passed. You can see the game turns variable at Settings._game.respawn_turn_elapses. mobs will disappear if they are too far from their starting position.
+Mobs will never respawn if player is outside of room. mobs will only respawn when player is in that room and only after so many game turns have passed. You can see the game turns variable at Settings._game.respawn_turn_elapses. mobs will disappear if they are too far from their starting position.
 
-sound continuously plays? select the ogg file at the godot filesystem tab than press import tab. Remove the loop option then press reimport. Next, drag the sound to AudioStreamPlayer node.
+Sound loops? select the ogg file at the godot filesystem tab than press import tab. Remove the loop option then press reimport. Next, drag the sound to AudioStreamPlayer node.
 
-load godot, go to project settings, search for compression then set all options to the highest value.
+Load godot, go to project settings, search for compression then set all options to the highest value.
 
-when printing something to scene using the print statement, add a hint to your code so that you know the file where the print output is from.
+When printing something to scene using the print statement, add a hint to your code so that you know the file where the print output is from.
 
 When importing 3d gridmap, enable detect 3d filter and mipmaps. 3d blocks that you use to draw on the map are stored in the blocksMuseum.tscn file.
 

@@ -20,6 +20,7 @@ border_width_bottom = 2
 border_color = Color( 0, 0, 0, 1 )
 
 [node name="MainMenu" type="Node2D" groups=["main_menu"]]
+visible = false
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 274.0 ]

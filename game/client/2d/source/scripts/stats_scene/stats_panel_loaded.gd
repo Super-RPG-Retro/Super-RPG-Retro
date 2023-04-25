@@ -33,22 +33,23 @@ onready var _player_gain_a_level = null
 onready var _health_text = $Background/HealthText
 onready var _mana_text = $Background/MagicText
   
+# sets the player character to the first player when scene loads.
+var _do_once_at_scene_load = true
+
 
 func _ready():
-	P._reset_data() # sets the vars to the player in use. 
-	
 	if Variables._at_scene == Enum.Scene.Game_UI:
 		$ButtonExit.visible = true
-		
-	_health_bar.max_value = P.character_number[str(P._number)]["_stats_loaded"].HP_max
-	_health_bar.value = P.character_number[str(P._number)]["_stats_loaded"].HP
 	
-	_magic_bar.max_value = P.character_number[str(P._number)]["_stats_loaded"].MP_max
-	_magic_bar.value = P.character_number[str(P._number)]["_stats_loaded"].MP
-
-	stats_text_all_update()
-	stats_value_all_update()
+	else:
+		P._update_character_stats_loaded() # sets the stats vars to the player in use. 
 	
+	# draw the stats panel but do not display the stats panel unless the saved panel is displayed.
+	self.visible = false	
+	_update_stats()	
+	
+	# update small health bar.
+	get_tree().call_group("player_damage", "damage_player", 0)
 	player_stats_panel_size()
 	
 		
@@ -57,72 +58,81 @@ func _input(event):
 	Variables._mouse_cursor_position.y = get_global_mouse_position().y
 	
 	# this is for the small panel. if arrow up button is clicked then stats name, xp, etc is shown. if down arrow button is clicked then str, def, con, etc is shown.
-	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == false || event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == true && Variables._at_scene == Enum.Scene.Main_Menu:
+	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == false || event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == true && Variables._at_scene == Enum.Scene.Main_Menu || _do_once_at_scene_load == true:
 		#left side of scene.
-		if Variables._mouse_cursor_position.x <= 512 && self.visible == true || Variables._at_scene != Enum.Scene.Main_Menu:
-			if get_node("Background/ArrowUp").has_focus():
-				P._number += 1
+		if self.visible == true || Variables._at_scene != Enum.Scene.Main_Menu || _do_once_at_scene_load == true:
+			if get_node("Background/ArrowUp").has_focus() || _do_once_at_scene_load == true:
+				Common._update_stats_last_player(P._number)
+				
+				if _do_once_at_scene_load == false:
+					P._number += 1
+				
+				P._number = int(clamp(P._number, 0, 6))
+				
+				Common._update_stats_player_characters(P._number)
+				_update_stats()	
+				
 				# update small health bar.
 				get_tree().call_group("player_damage", "damage_player", 0)
+				
+				_do_once_at_scene_load = false
+				
 			
 			if get_node("Background/ArrowDown").has_focus():
+				Common._update_stats_last_player(P._number)
+				
 				P._number -= 1
+				P._number = int(clamp(P._number, 0, 6))
+				
+				Common._update_stats_player_characters(P._number)
+				_update_stats()	
+				
 				# update small health bar.
 				get_tree().call_group("player_damage", "damage_player", 0)
 			
-			P._number = clamp(P._number, 0, 6)
-				
 			if get_node("Background/ArrowUp").has_focus() == true || get_node("Background/ArrowDown").has_focus() == true:
 				if Settings._system.sound == true:
 					if $SoundClick.is_playing() == false:
 						$SoundClick.play()
-			
-				
-			_health_bar.max_value = P.character_number[str(P._number)]["_stats_loaded"].HP_max
-			_health_bar.value = P.character_number[str(P._number)]["_stats_loaded"].HP
-			
-			_magic_bar.max_value = P.character_number[str(P._number)]["_stats_loaded"].MP_max
-			_magic_bar.value = P.character_number[str(P._number)]["_stats_loaded"].MP
-			
-			stats_text_all_update()
-			stats_value_all_update()
-			
+					
 			# change the player's texture on main map.
 			get_tree().call_group("player", "_change_texture")
 			
-					
+	
+func _update_stats():
+	_health_bar.max_value = P.character_stats[str(P._number)]["_loaded"].HP_max
+	_health_bar.value = P.character_stats[str(P._number)]["_loaded"].HP
+	
+	_magic_bar.max_value = P.character_stats[str(P._number)]["_loaded"].MP_max
+	_magic_bar.value = P.character_stats[str(P._number)]["_loaded"].MP
+	
+	if self.visible == true:
+		stats_text_all_update()
+		stats_value_all_update()
+	
+
 func player_stats_panel_size():
+	var _vis = true
+	
 	if Variables._at_scene == Enum.Scene.Game_UI:
+		_vis = false
+		
 		if Settings._system.player_stats_panel_size == 0:
 			get_node("Background").margin_bottom = 123
-			get_node("Background/StatsTextAllColumn1Label").visible = false
-			get_node("Background/StatsValueAllColumn1Label").visible = false
-			get_node("Background/StatsTextAllColumn2Label").visible = false
-			get_node("Background/StatsValueAllColumn2Label").visible = false
-	
+			
 		elif Settings._system.player_stats_panel_size <= 2:
 			get_node("Background").rect_size.y = 268
-			
-			get_node("Background/StatsTextAllColumn1Label").visible = true
-			get_node("Background/StatsValueAllColumn1Label").visible = true
-			get_node("Background/StatsTextAllColumn2Label").visible = true
-			get_node("Background/StatsValueAllColumn2Label").visible = true
-		
+			_vis = true
+				
 		elif Settings._system.player_stats_panel_size == 3:
 			get_node("Background").rect_size.y = 402
-			
-			get_node("Background/StatsTextAllColumn1Label").visible = true
-			get_node("Background/StatsValueAllColumn1Label").visible = true
-			get_node("Background/StatsTextAllColumn2Label").visible = true
-			get_node("Background/StatsValueAllColumn2Label").visible = true
+			_vis = true
+		
+	for _i in range (1, 2):		
+		get_node("Background/StatsTextAllColumn" + str(_i) + "Label").visible = _vis
+		get_node("Background/StatsValueAllColumn" + str(_i) + "Label").visible = _vis
+		
 	
-	else:
-		get_node("Background/StatsTextAllColumn1Label").visible = true
-		get_node("Background/StatsValueAllColumn1Label").visible = true
-		get_node("Background/StatsTextAllColumn2Label").visible = true
-		get_node("Background/StatsValueAllColumn2Label").visible = true
-
-
 func damage():	
 	var _t: float = P._hp
 	var _t_max: float = P._hp_max
@@ -151,7 +161,7 @@ func stats_text_all_update():
 	_stats_text_all_column1_label.bbcode_enabled = true
 	_stats_text_all_column2_label.bbcode_enabled = true
 	
-	for d in P.character_number[str(P._number)]["_stats_loaded"].keys():
+	for d in P.character_stats[str(P._number)]["_loaded"].keys():
 		i += 1
 		if i <= 5:
 			if d == "Class":
@@ -164,8 +174,8 @@ func stats_text_all_update():
 			
 			_stats_text_all_column2_label.bbcode_text += "[right]" + str(d) + "[/right]\n"
 	
-	_on_HealthBar_value_changed(P.character_number[str(P._number)]["_stats_loaded"].HP)
-	_on_MagicBar_value_changed(P.character_number[str(P._number)]["_stats_loaded"].MP)
+	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_loaded"].HP)
+	_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_loaded"].MP)
 
 	
 func stats_empty():
@@ -183,9 +193,12 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	
 	var _found = false
 	
+	#print(P._xp)
+	#print("level " ,P._level )
+	
 	# determine is player advances to the next level.
-	for _i in range(0, 99):
-		if 	P._xp >= P._xp_level[_i] && _i > P._level - 1:
+	for _i in range(1, 999):
+		if 	P._xp >= P._xp_level[_i] && _i == P._level:
 			
 			# destroy level up scene so that its dialog can be displayed at the ready() func, the next time its newed.			  
 			if _player_gain_a_level != null:
@@ -205,20 +218,20 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 		_player_gain_a_level.visible = false
 	
 	# display xp_next at stats.
-	if P.character_number[str(P._number)]["_stats_loaded"].Level < 99:
+	if P.character_stats[str(P._number)]["_loaded"].Level < 99:
 		_xp_next_value_label.text = str(P._xp_level[P._level])	
 	
 	# display the username on the stats panel.	
-	if get_node("Background/UsernameValueLabel") != null && P.character_number[str(P._number)]["_stats_loaded"].Username != "":
+	if get_node("Background/UsernameValueLabel") != null && P.character_stats[str(P._number)]["_loaded"].Username != "":
 		_username_value_label = get_node("Background/UsernameValueLabel")
-		_username_value_label.text = P.character_number[str(P._number)]["_stats_loaded"].Username[0].to_upper() + P.character_number[str(P._number)]["_stats_loaded"].Username.substr(1,-1) + " - " + P.character_name[str(P._number)]
+		_username_value_label.text = P.character_stats[str(P._number)]["_loaded"].Username[0].to_upper() + P.character_stats[str(P._number)]["_loaded"].Username.substr(1,-1) + " - " + P.character_name[str(P._number)]
 	
 	# display the xp on the stats panel.
 	_xp_value_label.text = str(P._xp)
 	_xp_next_value_label.text = str(P._xp_next)
 	
 	# prepare to display the rest of the stats, such as, str, def, int.
-	P.character_number[str(P._number)]["_stats_loaded"].Level = P._level
+	P.character_stats[str(P._number)]["_loaded"].Level = P._level
 	
 	var i = -1
 	_stats_value_all_column1_label.bbcode_enabled = true
@@ -228,7 +241,7 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	_stats_value_all_column2_label.bbcode_text = ""
 	
 	# add the stats values, such as, str value, def value.
-	for d in P.character_number[str(P._number)]["_stats_loaded"].values():
+	for d in P.character_stats[str(P._number)]["_loaded"].values():
 		i += 1
 		if i <= 5:
 			if i == 0:
@@ -244,32 +257,32 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	# display the health and health max.
 	if get_node("Background/HealthText") != null:
 		_health_text = get_node("Background/HealthText")
-		_health_text.text = str(P.character_number[str(P._number)]["_stats_loaded"].HP).pad_zeros(4) + "/" + str(P.character_number[str(P._number)]["_stats_loaded"].HP_max).pad_zeros(4)
+		_health_text.text = str(P.character_stats[str(P._number)]["_loaded"].HP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_loaded"].HP_max).pad_zeros(4)
 	
 	# healthbar	
-	var _t: float = P.character_number[str(P._number)]["_stats_loaded"].HP
-	var _t_max: float = P.character_number[str(P._number)]["_stats_loaded"].HP_max
+	var _t: float = P.character_stats[str(P._number)]["_loaded"].HP
+	var _t_max: float = P.character_stats[str(P._number)]["_loaded"].HP_max
 	_health_percentage.text = str(int((_t / _t_max) * 100)) + "%"
 	
-	_on_HealthBar_value_changed(P.character_number[str(P._number)]["_stats_loaded"].HP)
+	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_loaded"].HP)
 	
 	
 	
 	# display the health and health max.
 	if get_node("Background/MagicText") != null:
 		_mana_text = get_node("Background/MagicText")
-		_mana_text.text = str(P.character_number[str(P._number)]["_stats_loaded"].MP).pad_zeros(4) + "/" + str(P.character_number[str(P._number)]["_stats_loaded"].MP_max).pad_zeros(4)
+		_mana_text.text = str(P.character_stats[str(P._number)]["_loaded"].MP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_loaded"].MP_max).pad_zeros(4)
 	
 	# Magicbar	
-	_t = P.character_number[str(P._number)]["_stats_loaded"].MP
+	_t = P.character_stats[str(P._number)]["_loaded"].MP
 	_magic_percentage.text = "0%"
 	
 	_t_max = 0
-	if P.character_number[str(P._number)]["_stats_loaded"].MP_max > 0:
-		_t_max = P.character_number[str(P._number)]["_stats_loaded"].MP_max
+	if P.character_stats[str(P._number)]["_loaded"].MP_max > 0:
+		_t_max = P.character_stats[str(P._number)]["_loaded"].MP_max
 		_magic_percentage.text = str(int((_t / _t_max) * 100)) + "%"
 	
-		_on_MagicBar_value_changed(P.character_number[str(P._number)]["_stats_loaded"].MP)
+		_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_loaded"].MP)
 	
 	
 func _on_HealthBar_value_changed(value):

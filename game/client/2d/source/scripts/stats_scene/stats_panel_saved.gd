@@ -29,80 +29,95 @@ onready var _magic_bar = $Background/MagicBar
 onready var _magic_percentage = $Background/MagicPercentage
 onready var _mana_text = $Background/MagicText
 
-
-func _ready():
-	stats_saved_text_all_update()
-	stats_saved_value_all_update()
-	
-	var _t: float = P.character_number[str(P._number)]["_stats_saved"].HP
-	var _t_max: float = P.character_number[str(P._number)]["_stats_saved"].HP_max
-	_health_percentage.text = str(int((_t / _t_max) * 100)) + "%"
-	
-	_magic_bar.max_value = P.character_number[str(P._number)]["_stats_saved"].MP_max * P.character_number[str(P._number)]["_stats_saved"].Level
-	
-	_t = P.character_number[str(P._number)]["_stats_saved"].MP
-	_t_max = P.character_number[str(P._number)]["_stats_saved"].MP_max
-	_magic_percentage.text = "0%"
-	if _t_max > 0:
-		_magic_percentage.text = str(int((_t / _t_max) * 100)) + "%"
-	
 	
 func _input(event):
 	Variables._mouse_cursor_position.x = get_global_mouse_position().x
 	Variables._mouse_cursor_position.y = get_global_mouse_position().y
 	
 	# this is for the small panel. if arrow up button is clicked then stats name, xp, etc is shown. if down arrow button is clicked then str, def, con, etc is shown.
-	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == false || event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == true && Variables._at_scene == Enum.Scene.Main_Menu:
-		
+	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == false || event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click") && Variables._child_scene_open == true && Variables._at_scene == Enum.Scene.Main_Menu:		
 		#right side of scene.
-		if Variables._mouse_cursor_position.x > 512 && get_node("Background/ArrowUp").has_focus() || Variables._mouse_cursor_position.x > 512 && get_node("Background/ArrowDown").has_focus():
+		if get_node("Background/ArrowUp").has_focus() || get_node("Background/ArrowDown").has_focus():
 			if get_node("Background/ArrowUp").has_focus():
 				P._number += 1
 				
 			if get_node("Background/ArrowDown").has_focus():
 				P._number -= 1
 			
-			P._number = clamp(P._number, 0, 6)
+			P._number = int(clamp(P._number, 0, P.character_stats.size() - 1))
 				
 			if get_node("Background/ArrowUp").has_focus() == true || get_node("Background/ArrowDown").has_focus() == true:
 				if Settings._system.sound == true:
 					if $SoundClick.is_playing() == false:
 						$SoundClick.play()
+		
 			
-			_health_bar.max_value = P.character_number[str(P._number)]["_stats_saved"].HP_max
-			_on_HealthBar_value_changed(P.character_number[str(P._number)]["_stats_saved"].HP)
-			
-			var _t: float = P.character_number[str(P._number)]["_stats_saved"].HP
-			var _t_max: float = P.character_number[str(P._number)]["_stats_saved"].HP_max
-			_health_percentage.text = str(int((_t / _t_max) * 100)) + "%"
-			
-			_health_text.text = str(_t).pad_zeros(4) + "/" + str(_t_max).pad_zeros(4)
-			
-			_magic_bar.max_value = P.character_number[str(P._number)]["_stats_saved"].MP_max
-			_on_MagicBar_value_changed(P.character_number[str(P._number)]["_stats_saved"].MP)
-				
-			_t = P.character_number[str(P._number)]["_stats_saved"].MP
-			
-			_t_max = 0
-			_magic_percentage.text = "0%"
-			
-			if P.character_number[str(P._number)]["_stats_saved"].MP_max > 0:
-				_t_max = P.character_number[str(P._number)]["_stats_saved"].MP_max
-				_magic_percentage.text = str(int((_t / _t_max) * 100)) + "%"
-			
-			_mana_text.text = str(_t).pad_zeros(4) + "/" + str(_t_max).pad_zeros(4)
+			_update_one_player_panel()
+	
+	
+func _update_stats():
+	_health_bar.max_value = P.character_stats[str(P._number)]["_saved"].HP_max
+	_health_bar.value = P.character_stats[str(P._number)]["_saved"].HP
+	
+	_magic_bar.max_value = P.character_stats[str(P._number)]["_saved"].MP_max
+	_magic_bar.value = P.character_stats[str(P._number)]["_saved"].MP
+	
+	if self.visible == true:
+		_update_one_player_panel()
+		
+		
+func _update_one_player_panel():
+	_health_bar.max_value = P.character_stats[str(P._number)]["_saved"].HP_max
+	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_saved"].HP)
+	
+	var _t: float = P.character_stats[str(P._number)]["_saved"].HP
+	var _t_max: float = P.character_stats[str(P._number)]["_saved"].HP_max
+	_health_percentage.text = str(int((_t / _t_max) * 100)) + "%"
+	
+	_health_text.text = str(_t).pad_zeros(4) + "/" + str(_t_max).pad_zeros(4)
+	
+	_magic_bar.max_value = P.character_stats[str(P._number)]["_saved"].MP_max
+	_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_saved"].MP)
+		
+	_t = P.character_stats[str(P._number)]["_saved"].MP
+	
+	_t_max = 0
+	_magic_percentage.text = "0%"
+	
+	if P.character_stats[str(P._number)]["_saved"].MP_max > 0:
+		_t_max = P.character_stats[str(P._number)]["_saved"].MP_max
+		_magic_percentage.text = str(int((_t / _t_max) * 100)) + "%"
+	
+	_mana_text.text = str(_t).pad_zeros(4) + "/" + str(_t_max).pad_zeros(4)
 
-			stats_saved_text_all_update()
-			stats_saved_value_all_update()
-						
-				
+	stats_saved_text_all_update()
+	stats_saved_value_all_update()
+
+
+func stats_saved_empty():
+	self.visible = false
+	Variables._is_saved_id_panel_visible = false	
+
+	
+func stats_saved_value_all_update():
+	call_deferred("stats_saved_value_all_update2")
+	
+	var _file = File.new()
+	if _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+		self.visible = true
+		Variables._is_saved_id_panel_visible = true
+
+	else:
+		stats_saved_empty()
+
+# draw all stats text. not the value. So "Luck" text is displayed but not the value of it.
 func stats_saved_text_all_update():
 	
 	var i = -1
 	_stats_text_all_column1_label.bbcode_enabled = true
 	_stats_text_all_column2_label.bbcode_enabled = true
 	
-	for d in P.character_number[str(P._number)]["_stats_saved"].keys():
+	for d in P.character_stats[str(P._number)]["_saved"].keys():
 		i += 1
 		if i <= 5:
 			if d == "Class":
@@ -114,32 +129,21 @@ func stats_saved_text_all_update():
 				d = ""
 			
 			_stats_text_all_column2_label.bbcode_text += "[right]" + str(d) + "[/right]\n"
-			
-	_on_HealthBar_value_changed(P.character_number[str(P._number)]["_stats_saved"].HP)
-	_on_MagicBar_value_changed(P.character_number[str(P._number)]["_stats_saved"].MP)
 
 
-func stats_saved_empty():
-	self.visible = false
-	Variables._is_saved_id_panel_visible = false	
-
-	
-func stats_saved_value_all_update():
-	call_deferred("stats_saved_value_all_update2")
-	self.visible = true
-	Variables._is_saved_id_panel_visible = true
-
-
-# this func is called when the game id value is changed at the main menu. this updates the game data saved panel.
+# this func is called when the game id value is changed at the main menu. this updates the game data saved panel. this func updates the values of P.character_stats. for example, not the text of "Luck" but instead its value.
 func stats_saved_value_all_update2():	
-	_username_value_label.text = P.character_number[str(P._number)]["_stats_saved"].Username + " - " + P.character_name[str(P._number)]
+	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_saved"].HP)
+	_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_saved"].MP)
 	
-	_xp_value_label.text = str(P.character_number[str(P._number)]["_stats_saved"].XP)
-	_xp_next_value_label.text = str(P.character_number[str(P._number)]["_stats_saved"].XP_next)
+	_username_value_label.text = P.character_stats[str(P._number)]["_saved"].Username + " - " + P.character_name[str(P._number)]
+	
+	_xp_value_label.text = str(P.character_stats[str(P._number)]["_saved"].XP)
+	_xp_next_value_label.text = str(P.character_stats[str(P._number)]["_saved"].XP_next)
 	
 	# display xp_next at stats.
-	if P.character_number[str(P._number)]["_stats_saved"].Level < 99:
-		_xp_next_value_label.text = str(P._xp_level[P.character_number[str(P._number)]["_stats_saved"].Level]) 
+	if P.character_stats[str(P._number)]["_saved"].Level < 99:
+		_xp_next_value_label.text = str(P._xp_level[P.character_stats[str(P._number)]["_saved"].Level]) 
 	
 	
 	var i = -1
@@ -149,7 +153,7 @@ func stats_saved_value_all_update2():
 	_stats_value_all_column1_label.bbcode_text = ""
 	_stats_value_all_column2_label.bbcode_text = ""
 	
-	for d in P.character_number[str(P._number)]["_stats_saved"].values():
+	for d in P.character_stats[str(P._number)]["_saved"].values():
 		i += 1
 		if i <= 5:
 			if i == 0:
@@ -162,8 +166,8 @@ func stats_saved_value_all_update2():
 			else:
 				_stats_value_all_column2_label.bbcode_text += str(d).pad_zeros(3) + "\n"
 
-	_health_text.text = str(P.character_number[str(P._number)]["_stats_saved"].HP).pad_zeros(4) + "/" + str(P.character_number[str(P._number)]["_stats_saved"].HP_max).pad_zeros(4)
-	_mana_text.text = str(P.character_number[str(P._number)]["_stats_saved"].MP).pad_zeros(4) + "/" + str(P.character_number[str(P._number)]["_stats_saved"].MP_max).pad_zeros(4)
+	_health_text.text = str(P.character_stats[str(P._number)]["_saved"].HP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].HP_max).pad_zeros(4)
+	_mana_text.text = str(P.character_stats[str(P._number)]["_saved"].MP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].MP_max).pad_zeros(4)
 	
 
 func _on_HealthBar_value_changed(value):

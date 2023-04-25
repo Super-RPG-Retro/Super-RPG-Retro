@@ -17,8 +17,8 @@ onready var _sprite = $Sprite
 func _ready():
 	Filesystem._make_saved_data_directories()
 
-	P._reset_data()
-	P._reset_saved_data()
+	P._update_character_stats_loaded()
+	P._update_character_stats_saved()
 	P.reset()
 
 	# generate the xp levels.

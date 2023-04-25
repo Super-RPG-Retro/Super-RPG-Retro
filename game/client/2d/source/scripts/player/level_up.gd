@@ -18,9 +18,9 @@ onready var _accept_dialog = $AcceptDialog
 func _ready():
 	_accept_dialog.grab_focus()	
 	
-	for _i in range(0, 2000):
-		if 	P._xp >= P._xp_level[_i] && _i > P._level - 1:
-			$AcceptDialog.dialog_text = "Congratulations, you are now level " + str(_i + 1) + ".\r\nYou need " + str(P._xp_level[_i + 1] - P._xp) + " more xp for your next level." 
+	for _i in range(0, 999):
+		if 	P._xp >= P._xp_level[_i] && _i == P._level:
+			$AcceptDialog.dialog_text = "Congratulations, you are now level " + str(_i) + ".\r\nYou need " + str(P._xp_level[_i + 1] - P._xp) + " more xp for your next level." 
 			
 			P._level = _i + 1
 			# give more mp the lower the difficulty level.

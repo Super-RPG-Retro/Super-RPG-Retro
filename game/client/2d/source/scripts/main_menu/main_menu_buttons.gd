@@ -49,6 +49,9 @@ onready var _node = get_tree().get_current_scene().get_name()
 
 
 func _ready():
+	P._number = 0
+	P._number = int(clamp(P._number, 0, 6))
+	
 	_saved_id.max_value = Variables._game_id_max_value
 	
 	_empty_username_dialog.visible = false
@@ -56,7 +59,7 @@ func _ready():
 	
 	var _temp = null
 		
-	P.character_number[str(P._number)]["_stats_saved"].Username = P.character_number[str(P._number)]["_stats_loaded"].Username
+	P.character_stats[str(P._number)]["_saved"].Username = P.character_stats[str(P._number)]["_loaded"].Username
 	
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
@@ -88,30 +91,16 @@ func _ready():
 	_on_saved_ID_spinBox_value_changed(Variables._id_of_saved_game)
 	
 	if Variables._is_this_new_data == true:
-		get_tree().call_group("stats_loaded", "stats_empty")
+		_on_new_confirmation_dialog()
+	
 	else:
 		_on_ButtonLoad_pressed(true)
 	
 	_username_line_edit.text = "Athena"
-	
-	
-			
-func _process(_delta):
-	"""
-	if Settings._system.music == true:
-		if Settings._system.music == true:
-			if _music_intro.is_playing() == false && _music_stop == false:
-				_music_intro.play()
-	"""
+
 
 func _input(event):
 	if (event.is_pressed()):
-		"""
-		if Settings._system.music == true:
-			_music_intro.stop()
-			_music_stop = true
-		"""
-		
 		if (event.is_action_pressed("ui_escape", true)):		
 			_username_line_edit.focus_mode = Control.FOCUS_ALL
 			_username_line_edit.grab_focus()
@@ -148,13 +137,13 @@ func _on_new_confirmation_dialog():
 	
 	Filesystem.save("user://saved_data/is_this_new_data.txt", true)	
 	
-	P._reset_data()
+	P._update_character_stats_loaded()
 	Settings._reset_game()
 	
 	P._xp_next = P._xp_level[P._level]
-	P.character_number[str(P._number)]["_stats_loaded"].XP_next = P._xp_next
-	P.character_number[str(P._number)]["_stats_loaded"].Username = _username_line_edit.text
-	P.character_number[str(P._number)]["_stats_saved"].Username = _username_line_edit.text	
+	P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
+	P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
+	P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	
 	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_loaded", "stats_empty")
@@ -172,9 +161,9 @@ func _on_ButtonSave_pressed():
 	
 	if Variables._is_loaded_id_panel_visible == false:
 		P._xp_next = P._xp_level[P._level]
-		P.character_number[str(P._number)]["_stats_loaded"].XP_next = P._xp_next
-		P.character_number[str(P._number)]["_stats_loaded"].Username = _username_line_edit.text
-		P.character_number[str(P._number)]["_stats_saved"].Username = _username_line_edit.text	
+		P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
+		P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
+		P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	
 		
 		_save_game_data()
 		
@@ -228,13 +217,13 @@ func _save_game_data():
 	Filesystem.save("user://saved_data/is_this_new_data.txt", false)
 	
 	for _i in range (7):
-		P.character_number[str(_i)]["_stats_saved"] = P.character_number[str(_i)]["_stats_loaded"]
+		P.character_stats[str(_i)]["_saved"] = P.character_stats[str(_i)]["_loaded"]
 	
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_number[str(P._number)]["_stats_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
 	
 	# save stats
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_number)	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_stats)	
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt", Hud._loaded)	
 		
@@ -295,7 +284,7 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt")
 	
 	if _temp != null:		
-		P.character_number = _temp	
+		P.character_stats[str(P._number)]["_loaded"] = _temp[str(P._number)]["_loaded"]	
 			
 	_temp = null
 	
@@ -303,13 +292,13 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 		
 	if _temp != null:
-		P.character_number = _temp
+		P.character_stats[str(P._number)]["_saved"] = _temp[str(P._number)]["_saved"]
 			
-		P._hp_max = P.character_number[str(P._number)]["_stats_loaded"].HP_max
-		P._hp = P.character_number[str(P._number)]["_stats_loaded"].HP
-		P._level = P.character_number[str(P._number)]["_stats_loaded"].Level
-		P._xp = P.character_number[str(P._number)]["_stats_loaded"].XP
-		P._xp_next = P.character_number[str(P._number)]["_stats_loaded"].XP_next
+		P._hp_max = P.character_stats[str(P._number)]["_loaded"].HP_max
+		P._hp = P.character_stats[str(P._number)]["_loaded"].HP
+		P._level = P.character_stats[str(P._number)]["_loaded"].Level
+		P._xp = P.character_stats[str(P._number)]["_loaded"].XP
+		P._xp_next = P.character_stats[str(P._number)]["_loaded"].XP_next
 		
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
@@ -369,44 +358,41 @@ func _on_SavedConfirmationDialog_confirmed():
 func _on_ButtonPlay_pressed():
 	# determine if game exists.
 	var _file = File.new()
-	if !_file.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt"):
+	if !_file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
 		$NoGameIDexists.dialog_text = "No game exists for Game ID " + str(Variables._id_of_saved_game)
 		$NoGameIDexists.popup_centered()
 		return
 	
-	var found = false
-	
-	# username is empty. do not start the game.
+		# username is empty. do not start the game.
 	if Variables._is_this_new_data == true:
 		_scene_unfocused_panel.visible = true
-		_empty_username_dialog.dialog_text = "Cannot start game with no data."
+		_empty_username_dialog.dialog_text = "Cannot start game with no loaded data."
 		_empty_username_dialog.popup_centered()
 		return
 	
-	if found == false:
-		Variables.clear_null()
-		Variables._game_over = false
+	Variables.clear_null()
+	Variables._game_over = false
+	
+	get_tree().call_group("settings_system", "_music_stop")		
+	P.reset()
+	
+	# these saved visibility_map files created from the save game scene needs to be copied over other files so to correctly display the visibility map when restarting or starting a game. the reason is the visibility map is updated when using ladders or after saving a game.
+	Filesystem._load_visibility_maps()
+	
+	# clear this because it will be populated at game.gd, once it is populated, the list will not be read again unless you reenter the game from this file.
+	Json.d[str(Builder._config.game_id)]["mobs"] = {}
+	
+	var _temp = null
+	
+	# if this is a new game then start game at the starting dungeon level. to determine if this is a new game, try to load a file. if file does not exist then _temp will remain null.
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 		
-		get_tree().call_group("settings_system", "_music_stop")		
-		P.reset()
-		
-		# these saved visibility_map files created from the save game scene needs to be copied over other files so to correctly display the visibility map when restarting or starting a game. the reason is the visibility map is updated when using ladders or after saving a game.
-		Filesystem._load_visibility_maps()
-		
-		# clear this because it will be populated at game.gd, once it is populated, the list will not be read again unless you reenter the game from this file.
-		Json.d[str(Builder._config.game_id)]["mobs"] = {}
-		
-		var _temp = null
-		
-		# if this is a new game then start game at the starting dungeon level. to determine if this is a new game, try to load a file. if file does not exist then _temp will remain null.
-		_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
-			
-		if _temp == null:
-			Settings._game.level_number = Builder._data.starting_level - 1
-		
-		Filesystem.builder_playing_load_data()
-		
-		var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+	if _temp == null:
+		Settings._game.level_number = Builder._data.starting_level - 1
+	
+	Filesystem.builder_playing_load_data()
+	
+	var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
 		
 
 func _on_LineEdit_text_changed(_text):
@@ -425,7 +411,7 @@ func _on_LineEdit_text_changed(_text):
 
 	_username_line_edit.caret_position = old_caret_position
 	
-	P.character_number[str(P._number)]["_stats_saved"].Username = _text
+	P.character_stats[str(P._number)]["_saved"].Username = _text
 	
 
 func _on_EmptyUsernameDialog_modal_closed():
@@ -477,7 +463,7 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	# save stats dictionary
 	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 	if _temp != null:
-		P.character_number = _temp
+		P.character_stats[str(P._number)]["_saved"] = _temp[str(P._number)]["_saved"]
 		
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 		

@@ -30,7 +30,7 @@ var character_name:Dictionary = {
 }
 
 # c = player character number.
-var character_number:Dictionary = {
+var character_stats:Dictionary = {
 	"0": {},	
 	"1": {},
 	"2": {},
@@ -79,10 +79,10 @@ var _stats_data = {
 	}
 
 # player's "loaded" stats refers to data for the "saved" panel at main menu screen. stats equals starting stats plus starting stats plus object stats.
-var _stats_loaded = {}
+var _loaded = {}
 
 # player's "saved" stats refers to data for the "saved" panel at main menu screen.
-var _stats_saved = {}
+var _saved = {}
 
 
 var	_name
@@ -111,11 +111,11 @@ var	_artifact_wis
 
 var	_hp_max		= 20
 var	_hp			= 20
-var	_mp_max		= 20
-var	_mp			= 20
+var	_mp_max		= 0
+var	_mp			= 0
 var	_xp			= 0
-var	_xp_next	= 16
-var	_level 		= 1 # current level of player.
+var	_xp_next	= 34
+var	_level 		= 0 # current level of player.
 
 # this holds the player's experience points per level.
 var _xp_level = []
@@ -124,26 +124,26 @@ var _move_speed = 0
 
 
 func _ready():
-	for _id in range (character_number.size()):
-		character_number[str(_id)] = { 
-			_stats_loaded = {},
-			_stats_saved = {}
+	for _id in range (character_stats.size()):
+		character_stats[str(_id)] = { 
+			_loaded = {},
+			_saved = {}
 		 }
 
 	
 func reset():
-	_name = _stats_loaded.Username
+	_name = _loaded.Username
 	
-	_cha		= _stats_loaded.Charisma
-	_con 		= _stats_loaded.Constitution
-	_def 		= _stats_loaded.Defense
-	_dex 		= _stats_loaded.Dexterity
-	_int 		= _stats_loaded.Intelligence
-	_luc 		= _stats_loaded.Luck
-	_per 		= _stats_loaded.Perception
-	_str 		= _stats_loaded.Strength
-	_wil 		= _stats_loaded.Willpower
-	_wis 		= _stats_loaded.Wisdom
+	_cha		= _loaded.Charisma
+	_con 		= _loaded.Constitution
+	_def 		= _loaded.Defense
+	_dex 		= _loaded.Dexterity
+	_int 		= _loaded.Intelligence
+	_luc 		= _loaded.Luck
+	_per 		= _loaded.Perception
+	_str 		= _loaded.Strength
+	_wil 		= _loaded.Willpower
+	_wis 		= _loaded.Wisdom
 	
 	_artifact_cha	= Builder._dictionary_artifacts.data.Charisma
 	_artifact_con 	= Builder._dictionary_artifacts.data.Constitution
@@ -185,20 +185,20 @@ func _starting_skills(_id):
 	return _starting_dictionary
 
 	
-func _reset_data():
-	for _id in range (character_number.size()):
-		_stats_loaded = _starting_skills(_id)
-		character_number[str(_id)]["_stats_loaded"].merge(_stats_loaded, true)
+func _update_character_stats_loaded():
+	for _id in range (character_stats.size()):
+		_loaded = _starting_skills(_id)
+		character_stats[str(_id)]["_loaded"].merge(_loaded, true)
 	
 	reset()
 	
 	get_tree().call_group("main_loop", "clamp_p_vars")
 
 
-func _reset_saved_data():
-	for _id in range (character_number.size()):
-		_stats_saved = _starting_skills(_id)
-		character_number[str(_id)]["_stats_saved"].merge(_stats_saved, true)
+func _update_character_stats_saved():
+	for _id in range (character_stats.size()):
+		_saved = _starting_skills(_id)
+		character_stats[str(_id)]["_saved"].merge(_saved, true)
 		
 	
 	get_tree().call_group("main_loop", "clamp_p_vars_saved")
@@ -207,8 +207,8 @@ func _reset_saved_data():
 func reset_var():
 	_move_speed = 0
 	
-	_reset_data()
-	_reset_saved_data()
+	_update_character_stats_loaded()
+	_update_character_stats_saved()
 
 	reset()
 	
@@ -222,4 +222,5 @@ func xp_table():
 		
 		_xp_level[_i] += int(_xp_level[_i] * (float(0.2 * Settings._game.difficulty_level)))
 		
-	#print(_xp_level)
+		
+	print(_xp_level)

@@ -13,12 +13,12 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Sprite
 
 onready var _type = ""
-onready var _name = P.character_number[str(P._number)]["_stats_loaded"].Username
+onready var _name = P.character_stats[str(P._number)]["_loaded"].Username
 onready var tile = Vector2(0,  0)
 
 
 func _ready():
-	Common._player_now_playing_vars_update()
+	Common._init_stats_player_characters()
 	
 	if $Camera2D != null:
 		if Settings._system.use_large_tiles == true:

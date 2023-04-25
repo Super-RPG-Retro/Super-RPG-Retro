@@ -74,7 +74,7 @@ func load_saved_dictionary (var path : String) -> Dictionary:
 			printerr(path + " Could not load file. Error code " + str(_err) + ".")
 			
 	else:
-		P._reset_saved_data()
+		P._update_character_stats_saved()
 		_theDict = null
 		
 	
