@@ -31,6 +31,8 @@ var _event_tasks = load("res://singletons/builder/events/tasks.gd").new()
 var _dictionary_artifacts = load("res://singletons/builder/dictionaries/artifacts.gd").new()
 var _audio_music = load("res://singletons/builder/audio/music.gd").new()
 
+var _library_cell_items = load("res://singletons/builder/library/cell_items.gd").new()
+
 # at the builder home scene, these are the options. the game id is used at Builder._data as a number index, to seperate the builder games from each other. game id 0 has a game title of "Super RPG Retro"
 var _config = {
 	"game_id": 				0,
@@ -328,6 +330,8 @@ func all_array_append():
 		
 	_dictionary_artifacts.all_array_append()
 	_audio_music.all_array_append()
+	_library_cell_items.all_array_append()
+	
 		
 # at builder project menu, request to reset game data has been made. the id of the game is passed to this constructor.
 func reset_game(x: int):
@@ -380,6 +384,7 @@ func reset_game(x: int):
 
 	_dictionary_artifacts.reset_game()
 	_audio_music.reset_game()
+	_library_cell_items.reset_game()
 		
 	# recreate the arrays in this func.
 	Builder.all_array_append()
@@ -392,7 +397,7 @@ func reset_game(x: int):
 	
 	Filesystem.save("user://saved_data/builder_next_event_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._next_event)
 	
-	Filesystem.save("user://saved_data/builder_starting_skills.txt", Builder._starting_skills)
+	Filesystem.save("user://saved_data/builder_starting_skills_" + str(Builder._config.game_id) + ".txt", Builder._starting_skills)
 	
 
 # initiates these arrays by creating array elements.	
@@ -407,6 +412,7 @@ func _all_init():
 	_event_inventory.init()
 	_dictionary_artifacts.init()
 	_audio_music.init()
+	_library_cell_items.init()
 	
 
 func _exit_tree():
@@ -418,5 +424,6 @@ func _exit_tree():
 
 	_dictionary_artifacts.queue_free()
 	_audio_music.queue_free()
+	_library_cell_items.queue_free()
 	
 	queue_free()

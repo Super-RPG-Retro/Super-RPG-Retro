@@ -36,10 +36,6 @@ onready var _menu = null
 
 
 func _ready():
-	Variables._at_scene = Enum.Scene.Maze_create
-	# used at title_bar. see HeaderMenu node.
-	Variables._scene_title = "Builder: Library, Maze Create."
-
 	_event_number.value = Builder._event_story.data.event_number + 1
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	

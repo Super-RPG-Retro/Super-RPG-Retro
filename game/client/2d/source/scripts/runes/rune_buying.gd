@@ -420,7 +420,7 @@ func _on_DialogBuy_confirmed():
 	P._gold -= _spinbox_amount.value * Json._magic[_selected_rune_name]["Gold"]
 	Json._magic[_selected_rune_name]["Stack_amount"] += _spinbox_amount.value
 	
-	Filesystem.save_dictionary_json3("user://saved_data/builder_magic.txt", Json._magic)
+	Filesystem.save_dictionary_json3("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt", Json._magic)
 	
 	_stack_amount[_num_current].text = str(clamp(Json._magic[_selected_rune_name]["Stack_amount"], 0, 999))
 	

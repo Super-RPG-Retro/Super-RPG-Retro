@@ -107,7 +107,7 @@ func reset_game():
 	# recreate the arrays in this func.
 	all_array_append()	
 	
-	Filesystem.save("user://saved_data/builder_dictionary_artifacts.txt", Builder._dictionary_artifacts.data)
+	Filesystem.save("user://saved_data/builder_dictionary_artifacts_" + str(Builder._config.game_id) + ".txt", Builder._dictionary_artifacts.data)
 	
 	
 func _exit_tree():

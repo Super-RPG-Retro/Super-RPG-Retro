@@ -53,7 +53,7 @@ func _ready():
 	var directory = Directory.new()
 	
 	# if this is true then all directories have been created, there is no need to do anything else. go to main menu.
-	if directory.dir_exists(Variables._project_path + "/builder/magic/data/1") == true && file.file_exists("user://saved_data/builder_magic.txt") == true:
+	if directory.dir_exists(Variables._project_path + "/builder/magic/data/1") == true && file.file_exists("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt") == true:
 	#&& directory.dir_exists(Variables._project_path + "/builder/magics/data/2"):
 	# && directory.dir_exists(Variables._project_path + "/builder/magics/data/3") && directory.dir_exists(Variables._project_path + "/builder/magics/data/4") && directory.dir_exists(Variables._project_path + "/builder/magics/data/5") && directory.dir_exists(Variables._project_path + "/builder/magics/data/6") && directory.dir_exists(Variables._project_path + "/builder/magics/data/7") && directory.dir_exists(Variables._project_path + "/builder/magics/data/8")
 		$Panel.modulate = Color(1, 1, 1, 0)
@@ -122,7 +122,7 @@ func _process(_delta):
 			t.start()
 			yield(t, "timeout")
 			
-			Filesystem.save_dictionary_json3("user://saved_data/builder_magic.txt", Json._magic)
+			Filesystem.save_dictionary_json3("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt", Json._magic)
 			
 			# process the res://...builder/object json directories.
 			_process_objects_directory()
@@ -233,7 +233,7 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 		
 	# the magic files in their directory are all processed when this condition is true.
 	if _total_magic_files_in_directory == Json._magic.size():
-		Filesystem.save_dictionary_json3("user://saved_data/builder_magic.txt", Json._magic)
+		Filesystem.save_dictionary_json3("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt", Json._magic)
 			
 		_reading_magic_dir = false
 			
@@ -363,7 +363,7 @@ func _show_start_button():
 	
 	# load the magic data and then place it into the json file.
 	Json._magic = {}
-	Json._magic = Filesystem.load_dictionary_json2("user://saved_data/builder_magic.txt")
+	Json._magic = Filesystem.load_dictionary_json2("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt")
 	
 	# once all the json object dictionaires are loaded, they are saved to one file for faster game loading.
 	Filesystem.populate_json_dictionaries(true)

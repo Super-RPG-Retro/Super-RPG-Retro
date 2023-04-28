@@ -18,11 +18,11 @@ var _menu_rooms
 func _ready():
 	_menu_rooms = get_popup()	
 	
-	_menu_rooms.add_item("Create Maze" + Variables._menu_padding)
+	_menu_rooms.add_item("Cell Items" + Variables._menu_padding)
 	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
 		
 			
-func _input(event):
+func _input(_event):
 	if _menu_rooms.has_focus() == true:
 		Variables.a.scancode = 0
 
@@ -30,7 +30,7 @@ func _input(event):
 func _on_menu_rooms_item_pressed(ID):
 	match ID:
 		0:
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/audio/music.tscn")
+			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/library/cell_items.tscn")
 		
 		
 func _on_exiting_tree(_node):

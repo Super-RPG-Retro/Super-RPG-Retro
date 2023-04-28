@@ -23,6 +23,7 @@ var _event_tasks = load("res://singletons/builder/events/tasks.gd").new()
 var _dictionary_artifacts = load("res://singletons/builder/dictionaries/artifacts.gd").new()
 var _audio_music = load("res://singletons/builder/audio/music.gd").new()
 
+var _library_cell_items = load("res://singletons/builder/library/cell_items.gd").new()
 
 var _config 					= Builder._config.duplicate(true)
 
@@ -44,5 +45,6 @@ func _exit_tree():
 	
 	_dictionary_artifacts.queue_free()	
 	_audio_music.queue_free()
+	_library_cell_items.queue_free()
 	
 	queue_free()

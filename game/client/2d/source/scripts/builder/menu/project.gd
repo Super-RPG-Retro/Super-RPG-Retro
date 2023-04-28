@@ -26,7 +26,7 @@ func _ready():
 	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
 
 
-func _input(event):
+func _input(_event):
 	if _menu_rooms.has_focus() == true:
 		Variables.a.scancode = 0
 

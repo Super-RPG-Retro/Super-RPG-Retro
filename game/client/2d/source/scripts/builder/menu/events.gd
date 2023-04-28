@@ -39,7 +39,7 @@ func _process(_delta):
 		_menu_rooms.set_item_disabled(4, false) 
 		
 
-func _input(event):
+func _input(_event):
 	if _menu_rooms.has_focus() == true:
 		Variables.a.scancode = 0
 

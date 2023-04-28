@@ -415,7 +415,7 @@ func populate_json_dictionaries(_load:bool = false):
 	Json.make_directories()
 	
 	# if that one file exists then load that data into the json Json.d which holds all builder object dictionary data.
-	var _path = "user://saved_data/builder_dictionaries.txt"
+	var _path = "user://saved_data/builder_dictionaries_" + str(Builder._config.game_id) + ".txt"
 	
 	if _load == true:
 		var file = File.new()	
@@ -429,7 +429,7 @@ func populate_json_dictionaries(_load:bool = false):
 		for _i in Json.d[str(Builder._config.game_id)].keys():
 			Json.refresh_dictionaries(Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/" + _i + "/")
 		
-		Filesystem.save_dictionary_json3("user://saved_data/builder_dictionaries.txt", Json.d)
+		Filesystem.save_dictionary_json3("user://saved_data/builder_dictionaries_" + str(Builder._config.game_id) + ".txt", Json.d)
 
 
 func delete_builder_playing_data(var path):
@@ -535,7 +535,7 @@ func builder_load_data():
 	Builder_playing._event_inventory.data = Builder._event_inventory.data.duplicate(true)
 		
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_dictionary_artifacts.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_dictionary_artifacts_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
 		Builder._dictionary_artifacts.data = _temp
@@ -543,7 +543,7 @@ func builder_load_data():
 	Builder_playing._dictionary_artifacts.data = Builder._dictionary_artifacts.data.duplicate(true)
 		
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_audio_music.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_audio_music_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
 		Builder._audio_music.data = _temp
@@ -552,12 +552,23 @@ func builder_load_data():
 	
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_starting_skills.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_starting_skills_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
 		Builder._starting_skills = _temp 
 		
 	Builder_playing._starting_skills = Builder._starting_skills.duplicate(true)	
+		
+	
+	_temp = null
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_library_cell_items_" + str(Builder._config.game_id) + ".txt")
+	
+	if _temp != null:
+		Builder._library_cell_items.data = _temp 
+		
+	Builder_playing._library_cell_items = Builder._library_cell_items.duplicate(true)	
+	
+	
 	
 	Builder_playing._event_inventory.data 				= Builder._event_inventory.data.duplicate(true)
 
@@ -628,13 +639,20 @@ func builder_playing_load_data():
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/music.txt")
 	
 	if _temp != null:
-		Builder_playing._audio_music = _temp
+		Builder_playing._audio_music.data = _temp
 	
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/dictionary_starting_skills.txt")
 	
 	if _temp != null:
 		Builder_playing._starting_skills = _temp
+	
+	
+	_temp = null
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cell_items.txt")
+	
+	if _temp != null:
+		Builder_playing._library_cell_items.data = _temp
 
 
 # save all builder data.
@@ -657,13 +675,15 @@ func builder_save_data():
 	
 	Filesystem.save("user://saved_data/builder_next_event_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._next_event)
 	
-	Filesystem.save("user://saved_data/builder_dictionary_artifacts.txt", Builder._dictionary_artifacts.data)
+	Filesystem.save("user://saved_data/builder_dictionary_artifacts_" + str(Builder._config.game_id) + ".txt", Builder._dictionary_artifacts.data)
 	
-	Filesystem.save("user://saved_data/builder_audio_music.txt", Builder._audio_music.data)
+	Filesystem.save("user://saved_data/builder_audio_music_" + str(Builder._config.game_id) + ".txt", Builder._audio_music.data)
 	
-	Filesystem.save("user://saved_data/builder_starting_skills.txt", Builder._starting_skills)
-
-
+	Filesystem.save("user://saved_data/builder_starting_skills_" + str(Builder._config.game_id) + ".txt", Builder._starting_skills)
+	
+	Filesystem.save("user://saved_data/builder_library_cell_items_" + str(Builder._config.game_id) + ".txt", Builder._library_cell_items.data)
+	
+	
 # these are the builder vars used while playing. these vars are loaded here from disk.
 func builder_playing_save_data():
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/event_tasks.txt", Builder_playing._event_tasks.data)	
@@ -682,9 +702,12 @@ func builder_playing_save_data():
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/artifacts.txt", Builder_playing._dictionary_artifacts.data)
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/music.txt", Builder_playing._audio_music )
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/music.txt", Builder_playing._audio_music.data)
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/dictionary_starting_skills.txt", Builder_playing._starting_skills)
+	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cell_items.txt", Builder_playing._library_cell_items.data)
+
 
 
 func _delete_game_data():
