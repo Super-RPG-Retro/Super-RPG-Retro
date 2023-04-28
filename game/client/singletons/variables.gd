@@ -13,6 +13,9 @@ You should have received a copy of the GNU Affero General Public License along w
 # vars are placed here when they cannot be placed in amy other singleton. they are used game wide, simular to triggers.
 extends Node
 
+# simulate a keyboard key press. used to register the value in a spinbox.
+var a = InputEventKey.new()
+
 # how many game turns these items will be in effect. this var is set at potion_impair_vision()
 var _potion_impair_vision_turns = 0
 var _potion_healing_turns = 0

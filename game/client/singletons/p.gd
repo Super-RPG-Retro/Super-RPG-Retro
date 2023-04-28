@@ -157,6 +157,7 @@ func reset():
 	_artifact_wis 	= Builder._dictionary_artifacts.data.Wisdom
 	
 
+# do not reorder because that would change the order of this stats text at the player_stats scene.
 func _starting_skills(_id):
 	var _starting_dictionary = {
 		"Class": 		"",
@@ -165,7 +166,7 @@ func _starting_skills(_id):
 		"Constitution": Builder._starting_skills.Constitution[_id],
 		"Dexterity": 	Builder._starting_skills.Dexterity[_id],
 		"Intelligence": Builder._starting_skills.Intelligence[_id],
-		"Level": 		0,
+		"Level": 		Builder._starting_skills.Level[_id],
 		"Charisma": 	Builder._starting_skills.Charisma[_id],
 		"Wisdom": 		Builder._starting_skills.Wisdom[_id],
 		"Willpower": 	Builder._starting_skills.Willpower[_id],
@@ -223,4 +224,4 @@ func xp_table():
 		_xp_level[_i] += int(_xp_level[_i] * (float(0.2 * Settings._game.difficulty_level)))
 		
 		
-	print(_xp_level)
+	#print(_xp_level)

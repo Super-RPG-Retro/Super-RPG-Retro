@@ -26,6 +26,27 @@ func _process(_delta):
 	clamp_p_vars_saved()
 	
 
+# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
+func _scancode_if_pressed_enter(event):
+	if event is InputEventMouse:
+		Variables.a.pressed = true # change to false to simulate a key release
+		Variables.a.scancode = KEY_ENTER
+			
+		Input.parse_input_event(Variables.a)
+		
+		
+func _skills_loaded_total():
+	var _str = str(P.character_stats[str(P._number)]["_loaded"].Strength + P.character_stats[str(P._number)]["_loaded"].Defense + P.character_stats[str(P._number)]["_loaded"].Constitution + P.character_stats[str(P._number)]["_loaded"].Dexterity + P.character_stats[str(P._number)]["_loaded"].Intelligence + P.character_stats[str(P._number)]["_loaded"].Charisma + P.character_stats[str(P._number)]["_loaded"].Wisdom + P.character_stats[str(P._number)]["_loaded"].Willpower + P.character_stats[str(P._number)]["_loaded"].Perception + P.character_stats[str(P._number)]["_loaded"].Luck).pad_zeros(4) + "/9990."
+	
+	return 	_str
+
+
+func _skills_saved_total():
+	var _str = str(P.character_stats[str(P._number)]["_saved"].Strength + P.character_stats[str(P._number)]["_saved"].Defense + P.character_stats[str(P._number)]["_saved"].Constitution + P.character_stats[str(P._number)]["_saved"].Dexterity + P.character_stats[str(P._number)]["_saved"].Intelligence + P.character_stats[str(P._number)]["_saved"].Charisma + P.character_stats[str(P._number)]["_saved"].Wisdom + P.character_stats[str(P._number)]["_saved"].Willpower + P.character_stats[str(P._number)]["_saved"].Perception + P.character_stats[str(P._number)]["_saved"].Luck).pad_zeros(4) + "/9990."
+	
+	return _str
+	
+	
 # sort the data and return it.
 func _sort(_dictionary, _d_column, _item_list_current_index = 0):
 	var _i = -1	
@@ -102,6 +123,8 @@ func _update_stats_last_player(_i):
 	P.character_stats[str(_i)]["_loaded"].XP = P._xp
 	P.character_stats[str(_i)]["_loaded"].XP_next = P._xp_next
 	
+	P.character_stats[str(_i)]["_loaded"].Level = P._level
+	
 	P.character_stats[str(_i)]["_loaded"].Charisma = P._cha
 	P.character_stats[str(_i)]["_loaded"].Constitution = P._con
 	P.character_stats[str(_i)]["_loaded"].Defense = P._def
@@ -124,6 +147,8 @@ func _init_stats_player_characters():
 		
 		P._xp = P.character_stats[str(_i)]["_loaded"].XP
 		P._xp_next = P.character_stats[str(_i)]["_loaded"].XP_next
+		
+		P._level = P.character_stats[str(_i)]["_loaded"].Level
 		
 		P._cha = P.character_stats[str(_i)]["_loaded"].Charisma
 		P._con = P.character_stats[str(_i)]["_loaded"].Constitution
@@ -148,6 +173,8 @@ func _update_stats_player_characters(_i):
 	
 	P._xp = P.character_stats[str(_i)]["_loaded"].XP	
 	P._xp_next = P.character_stats[str(_i)]["_loaded"].XP_next
+	
+	P._level = P.character_stats[str(_i)]["_loaded"].Level
 	
 	P._cha = P.character_stats[str(_i)]["_loaded"].Charisma
 	P._con = P.character_stats[str(_i)]["_loaded"].Constitution
@@ -178,6 +205,8 @@ func clamp_p_vars():
 	
 	P._xp_next = clamp(P._xp_next, 0, 99999999999999)
 	P.character_stats[str(P._number)]["_loaded"].XP_next = clamp(P.character_stats[str(P._number)]["_loaded"].XP_next, 0, 99999999999999)
+	
+	P.character_stats[str(P._number)]["_loaded"].Strength = clamp(P.character_stats[str(P._number)]["_loaded"].Strength, 0, 999)
 	
 	Hud._loaded.Gold = clamp(Hud._loaded.Gold, 0, 9999999999)
 	
@@ -228,6 +257,8 @@ func clamp_p_vars_saved():
 	P.character_stats[str(P._number)]["_saved"].XP = clamp(P.character_stats[str(P._number)]["_saved"].XP, 0, 99999999999999)
 	
 	P.character_stats[str(P._number)]["_saved"].XP_next = clamp(P.character_stats[str(P._number)]["_saved"].XP_next, 0, 99999999999999)
+	
+	P.character_stats[str(P._number)]["_saved"].Level = clamp(P.character_stats[str(P._number)]["_saved"].Level, 0, 999)
 	
 	Hud._saved.Gold = clamp(Hud._saved.Gold, 0, 9999999999)
 	

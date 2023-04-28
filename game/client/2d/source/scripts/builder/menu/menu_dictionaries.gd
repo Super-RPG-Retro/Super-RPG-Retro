@@ -73,6 +73,11 @@ func _process(_delta):
 		_menu_rooms.set_item_disabled(2, false)
 
 
+func _input(event):
+	if _menu_rooms.has_focus() == true || _menu_rooms_sub.has_focus() == true || _menu_rooms_sub2.has_focus() == true:
+		Variables.a.scancode = 0
+		
+
 func _on_menu_rooms_sub_item_pressed1(ID):
 	Common.directory_names(ID)
 			

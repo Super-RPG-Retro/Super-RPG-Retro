@@ -91,6 +91,10 @@ theme = ExtResource( 4 )
 popup_exclusive = true
 dialog_autowrap = true
 
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_right = 74.0
+margin_bottom = 24.0
+
 [connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
 [connection signal="focus_exited" from="AcceptDialogRename" to="." method="_on_AcceptDialog_focus_exited"]
 [connection signal="modal_closed" from="AcceptDialogRename" to="." method="_on_AcceptDialog_modal_closed"]

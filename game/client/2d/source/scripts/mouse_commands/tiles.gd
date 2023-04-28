@@ -89,7 +89,7 @@ func overview(p_node, e_node, i_node, t_node):
 		var _mp_max:int = 0
 		var _mp:int 	= 0
 		var _gold:int 	= 0
-		var _level:int 	= 0
+		var _level:int 	= 1
 		var _xp:int 	= 0
 		
 		# display the text of the overview panel.
@@ -109,7 +109,7 @@ func overview(p_node, e_node, i_node, t_node):
 			_mp_max = P._mp_max
 			_mp = P._mp
 			_gold = Hud._gold
-			_level = P._level
+			_level = P._level + 1
 			_xp = P._xp
 		
 		if _type == "mobs":

@@ -140,7 +140,7 @@ func _on_new_confirmation_dialog():
 	P._update_character_stats_loaded()
 	Settings._reset_game()
 	
-	P._xp_next = P._xp_level[P._level]
+	P._xp_next = P._xp_level[P._level + 1]
 	P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
 	P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
 	P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	
@@ -160,7 +160,7 @@ func _on_ButtonSave_pressed():
 		Variables._is_this_new_data = _temp
 	
 	if Variables._is_loaded_id_panel_visible == false:
-		P._xp_next = P._xp_level[P._level]
+		P._xp_next = P._xp_level[P._level + 1]
 		P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
 		P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
 		P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	

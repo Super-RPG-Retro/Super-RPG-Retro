@@ -17,8 +17,10 @@ onready var _game_data_text = $GameData/stats/Text
 onready var _game_data_loaded = $GameDataLoaded/Stats/Text
 onready var _game_data_saved = $GameDataSaved/Stats/Text
 
+onready var _credits = $Credits
 
-func _init():
+
+func _ready():
 	Variables._at_scene = Enum.Scene.Main_Menu
 	Variables._scene_title = "Welcome to Super RPG Retro."
 	
@@ -35,9 +37,9 @@ func _init():
 	Common._music_play()
 	Filesystem.builder_load_data()
 	Common._game_title()
+	Common._init_stats_player_characters() 
+	
 
-
-func _ready():
 	# load the settings system file.
 	var _temp = Filesystem.load_dictionary("user://saved_data/settings_system.txt")
 	
@@ -50,20 +52,24 @@ func _ready():
 	
 func _process(_delta):
 	if Variables._id_of_loaded_game_temp != Variables._id_of_loaded_game:
-		_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".   Statistics " + str(P.character_stats[str(P._number)]["_loaded"].Strength + P.character_stats[str(P._number)]["_loaded"].Defense + P.character_stats[str(P._number)]["_loaded"].Constitution + P.character_stats[str(P._number)]["_loaded"].Dexterity + P.character_stats[str(P._number)]["_loaded"].Intelligence + P.character_stats[str(P._number)]["_loaded"].Charisma + P.character_stats[str(P._number)]["_loaded"].Wisdom + P.character_stats[str(P._number)]["_loaded"].Willpower + P.character_stats[str(P._number)]["_loaded"].Perception + P.character_stats[str(P._number)]["_loaded"].Luck).pad_zeros(4) + "."
+		var _str = Common._skills_loaded_total()
+		
+		_game_data_loaded.text = "Loaded ID " + str(Variables._id_of_loaded_game).pad_zeros(2) + ".  Skills " + _str
 		
 		get_tree().call_group("stats_loaded", "_update_stats")
 		
 		Variables._id_of_loaded_game_temp = Variables._id_of_loaded_game
 	
 	if Variables._id_of_saved_game != Variables._id_of_saved_game_temp:
-		_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".   Statistics " + str(P.character_stats[str(P._number)]["_saved"].Strength + P.character_stats[str(P._number)]["_saved"].Defense + P.character_stats[str(P._number)]["_saved"].Constitution + P.character_stats[str(P._number)]["_saved"].Dexterity + P.character_stats[str(P._number)]["_saved"].Intelligence + P.character_stats[str(P._number)]["_saved"].Charisma + P.character_stats[str(P._number)]["_saved"].Wisdom + P.character_stats[str(P._number)]["_saved"].Willpower + P.character_stats[str(P._number)]["_saved"].Perception + P.character_stats[str(P._number)]["_saved"].Luck).pad_zeros(4) + "."
+		var _str = Common._skills_saved_total()
 		
+		_game_data_saved.text = "Saved ID " + str(Variables._id_of_saved_game).pad_zeros(2) + ".  Skills " + _str 
 		get_tree().call_group("stats_saved", "_update_stats")
 		
 		Variables._id_of_saved_game_temp = Variables._id_of_saved_game
 		
 		if get_node(".").visible == false:
+			_credits.grab_focus()
 			get_node(".").visible = true
 		
 		

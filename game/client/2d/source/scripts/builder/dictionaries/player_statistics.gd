@@ -58,56 +58,13 @@ func _draw_skill_values():
 		_label[_p].add_color_override("font_color", Color("#0054ff")) # blue 
 		_grid.add_child(_label[_p])
 		
-		for _s in range (10): # stats.
-			_e += 1
-			
-			# stat name,
-			_label.append([])
-			_label[_e] = Label.new()
-			_label[_e].text = Variables.s[str(_s)]
-			_label[_e].autowrap = true
-			_label[_e].align = HALIGN_RIGHT
-			_grid.add_child(_label[_e])
-			
-			_grid_child.append([])
-			_grid_child[_e] = HBoxContainer.new()
-			_grid_child[_e].rect_min_size.x = 750
-			_grid_child[_e].rect_size.y = 32
-			_grid.add_child(_grid_child[_e])
-			
-			# stat value.
-			_spin_box.append([])
-			_spin_box[_e] = SpinBox.new()
-			_spin_box[_e].min_value = 0
-			_spin_box[_e].max_value = 200
-			_spin_box[_e].value = Builder._starting_skills[Variables.s[str(_s)]][_p]
-			_spin_box[_e].rect_size.x = 100
-			_spin_box[_e].rect_min_size.x = 50
-			_grid_child[_e].add_child(_spin_box[_e])
-			
-			# stat description.
-			_description.append([])
-			_description[_e] = Label.new()
-			_description[_e].text = Variables.s_desc[str(_s)]
-			_description[_e].autowrap = true
-			_description[_e].rect_min_size.x = 545
-			_description[_e].rect_size.y = 32
-			_description[_e].align = HALIGN_LEFT
-			_grid_child[_e].add_child(_description[_e])
-			
-			
-			# remove the signal..
-			if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
-				_spin_box[_e].disconnect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
-				
-			# create the signal.
-			var _y = _spin_box[_e].connect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
-			
+		_draw_bar_value("HP_max", _p)
+		_draw_bar_value("HP", _p)
+		_draw_bar_value("MP_max", _p)
+		_draw_bar_value("MP", _p)
 		
-		_draw_value("HP_max", _p)
-		_draw_value("HP", _p)
-		_draw_value("MP_max", _p)
-		_draw_value("MP", _p)
+		_draw_level(_p)		
+		_draw_skills(_p)		
 		
 		#used as a padding between player character names.
 		# empty.
@@ -125,7 +82,7 @@ func _draw_skill_values():
 		_grid.add_child(_empty[_p])
 
 
-func _draw_value(_str:String, _p: int):
+func _draw_bar_value(_str:String, _p: int):
 	_e += 1
 	
 	# stat name,
@@ -178,19 +135,142 @@ func _draw_value(_str:String, _p: int):
 	
 	# remove the signal..
 	if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
-		_spin_box[_e].disconnect("mouse_exited", self, "_on_mouse_exited", [_str, _p, _e])
+		_spin_box[_e].disconnect("mouse_exited", self, "_on_bar_mouse_exited", [_str, _p, _e])
 		
 	# create the signal.
-	var _y = _spin_box[_e].connect("mouse_exited", self, "_on_mouse_exited", [_str, _p, _e])
+	var _y = _spin_box[_e].connect("mouse_exited", self, "_on_bar_mouse_exited", [_str, _p, _e])
 	
+	
+	if _spin_box[_e].is_connected("value_changed", self, "_on_bar_value_changed"):
+		_spin_box[_e].disconnect("value_changed", self, "_on_bar_value_changed", [_str, _p, _e])
+		
+	# create the signal.
+	var _z = _spin_box[_e].connect("value_changed", self, "_on_bar_value_changed", [_str, _p, _e])
+
+
+func _draw_level(_p: int):
+	_e += 1
+	
+	# stat name,
+	_label.append([])
+	_label[_e] = Label.new()
+	_label[_e].text = "Player Level"
+	_label[_e].autowrap = true
+	_label[_e].align = HALIGN_RIGHT
+	_grid.add_child(_label[_e])
+	
+	_grid_child.append([])
+	_grid_child[_e] = HBoxContainer.new()
+	_grid_child[_e].rect_min_size.x = 750
+	_grid_child[_e].rect_size.y = 32
+	_grid.add_child(_grid_child[_e])
+	
+	# stat value.
+	_spin_box.append([])
+	_spin_box[_e] = SpinBox.new()
+	
+	_spin_box[_e].min_value = 1
+		
+	_spin_box[_e].max_value = 100
+	_spin_box[_e].value = Builder._starting_skills["Level"][_p] + 1
+	_spin_box[_e].rect_size.x = 100
+	_spin_box[_e].rect_min_size.x = 50
+	_grid_child[_e].add_child(_spin_box[_e])
+	
+	# stat description.
+	_description.append([])
+	_description[_e] = Label.new()
+	
+	var _desc_text = ""
+	
+	_description[_e].text = "Current level of the player."
+	_description[_e].autowrap = true
+	_description[_e].rect_min_size.x = 545
+	_description[_e].rect_size.y = 32
+	_description[_e].align = HALIGN_LEFT
+	_grid_child[_e].add_child(_description[_e])
+	
+	# remove the signal..
+	if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
+		_spin_box[_e].disconnect("mouse_exited", self, "_on_level_mouse_exited", [_p, _e])
+		
+	# create the signal.
+	var _y = _spin_box[_e].connect("mouse_exited", self, "_on_level_mouse_exited", [_p, _e])
+	
+
+func _draw_skills(_p:int):
+	
+		for _s in range (10): # skills.
+			_e += 1
+			
+			# stills name,
+			_label.append([])
+			_label[_e] = Label.new()
+			_label[_e].text = Variables.s[str(_s)]
+			_label[_e].autowrap = true
+			_label[_e].align = HALIGN_RIGHT
+			_grid.add_child(_label[_e])
+			
+			_grid_child.append([])
+			_grid_child[_e] = HBoxContainer.new()
+			_grid_child[_e].rect_min_size.x = 750
+			_grid_child[_e].rect_size.y = 32
+			_grid.add_child(_grid_child[_e])
+			
+			# skills value.
+			_spin_box.append([])
+			_spin_box[_e] = SpinBox.new()
+			_spin_box[_e].min_value = 0
+			_spin_box[_e].max_value = 200
+			_spin_box[_e].value = Builder._starting_skills[Variables.s[str(_s)]][_p]
+			_spin_box[_e].rect_size.x = 100
+			_spin_box[_e].rect_min_size.x = 50
+			_grid_child[_e].add_child(_spin_box[_e])
+			
+			# skills description.
+			_description.append([])
+			_description[_e] = Label.new()
+			_description[_e].text = Variables.s_desc[str(_s)]
+			_description[_e].autowrap = true
+			_description[_e].rect_min_size.x = 545
+			_description[_e].rect_size.y = 32
+			_description[_e].align = HALIGN_LEFT
+			_grid_child[_e].add_child(_description[_e])
+			
+			
+			# remove the signal..
+			if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
+				_spin_box[_e].disconnect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
+				
+			# create the signal.
+			var _y = _spin_box[_e].connect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
+		
 
 # when existing the spin box, this func stores the value of the spin box into the builder var. When exiting this scene the builder data will be saved.
 func _on_stats_mouse_exited(_s, _p, _i):
 	Builder._starting_skills[Variables.s[str(_s)]][_p] = _spin_box[_i].value
 	
-	
-func _on_mouse_exited(_str, _p, _i):
+
+# bar:		both health and mana use this func.	
+func _on_bar_mouse_exited(_str, _p, _i):
 	Builder._starting_skills[_str][_p] = _spin_box[_i].value
+
+
+func _on_bar_value_changed(_value, _str, _p, _i):
+	if _i == 1 && _spin_box[1].value > _spin_box[0].value:
+		_spin_box[1].value = _spin_box[0].value
+		return  
+	
+	if _i == 3 && _spin_box[3].value > _spin_box[2].value:
+		_spin_box[3].value = _spin_box[2].value
+		return
+		
+	Builder._starting_skills[_str][_p] = _spin_box[_i].value
+
+
+# player's level
+func _on_level_mouse_exited(_p, _i):
+	Builder._starting_skills["Level"][_p] = _spin_box[_i].value - 1
 
 
 func _return_to_main_menu():

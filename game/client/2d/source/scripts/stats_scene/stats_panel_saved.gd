@@ -138,12 +138,15 @@ func stats_saved_value_all_update2():
 	
 	_username_value_label.text = P.character_stats[str(P._number)]["_saved"].Username + " - " + P.character_name[str(P._number)]
 	
+	if P.character_stats[str(P._number)]["_saved"].XP == 0:
+		P.character_stats[str(P._number)]["_saved"].XP = P._xp_level[P.character_stats[str(P._number)]["_saved"].Level]
+	
+	# display xp_next at stats.
 	_xp_value_label.text = str(P.character_stats[str(P._number)]["_saved"].XP)
 	_xp_next_value_label.text = str(P.character_stats[str(P._number)]["_saved"].XP_next)
 	
-	# display xp_next at stats.
-	if P.character_stats[str(P._number)]["_saved"].Level < 99:
-		_xp_next_value_label.text = str(P._xp_level[P.character_stats[str(P._number)]["_saved"].Level]) 
+	if P.character_stats[str(P._number)]["_saved"].Level < 999:
+		_xp_next_value_label.text = str(P._xp_level[P.character_stats[str(P._number)]["_saved"].Level + 1]) 
 	
 	
 	var i = -1

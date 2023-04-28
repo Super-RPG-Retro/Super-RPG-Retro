@@ -12,7 +12,6 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-
 func _ready():
 	Variables._at_scene = Enum.Scene.Settings_system
 	Variables._scene_title = "Configuration Variables."
@@ -87,6 +86,11 @@ func _process(_delta):
 	
 		
 func _input(event):	
+	# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
+	if Variables._at_scene == Enum.Scene.Settings_system:
+		Common._scancode_if_pressed_enter(event)
+		
+	
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):

@@ -33,9 +33,9 @@ var moveRight = false
 # camera rotation.
 var targetRotation = 0
 
-
 func _ready():
 	set_process_input(true)
+
 
 func _process(_delta):
 	# continuous rotation of player in one direction would result in a value greater than 360. for easer programming if value is greater than 360, set back to 0

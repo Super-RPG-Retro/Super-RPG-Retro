@@ -32,7 +32,9 @@ onready var _player_gain_a_level = null
 # health "min / max" values
 onready var _health_text = $Background/HealthText
 onready var _mana_text = $Background/MagicText
-  
+
+onready var _misc_value_all_column1_label = $Background/MiscValueAllColumn1Label
+	
 # sets the player character to the first player when scene loads.
 var _do_once_at_scene_load = true
 
@@ -100,11 +102,11 @@ func _input(event):
 			
 	
 func _update_stats():
-	_health_bar.max_value = P.character_stats[str(P._number)]["_loaded"].HP_max
-	_health_bar.value = P.character_stats[str(P._number)]["_loaded"].HP
+	_health_bar.max_value = P._hp_max
+	_health_bar.value = P._hp
 	
-	_magic_bar.max_value = P.character_stats[str(P._number)]["_loaded"].MP_max
-	_magic_bar.value = P.character_stats[str(P._number)]["_loaded"].MP
+	_magic_bar.max_value = P._mp_max
+	_magic_bar.value = P._mp
 	
 	if self.visible == true:
 		stats_text_all_update()
@@ -174,8 +176,8 @@ func stats_text_all_update():
 			
 			_stats_text_all_column2_label.bbcode_text += "[right]" + str(d) + "[/right]\n"
 	
-	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_loaded"].HP)
-	_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_loaded"].MP)
+	_on_HealthBar_value_changed(P._hp)
+	_on_MagicBar_value_changed(P._mp)
 
 	
 func stats_empty():
@@ -198,7 +200,7 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	
 	# determine is player advances to the next level.
 	for _i in range(1, 999):
-		if 	P._xp >= P._xp_level[_i] && _i == P._level:
+		if 	P._xp >= P._xp_level[_i] && _i -1 == P._level:
 			
 			# destroy level up scene so that its dialog can be displayed at the ready() func, the next time its newed.			  
 			if _player_gain_a_level != null:
@@ -218,7 +220,7 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 		_player_gain_a_level.visible = false
 	
 	# display xp_next at stats.
-	if P.character_stats[str(P._number)]["_loaded"].Level < 99:
+	if P._level < 999:
 		_xp_next_value_label.text = str(P._xp_level[P._level])	
 	
 	# display the username on the stats panel.	
@@ -227,11 +229,14 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 		_username_value_label.text = P.character_stats[str(P._number)]["_loaded"].Username[0].to_upper() + P.character_stats[str(P._number)]["_loaded"].Username.substr(1,-1) + " - " + P.character_name[str(P._number)]
 	
 	# display the xp on the stats panel.
+	if P._xp == 0:
+		P._xp = P._xp_level[P._level]
+	
 	_xp_value_label.text = str(P._xp)
 	_xp_next_value_label.text = str(P._xp_next)
 	
 	# prepare to display the rest of the stats, such as, str, def, int.
-	P.character_stats[str(P._number)]["_loaded"].Level = P._level
+	P._level = P._level
 	
 	var i = -1
 	_stats_value_all_column1_label.bbcode_enabled = true
@@ -257,32 +262,36 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	# display the health and health max.
 	if get_node("Background/HealthText") != null:
 		_health_text = get_node("Background/HealthText")
-		_health_text.text = str(P.character_stats[str(P._number)]["_loaded"].HP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_loaded"].HP_max).pad_zeros(4)
+		_health_text.text = str(P._hp).pad_zeros(4) + "/" + str(P._hp_max).pad_zeros(4)
 	
 	# healthbar	
-	var _t: float = P.character_stats[str(P._number)]["_loaded"].HP
-	var _t_max: float = P.character_stats[str(P._number)]["_loaded"].HP_max
+	var _t: float = P._hp
+	var _t_max: float = P._hp_max
 	_health_percentage.text = str(int((_t / _t_max) * 100)) + "%"
 	
-	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_loaded"].HP)
+	_on_HealthBar_value_changed(P._hp)
 	
 	
 	
-	# display the health and health max.
+	# display the mana and mana max.
 	if get_node("Background/MagicText") != null:
 		_mana_text = get_node("Background/MagicText")
-		_mana_text.text = str(P.character_stats[str(P._number)]["_loaded"].MP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_loaded"].MP_max).pad_zeros(4)
+		_mana_text.text = str(P._mp).pad_zeros(4) + "/" + str(P._mp_max).pad_zeros(4)
 	
 	# Magicbar	
-	_t = P.character_stats[str(P._number)]["_loaded"].MP
+	_t = P._mp
 	_magic_percentage.text = "0%"
 	
 	_t_max = 0
-	if P.character_stats[str(P._number)]["_loaded"].MP_max > 0:
-		_t_max = P.character_stats[str(P._number)]["_loaded"].MP_max
+	if P._mp_max > 0:
+		_t_max = P._mp_max
 		_magic_percentage.text = str(int((_t / _t_max) * 100)) + "%"
 	
-		_on_MagicBar_value_changed(P.character_stats[str(P._number)]["_loaded"].MP)
+		_on_MagicBar_value_changed(P._mp)
+	
+	
+	var _str = Common._skills_loaded_total()
+	_misc_value_all_column1_label.bbcode_text = _str + "\n" + str(P._level + 1)
 	
 	
 func _on_HealthBar_value_changed(value):

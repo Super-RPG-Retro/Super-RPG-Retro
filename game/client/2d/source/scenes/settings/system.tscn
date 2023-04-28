@@ -33,7 +33,7 @@ volume_db = -10.0
 margin_left = 16.0
 margin_top = 135.0
 margin_right = 1008.0
-margin_bottom = 584.0
+margin_bottom = 720.0
 mouse_filter = 2
 theme = ExtResource( 2 )
 custom_styles/bg = SubResource( 1 )
@@ -128,6 +128,7 @@ margin_right = 355.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 200, 0 )
 focus_mode = 2
+size_flags_vertical = 4
 max_value = 1e+09
 
 [node name="Label7" type="Label" parent="Container/Grid"]
@@ -318,10 +319,12 @@ align = 2
 
 [node name="CorridorLengthSpinBox" type="SpinBox" parent="Container/Grid/GridChild2"]
 margin_left = 255.0
+margin_top = 7.0
 margin_right = 355.0
-margin_bottom = 47.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 100, 0 )
 focus_mode = 2
+size_flags_vertical = 4
 min_value = 3.0
 max_value = 12.0
 value = 6.0
