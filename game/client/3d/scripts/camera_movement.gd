@@ -148,5 +148,5 @@ func _physics_process(_delta):
 	_movement_direction.z = round(_movement_direction.z)
 	
 	if Variables._at_library == true:
-		Variables._dungeon_coordinates = str(ceil(transform.origin.ceil().x / 2)) + "," + str(ceil(transform.origin.ceil().z / 2))
+		Variables._dungeon_coordinates = str(ceil(transform.origin.ceil().x / 2) - 1) + "," + str(ceil(transform.origin.ceil().z / 2) - 1)
 	

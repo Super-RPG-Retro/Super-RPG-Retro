@@ -15,5 +15,5 @@ extends GridMap
 
 func _ready():
 	pass
-	#self.set_cell_item(5, 5, 0, 0)
+	self.set_cell_item(1, 0, 9, 1)
 

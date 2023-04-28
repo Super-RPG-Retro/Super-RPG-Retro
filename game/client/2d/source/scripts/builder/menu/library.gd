@@ -10,15 +10,31 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-extends Sprite3D
+extends MenuButton
+
+
+var _menu_rooms
 
 func _ready():
-	pass # Replace with function body.
-
-
-func show():
-	self.visible = true
+	_menu_rooms = get_popup()	
 	
+	_menu_rooms.add_item("Create Maze" + Variables._menu_padding)
+	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
+		
+			
+func _input(event):
+	if _menu_rooms.has_focus() == true:
+		Variables.a.scancode = 0
 
-func hide():
-	self.visible = false
+
+func _on_menu_rooms_item_pressed(ID):
+	match ID:
+		0:
+			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/audio/music.tscn")
+		
+		
+func _on_exiting_tree(_node):
+	call_deferred("remove_child", _menu_rooms)
+	call_deferred("queue_free", _menu_rooms)
+	
+	queue_free()

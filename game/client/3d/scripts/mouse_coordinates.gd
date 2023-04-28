@@ -28,29 +28,18 @@ func _process(_delta):
 func _input(event):
 	# first dungeon. first level.
 	# button_normal
-	if Variables._dungeon_coordinates == "4,7" && Variables._compass == "E":
-		if get_global_mouse_position().x <= 280 || get_global_mouse_position().x >= 527 || get_global_mouse_position().y <= 260 || get_global_mouse_position().y >= 289:
-			get_tree().call_group("button_normal", "show")
-			get_tree().call_group("button_hover", "hide")
-			get_tree().call_group("button_selected", "hide")
-		
-		# button_hover		
-		if get_global_mouse_position().x > 280 && get_global_mouse_position().x < 527 && get_global_mouse_position().y > 260 && get_global_mouse_position().y < 289:
-			get_tree().call_group("button_normal", "hide")
-			get_tree().call_group("button_hover", "show")
-			get_tree().call_group("button_selected", "hide")
+	if Variables._dungeon_coordinates == "3,6" && Variables._compass == "E":
+		# button_selected		
+		if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_released("ui_left_mouse_click"):
+			get_tree().call_group("button", "hide")
 			
-			# button_selected		
-			if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_released("ui_left_mouse_click"):
-				get_tree().call_group("button_normal", "hide")
-				get_tree().call_group("button_hover", "hide")
-				get_tree().call_group("button_selected", "show")
-				
-				Variables._compass_last_known_for_3d = Variables._compass
-				Variables._child_scene_open = false
-				Variables._at_library = false				
-				Variables._game_over = false
-				
-				get_parent().get_node("Sound").play()
-				get_tree().call_group("game_ui", "scene_2d")
-				
+			Variables._compass_last_known_for_3d = Variables._compass
+			Variables._child_scene_open = false
+			Variables._at_library = false				
+			Variables._game_over = false
+			
+			get_parent().get_node("Sound").play()
+			get_tree().call_group("game_ui", "scene_2d")
+			
+		else:
+			get_tree().call_group("button", "show")

@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://2d/source/scripts/builder/menu/menu_project.gd" type="Script" id=1]
+[ext_resource path="res://2d/source/scripts/builder/menu/project.gd" type="Script" id=1]
 [ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=2]
-[ext_resource path="res://2d/source/scripts/builder/menu/menu_dictionaries.gd" type="Script" id=3]
+[ext_resource path="res://2d/source/scripts/builder/menu/dictionaries.gd" type="Script" id=3]
 [ext_resource path="res://2d/source/scenes/scene_header.tscn" type="PackedScene" id=4]
-[ext_resource path="res://2d/source/scripts/builder/menu/menu_audio.gd" type="Script" id=5]
+[ext_resource path="res://2d/source/scripts/builder/menu/library.gd" type="Script" id=5]
 [ext_resource path="res://2d/source/scripts/builder/menu/menu.gd" type="Script" id=6]
 [ext_resource path="res://2d/assets/themes/panel_blue.tres" type="Theme" id=7]
-[ext_resource path="res://2d/source/scripts/builder/menu/menu_events.gd" type="Script" id=8]
+[ext_resource path="res://2d/source/scripts/builder/menu/events.gd" type="Script" id=8]
+[ext_resource path="res://2d/source/scripts/builder/menu/audio.gd" type="Script" id=9]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -74,6 +75,20 @@ group = SubResource( 1 )
 text = "Audio"
 flat = false
 switch_on_hover = true
+script = ExtResource( 9 )
+
+[node name="MenuLibrary" type="MenuButton" parent="."]
+margin_left = 456.0
+margin_top = 46.0
+margin_right = 544.0
+margin_bottom = 74.0
+focus_mode = 2
+theme = ExtResource( 2 )
+action_mode = 1
+group = SubResource( 1 )
+text = "Library"
+flat = false
+switch_on_hover = true
 script = ExtResource( 5 )
 
 [node name="SceneHeader" parent="." instance=ExtResource( 4 )]
@@ -91,5 +106,6 @@ points = PoolVector2Array( 1024, 0, 512.05, 0, 433.572, 0, 0, 0 )
 [connection signal="child_exiting_tree" from="MenuDictionaries" to="MenuDictionaries" method="_on_exiting_tree"]
 [connection signal="child_exiting_tree" from="MenuEvents" to="MenuEvents" method="_on_exiting_tree"]
 [connection signal="child_exiting_tree" from="MenuAudio" to="MenuAudio" method="_on_exiting_tree"]
+[connection signal="child_exiting_tree" from="MenuLibrary" to="MenuLibrary" method="_on_exiting_tree"]
 
 [editable path="SceneHeader"]

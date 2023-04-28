@@ -18,21 +18,8 @@ var _menu_rooms
 func _ready():
 	_menu_rooms = get_popup()	
 	
-	_menu_rooms.set_name("Audio" + Variables._menu_padding)
-	
 	_menu_rooms.add_item("Music" + Variables._menu_padding)
-				
 	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
-		
-	
-func _process(_delta):
-	if Builder._config.dungeon_enabled[Builder._config.game_id][Builder._config.dungeon_number - 1] == 0:
-		_menu_rooms.set_item_disabled(0, false)
-		
-		
-func _input(event):
-	if _menu_rooms.has_focus() == true:
-		Variables.a.scancode = 0
 
 
 func _on_menu_rooms_item_pressed(ID):

@@ -18,12 +18,13 @@ func _ready():
 	_menu_project.grab_focus()
 
 func _input(event):
-	if $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true:
+	if $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true || $MenuLibrary.has_focus() == true:
 		Variables.a.scancode = 0
 		
 	else:
 		# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
-		Common._scancode_if_pressed_enter(event)
+		if Variables._scene_title != "Builder: Audio Music.":
+			Common._scancode_if_pressed_enter(event)
 		
 		
 	if(event.is_pressed()) && Variables._child_scene_open == false:
