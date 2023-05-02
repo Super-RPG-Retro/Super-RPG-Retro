@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://3d/assets/meshlibs/museum.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://3d/assets/meshlibs/library.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://3d/scripts/camera_movement.gd" type="Script" id=3]
 [ext_resource path="res://3d/scripts/mouse_coordinates.gd" type="Script" id=4]
 [ext_resource path="res://3d/assets/images/portal1.png" type="Texture" id=7]
@@ -123,7 +123,7 @@ __meta__ = {
 }
 
 [node name="Player" type="KinematicBody" parent="Viewport/Viewport/Spatial/MainMap" groups=["library_player"]]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 4, 3, 1, 21 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 4, 1, 1, 1 )
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/Player"]
@@ -131,7 +131,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="Viewport/Viewport/Spatial/MainMap/Player"]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, -0.0726995, 0.233206 )
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0.23 )
 doppler_tracking = 1
 current = true
 fov = 47.7111

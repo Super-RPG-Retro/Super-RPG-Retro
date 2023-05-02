@@ -566,7 +566,7 @@ func builder_load_data():
 	if _temp != null:
 		Builder._library_cell_items.data = _temp 
 		
-	Builder_playing._library_cell_items = Builder._library_cell_items.duplicate(true)	
+	Builder_playing._library_cell_items.data = Builder._library_cell_items.data.duplicate(true)	
 	
 	
 	

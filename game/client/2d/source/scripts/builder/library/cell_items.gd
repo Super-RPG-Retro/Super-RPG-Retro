@@ -12,79 +12,71 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _sprite = Sprite.new()
+onready var _grid = $Container/Grid
 
-onready var _item_list_select_dictionary = $Container/Grid/Grid5/ItemListSelectDictionary
+var _label 			= []
+var _empty 			= []
+var _grid_child 	= []
+var _image 			= []
 
-# this is the target for the event.
-onready var _item_list_remove = $Container/Grid/Grid7/ItemListRemove
+# increments array elements.
+var _e = -1
 
-onready var _event_number = $Container/Grid/Grid1/EventSpinbox
-
-onready var _event_enabled = $Container/Grid/Grid4/EventEnabled
-
-onready var _dungeon_number = $Container/Grid/Grid3/DungeonSpinbox
-
-# total available levels for each dungeon. this var is passed to Builder._event_puzzles.data.event_number
-onready var _level_number = $Container/Grid/Grid2/LevelSpinbox
-
-# this is the story about the event before you are asked if you accept the event. this story could be about the dungeon, level, an npc talking to you, etc.
-onready var _story = $Container/Grid/StoryTextEdit
+# cell button number
+var _b = 0
 
 # the builder menu.
 onready var _menu = null
 
 
 func _ready():
-	_event_number.value = Builder._event_story.data.event_number + 1
-	_on_event_number_Spinbox_value_changed(_event_number.value)
-	
-	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
-		add_child( _menu )
-		
-	_item_list_select_dictionary.select(Variables._dictionary_index, true)
-	
-	if _item_list_remove.get_item_count() > 0:
-		_item_list_remove.select(1, true)
+	Variables._at_scene = Enum.Scene.Builder
+	# used at title_bar. see HeaderMenu node.
+	Variables._scene_title = "Builder: Event Story."
 
+	_draw_cells()
+	
+	
+# this draws the cells when the scene is first created.
+func _draw_cells():
+	for _y in range (100):
+		for _x in range (100):
+			_e += 1
+			if _e >= 10000:
+				break
 			
-func _on_event_number_Spinbox_value_changed(value):
-	Builder._event_story.data.event_number = value - 1
-	
-	
-	_item_list_remove.clear()
+			# image representing to mesh library cell.
+			_image.append(Vector3(_x, _y, 0))
+			_image[_e] = Button.new()
+			_image[_e].icon = load("res://3d/assets/images/cell_items/"+ str(Builder._library_cell_items.data.cell_items[_e] + 1) +".png")
+			_grid.add_child(_image[_e])
 			
-	# add the task to the ItemList.
-	# the task could be any object.
-	for _r in range (20):
-		for _i in range (Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].size()):
-			
-			# add the textures
-			_sprite.texture = Filesystem._load_external_image(Builder._event_story.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r][_i], 1)
-			_item_list_remove.add_icon_item(_sprite.texture, false)
-			
-			# ItemList task.
-			_item_list_remove.add_item(Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r][_i], null, true)
-		
-		
-	if bool(Builder._event_story.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number]) == true:
-		_event_enabled.pressed = true
-	else:
-		_event_enabled.pressed = false	
-	
-	_story.text = Builder._event_story.data.story_text[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number]
-	
-	_dungeon_number.value = Builder._event_story.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] + 1
-	
-	_level_number.value = Builder._event_story.data.level_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] + 1
+			# remove the signal..
+			if _image[_e].is_connected("pressed", self, "_on_pressed"):
+				_image[_e].disconnect("pressed", self, "_on_pressed", [_e])
+				
+			# create the signal.
+			var _z = _image[_e].connect("pressed", self, "_on_pressed", [_e])
 	
 
-func _on_EventEnabled_toggled(button_pressed):
-	# update the builder event_enabled data. 	
-	Builder._event_story.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] = button_pressed
-		
+func _on_pressed(_e_current):
+	_e = -1	
 	
+	# only 1 player allowed on map. clear map of all player image before placing player image on map.
+	for _y in range (100):
+		for _x in range (100):
+			_e += 1
+			if _e >= 10000:
+				break
+			
+			if _b == 99 && Builder._library_cell_items.data.cell_items[_e] == 99:
+				Builder._library_cell_items.data.cell_items[_e] = 0
+				_image[_e].icon = load("res://3d/assets/images/cell_items/0.png")
+			
+	_image[_e_current].icon = load("res://3d/assets/images/cell_items/"+ str(_b + 1) +".png")
+	Builder._library_cell_items.data.cell_items[_e_current] = _b
+	
+
 func _on_StatusBar_tree_exiting():
 	
 	call_deferred("remove_child", _menu)
@@ -97,88 +89,19 @@ func _return_to_main_menu():
 	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
 
 
-func _on_Node2D_tree_exiting():
-	call_deferred("remove_child", _menu)
-	call_deferred("queue_free", _menu)
-	
-	queue_free()
+func _on_CellButton1_pressed():
+	_b = -1
 
 
-func _on_dungeon_Spinbox_value_changed(value):
-	# store the current value in to the builder var.
-	Builder._event_story.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] = value - 1
+func _on_CellButton2_pressed():
+	_b = 0
 	
 
-func _on_level_number_Spinbox_value_changed(value):
-	# store the current value in to the builder var.
-	Builder._event_story.data.level_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] = value - 1
+func _on_CellButton3_pressed():
+	_b = 1
+
+
+# location of player.
+func _on_CellButton99_pressed():
+	_b = 99
 	
-
-func _on_StoryTextEdit_text_changed():
-	Builder._event_story.data.story_text[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] = _story.text
-	
-
-
-func _on_dictionary_ItemList_item_selected(index):
-	Variables._dictionary_index = index
-
-
-func _on_item_list_add_Button_pressed():
-	match Variables._dictionary_index:
-		0: Variables._dictionary_name = "mobs1"
-		1: Variables._dictionary_name = "mobs2"
-		2: Variables._dictionary_name = "amulet"
-		3: Variables._dictionary_name = "armor"
-		4: Variables._dictionary_name = "book"
-		5: Variables._dictionary_name = "food"
-		6: Variables._dictionary_name = "gold"
-		7: Variables._dictionary_name = "ring"
-		8: Variables._dictionary_name = "scroll"
-		9: Variables._dictionary_name = "wand"
-		10: Variables._dictionary_name = "weapon"
-		
-	# these two files are needed before calling the below scene.
-	Variables.select_json_dictionary_singly = true
-	Variables.select_items_data_to_return = Enum.Select_items.Event_story	
-	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
-	
-	
-func _on_item_list_remove_Button_pressed():
-	var _i = 0
-	
-	# this code removes the selected item(s) from the ItemList node.
-	
-	# _i is increments here the bottom of this code block. increment _i until _i equals max items in list.
-	while _i < _item_list_remove.get_item_count():
-		
-		# get the text of the ItemList at row _i.
-		var _text = _item_list_remove.get_item_text(_i)
-		
-		# enter this code block if the _i row is selected.
-		if _item_list_remove.is_selected(_i):		
-			# for every directory...
-			for _r in range (20):
-				# ... check if directory contents _text.
-				if Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].has(_text):
-					# Searches the array for a value and returns its index or -1 if not found..
-					var _found = Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].find(_text)
-					
-					# remove the item from the ItemList.	
-					_item_list_remove.remove_item(_i)
-					_item_list_remove.remove_item(_i-1)
-					
-					# remove the item from builder vars.
-					Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].pop_at(_found)
-					
-					Builder._event_story.data.file_path_json[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].pop_at(_found)
-					
-					Builder._event_story.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].pop_at(_found)
-					
-					Builder._event_story.data.directory_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].pop_at(_found)
-					
-
-		else:
-			_i += 1
-
-

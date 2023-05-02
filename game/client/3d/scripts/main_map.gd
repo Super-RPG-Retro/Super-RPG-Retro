@@ -14,6 +14,15 @@ extends GridMap
 
 
 func _ready():
-	pass
-	self.set_cell_item(1, 0, 9, 1)
+	var _e = -1
+	
+	# place the blocks on the main map.
+	for _y in range (100):
+		for _x in range (100):
+			_e += 1
+			if _e >= 10000:
+				break
+			
+			# x, z, y, block id.
+			self.set_cell_item(_x, 0, _y, Builder_playing._library_cell_items.data.cell_items[_e])
 

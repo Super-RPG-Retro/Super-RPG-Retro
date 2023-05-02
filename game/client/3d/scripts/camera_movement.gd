@@ -12,7 +12,7 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends KinematicBody
 
-var amountMove = 1 #if you wanna go fast make this big.
+var amountMove = 1 #make this big if you want to go fast.
 var amountAngle = 2
 
 # camera movement in an up or down direction.
@@ -35,7 +35,20 @@ var targetRotation = 0
 
 func _ready():
 	set_process_input(true)
-
+	
+	var _e = -1
+	
+	# place the player on the main map.	
+	for _y in range (100):
+		for _x in range (100):
+			_e += 1
+			if _e >= 10000:
+				break
+			
+			#if Builder_playing._library_cell_items.data.cell_items[_e] == 99:
+			# x, z, y
+	#self.move_and_collide(Vector3(-2, 0, -8))
+	
 
 func _process(_delta):
 	# continuous rotation of player in one direction would result in a value greater than 360. for easer programming if value is greater than 360, set back to 0
@@ -72,7 +85,7 @@ func _physics_process(_delta):
 		Variables._compass_update = true
 		Hud._loaded.Turns += 1
 		
-		# godot has a word bug that they might not ever fix. in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
+		# in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
 		if targetRotation == 0:
 			_movement_direction.z -= amountMove
 		if targetRotation == 180:

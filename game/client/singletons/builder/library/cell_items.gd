@@ -13,29 +13,34 @@ You should have received a copy of the GNU Affero General Public License along w
 # remember to delete the settings file at user:// after adding something here, else you will receive a run time error.
 extends Node
 var data = {
-	"item_name": 			[],
+	"mesh_library": 			[],
 	"cell_items":		[],
 }
 	
 func init():
 	data = {	
-	"item_name": 			[],
+	"mesh_library": 			[],
 	"cell_items":		[],
 }	
 	
 
 func all_array_append():	
 	for _n in range (10):
-		data.item_name.append([])
-		
-	# 100 x coordinates plus 100 y coordinates equals 1000 3d tiles
-	for _n in range (1000):
-		# a -1 value is an empty tile.
-		data.cell_items.append(Vector2(-1, -1))
+		data.mesh_library.append([])
+	
+	var _e = -1
+	
+	for _y in range (100):
+		for _x in range (100):
+			_e += 1
+			if _e >= 10000:
+				break
+				
+			data.cell_items.append(-1)
 
 
 func reset_game():
-	data.item_name.clear()
+	data.mesh_library.clear()
 	data.cell_items.clear()
 	
 	# recreate the arrays in this func.

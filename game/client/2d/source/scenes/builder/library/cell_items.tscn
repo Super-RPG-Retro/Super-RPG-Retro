@@ -1,194 +1,74 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://2d/source/scripts/builder/library/cell_items.gd" type="Script" id=1]
-[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=2]
-[ext_resource path="res://2d/assets/themes/rounded_button.tres" type="Theme" id=3]
-[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=4]
-[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://2d/assets/themes/panel_blue.tres" type="Theme" id=6]
+[ext_resource path="res://3d/assets/images/cell_items/2.png" type="Texture" id=1]
+[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=4]
+[ext_resource path="res://2d/source/scripts/builder/library/cell_items.gd" type="Script" id=5]
+[ext_resource path="res://3d/assets/images/cell_items/0.png" type="Texture" id=6]
+[ext_resource path="res://3d/assets/images/cell_items/1.png" type="Texture" id=7]
+[ext_resource path="res://3d/assets/images/cell_items/100.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0392157, 0.411765, 0.52549, 0.313726 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.0392157, 0.313726, 0.392157, 0.313726 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.6, 0.6, 0.6, 0.313726 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_blend = true
-
 [node name="Node2D" type="Node2D" groups=["builder"]]
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 
-[node name="HeaderMenu" parent="." instance=ExtResource( 4 )]
+[node name="HeaderMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="CellButton1" type="Button" parent="."]
+margin_left = 146.0
+margin_top = 88.0
+margin_right = 216.0
+margin_bottom = 110.0
+text = "Empty"
+icon = ExtResource( 6 )
+
+[node name="CellButton2" type="Button" parent="."]
+margin_left = 8.0
+margin_top = 88.0
+margin_right = 36.0
+margin_bottom = 110.0
+icon = ExtResource( 7 )
+
+[node name="CellButton3" type="Button" parent="."]
+margin_left = 40.0
+margin_top = 88.0
+margin_right = 68.0
+margin_bottom = 110.0
+icon = ExtResource( 1 )
+
+[node name="CellButton99" type="Button" parent="."]
+margin_left = 72.0
+margin_top = 88.0
+margin_right = 100.0
+margin_bottom = 110.0
+icon = ExtResource( 8 )
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_top = 112.0
+margin_left = 8.0
+margin_top = 120.0
 margin_right = 1024.0
-margin_bottom = 568.0
+margin_bottom = 576.0
 mouse_filter = 2
-custom_styles/bg = SubResource( 5 )
-scroll_horizontal_enabled = false
+theme = ExtResource( 4 )
+custom_styles/bg = SubResource( 1 )
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 1024.0
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+columns = 100
+
+[node name="StatusBar" parent="." instance=ExtResource( 2 )]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 200, 40 )
-size_flags_horizontal = 3
-columns = 7
 
-[node name="Padding" type="Label" parent="Container/Grid"]
-margin_top = 4.0
-margin_right = 28.0
-margin_bottom = 18.0
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-text = "       "
-
-[node name="SceneName" type="Label" parent="Container/Grid"]
-margin_left = 32.0
-margin_top = 4.0
-margin_right = 232.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 200, 0 )
-custom_colors/font_color = Color( 0, 0, 0, 0 )
-text = " Scene."
-
-[node name="MusicName" type="Label" parent="Container/Grid"]
-margin_left = 236.0
-margin_top = 4.0
-margin_right = 534.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 298, 0 )
-custom_colors/font_color = Color( 0, 0, 0, 0 )
-text = " Music."
-
-[node name="Padding2" type="Label" parent="Container/Grid"]
-margin_left = 538.0
-margin_top = 4.0
-margin_right = 570.0
-margin_bottom = 18.0
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-text = "        "
-
-[node name="PlayButton" type="Label" parent="Container/Grid"]
-margin_left = 574.0
-margin_right = 606.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 32, 0 )
-theme = ExtResource( 3 )
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-
-[node name="StopButton" type="Label" parent="Container/Grid"]
-margin_left = 610.0
-margin_top = 4.0
-margin_right = 642.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 32, 0 )
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-
-[node name="Padding3" type="Label" parent="Container/Grid"]
-margin_left = 646.0
-margin_top = 4.0
-margin_right = 1024.0
-margin_bottom = 18.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-text = "    "
-
-[node name="Container2" type="ScrollContainer" parent="."]
-margin_top = 96.0
-margin_right = 1024.0
-margin_bottom = 136.0
-mouse_filter = 2
-theme = ExtResource( 6 )
-scroll_horizontal_enabled = false
-scroll_vertical_enabled = false
-
-[node name="Grid2" type="GridContainer" parent="Container2"]
-margin_right = 1024.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 200, 40 )
-size_flags_horizontal = 3
-columns = 6
-
-[node name="Padding" type="Label" parent="Container2/Grid2"]
-margin_right = 24.0
-margin_bottom = 22.0
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-text = "    "
-
-[node name="SceneName" type="Label" parent="Container2/Grid2"]
-margin_left = 28.0
-margin_right = 228.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 200, 0 )
-theme = ExtResource( 2 )
-text = " Scene."
-valign = 1
-
-[node name="MusicName" type="Label" parent="Container2/Grid2"]
-margin_left = 232.0
-margin_right = 552.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 320, 0 )
-theme = ExtResource( 2 )
-text = " Music."
-valign = 1
-
-[node name="PlayButton" type="Label" parent="Container2/Grid2"]
-margin_left = 556.0
-margin_right = 603.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 32, 0 )
-theme = ExtResource( 2 )
-text = "Play."
-valign = 1
-
-[node name="StopButton" type="Label" parent="Container2/Grid2"]
-margin_left = 607.0
-margin_right = 658.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 32, 0 )
-theme = ExtResource( 2 )
-text = "Stop."
-valign = 1
-
-[node name="Padding2" type="Label" parent="Container2/Grid2"]
-margin_left = 662.0
-margin_right = 1024.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-theme = ExtResource( 2 )
-custom_colors/font_color = Color( 1, 0.713726, 0.427451, 1 )
-text = "    "
-valign = 1
-
-[node name="StatusBar" parent="." instance=ExtResource( 5 )]
-
-[node name="SelectButton" type="Button" parent="."]
-margin_top = 135.0
-margin_right = 1025.0
-margin_bottom = 167.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-
+[connection signal="pressed" from="CellButton1" to="." method="_on_CellButton1_pressed"]
+[connection signal="pressed" from="CellButton2" to="." method="_on_CellButton2_pressed"]
+[connection signal="pressed" from="CellButton3" to="." method="_on_CellButton3_pressed"]
+[connection signal="pressed" from="CellButton99" to="." method="_on_CellButton99_pressed"]
 [connection signal="tree_exiting" from="StatusBar" to="." method="_on_StatusBar_tree_exiting"]
