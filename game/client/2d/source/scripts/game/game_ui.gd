@@ -229,6 +229,9 @@ func _input(event):
 				Variables._rune_currently_selected = -1
 				get_tree().call_group("rune_casting", "rune_position_hide")
 			
+			if Variables._at_library == false:
+				Variables._player_stop_moving = true
+			
 			# 0, -1 refers to x has no movement and y moves up.
 			get_tree().call_group("game_world", "try_move", 0, -1)
 			get_tree().call_group("rune_casting", "rune_turns")
@@ -241,10 +244,13 @@ func _input(event):
 				Variables._rune_currently_selected = -1
 				get_tree().call_group("rune_casting", "rune_position_hide")
 			
+			if Variables._at_library == false:
+				Variables._player_stop_moving = true
+				
 			get_tree().call_group("game_world", "try_move", 0, 1)
 			get_tree().call_group("rune_casting", "rune_turns")
 		
-			
+		
 	# listen for ESC to exit app
 	if(event.is_pressed()) && Variables._child_scene_open == false:
 		if(event.is_action_pressed("ui_escape", true)):

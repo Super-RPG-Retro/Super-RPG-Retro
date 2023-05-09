@@ -30,34 +30,19 @@ var moveDown = false
 var moveLeft = false
 var moveRight = false
 
-# camera rotation.
-var targetRotation = 0
 
 func _ready():
 	set_process_input(true)
 	
-	var _e = -1
-	
-	# place the player on the main map.	
-	for _y in range (100):
-		for _x in range (100):
-			_e += 1
-			if _e >= 10000:
-				break
-			
-			#if Builder_playing._library_cell_items.data.cell_items[_e] == 99:
-			# x, z, y
-	#self.move_and_collide(Vector3(-2, 0, -8))
-	
 
 func _process(_delta):
 	# continuous rotation of player in one direction would result in a value greater than 360. for easer programming if value is greater than 360, set back to 0
-	if targetRotation == -90:
-		targetRotation = 270
-	if targetRotation == 360:
-		targetRotation = 0
+	if Variables._player_target_rotation == -90:
+		Variables._player_target_rotation = 270
+	if Variables._player_target_rotation == 360:
+		Variables._player_target_rotation = 0
 	
-	rotation_degrees = Vector3(0, targetRotation, 0)
+	rotation_degrees = Vector3(0, Variables._player_target_rotation, 0)
 
 
 func _physics_process(_delta):
@@ -66,69 +51,77 @@ func _physics_process(_delta):
 		return
 			
 	if Input.is_action_pressed("ui_down") and _camera_movement == 0 and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
-		Variables._compass_update = true
-		Hud._loaded.Turns += 1
+		if Variables._player_stop_moving == false:
+			Variables._compass_update = true
+			Hud._loaded.Turns += 1
+			
+			if Variables._player_target_rotation == 0:
+				_movement_direction.z += amountMove
+			if Variables._player_target_rotation == 180:
+				_movement_direction.z -= amountMove
+			if Variables._player_target_rotation == 90:
+				_movement_direction.x += amountMove
+			if Variables._player_target_rotation == 270:
+				_movement_direction.x -= amountMove
+			
+			moveDown = true
 		
-		if targetRotation == 0:
-			_movement_direction.z += amountMove
-		if targetRotation == 180:
-			_movement_direction.z -= amountMove
-		if targetRotation == 90:
-			_movement_direction.x += amountMove
-		if targetRotation == 270:
-			_movement_direction.x -= amountMove
-		
-		moveDown = true
-		
+		else:
+			Variables._player_stop_moving = false
+			
 	# the player is not moving when moveUp value is false. if everything is ok then player can move.
 	if Input.is_action_pressed("ui_up") and _camera_movement == 0 and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
-		Variables._compass_update = true
-		Hud._loaded.Turns += 1
-		
-		# in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
-		if targetRotation == 0:
-			_movement_direction.z -= amountMove
-		if targetRotation == 180:
-			_movement_direction.z += amountMove
-		if targetRotation == 90:
-			_movement_direction.x -= amountMove
-		if targetRotation == 270:
-			_movement_direction.x += amountMove
+		if Variables._player_stop_moving == false:
+			Variables._compass_update = true
+			Hud._loaded.Turns += 1
 			
-		moveUp = true
-		
+			# in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
+			if Variables._player_target_rotation == 0:
+				_movement_direction.z -= amountMove
+			if Variables._player_target_rotation == 180:
+				_movement_direction.z += amountMove
+			if Variables._player_target_rotation == 90:
+				_movement_direction.x -= amountMove
+			if Variables._player_target_rotation == 270:
+				_movement_direction.x += amountMove
+				
+			moveUp = true
+			
+		else:
+			Variables._player_stop_moving = false
+			
 	# if player is requesting to move left, set moveLeft var to true so that anymore movement requests are ignore so that the player can finish moving from one block to the next.
 	if Variables._compass_update == false && Input.is_action_pressed("ui_left") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
-		targetRotation += amountAngle
+		Variables._player_target_rotation += amountAngle
 		moveLeft = true
 		
 	if Variables._compass_update == false && Input.is_action_pressed("ui_right") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
-		targetRotation -= amountAngle
+		Variables._player_target_rotation -= amountAngle
 		moveRight = true
 			
 	if _camera_movement < 15 and moveDown == true || _camera_movement < 15 and moveUp == true:
 		_camera_movement += 1
 		var _mas = move_and_slide(_movement_direction, Vector3(0,1,0))
 			
-		# depending on the direction of targetRotation, move the player.
+		# depending on the direction of Variables._player_target_rotation, move the player.
 		if moveDown == true:
-			if targetRotation == 0:
+			if Variables._player_target_rotation == 0:
 				_movement_direction.z += amountMove
-			if targetRotation == 180:
+			if Variables._player_target_rotation == 180:
 				_movement_direction.z -= amountMove
-			if targetRotation == 90:
+			if Variables._player_target_rotation == 90:
 				_movement_direction.x += amountMove
-			if targetRotation == 270:
+			if Variables._player_target_rotation == 270:
 				_movement_direction.x -= amountMove
 			
 		if moveUp == true:
-			if targetRotation == 0:
+			if Variables._player_target_rotation == 0:
 				_movement_direction.z -= amountMove
-			if targetRotation == 180:
+			if Variables._player_target_rotation == 180:
 				_movement_direction.z += amountMove
-			if targetRotation == 90:
+			if Variables._player_target_rotation == 90:
 				_movement_direction.x -= amountMove
-			if targetRotation == 270:
+			if Variables._player_target_rotation == 270:
 				_movement_direction.x += amountMove
 		
 		if _camera_movement == 5:
@@ -146,10 +139,10 @@ func _physics_process(_delta):
 			_camera_rotation += amountAngle
 						
 			if moveLeft == true:
-				targetRotation += amountAngle
+				Variables._player_target_rotation += amountAngle
 				
 			if moveRight == true:
-				targetRotation -= amountAngle
+				Variables._player_target_rotation -= amountAngle
 				
 		else:
 			Variables._compass_update = true

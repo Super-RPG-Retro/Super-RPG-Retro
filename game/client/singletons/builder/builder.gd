@@ -31,7 +31,7 @@ var _event_tasks = load("res://singletons/builder/events/tasks.gd").new()
 var _dictionary_artifacts = load("res://singletons/builder/dictionaries/artifacts.gd").new()
 var _audio_music = load("res://singletons/builder/audio/music.gd").new()
 
-var _library_cell_items = load("res://singletons/builder/library/cell_items.gd").new()
+var _library_cell = load("res://singletons/builder/library/cells.gd").new()
 
 # at the builder home scene, these are the options. the game id is used at Builder._data as a number index, to seperate the builder games from each other. game id 0 has a game title of "Super RPG Retro"
 var _config = {
@@ -330,7 +330,7 @@ func all_array_append():
 		
 	_dictionary_artifacts.all_array_append()
 	_audio_music.all_array_append()
-	_library_cell_items.all_array_append()
+	_library_cell.all_array_append()
 	
 		
 # at builder project menu, request to reset game data has been made. the id of the game is passed to this constructor.
@@ -384,7 +384,7 @@ func reset_game(x: int):
 
 	_dictionary_artifacts.reset_game()
 	_audio_music.reset_game()
-	_library_cell_items.reset_game()
+	_library_cell.reset_game()
 		
 	# recreate the arrays in this func.
 	Builder.all_array_append()
@@ -412,7 +412,7 @@ func _all_init():
 	_event_inventory.init()
 	_dictionary_artifacts.init()
 	_audio_music.init()
-	_library_cell_items.init()
+	_library_cell.init()
 	
 
 func _exit_tree():
@@ -424,6 +424,6 @@ func _exit_tree():
 
 	_dictionary_artifacts.queue_free()
 	_audio_music.queue_free()
-	_library_cell_items.queue_free()
+	_library_cell.queue_free()
 	
 	queue_free()

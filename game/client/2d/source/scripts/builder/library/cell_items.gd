@@ -20,7 +20,7 @@ var _grid_child 	= []
 var _image 			= []
 
 # increments array elements.
-var _e = -1
+var _e = 0
 
 # cell button number
 var _b = 0
@@ -41,14 +41,13 @@ func _ready():
 func _draw_cells():
 	for _y in range (100):
 		for _x in range (100):
-			_e += 1
 			if _e >= 10000:
 				break
 			
 			# image representing to mesh library cell.
 			_image.append(Vector3(_x, _y, 0))
 			_image[_e] = Button.new()
-			_image[_e].icon = load("res://3d/assets/images/cell_items/"+ str(Builder._library_cell_items.data.cell_items[_e] + 1) +".png")
+			_image[_e].icon = load("res://3d/assets/images/cells/"+ str(Builder._library_cell.data.cell_item[_e]) +".png")
 			_grid.add_child(_image[_e])
 			
 			# remove the signal..
@@ -58,9 +57,11 @@ func _draw_cells():
 			# create the signal.
 			var _z = _image[_e].connect("pressed", self, "_on_pressed", [_e])
 	
-
+			_e += 1
+			
+			
 func _on_pressed(_e_current):
-	_e = -1	
+	_e = 0
 	
 	# only 1 player allowed on map. clear map of all player image before placing player image on map.
 	for _y in range (100):
@@ -69,12 +70,12 @@ func _on_pressed(_e_current):
 			if _e >= 10000:
 				break
 			
-			if _b == 99 && Builder._library_cell_items.data.cell_items[_e] == 99:
-				Builder._library_cell_items.data.cell_items[_e] = 0
-				_image[_e].icon = load("res://3d/assets/images/cell_items/0.png")
+			if _b >= 96 && _b <= 99 && Builder._library_cell.data.cell_item[_e] >= 96 && Builder._library_cell.data.cell_item[_e] <= 99:
+				Builder._library_cell.data.cell_item[_e] = 0
+				_image[_e].icon = load("res://3d/assets/images/cells/0.png")
 			
-	_image[_e_current].icon = load("res://3d/assets/images/cell_items/"+ str(_b + 1) +".png")
-	Builder._library_cell_items.data.cell_items[_e_current] = _b
+	_image[_e_current].icon = load("res://3d/assets/images/cells/"+ str(_b) +".png")
+	Builder._library_cell.data.cell_item[_e_current] = _b
 	
 
 func _on_StatusBar_tree_exiting():
@@ -90,18 +91,33 @@ func _return_to_main_menu():
 
 
 func _on_CellButton1_pressed():
-	_b = -1
+	_b = 0
 
 
 func _on_CellButton2_pressed():
-	_b = 0
+	_b = 1
 	
 
 func _on_CellButton3_pressed():
-	_b = 1
+	_b = 2
 
 
-# location of player.
-func _on_CellButton99_pressed():
+# location of player. player's starting position standing normal.
+func _on_CellButton_player_96_pressed():
+	_b = 96
+	
+
+# location of player. player's starting position rotated 270 degrees.
+func _on_CellButton_player_97_pressed():
 	_b = 99
 	
+
+# location of player. player's starting position rotated 180 degrees.
+func _on_CellButton_player_98_pressed():
+	_b = 98
+	
+
+# location of player. player's starting position rotated 90 degrees.
+func _on_CellButton_player_99_pressed():
+	_b = 97
+

@@ -354,7 +354,7 @@ func delete_builder_playing_data():
 	
 	Filesystem.delete_builder_playing_data("user://saved_data/builder_playing__starting_skills_" + str(Variables._id_of_loaded_game) + ".txt")
 	
-	Filesystem.delete_builder_playing_data("user://saved_data/builder_library_cell_items_" + str(Variables._id_of_loaded_game) + ".txt")
+	Filesystem.delete_builder_playing_data("user://saved_data/builder_library_cells_" + str(Variables._id_of_loaded_game) + ".txt")
 	
 	
 # returns true if the string contains only letters.

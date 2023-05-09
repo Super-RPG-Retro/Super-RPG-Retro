@@ -13,21 +13,19 @@ You should have received a copy of the GNU Affero General Public License along w
 # remember to delete the settings file at user:// after adding something here, else you will receive a run time error.
 extends Node
 var data = {
-	"mesh_library": 			[],
-	"cell_items":		[],
+	# all cell mesh, player and items etc. this var is used to create the library.
+	"cell_item":					[],
+	"player_starting_direction":	0,	# when game first starts.
 }
 	
 func init():
 	data = {	
-	"mesh_library": 			[],
-	"cell_items":		[],
+	"cell_item":					[],
+	"player_starting_direction":	0,
 }	
 	
 
-func all_array_append():	
-	for _n in range (10):
-		data.mesh_library.append([])
-	
+func all_array_append():		
 	var _e = -1
 	
 	for _y in range (100):
@@ -36,17 +34,17 @@ func all_array_append():
 			if _e >= 10000:
 				break
 				
-			data.cell_items.append(-1)
+			data.cell_item.append(0)
 
 
 func reset_game():
-	data.mesh_library.clear()
-	data.cell_items.clear()
+	data.cell_item.clear()
+	data.player_starting_direction = 0
 	
 	# recreate the arrays in this func.
 	all_array_append()
 	
-	Filesystem.save("user://saved_data/builder_library_cell_items_" + str(Builder._config.game_id) + ".txt", Builder._library_cell_items.data)
+	Filesystem.save("user://saved_data/builder_library_cells_" + str(Builder._config.game_id) + ".txt", Builder._library_cell.data)
 	
 
 func _exit_tree():

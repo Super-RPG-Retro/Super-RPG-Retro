@@ -12,7 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends GridMap
 
+onready var _player = $Player
 
+ 
 func _ready():
 	var _e = -1
 	
@@ -24,5 +26,10 @@ func _ready():
 				break
 			
 			# x, z, y, block id.
-			self.set_cell_item(_x, 0, _y, Builder_playing._library_cell_items.data.cell_items[_e])
-
+			self.set_cell_item(_x, 0, _y, Builder_playing._library_cell.data.cell_item[_e] - 1)
+	
+			if Builder_playing._library_cell.data.cell_item[_e] >= 96 && Builder_playing._library_cell.data.cell_item[_e] <= 99:
+				_player.transform.origin.x = (_x * 2) + 1
+				_player.transform.origin.z = (_y * 2) + 1
+	
+				Variables._player_target_rotation = (Builder_playing._library_cell.data.cell_item[_e] - 96) * 90

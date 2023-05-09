@@ -561,12 +561,12 @@ func builder_load_data():
 		
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_library_cell_items_" + str(Builder._config.game_id) + ".txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_library_cells_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
-		Builder._library_cell_items.data = _temp 
+		Builder._library_cell.data = _temp 
 		
-	Builder_playing._library_cell_items.data = Builder._library_cell_items.data.duplicate(true)	
+	Builder_playing._library_cell.data = Builder._library_cell.data.duplicate(true)	
 	
 	
 	
@@ -649,10 +649,10 @@ func builder_playing_load_data():
 	
 	
 	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cell_items.txt")
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cells.txt")
 	
 	if _temp != null:
-		Builder_playing._library_cell_items.data = _temp
+		Builder_playing._library_cell.data = _temp
 
 
 # save all builder data.
@@ -681,7 +681,7 @@ func builder_save_data():
 	
 	Filesystem.save("user://saved_data/builder_starting_skills_" + str(Builder._config.game_id) + ".txt", Builder._starting_skills)
 	
-	Filesystem.save("user://saved_data/builder_library_cell_items_" + str(Builder._config.game_id) + ".txt", Builder._library_cell_items.data)
+	Filesystem.save("user://saved_data/builder_library_cells_" + str(Builder._config.game_id) + ".txt", Builder._library_cell.data)
 	
 	
 # these are the builder vars used while playing. these vars are loaded here from disk.
@@ -706,7 +706,7 @@ func builder_playing_save_data():
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/dictionary_starting_skills.txt", Builder_playing._starting_skills)
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cell_items.txt", Builder_playing._library_cell_items.data)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/builder_library_cells.txt", Builder_playing._library_cell.data)
 
 
 
