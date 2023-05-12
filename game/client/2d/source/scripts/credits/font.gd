@@ -17,7 +17,7 @@ func _ready() -> void:
 	bbcode_enabled = true
 	bbcode_text = "Fonts used.\nXolonium font by [color=#bbbbff][url=_link]Severin Meyer[/url][/color]. Black Chancery font by [color=#bbbbff][url=_link2]Earl Allen/Doug Miles[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	var _s = connect("meta_clicked", self, "call")
 
 
 func _link():

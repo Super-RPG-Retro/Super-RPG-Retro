@@ -20,7 +20,7 @@ func _ready() -> void:
 	connect("meta_clicked", self, "call")
 
 func _link():
-	OS.shell_open("https://opengameart.org/content/sfx-the-ultimate-2017-16-bit-mini-pack/") 
+	var _s = OS.shell_open("https://opengameart.org/content/sfx-the-ultimate-2017-16-bit-mini-pack/") 
 	
 
 func _link2():

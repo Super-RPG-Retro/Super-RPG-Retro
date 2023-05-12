@@ -40,6 +40,9 @@ var _do_once_at_scene_load = true
 
 
 func _ready():
+	# stat text will not draw to scene when mouse is outside of app.
+	get_viewport().warp_mouse(Vector2(512, 330))
+	
 	if Variables._at_scene == Enum.Scene.Game_UI:
 		$ButtonExit.visible = true
 	
