@@ -1,12 +1,12 @@
 ### Summary
-This game is currently a work in progress. Programmed in Godot. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Music copyright Jim Paterson, https://www.mfiles.co.uk/. Used for Super RPG Retro with his permission.
+This game is currently a work in progress. Programmed in Godot 3.5. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Music copyright Jim Paterson, https://www.mfiles.co.uk/. Used for Super RPG Retro with his permission.
 
 
 
-![This image shows the main menu, where the user loads game data or saves game data.](https://github.com/Super-RPG-Retro/Super-RPG-Retro/blob/main/images/main_menu_scene.png)
-![This image shows a 3D maze, called the library, where the player can access other dungeons.](https://github.com/Super-RPG-Retro/Super-RPG-Retro/blob/main/images/library_scene.png)
-![This image shows a small playable map, so that more of the client features are shown.](https://github.com/Super-RPG-Retro/Super-RPG-Retro/blob/main/images/game_world_small_map.png)
-![This image shows a large playable map. The game layout can be customized.](https://github.com/Super-RPG-Retro/Super-RPG-Retro/blob/main/images/game_world_large_map.png)
+![This image shows the main menu, where the user loads game data or saves game data.](./images/main_menu_scene.png)
+![This image shows a 3D maze, called the library, where the player can access other dungeons.](./images/library_scene.png)
+![This image shows a small playable map, so that more of the client features are shown.](./images/game_world_small_map.png)
+![This image shows a large playable map. The game layout can be customized.](./images/game_world_large_map.png)
 
 
 
