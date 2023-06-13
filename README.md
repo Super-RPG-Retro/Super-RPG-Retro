@@ -1,3 +1,6 @@
+Procedurally Generated dungeons. Game inspired by Lufia 2 and legacy of the ancients.
+
+
 ### Summary
 This game is currently a work in progress. Programmed in Godot 3.5. Help make this a great game. A team of volunteers needed. Join the [Super RPG Retro](https://discord.gg/b8damxvwX8) discord server. Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute. The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Music copyright Jim Paterson, https://www.mfiles.co.uk/. Used for Super RPG Retro with his permission.
 
