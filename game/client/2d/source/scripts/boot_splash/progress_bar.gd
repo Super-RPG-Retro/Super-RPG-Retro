@@ -144,7 +144,7 @@ func _process(_delta):
 	
 	
 func _input(event):	
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
+	if event is InputEventScreenTouch || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
 		if _can_go_to_main_menu == true:
 			$PressStart.modulate = Color(1, 1, 1, 1)
 		

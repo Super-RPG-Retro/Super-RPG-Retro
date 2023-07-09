@@ -155,6 +155,29 @@ var d:Dictionary = {
 	}
 
 func _ready():
+	var dir = Directory.new()
+	if not dir.dir_exists("res://bundles/builder/magic/data"):
+		dir.make_dir("res://bundles/builder/magic/data")
+		
+	if not dir.dir_exists("res://bundles/builder/artifacts"):
+		dir.make_dir("res://bundles/builder/artifacts")
+						
+	if not dir.dir_exists("res://bundles/builder/objects/data"):
+		dir.make_dir("res://bundles/builder/objects/data")
+		
+	if not dir.dir_exists("res://bundles/builder/objects/images"):
+		dir.make_dir("res://bundles/builder/objects/images")	
+	
+	if not dir.dir_exists("res://bundles/builder/objects/images/dictionaries"):
+		dir.make_dir("res://bundles/builder/objects/images/dictionaries")
+	
+	# after downloading the archive from the Super-RPG-Retro repository at github, the empty builder folders do not exist so they have to be created here.
+	if not dir.dir_exists("res://bundles/builder/objects/system/data/mobs"):
+		dir.make_dir("res://bundles/builder/objects/system/data/mobs")
+	
+	if not dir.dir_exists("res://bundles/builder/objects/system/images/dictionaries/mobs"):
+		dir.make_dir("res://bundles/builder/objects/system/images/dictionaries/mobs")
+	
 	make_directories()
 	
 	
