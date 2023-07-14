@@ -14,7 +14,7 @@ extends Node2D
 
 func _ready():
 	Variables._at_scene = Enum.Scene.Settings_system
-	Variables._scene_title = "Configuration Variables."
+	Variables._scene_title = "Settings System."
 	
 	get_node("Container").set_follow_focus(true)		
 	get_node("Container/Grid/Music").grab_focus()

@@ -28,7 +28,7 @@ func _process(_delta):
 
 # this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
 func _scancode_if_pressed_enter(event):
-	if event is InputEventMouse:
+	if event is InputEventScreenTouch || event is InputEventMouse:
 		Variables.a.pressed = true # change to false to simulate a key release
 		Variables.a.scancode = KEY_ENTER
 			

@@ -17,8 +17,8 @@ onready var _menu_project = $MenuProject
 func _ready():
 	_menu_project.grab_focus()
 
-func _input(event):
-	if $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true || $MenuLibrary.has_focus() == true:
+func _gui_input(event):
+	if $SceneHeader/ButtonExit.has_focus() == true || $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true || $MenuLibrary.has_focus() == true:
 		Variables.a.scancode = 0
 		
 	else:
