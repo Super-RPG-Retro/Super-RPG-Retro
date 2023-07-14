@@ -1,6 +1,6 @@
 Procedurally generated dungeons with a game construction kit. Game inspired by Lufia 2 and legacy of the ancients.
 
-# [Home](README.MD) | [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
+# [Home]() | [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
 Join the Super RPG Retro [discord server](https://discord.gg/b8damxvwX8). Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute.
 
