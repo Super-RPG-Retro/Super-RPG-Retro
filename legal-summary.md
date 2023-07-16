@@ -1,3 +1,5 @@
+This page summarizes the GNU Affero General Public License that Super RPG Retro is licensed under and lists copyright notices and/or webpage links referring to files that Super RPG Retro uses.
+
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
 Join the Super RPG Retro [discord server](https://discord.gg/b8damxvwX8). Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute.

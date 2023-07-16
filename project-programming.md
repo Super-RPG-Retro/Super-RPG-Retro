@@ -1,3 +1,5 @@
+You need to understand the following things before you do Super RPG Retro programming. Including tips and advice that may improve one's programming skills.
+
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
 Join the Super RPG Retro [discord server](https://discord.gg/b8damxvwX8). Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute.
