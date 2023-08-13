@@ -1,17 +1,19 @@
+# Home page.
+
 Procedurally generated dungeons with a game construction kit. Game inspired by Lufia 2 and legacy of the ancients.
 
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
 Join the Super RPG Retro [discord server](https://discord.gg/b8damxvwX8). Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute.
 
-![This 3D maze is called the library. The player can enter any dungeon from the library.](./images/library_scene.png)
-<br/><br/>
-This 3D maze is called the library. The player can enter any dungeon from the library.
-<br/><br/><br/><br/>
-
 ![This image shows a small playable map so that more of the client features are shown.](./images/game_world_small_map.png)
 <br/><br/>
 This image shows a small playable map so that more of the client features are shown.
+<br/><br/><br/><br/>
+
+![This 3D maze is called the library. The player can enter any dungeon from the library.](./images/library_scene.png)
+<br/><br/>
+This 3D maze is called the library. The player can enter any dungeon from the library.
 <br/><br/><br/><br/>
 
 ### Summary
@@ -65,4 +67,4 @@ Game play can be configured to look exactly the same every time you play it or t
 * Option for the player to return to the last level of a dungeon.
 * Option to continue a saved game.
 
-Currently, some features do not work as intended and some places in code are spaghetti. The idea is to update this game to Godot 4.1. The code will then be organized using the DRY, KISS and SOILD principles for future programmers. See [project Programming](project-programming.md) for more information.
+Currently, some features do not work as intended and some places in code are spaghetti. The idea is to update this game to Godot 4.2 dev 1. The code will then be organized using the DRY, KISS and SOLID principles for future programmers. See [project Programming](project-programming.md) for more information.

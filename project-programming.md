@@ -1,4 +1,11 @@
-You need to understand the following things before you do Super RPG Retro programming. Including tips and advice that may improve one's programming skills.
+---
+title: Project Programming.
+description: This page explains how Super RPG Retro is constructed and gives tips and advice that may improve one's programming skills.
+---
+
+# Project Programming.
+
+This page explains how Super RPG Retro is constructed and gives tips and advice that may improve one's programming skills.
 
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
@@ -21,7 +28,7 @@ When you run the game, at the splash scene, a check will be made at the users_di
 
 builder_dir/objects/system/images to builder_dir/objects/images/#
 
-builder_dir/bjects/system/data to builder_dir/objects/data/#
+builder_dir/objects/system/data to builder_dir/objects/data/#
 
 builder_dir/magic/system/data to builder_dir/magic/data/#
 
@@ -44,13 +51,15 @@ If the game crashes, search for the word TODO in the .gd files and then read tho
 
 A good practice to increase the performance of your code:
 
-var Peter:int = 0
+var Peter := 0
 
-notice the int instead of...
+notice the variable is inferred. Do not use...
 
-var Peter = 0
+var Peter :int = 0
 
-All dungeons are procedurally generated. However, levels will have the same layout if their room size and room number amount match.
+You might notice that large arrays will take 2 time longer to process in godot 4.2 dev 1 when using a data type.
+
+All dungeons are procedurally generated. However, levels will have the same layout if their room size and room number amount match. This could be an added feature for game settings.
 
 you can do...
 
@@ -74,4 +83,4 @@ Load godot, go to project settings, search for compression, and set all options 
 
 When printing something to console, remember to add a hint to your code so you know where the print statement is.
 
-When importing a 3d gridmap, enable detect 3d filter and mipmaps. 3d blocks that you use to draw on the map are stored in the blocks_museum.tscn file.
+When importing a 3d gridmap, enable detect 3d filter and mipmaps. 3d blocks that you use to draw on the map are stored in the gridmap.tscn file.

@@ -1,3 +1,10 @@
+---
+title: Screenshots.
+description: This page displays some screenshots of the Super RPG Retro software. The following images may not be current.
+---
+
+# Screenshots.
+
 This page displays some screenshots of the Super RPG Retro software. The following images may not be current.
 
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)

@@ -1,3 +1,10 @@
+---
+title: Legal Summary
+description: This page summarizes the GNU Affero General Public License that Super RPG Retro is licensed under and lists copyright notices and/or webpage links referring to files that Super RPG Retro uses.
+---
+
+# Legal Summary.
+
 This page summarizes the GNU Affero General Public License that Super RPG Retro is licensed under and lists copyright notices and/or webpage links referring to files that Super RPG Retro uses.
 
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
