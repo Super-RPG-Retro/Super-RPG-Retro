@@ -13,18 +13,19 @@ You should have received a copy of the GNU Affero General Public License along w
 # this file holds the dictionary data for each inventory item. the display of these items are at the inventory panel.
 extends Node
 
-var _item_total:int = 0
 
-var _file_name = []
-var _file_path = []
-var _image_texture = []
-var _directory_name = []
+var _item_total			:= 0
 
-var _paper = {
+var _file_name 			:= []
+var _file_path 			:= []
+var _image_texture 		:= []
+var _directory_name 	:= []
+
+var _paper := {
 				"Description": "Increments your score by 1.",
 }
 
-var _potion = {
+var _potion := {
 			"potion_impair_vision": 
 			{
 				"ID": 0,
@@ -79,7 +80,7 @@ func build():
 	for _w in range (8): # dungeon number
 		for _x in range (100): # event number
 			for _y in range (20):
-				if Builder._event_inventory.data.file_name[Builder._config.game_id][_w][_x][_y].empty() == false:
+				if Builder._event_inventory.data.file_name[Builder._config.game_id][_w][_x][_y].is_empty() == false:
 					for _r in range (Builder._event_inventory.data.file_name[Builder._config.game_id][_w][_x][_y].size()): 	
 						# Builder._event_inventory.data.file_name was populated at builder. the _file_name here can be access using Inventory._file_name[1, 2, etc]
 						# the directory name here can be used at Json.gd to get its description or any other data that is needed.

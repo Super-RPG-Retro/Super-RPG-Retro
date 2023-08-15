@@ -14,8 +14,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # name of a tile, plus level player is at. eg wall_1.
-var _dungeon1 = {
+var _dungeon1 := {
 		"level_1":
 			{
 				"Wall": 

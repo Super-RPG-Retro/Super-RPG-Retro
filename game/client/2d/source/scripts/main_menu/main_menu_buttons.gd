@@ -13,39 +13,28 @@ You should have received a copy of the GNU Affero General Public License along w
 # main menu buttons.
 extends Node2D
 
-onready var _music_intro = $MusicIntro
-
 # if true, the music will not play again until this scene reentry.
-var _music_stop:bool = false
+var _music_stop := false
 
 # a message saying that after clicking the play buttom, the username is currently empty.
-onready var _empty_username_dialog = $EmptyUsernameDialog
+@onready var _empty_username_dialog := $EmptyUsernameDialog
 
 # dialog shown after the selected game was delete.
-onready var _delete_game_dialog = $DeleteGameDialog
+@onready var _delete_game_dialog := $DeleteGameDialog
 
 # confirmation before selected game is deleted.
-onready var _saved_confirmation_dialog = $SavedConfirmationDialog
+@onready var _saved_confirmation_dialog := $SavedConfirmationDialog
 
 # new button
-onready var _new_confirmation_dialog = $NewConfirmationDialog
+@onready var _new_confirmation_dialog = $NewConfirmationDialog
 
 # this holds the username data.
-onready var _username_line_edit = $GameDataPanel/GridContainer/GridContainer/UsernameLineEdit
+@onready var _username_line_edit = $GameDataPanel/GridContainer/GridContainer/UsernameLineEdit
 
 # saved game id.
-onready var _saved_id = $GameDataPanel/GridContainer/GridContainer/SpinBoxSavedID
+@onready var _saved_id = $GameDataPanel/GridContainer/GridContainer/SpinBoxSavedID
 
-onready var _button_new = $GameDataPanel/GridContainer/ButtonNew
-onready var _button_save = $GameDataPanel/GridContainer/ButtonSave
-onready var _button_load = $GameDataPanel/GridContainer/ButtonLoad
-onready var _button_delete = $GameDataPanel/GridContainer/ButtonDelete
-onready var _button_play = $GameDataPanel/GridContainer/ButtonPlay
-
-# a tranparent panel displayed overtop of the scene. shown when a dialog box is displayed. used to fade the rest of the scene.
-onready var _scene_unfocused_panel = $SceneUnfocusedPanel
-
-onready var _node = get_tree().get_current_scene().get_name()
+@onready var _node = get_tree().get_current_scene().get_name()
 
 
 func _ready():
@@ -78,15 +67,13 @@ func _ready():
 	else:
 		Variables._id_of_loaded_game = 0
 	
-	var _file = File.new()
-	if _file.file_exists("user://saved_data/is_this_new_data.txt") == true:
+	if FileAccess.file_exists("user://saved_data/is_this_new_data.txt") == true:
 		_temp = Filesystem.load_int("user://saved_data/is_this_new_data.txt")
 		
 		Variables._is_this_new_data = bool(_temp)
 		
 	else:
 		Variables._is_this_new_data = true
-	
 	
 	_on_saved_ID_spinBox_value_changed(Variables._id_of_saved_game)
 	
@@ -105,7 +92,8 @@ func _input(event):
 			_username_line_edit.focus_mode = Control.FOCUS_ALL
 			_username_line_edit.grab_focus()
 		
-			
+		
+func _gui_input(event):			
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_new", true)):
 			_on_ButtonNew_pressed()
@@ -124,8 +112,6 @@ func _input(event):
 		
 func _on_ButtonNew_pressed():
 	Variables._id_of_loaded_game_temp = -1
-	_scene_unfocused_panel.visible = true
-	
 	_new_confirmation_dialog.dialog_text = "New game at Game ID " + str(_saved_id.value) + "?"
 		
 	_new_confirmation_dialog.popup_centered()
@@ -133,12 +119,10 @@ func _on_ButtonNew_pressed():
 
 func _on_new_confirmation_dialog():
 	Variables._is_this_new_data = true
-	get_tree().call_group("main_menu", "enable_settings_game_scene")
 	
 	Filesystem.save("user://saved_data/is_this_new_data.txt", true)	
 	
 	P._update_character_stats_loaded()
-	Settings._reset_game()
 	
 	P._xp_next = P._xp_level[P._level + 1]
 	P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
@@ -176,8 +160,6 @@ func _on_ButtonSave_pressed():
 		_save_game_data() 
 		
 	else:		
-		_scene_unfocused_panel.visible = true
-		
 		# after clicking the dialog, code will go to the _save_game() func.
 		$SaveConfirmationDialog.dialog_text = "Overwrite game data at Game ID " + str(Variables._id_of_saved_game) + "?" 
 		$SaveConfirmationDialog.popup_centered()
@@ -189,8 +171,7 @@ func _save_game():
 		var _does_file_exist2
 		
 		# determine if file exists	
-		var _file = File.new()
-		var _does_file_exist =  _file.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+		var _does_file_exist =  FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
 		
 		if _does_file_exist == true:
 			# try again to delete data.
@@ -199,7 +180,7 @@ func _save_game():
 			
 			# determine if file was removed.
 			# TODO need to display a message if this fails.
-			_does_file_exist2 = _file.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+			_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
 	
 	_save_game_data()
 	
@@ -240,8 +221,7 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	if _bypass == false:
 		
 		# determine if game exists.
-		var _file = File.new()
-		if !_file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+		if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
 			$NoGameIDexists.dialog_text = "No game exists for Game ID " + str(Variables._id_of_saved_game)
 			
 			$NoGameIDexists.popup_centered()
@@ -321,13 +301,10 @@ func _on_ButtonDelete_pressed():
 	Variables._id_of_saved_game_temp = -1
 	
 	# determine if file was removed
-	var _file = File.new()
-	var	_does_file_exist = _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+	var	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
 	
 	# only show a dialog box if there are data to delete.
 	if _does_file_exist == true:	
-		_scene_unfocused_panel.visible = true
-		
 		_saved_confirmation_dialog.dialog_text = "Delete game at Game ID " + str(Variables._id_of_saved_game) + "?"
 		
 		_saved_confirmation_dialog.popup_centered()
@@ -337,19 +314,20 @@ func _on_SavedConfirmationDialog_confirmed():
 	var _does_file_exist
 	var _does_file_exist2 # verification of data.
 	
+	Settings._reset_game()
+	$"../SettingsGame".visible = true
+	
 	# determine if file exists	
-	var _file = File.new()
-	_does_file_exist = _file.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
 	
 	if _does_file_exist == true:
 		Filesystem._delete_game_data()
 		
 		# determine if file was removed
-		_does_file_exist2 = _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
 	
 	# if file existed and was removed then show dialog box.
-	if _does_file_exist == true && _does_file_exist2 == false:
-		_scene_unfocused_panel.visible = true
+	if _does_file_exist2 == false:
 		_delete_game_dialog.popup_centered()
 		
 		get_tree().call_group("stats_saved", "stats_saved_empty")
@@ -357,15 +335,13 @@ func _on_SavedConfirmationDialog_confirmed():
 
 func _on_ButtonPlay_pressed():
 	# determine if game exists.
-	var _file = File.new()
-	if !_file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+	if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
 		$NoGameIDexists.dialog_text = "No game exists for Game ID " + str(Variables._id_of_saved_game)
 		$NoGameIDexists.popup_centered()
 		return
 	
 		# username is empty. do not start the game.
 	if Variables._is_this_new_data == true:
-		_scene_unfocused_panel.visible = true
 		_empty_username_dialog.dialog_text = "Cannot start game with no loaded data."
 		_empty_username_dialog.popup_centered()
 		return
@@ -392,12 +368,12 @@ func _on_ButtonPlay_pressed():
 	
 	Filesystem.builder_playing_load_data()
 	
-	var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/game/game_ui.tscn")
 		
 
 func _on_LineEdit_text_changed(_text):
 	# get the caret position and clear the line edit. the new line edit _text will be searched using regex for valid characters.
-	var old_caret_position = _username_line_edit.caret_position
+	var old_caret_position = _username_line_edit.caret_column
 	_username_line_edit.text = ""
 	
 	# players can only create an account using only letters and numbers. comma is used as a reserved character so no special characters are used.
@@ -409,38 +385,12 @@ func _on_LineEdit_text_changed(_text):
 	for valid_character in regex.search_all(_text):
 		_username_line_edit.text += valid_character.get_string()
 
-	_username_line_edit.caret_position = old_caret_position
+	_username_line_edit.caret_column = old_caret_position
 	
 	P.character_stats[str(P._number)]["_saved"].Username = _text
 	
 
-func _on_EmptyUsernameDialog_modal_closed():
-	_scene_unfocused_panel.visible = false
-
-
-func _on_EmptyUsernameDialog_hide():
-	if _scene_unfocused_panel != null:
-		_scene_unfocused_panel.visible = false
-
-
-func _on_DeleteGameDialog_modal_closed():
-	_scene_unfocused_panel.visible = false
-
-
-func _on_DeleteGameDialog_hide():
-	if _scene_unfocused_panel != null:
-		_scene_unfocused_panel.visible = false
-
-
-func _on_SaveConfirmationDialog_hide():
-	if _scene_unfocused_panel != null:
-		_scene_unfocused_panel.visible = false
-
-
 func _on_SaveConfirmationDialog_confirmed():
-	if _scene_unfocused_panel != null:
-		_scene_unfocused_panel.visible = false
-
 	_save_game()
 
 
@@ -458,8 +408,7 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt")
 	if _temp != null:
 		Hud._saved = _temp
-	
-	
+		
 	# save stats dictionary
 	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 	if _temp != null:
@@ -467,14 +416,23 @@ func _on_saved_ID_spinBox_value_changed(_value):
 		
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 		
+		$"../SettingsGame".visible = false
+		
 	else:
 		
 		get_tree().call_group("stats_saved", "stats_saved_empty")
-	
-	
-
+		
+		$"../SettingsGame".visible = true		
+		
+	# load settings game file.
+	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt")
+		
+	if _temp != null:
+		Settings._game = _temp
+		
+	else:
+		Settings._reset_game()	
+		
+		
 func _on_NoDataDialog_confirmed():
-	if _scene_unfocused_panel != null:
-		_scene_unfocused_panel.visible = false
-		
-		
+	pass	

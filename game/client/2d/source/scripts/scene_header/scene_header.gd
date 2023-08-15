@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _label = $Label
+
+@onready var _label := $Label
 
 
 func _process(_delta):

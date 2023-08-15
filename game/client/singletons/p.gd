@@ -17,8 +17,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # player characters.
-var character_name:Dictionary = {
+var character_name := {
 	"0": "Maxim",
 	"1": "Tia",
 	"2": "Dekar",
@@ -30,7 +31,7 @@ var character_name:Dictionary = {
 }
 
 # c = player character number.
-var character_stats:Dictionary = {
+var character_stats := {
 	"0": {},	
 	"1": {},
 	"2": {},
@@ -41,10 +42,10 @@ var character_stats:Dictionary = {
 }
 
 # current character number.
-var _number:int = 0
+var _number := 0
 
 # player's class.
-var class_list:Dictionary = {
+var class_list := {
 	"0": "Archer",
 	"1": "Druid",
 	"2": "Knight",
@@ -55,7 +56,7 @@ var class_list:Dictionary = {
 }
 
 # player stats and stats_saved directories will be created from this directory.
-var _stats_data = {
+var _stats_data := {
 		"Class": 		"",
 		"Strength":		0,
 		"Defense": 		0,
@@ -79,48 +80,36 @@ var _stats_data = {
 	}
 
 # player's "loaded" stats refers to data for the "saved" panel at main menu screen. stats equals starting stats plus starting stats plus object stats.
-var _loaded = {}
+var _loaded			:= {}
 
 # player's "saved" stats refers to data for the "saved" panel at main menu screen.
-var _saved = {}
-
-
-var	_name
+var _saved			:= {}
+var	_name			:= ""
 
 # short form of stat names, so that coding is easer. later, save these vars to dictionary, so a game save can be made.
-var	_cha
-var	_artifact_cha
-var	_con
-var	_artifact_con
-var	_def
-var	_artifact_def
-var	_dex
-var	_artifact_dex
-var	_int
-var	_artifact_int
-var	_luc
-var	_artifact_luc
-var	_per
-var	_artifact_per
-var	_str
-var	_artifact_str
-var	_wil
-var	_artifact_wil
-var	_wis
-var	_artifact_wis
+var	_cha			:= 0
+var	_con			:= 0
+var	_def			:= 0
+var	_dex			:= 0
+var	_int			:= 0
+var	_luc			:= 0
+var	_per			:= 0
+var	_str			:= 0
+var	_wil			:= 0
+var	_wis			:= 0
 
-var	_hp_max		= 20
-var	_hp			= 20
-var	_mp_max		= 0
-var	_mp			= 0
-var	_xp			= 0
-var	_xp_next	= 34
-var	_level 		= 0 # current level of player.
+var	_hp_max			:= 20
+var	_hp 			:= 20
+var	_mp_max 		:= 0
+var	_mp 			:= 0
+var	_xp 			:= 0
+var	_xp_next 		:= 34
+var	_level 			:= 0 # current level of player.
 
 # this holds the player's experience points per level.
-var _xp_level = []
+var _xp_level := []
 
-var _move_speed = 0
+var _move_speed := 0
 
 
 func _ready():
@@ -145,22 +134,20 @@ func reset():
 	_wil 		= _loaded.Willpower
 	_wis 		= _loaded.Wisdom
 	
-	_artifact_cha	= Builder._dictionary_artifacts.data.Charisma
-	_artifact_con 	= Builder._dictionary_artifacts.data.Constitution
-	_artifact_def 	= Builder._dictionary_artifacts.data.Defense
-	_artifact_dex 	= Builder._dictionary_artifacts.data.Dexterity
-	_artifact_int 	= Builder._dictionary_artifacts.data.Intelligence
-	_artifact_luc 	= Builder._dictionary_artifacts.data.Luck
-	_artifact_per 	= Builder._dictionary_artifacts.data.Perception
-	_artifact_str 	= Builder._dictionary_artifacts.data.Strength
-	_artifact_wil 	= Builder._dictionary_artifacts.data.Willpower
-	_artifact_wis 	= Builder._dictionary_artifacts.data.Wisdom
-	
 
 # do not reorder because that would change the order of this stats text at the player_stats scene.
 func _starting_skills(_id):
 	var _starting_dictionary = {
 		"Class": 		"",
+		"Username": 	"Athena",
+		
+		"HP_max": 		Builder._starting_skills.HP_max[_id],
+		"HP": 			Builder._starting_skills.HP[_id],
+		"MP_max": 		Builder._starting_skills.MP_max[_id],
+		"MP": 			Builder._starting_skills.MP[_id],
+		"XP": 			Builder._starting_skills.XP[_id],
+		"XP_next": 		Builder._starting_skills.XP_next[_id],
+		
 		"Strength": 	Builder._starting_skills.Strength[_id],
 		"Defense": 		Builder._starting_skills.Defense[_id],
 		"Constitution": Builder._starting_skills.Constitution[_id],
@@ -172,13 +159,6 @@ func _starting_skills(_id):
 		"Willpower": 	Builder._starting_skills.Willpower[_id],
 		"Perception": 	Builder._starting_skills.Perception[_id],
 		"Luck": 		Builder._starting_skills.Luck[_id],
-		"Username": 	"Athena",
-		"HP_max": 		Builder._starting_skills.HP_max[_id],
-		"HP": 			Builder._starting_skills.HP[_id],
-		"MP_max": 		Builder._starting_skills.MP_max[_id],
-		"MP": 			Builder._starting_skills.MP[_id],
-		"XP": 			Builder._starting_skills.XP[_id],
-		"XP_next": 		Builder._starting_skills.XP_next[_id],
 		
 	}
 

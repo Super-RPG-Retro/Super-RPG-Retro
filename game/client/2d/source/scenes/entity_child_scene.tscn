@@ -1,881 +1,886 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dfn70hyvybogq"]
 
-[ext_resource path="res://2d/assets/images/entity_background.png" type="Texture" id=1]
-[ext_resource path="res://bundles/assets/images/magic/animation/0b.png" type="Texture" id=2]
-[ext_resource path="res://bundles/assets/images/magic/animation/0c.png" type="Texture" id=3]
-[ext_resource path="res://bundles/assets/images/magic/animation/0a.png" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://cutrs7a1oonnc" path="res://2d/assets/images/entity_background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://di4on4y0graj6" path="res://bundles/assets/images/magic/animation/0b.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bhrms5o1il7k4" path="res://bundles/assets/images/magic/animation/0c.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://esy6s4d6g2j0" path="res://bundles/assets/images/magic/animation/0a.png" id="4"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ) ],
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
 "loop": true,
-"name": "0",
+"name": &"0",
 "speed": 5.0
-} ]
+}]
 
 [node name="EntityChildScene" type="Node2D"]
 z_as_relative = false
-__meta__ = {
-"_edit_horizontal_guides_": [  ],
-"_edit_vertical_guides_": [ 123.0 ]
-}
 
-[node name="EntityBackground" type="Sprite" parent="."]
-position = Vector2( 10.5, 8 )
-texture = ExtResource( 1 )
+[node name="EntityBackground" type="Sprite2D" parent="."]
+position = Vector2(10.5, 8)
+texture = ExtResource("1")
 
 [node name="HP" type="ColorRect" parent="."]
-margin_left = -4.0
-margin_top = 21.0
-margin_right = 25.0
-margin_bottom = 23.0
-color = Color( 0, 0, 0.627451, 1 )
+offset_left = -4.0
+offset_top = 21.0
+offset_right = 25.0
+offset_bottom = 23.0
+color = Color(0, 0, 0.627451, 1)
 
-[node name="RuneGuide1" type="AnimatedSprite" parent="."]
+[node name="RuneGuide1" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide2" type="AnimatedSprite" parent="."]
+[node name="RuneGuide2" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide3" type="AnimatedSprite" parent="."]
+[node name="RuneGuide3" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide4" type="AnimatedSprite" parent="."]
+[node name="RuneGuide4" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide5" type="AnimatedSprite" parent="."]
+[node name="RuneGuide5" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide6" type="AnimatedSprite" parent="."]
+[node name="RuneGuide6" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide7" type="AnimatedSprite" parent="."]
+[node name="RuneGuide7" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide8" type="AnimatedSprite" parent="."]
+[node name="RuneGuide8" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide9" type="AnimatedSprite" parent="."]
+[node name="RuneGuide9" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide10" type="AnimatedSprite" parent="."]
+[node name="RuneGuide10" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide11" type="AnimatedSprite" parent="."]
+[node name="RuneGuide11" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, -152 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, -152)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide12" type="AnimatedSprite" parent="."]
+[node name="RuneGuide12" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide13" type="AnimatedSprite" parent="."]
+[node name="RuneGuide13" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide14" type="AnimatedSprite" parent="."]
+[node name="RuneGuide14" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide15" type="AnimatedSprite" parent="."]
+[node name="RuneGuide15" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide16" type="AnimatedSprite" parent="."]
+[node name="RuneGuide16" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide17" type="AnimatedSprite" parent="."]
+[node name="RuneGuide17" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide18" type="AnimatedSprite" parent="."]
+[node name="RuneGuide18" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide19" type="AnimatedSprite" parent="."]
+[node name="RuneGuide19" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide20" type="AnimatedSprite" parent="."]
+[node name="RuneGuide20" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide21" type="AnimatedSprite" parent="."]
+[node name="RuneGuide21" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide22" type="AnimatedSprite" parent="."]
+[node name="RuneGuide22" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, -120 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, -120)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide23" type="AnimatedSprite" parent="."]
+[node name="RuneGuide23" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide24" type="AnimatedSprite" parent="."]
+[node name="RuneGuide24" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide25" type="AnimatedSprite" parent="."]
+[node name="RuneGuide25" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide26" type="AnimatedSprite" parent="."]
+[node name="RuneGuide26" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide27" type="AnimatedSprite" parent="."]
+[node name="RuneGuide27" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide28" type="AnimatedSprite" parent="."]
+[node name="RuneGuide28" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide29" type="AnimatedSprite" parent="."]
+[node name="RuneGuide29" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide30" type="AnimatedSprite" parent="."]
+[node name="RuneGuide30" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide31" type="AnimatedSprite" parent="."]
+[node name="RuneGuide31" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide32" type="AnimatedSprite" parent="."]
+[node name="RuneGuide32" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide33" type="AnimatedSprite" parent="."]
+[node name="RuneGuide33" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, -88 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, -88)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide34" type="AnimatedSprite" parent="."]
+[node name="RuneGuide34" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide35" type="AnimatedSprite" parent="."]
+[node name="RuneGuide35" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide36" type="AnimatedSprite" parent="."]
+[node name="RuneGuide36" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide37" type="AnimatedSprite" parent="."]
+[node name="RuneGuide37" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide38" type="AnimatedSprite" parent="."]
+[node name="RuneGuide38" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide39" type="AnimatedSprite" parent="."]
+[node name="RuneGuide39" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide40" type="AnimatedSprite" parent="."]
+[node name="RuneGuide40" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide41" type="AnimatedSprite" parent="."]
+[node name="RuneGuide41" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide42" type="AnimatedSprite" parent="."]
+[node name="RuneGuide42" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide43" type="AnimatedSprite" parent="."]
+[node name="RuneGuide43" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide44" type="AnimatedSprite" parent="."]
+[node name="RuneGuide44" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, -56 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, -56)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide45" type="AnimatedSprite" parent="."]
+[node name="RuneGuide45" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide46" type="AnimatedSprite" parent="."]
+[node name="RuneGuide46" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide47" type="AnimatedSprite" parent="."]
+[node name="RuneGuide47" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide48" type="AnimatedSprite" parent="."]
+[node name="RuneGuide48" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide49" type="AnimatedSprite" parent="."]
+[node name="RuneGuide49" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide50" type="AnimatedSprite" parent="."]
+[node name="RuneGuide50" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide51" type="AnimatedSprite" parent="."]
+[node name="RuneGuide51" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide52" type="AnimatedSprite" parent="."]
+[node name="RuneGuide52" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide53" type="AnimatedSprite" parent="."]
+[node name="RuneGuide53" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide54" type="AnimatedSprite" parent="."]
+[node name="RuneGuide54" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide55" type="AnimatedSprite" parent="."]
+[node name="RuneGuide55" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, -24 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, -24)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide56" type="AnimatedSprite" parent="."]
+[node name="RuneGuide56" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide57" type="AnimatedSprite" parent="."]
+[node name="RuneGuide57" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide58" type="AnimatedSprite" parent="."]
+[node name="RuneGuide58" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide59" type="AnimatedSprite" parent="."]
+[node name="RuneGuide59" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide60" type="AnimatedSprite" parent="."]
+[node name="RuneGuide60" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide61" type="AnimatedSprite" parent="."]
+[node name="RuneGuide61" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide62" type="AnimatedSprite" parent="."]
+[node name="RuneGuide62" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide63" type="AnimatedSprite" parent="."]
+[node name="RuneGuide63" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide64" type="AnimatedSprite" parent="."]
+[node name="RuneGuide64" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide65" type="AnimatedSprite" parent="."]
+[node name="RuneGuide65" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide66" type="AnimatedSprite" parent="."]
+[node name="RuneGuide66" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 8 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 8)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide67" type="AnimatedSprite" parent="."]
+[node name="RuneGuide67" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide68" type="AnimatedSprite" parent="."]
+[node name="RuneGuide68" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide69" type="AnimatedSprite" parent="."]
+[node name="RuneGuide69" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide70" type="AnimatedSprite" parent="."]
+[node name="RuneGuide70" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide71" type="AnimatedSprite" parent="."]
+[node name="RuneGuide71" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide72" type="AnimatedSprite" parent="."]
+[node name="RuneGuide72" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide73" type="AnimatedSprite" parent="."]
+[node name="RuneGuide73" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide74" type="AnimatedSprite" parent="."]
+[node name="RuneGuide74" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide75" type="AnimatedSprite" parent="."]
+[node name="RuneGuide75" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide76" type="AnimatedSprite" parent="."]
+[node name="RuneGuide76" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide77" type="AnimatedSprite" parent="."]
+[node name="RuneGuide77" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 40 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 40)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide78" type="AnimatedSprite" parent="."]
+[node name="RuneGuide78" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide79" type="AnimatedSprite" parent="."]
+[node name="RuneGuide79" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide80" type="AnimatedSprite" parent="."]
+[node name="RuneGuide80" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide81" type="AnimatedSprite" parent="."]
+[node name="RuneGuide81" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide82" type="AnimatedSprite" parent="."]
+[node name="RuneGuide82" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide83" type="AnimatedSprite" parent="."]
+[node name="RuneGuide83" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide84" type="AnimatedSprite" parent="."]
+[node name="RuneGuide84" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide85" type="AnimatedSprite" parent="."]
+[node name="RuneGuide85" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide86" type="AnimatedSprite" parent="."]
+[node name="RuneGuide86" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide87" type="AnimatedSprite" parent="."]
+[node name="RuneGuide87" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide88" type="AnimatedSprite" parent="."]
+[node name="RuneGuide88" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 72 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 72)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide89" type="AnimatedSprite" parent="."]
+[node name="RuneGuide89" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide90" type="AnimatedSprite" parent="."]
+[node name="RuneGuide90" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide91" type="AnimatedSprite" parent="."]
+[node name="RuneGuide91" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide92" type="AnimatedSprite" parent="."]
+[node name="RuneGuide92" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide93" type="AnimatedSprite" parent="."]
+[node name="RuneGuide93" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide94" type="AnimatedSprite" parent="."]
+[node name="RuneGuide94" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide95" type="AnimatedSprite" parent="."]
+[node name="RuneGuide95" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide96" type="AnimatedSprite" parent="."]
+[node name="RuneGuide96" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide97" type="AnimatedSprite" parent="."]
+[node name="RuneGuide97" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide98" type="AnimatedSprite" parent="."]
+[node name="RuneGuide98" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide99" type="AnimatedSprite" parent="."]
+[node name="RuneGuide99" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 104 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 104)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide100" type="AnimatedSprite" parent="."]
+[node name="RuneGuide100" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide101" type="AnimatedSprite" parent="."]
+[node name="RuneGuide101" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide102" type="AnimatedSprite" parent="."]
+[node name="RuneGuide102" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide103" type="AnimatedSprite" parent="."]
+[node name="RuneGuide103" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide104" type="AnimatedSprite" parent="."]
+[node name="RuneGuide104" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide105" type="AnimatedSprite" parent="."]
+[node name="RuneGuide105" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide106" type="AnimatedSprite" parent="."]
+[node name="RuneGuide106" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide107" type="AnimatedSprite" parent="."]
+[node name="RuneGuide107" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide108" type="AnimatedSprite" parent="."]
+[node name="RuneGuide108" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide109" type="AnimatedSprite" parent="."]
+[node name="RuneGuide109" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide110" type="AnimatedSprite" parent="."]
+[node name="RuneGuide110" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 136 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 136)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide111" type="AnimatedSprite" parent="."]
+[node name="RuneGuide111" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -149, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-149, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide112" type="AnimatedSprite" parent="."]
+[node name="RuneGuide112" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -117, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-117, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide113" type="AnimatedSprite" parent="."]
+[node name="RuneGuide113" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -85, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-85, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide114" type="AnimatedSprite" parent="."]
+[node name="RuneGuide114" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -53, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-53, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide115" type="AnimatedSprite" parent="."]
+[node name="RuneGuide115" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( -21, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(-21, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide116" type="AnimatedSprite" parent="."]
+[node name="RuneGuide116" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 11, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(11, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide117" type="AnimatedSprite" parent="."]
+[node name="RuneGuide117" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 43, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(43, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide118" type="AnimatedSprite" parent="."]
+[node name="RuneGuide118" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 75, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(75, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide119" type="AnimatedSprite" parent="."]
+[node name="RuneGuide119" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 107, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(107, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide120" type="AnimatedSprite" parent="."]
+[node name="RuneGuide120" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 139, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(139, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
-[node name="RuneGuide121" type="AnimatedSprite" parent="."]
+[node name="RuneGuide121" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
-position = Vector2( 171, 168 )
-frames = SubResource( 1 )
-animation = "0"
+position = Vector2(171, 168)
+sprite_frames = SubResource("1")
+animation = &"0"
 
 [node name="Node2D" type="Node2D" parent="."]

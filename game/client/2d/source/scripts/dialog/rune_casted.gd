@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _accept_dialog = $AcceptDialog
+
+@onready var _accept_dialog := $AcceptDialog
 
 
 func _ready():
@@ -31,7 +32,7 @@ func _process(_delta):
 		
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || (event.is_action_pressed("ui_accept", true)):
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || (event.is_action_pressed("ui_accept", true)):
 		if _accept_dialog.visible == true:
 			Variables._child_scene_open = false
 			

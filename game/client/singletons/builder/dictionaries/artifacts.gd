@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node
 
 
-var data = {
+var data := {
 	"artifact_number":			0,
 	"file_name":			[], # json file name.
 	"file_path_json":		[], # json file path.

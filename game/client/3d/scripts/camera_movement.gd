@@ -10,25 +10,28 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-extends KinematicBody
+extends CharacterBody3D
 
-var amountMove = 1 #make this big if you want to go fast.
-var amountAngle = 2
+var _dx := 0
+var _dz := 0
+
+var amountMove := 1 #make this big if you want to go fast.
+var amountAngle := 2
 
 # camera movement in an up or down direction.
-var _camera_movement = 0
+var _camera_movement := 0
 # camera rotation. player is moving left or right.
-var _camera_rotation = 0
+var _camera_rotation := 0
 
 # the direction the player is moving in. This does the smooth motion. if moving forward then this var increment in value until it reaches the end value. only then can the player move again.
-var _movement_direction = Vector3(0, 0, 0)
+var _movement_direction := Vector3(0, 0, 0)
 
 # when one of these values are true, a block of code stops player from moving, when player is already movement. we cannot have the player stopping on floor in-between two blocks. that would break code. 
 # these vars are used to do the smooth movement when one of these values is true.
-var moveUp = false
-var moveDown = false
-var moveLeft = false
-var moveRight = false
+var moveUp 		:= false
+var moveDown 	:= false
+var moveLeft 	:= false
+var moveRight 	:= false
 
 
 func _ready():
@@ -57,15 +60,26 @@ func _physics_process(_delta):
 			
 			if Variables._player_target_rotation == 0:
 				_movement_direction.z += amountMove
+				_dx = int(round(position.x))
+				_dz = int(round(position.z)) + 1
+			
 			if Variables._player_target_rotation == 180:
 				_movement_direction.z -= amountMove
+				_dx = int(round(position.x))
+				_dz = int(round(position.z)) - 1
+				
 			if Variables._player_target_rotation == 90:
 				_movement_direction.x += amountMove
+				_dx = int(round(position.x)) + 1
+				_dz = int(round(position.z))
+				
 			if Variables._player_target_rotation == 270:
 				_movement_direction.x -= amountMove
-			
+				_dx = int(round(position.x)) - 1
+				_dz = int(round(position.z))
+				
 			moveDown = true
-		
+			
 		else:
 			Variables._player_stop_moving = false
 			
@@ -78,12 +92,23 @@ func _physics_process(_delta):
 			# in 3d think of z coordinate as y and y as z. in this code, player is not moving up and down using the z value. player is moving forward and backwards.
 			if Variables._player_target_rotation == 0:
 				_movement_direction.z -= amountMove
+				_dx = int(round(position.x))
+				_dz = int(round(position.z)) - 1
+				
 			if Variables._player_target_rotation == 180:
 				_movement_direction.z += amountMove
+				_dx = int(round(position.x))
+				_dz = int(round(position.z)) + 1
+				
 			if Variables._player_target_rotation == 90:
 				_movement_direction.x -= amountMove
+				_dx = int(round(position.x)) - 1
+				_dz = int(round(position.z))
+				
 			if Variables._player_target_rotation == 270:
 				_movement_direction.x += amountMove
+				_dx = int(round(position.x)) + 1
+				_dz = int(round(position.z))
 				
 			moveUp = true
 			
@@ -91,17 +116,22 @@ func _physics_process(_delta):
 			Variables._player_stop_moving = false
 			
 	# if player is requesting to move left, set moveLeft var to true so that anymore movement requests are ignore so that the player can finish moving from one block to the next.
-	if Variables._compass_update == false && Input.is_action_pressed("ui_left") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
+	if Variables._compass_update == false && _camera_movement == 0 && Input.is_action_pressed("ui_left") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._player_target_rotation += amountAngle
 		moveLeft = true
 		
-	if Variables._compass_update == false && Input.is_action_pressed("ui_right") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
+	if Variables._compass_update == false && _camera_movement == 0 && Input.is_action_pressed("ui_right") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._player_target_rotation -= amountAngle
 		moveRight = true
 			
-	if _camera_movement < 15 and moveDown == true || _camera_movement < 15 and moveUp == true:
+	if _camera_movement < 10 and moveDown == true || _camera_movement < 10 and moveUp == true:
 		_camera_movement += 1
-		var _mas = move_and_slide(_movement_direction, Vector3(0,1,0))
+		
+		# move player if cell is empty or a player cell.
+		if $"..".get_cell_item(Vector3i(_dx, 0, _dz)) == -1 || $"..".get_cell_item(Vector3i(_dx, 0, _dz)) >= 90:
+			set_velocity(_movement_direction)
+			set_up_direction(Vector3(0,1,0))
+			move_and_slide()
 			
 		# depending on the direction of Variables._player_target_rotation, move the player.
 		if moveDown == true:
@@ -124,11 +154,14 @@ func _physics_process(_delta):
 			if Variables._player_target_rotation == 270:
 				_movement_direction.x += amountMove
 		
-		if _camera_movement == 5:
+		if _camera_movement == 10:
 			if Settings._system.sound == true:
 				get_tree().call_group("game_audio", "start_walk_timer")
 		
-	elif _camera_movement == 15  and moveLeft == false and moveRight == false:
+	elif _camera_movement == 10 and moveLeft == false and moveRight == false:
+		position.x = round(position.x)
+		position.z = round(position.z)
+
 		_camera_movement = 0
 		_movement_direction = Vector3(0, 0, 0)
 		moveUp = false
@@ -154,5 +187,5 @@ func _physics_process(_delta):
 	_movement_direction.z = round(_movement_direction.z)
 	
 	if Variables._at_library == true:
-		Variables._dungeon_coordinates = str(ceil(transform.origin.ceil().x / 2) - 1) + "," + str(ceil(transform.origin.ceil().z / 2) - 1)
+		Variables._dungeon_coordinates = str(ceil(transform.origin.ceil().x / 2)) + "," + str(ceil(transform.origin.ceil().z / 2))
 	

@@ -1,294 +1,118 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://xdqr5oagg0bt"]
 
-[ext_resource path="res://3d/assets/meshlibs/library.meshlib" type="MeshLibrary" id=1]
-[ext_resource path="res://3d/scripts/camera_movement.gd" type="Script" id=3]
-[ext_resource path="res://3d/scripts/mouse_coordinates.gd" type="Script" id=4]
-[ext_resource path="res://3d/assets/images/portal1.png" type="Texture" id=7]
-[ext_resource path="res://bundles/assets/fonts/xolonium/Xolonium_size_14.tres" type="DynamicFont" id=11]
-[ext_resource path="res://audio/sound/teleport.ogg" type="AudioStream" id=12]
-[ext_resource path="res://3d/scripts/main_map.gd" type="Script" id=13]
+[ext_resource type="MeshLibrary" uid="uid://d1c2wue4v05bv" path="res://3d/assets/meshlibs/library.meshlib" id="1"]
+[ext_resource type="Texture2D" uid="uid://brxli4120bms0" path="res://bundles/assets/images/textures/7.png" id="1_cphlo"]
+[ext_resource type="Texture2D" uid="uid://ck7hcc06mhod2" path="res://bundles/assets/images/textures/15.png" id="2_1gp3k"]
+[ext_resource type="Script" path="res://3d/scripts/camera_movement.gd" id="3"]
+[ext_resource type="Script" path="res://3d/scripts/mouse_coordinates.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://bx2874uhmk2ak" path="res://3d/scenes/dungeon_door.tscn" id="6_tt7m0"]
+[ext_resource type="PackedScene" uid="uid://6vja344wdwgc" path="res://3d/scenes/torch.tscn" id="7_yxakl"]
+[ext_resource type="AudioStream" uid="uid://djsp5hrtwv4sd" path="res://audio/sound/teleport.ogg" id="12"]
+[ext_resource type="Script" path="res://3d/scripts/main_map.gd" id="13"]
 
-[sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="CubeMesh" id=2]
-material = SubResource( 1 )
-size = Vector3( 0.5, 2, 0.5 )
-
-[sub_resource type="SphereShape" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.313726, 0, 0.286275, 1 )
-
-[sub_resource type="CylinderMesh" id=5]
-material = SubResource( 4 )
-
-[sub_resource type="SpatialMaterial" id=6]
-
-[sub_resource type="CylinderMesh" id=7]
-material = SubResource( 6 )
-
-[sub_resource type="SpatialMaterial" id=8]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="CylinderMesh" id=9]
-material = SubResource( 8 )
-
-[sub_resource type="CubeMesh" id=18]
-
-[sub_resource type="Skin" id=21]
-
-[sub_resource type="SpatialMaterial" id=14]
-albedo_color = Color( 0, 0.933333, 0, 1 )
-
-[sub_resource type="CubeMesh" id=15]
-material = SubResource( 14 )
-
-[sub_resource type="SpatialMaterial" id=16]
-albedo_color = Color( 0, 0.933333, 0, 1 )
-
-[sub_resource type="CubeMesh" id=17]
-material = SubResource( 16 )
-
-[sub_resource type="CubeMesh" id=22]
-
-[sub_resource type="SpatialMaterial" id=23]
-albedo_color = Color( 0.652344, 0.652344, 0.652344, 1 )
-roughness = 0.0
-
-[sub_resource type="ProceduralSky" id=19]
-ground_energy = 1.25
-
-[sub_resource type="Environment" id=20]
-background_mode = 3
-background_sky = SubResource( 19 )
-background_color = Color( 0.470588, 0.470588, 0.470588, 1 )
-background_energy = 1.3
-ambient_light_energy = 0.5
+[sub_resource type="Environment" id="Environment_ffuqr"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 3
+glow_enabled = true
 fog_enabled = true
-fog_color = Color( 0, 0.0313726, 0.0666667, 1 )
-fog_sun_color = Color( 0, 0.00392157, 0.0509804, 1 )
-fog_sun_amount = 1.0
-ssao_enabled = true
-ssao_quality = 2
-dof_blur_near_enabled = true
+fog_density = 0.1
+volumetric_fog_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eg7wx"]
+albedo_texture = ExtResource("1_cphlo")
+uv1_scale = Vector3(125, 125, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x7d7n"]
+material = SubResource("StandardMaterial3D_eg7wx")
+size = Vector2(250, 250)
+center_offset = Vector3(0, 0, 0.5)
+
+[sub_resource type="ImageTexture" id="ImageTexture_426mk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex58a"]
+albedo_color = Color(0.0784314, 0.313726, 0.478431, 1)
+albedo_texture = ExtResource("2_1gp3k")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = SubResource("ImageTexture_426mk")
+uv1_scale = Vector3(125, 125, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y2yg2"]
+material = SubResource("StandardMaterial3D_ex58a")
+flip_faces = true
+size = Vector2(250, 250)
+
+[sub_resource type="StandardMaterial3D" id="1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="2"]
+material = SubResource("1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1wbj"]
 
 [node name="Node2D" type="Node2D"]
 z_index = -10
+position = Vector2(40, 30)
 
-[node name="Viewport" type="ViewportContainer" parent="."]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 660.0
-margin_bottom = 409.0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ffuqr")
 
-[node name="Viewport" type="Viewport" parent="Viewport"]
-size = Vector2( 628, 375 )
+[node name="ViewportContainer" type="SubViewportContainer" parent="."]
+
+[node name="Viewport" type="SubViewport" parent="ViewportContainer"]
 handle_input_locally = false
-render_target_update_mode = 3
+size = Vector2i(628, 375)
+render_target_update_mode = 4
 
-[node name="Spatial" type="Spatial" parent="Viewport/Viewport"]
+[node name="Spatial" type="Node3D" parent="ViewportContainer/Viewport"]
 
-[node name="Floor" type="GridMap" parent="Viewport/Viewport/Spatial"]
-mesh_library = ExtResource( 1 )
+[node name="Floor" type="MeshInstance3D" parent="ViewportContainer/Viewport/Spatial"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("PlaneMesh_x7d7n")
+
+[node name="Ceiling" type="MeshInstance3D" parent="ViewportContainer/Viewport/Spatial"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("PlaneMesh_y2yg2")
+
+[node name="MainMap" type="GridMap" parent="ViewportContainer/Viewport/Spatial"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh_library = ExtResource("1")
+cell_size = Vector3(1, 4, 1)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_priority = 10000.0
 data = {
-"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 9, 5, 0, 10, 5, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0, 6, 6, 0, 7, 6, 0, 8, 6, 0, 9, 6, 0, 10, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 9, 7, 0, 10, 7, 0, 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
+"cells": PackedInt32Array(3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 10, 1, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 8, 2, 0, 10, 2, 0, 0, 3, 0, 2, 3, 0, 8, 3, 0, 10, 3, 0, 0, 4, 0, 2, 4, 0, 4, 4, 1, 5, 4, 1, 8, 4, 0, 10, 4, 0, 0, 5, 0, 2, 5, 0, 4, 5, 1, 8, 5, 0, 10, 5, 0, 0, 6, 0, 2, 6, 0, 4, 6, 1, 5, 6, 1, 8, 6, 0, 10, 6, 0, 0, 7, 0, 2, 7, 0, 4, 7, 1, 6, 7, 0, 8, 7, 0, 10, 7, 0, 0, 8, 0, 2, 8, 0, 8, 8, 0, 10, 8, 0, 0, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 8, 9, 0, 10, 9, 0, 10, 10, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0)
 }
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, 0 )
-}
+script = ExtResource("13")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Ceiling" type="GridMap" parent="Viewport/Viewport/Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
-mesh_library = ExtResource( 1 )
-data = {
-"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 9, 5, 0, 10, 5, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0, 6, 6, 0, 7, 6, 0, 8, 6, 0, 9, 6, 0, 10, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 9, 7, 0, 10, 7, 0, 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
-}
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, 0 )
-}
+[node name="Player" type="CharacterBody3D" parent="ViewportContainer/Viewport/Spatial/MainMap" groups=["library_player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+script = ExtResource("3")
 
-[node name="MainMap" type="GridMap" parent="Viewport/Viewport/Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-mesh_library = ExtResource( 1 )
-data = {
-"cells": PoolIntArray( 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 10, 1, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 8, 2, 0, 10, 2, 0, 0, 3, 0, 2, 3, 0, 8, 3, 0, 10, 3, 0, 0, 4, 0, 2, 4, 0, 4, 4, 1, 5, 4, 1, 8, 4, 0, 10, 4, 0, 0, 5, 0, 2, 5, 0, 4, 5, 1, 8, 5, 0, 10, 5, 0, 0, 6, 0, 2, 6, 0, 4, 6, 1, 5, 6, 1, 8, 6, 0, 10, 6, 0, 0, 7, 0, 2, 7, 0, 4, 7, 1, 6, 7, 0, 8, 7, 0, 10, 7, 0, 0, 8, 0, 2, 8, 0, 8, 8, 0, 10, 8, 0, 0, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 8, 9, 0, 10, 9, 0, 10, 10, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0 )
-}
-script = ExtResource( 13 )
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, 0 )
-}
+[node name="MeshInstance" type="MeshInstance3D" parent="ViewportContainer/Viewport/Spatial/MainMap/Player"]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+mesh = SubResource("2")
 
-[node name="Player" type="KinematicBody" parent="Viewport/Viewport/Spatial/MainMap" groups=["library_player"]]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 4, 1, 1, 1 )
-script = ExtResource( 3 )
+[node name="CollisionShape" type="CollisionShape3D" parent="ViewportContainer/Viewport/Spatial/MainMap/Player"]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+shape = SubResource("BoxShape3D_v1wbj")
 
-[node name="MeshInstance" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/Player"]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 2 )
-
-[node name="Camera" type="Camera" parent="Viewport/Viewport/Spatial/MainMap/Player"]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0.23 )
+[node name="Camera" type="Camera3D" parent="ViewportContainer/Viewport/Spatial/MainMap/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
 doppler_tracking = 1
-current = true
-fov = 47.7111
 near = 0.1
-far = 50.0
+far = 200.0
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/Viewport/Spatial/MainMap/Player"]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0 )
-shape = SubResource( 3 )
+[node name="DungeonDoor" parent="ViewportContainer/Viewport/Spatial" instance=ExtResource("6_tt7m0")]
 
-[node name="torcNorth1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
-transform = Transform( -8.14603e-09, 0, -0.05, 0, 0.5, 0, 0.05, 0, -8.14603e-09, 10.993, 0.886, 10.05 )
-mesh = SubResource( 5 )
-skeleton = NodePath("../..")
+[node name="Torch" parent="ViewportContainer/Viewport/Spatial" instance=ExtResource("7_yxakl")]
 
-[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1"]
-transform = Transform( 1.8, 0, -2.6977e-14, 0, 0.3, 0, 2.6977e-14, 0, 1.8, 1.05504e-06, 0.5, -8.03037e-07 )
-mesh = SubResource( 7 )
+[node name="MouseCoordinates" type="Node2D" parent="ViewportContainer"]
+script = ExtResource("4")
 
-[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1/light"]
-transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
-mesh = SubResource( 9 )
-
-[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torcNorth1"]
-transform = Transform( 20, 0, -1.47793e-12, 0, 2, 0, 1.47793e-12, 0, 20, 0, 1, 0 )
-light_energy = 5.0
-omni_attenuation = 10.0
-
-[node name="torcSouth1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
-transform = Transform( -8.14603e-09, 0, 0.05, 0, 0.5, 0, -0.05, 0, -8.14603e-09, 11.02, 0.9, 11.95 )
-mesh = SubResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1"]
-transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
-mesh = SubResource( 7 )
-
-[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1/light"]
-transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
-mesh = SubResource( 9 )
-
-[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torcSouth1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-light_energy = 5.0
-omni_attenuation = 10.0
-
-[node name="torchEast1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
-transform = Transform( -0.05, 0, -1.62921e-08, 0, 0.5, 0, 1.62921e-08, 0, -0.05, 7.95, 0.89, 9.017 )
-mesh = SubResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchEast1"]
-transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
-mesh = SubResource( 7 )
-
-[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchEast1/light"]
-transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
-mesh = SubResource( 9 )
-
-[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torchEast1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-light_energy = 5.0
-omni_attenuation = 10.0
-
-[node name="torchWest1" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap"]
-transform = Transform( 0.05, 0, 0, 0, 0.5, 0, 0, 0, 0.05, 10.05, 0.89, 11.03 )
-mesh = SubResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="light" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchWest1"]
-transform = Transform( 1.8, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 1.90735e-06, 0.5, 1.90735e-06 )
-mesh = SubResource( 7 )
-
-[node name="mount" type="MeshInstance" parent="Viewport/Viewport/Spatial/MainMap/torchWest1/light"]
-transform = Transform( 3, 0, 0, 0, 0.167, 0, 0, 0, 0.4, -1.83333, -1.66667, 1.90735e-06 )
-mesh = SubResource( 9 )
-
-[node name="OmniLight" type="OmniLight" parent="Viewport/Viewport/Spatial/MainMap/torchWest1"]
-transform = Transform( 20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 1, 0 )
-light_energy = 5.0
-omni_attenuation = 10.0
-
-[node name="museum" type="MeshInstance" parent="Viewport/Viewport/Spatial"]
-transform = Transform( 0.05, 0, 0, 0, 0.5, 0, 0, 0, 0.93, 8, 3, 13 )
-mesh = SubResource( 18 )
-skin = SubResource( 21 )
-skeleton = NodePath("")
-
-[node name="bprderLeft" type="MeshInstance" parent="Viewport/Viewport/Spatial/museum"]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.0263158, 4.76837e-06, 0, -1 )
-mesh = SubResource( 15 )
-
-[node name="borderRight" type="MeshInstance" parent="Viewport/Viewport/Spatial/museum"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.027, -1, 0, 1.027 )
-mesh = SubResource( 17 )
-
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/Viewport/Spatial/museum"]
-transform = Transform( -1.5299e-08, 0, 0.5, 0, 0.7, 0, -0.35, 0, -2.18557e-08, -3, 0, 0 )
-offset = Vector2( 174, -1 )
-texture = ExtResource( 7 )
-
-[node name="Label3D" type="Label3D" parent="Viewport/Viewport/Spatial/museum"]
-transform = Transform( 4.37114e-08, 8.74228e-08, -1, 8.74228e-08, 1, 8.74228e-08, 1, -8.74228e-08, 4.37114e-08, -3, 0, 0 )
-offset = Vector2( -25, 38 )
-modulate = Color( 0.980392, 0.921569, 0, 1 )
-text = "Enter dungeon Insects at level 1 for free?"
-font = ExtResource( 11 )
-horizontal_alignment = 0
-uppercase = true
-line_spacing = 4.0
-autowrap = true
-width = 120.0
-__meta__ = {
-"_editor_description_": "y value moves in opposite direction. a negative y value will move label down, not up."
-}
-
-[node name="Pillar1" type="Spatial" parent="Viewport/Viewport/Spatial"]
-transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.92, 2.25, 11 )
-
-[node name="PillarBottom" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="PillarTop" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="PillarMiddle" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar1"]
-transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="Pillar2" type="Spatial" parent="Viewport/Viewport/Spatial"]
-transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.92, 2.25, 15 )
-
-[node name="PillarBottom" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="PillarTop" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="PillarMiddle" type="MeshInstance" parent="Viewport/Viewport/Spatial/Pillar2"]
-transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
-mesh = SubResource( 22 )
-material/0 = SubResource( 23 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Viewport"]
-environment = SubResource( 20 )
-
-[node name="MouseCoordinates" type="Node2D" parent="Viewport"]
-script = ExtResource( 4 )
-
-[node name="Sound" type="AudioStreamPlayer" parent="Viewport"]
-stream = ExtResource( 12 )
+[node name="Sound" type="AudioStreamPlayer" parent="ViewportContainer"]
+stream = ExtResource("12")

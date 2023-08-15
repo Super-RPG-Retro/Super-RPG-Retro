@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node
 
 
-var data = {
+var data := {
 	"file_name":			[], # json file name.
 	"id":					[], # ItemList current selected position.
 }

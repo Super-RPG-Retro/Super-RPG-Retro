@@ -15,9 +15,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "Misc Stuff.\nExtra tiles used. [color=#bbbbff][url=_link]A level tile[/url][/color] and [color=#bbbbff][url=_link2]background for RPG battle[/url][/color]."
+	text = "Misc Stuff.\nExtra tiles used. [color=#bbbbff][url=_link]A level tile[/url][/color] and [color=#bbbbff][url=_link2]background for RPG battle[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	OS.shell_open("https://opengameart.org/content/dirt-ground-seamless-free/")

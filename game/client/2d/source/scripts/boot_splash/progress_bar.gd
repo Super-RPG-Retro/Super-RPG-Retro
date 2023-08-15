@@ -14,48 +14,41 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # true when ready to go to main menu. this value is false until all data has been processed and when all timers have timeout.
-var _can_go_to_main_menu = false
+var _can_go_to_main_menu:= false
 
 # this modulates the "press start" text.
-var _pressed_start_modulate:float = 1
+var _pressed_start_modulate:= 1.0
 
-onready var _progress_bar = $Panel/ProgressBar
+@onready var _progress_bar:= $Panel/ProgressBar
 
 # timer to start pulling data from the builder objects directory.
-onready var _timer_objects_display_panel = $TimerObjectsDisplayPanel
+@onready var _timer_objects_display_panel:= $TimerObjectsDisplayPanel
 
-onready var _timer_magic_display_panel = $TimerMagicDisplayPanel
+@onready var _timer_magic_display_panel:= $TimerMagicDisplayPanel
 
-var _total_magic_files_in_directory = 0
-
-# if true then the objects code at _process() will be read.
-var _do_objects_directory:bool = false
+var _total_magic_files_in_directory := 0
 
 # if true then the magic code at _process() will be read.
-var _do_magic_directory:bool = true
+var _do_magic_directory := true
 
 # these increment the progress bar value. when value is 402, the next data directory will load.
-var _reading_data_dir:bool = false
-var _reading_magic_dir:bool = true
+var _reading_data_dir := false
+var _reading_magic_dir := true
 
 # changes the alpha of the progress bar.
-var _modulate:float = 0 
+var _modulate := 0.0 
 
 # this var increments until it reaches the value of Variables._total_builder_data_directories. When value has been reached then the main menu will load.
-var _next_builder_data_directory = 0
+var _next_builder_data_directory := 0
 
-var _start_button_clicked:int = 0
+var _start_button_clicked := 0
 
 
 func _ready():
-	var file = File.new()
-	var directory = Directory.new()
-	
 	# if this is true then all directories have been created, there is no need to do anything else. go to main menu.
-	if directory.dir_exists(Variables._project_path + "/builder/magic/data/1") == true && file.file_exists("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt") == true:
-	#&& directory.dir_exists(Variables._project_path + "/builder/magics/data/2"):
-	# && directory.dir_exists(Variables._project_path + "/builder/magics/data/3") && directory.dir_exists(Variables._project_path + "/builder/magics/data/4") && directory.dir_exists(Variables._project_path + "/builder/magics/data/5") && directory.dir_exists(Variables._project_path + "/builder/magics/data/6") && directory.dir_exists(Variables._project_path + "/builder/magics/data/7") && directory.dir_exists(Variables._project_path + "/builder/magics/data/8")
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magic/data/1") == true && FileAccess.file_exists("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt") == true: # && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/8"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 		
 		_show_start_button()
@@ -66,18 +59,14 @@ func _ready():
 		
 	
 func _process_objects_directory():
-	var directory = Directory.new()
-	
-	if directory.dir_exists(Variables._project_path + "/builder/objects/data/1"): #&& directory.dir_exists(Variables._project_path + "/builder/objects/data/2"):
-	# && directory.dir_exists(Variables._project_path + "/builder/objects/data/3") && directory.dir_exists(Variables._project_path + "/builder/objects/data/4") && directory.dir_exists(Variables._project_path + "/builder/objects/data/5") && directory.dir_exists(Variables._project_path + "/builder/objects/data/6") && directory.dir_exists(Variables._project_path + "/builder/objects/data/7") && directory.dir_exists(Variables._project_path + "/builder/objects/data/8")
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/1"): #&& DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/8"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 		
 	else:
 		_timer_objects_display_panel.start()
 	
 	
-	if directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/1"): #&& directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/2"):
-	#&& directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/3") && directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/4") && directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/5") && directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/6") && directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/7") && directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/8")
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/1"): #&& DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/8"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 	
 	else:
@@ -88,7 +77,7 @@ func _process_objects_directory():
 		_show_start_button()
 		
 	
-func _process(_delta):
+func _physics_process(_delta):
 	if _start_button_clicked != 0:
 		_start_button_clicked += 1
 		
@@ -120,7 +109,7 @@ func _process(_delta):
 			t.set_one_shot(true)
 			self.add_child(t)
 			t.start()
-			yield(t, "timeout")
+			await t.timeout
 			
 			Filesystem.save_dictionary_json3("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt", Json._magic)
 			
@@ -144,7 +133,7 @@ func _process(_delta):
 	
 	
 func _input(event):	
-	if event is InputEventScreenTouch || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
+	if event is InputEventScreenTouch || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
 		if _can_go_to_main_menu == true:
 			$PressStart.modulate = Color(1, 1, 1, 1)
 		
@@ -152,20 +141,21 @@ func _input(event):
 
 
 func _go_to_main_menu():
-		var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+		var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 # for the json files...
 # copy a res:// directory plus all files inside that directory to the same directory at user://
 func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
-	var directory = Directory.new()
-	
 	# Creates a target directory and all necessary intermediate directories in its path, by calling make_dir() recursively.
-	if not directory.dir_exists(_dir_to):
+	if DirAccess.dir_exists_absolute(_dir_from):
+		var directory = DirAccess.open(_dir_from)
 		directory.make_dir_recursive(_dir_to)
 	
 	# Initializes the stream used to list all files and directories using the get_next() function, closing the currently opened stream if needed.
-	if directory.open(_dir_from) == OK:
-		directory.list_dir_begin(true)
+	DirAccess.open(_dir_from)
+	if DirAccess.get_open_error() == OK:
+		var directory = DirAccess.open(_dir_from)
+		directory.list_dir_begin()
 		
 		# Returns the next element (file or directory) in the current directory
 		var file_name = directory.get_next()
@@ -175,12 +165,12 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 			
 			var _timer = Timer.new()
 			_timer.wait_time = 0.001
-			_timer.connect("timeout", self, "_on_timer_timeout") 
+			_timer.connect("timeout", Callable(self, "_on_timer_timeout")) 
 			add_child(_timer)
 			_timer.start()
 			
 			# stop to update the progress bar.
-			yield(_timer, "timeout")
+			await _timer.timeout
 			_timer.stop()
 			_timer = null
 			
@@ -195,14 +185,14 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 				
 				# get the content of the file...
 				var _data = {}
-				var file = File.new()
 				
-				if file.file_exists(_dir_to + "/" + file_name):
+				if FileAccess.file_exists(_dir_to + "/" + file_name):
+					var _o = FileAccess.open(_dir_to + "/" + file_name, FileAccess.READ)
+					var text = _o.get_as_text()
+					var test_json_conv = JSON.new()
 					
-					var _o = file.open(_dir_to + "/" + file_name, File.READ)
-						
-					var text = file.get_as_text()
-					_data = parse_json(text)
+					test_json_conv.parse(text)
+					_data = test_json_conv.get_data()
 					
 					if _reading_magic_dir == true:
 						var _file = file_name.trim_suffix(".json")
@@ -214,11 +204,11 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 		
 								
 				# then encrypt it so that nobody can edit it.
-				file.open_encrypted_with_pass(_dir_to + "/" + 
+				var  _file = FileAccess.open_encrypted_with_pass(_dir_to + "/" + 
 				# this password must be the same when reading the file.
-				file_name, File.WRITE, "r85v&D4vHw3!df3Gd")
-				file.store_line(to_json(_data))
-				file.close()
+				file_name, FileAccess.WRITE, "r85v&D4vHw3!df3Gd")
+				_file.store_line(JSON.stringify(_data))
+				_file.close()
 
 			file_name = directory.get_next()
 	
@@ -239,15 +229,16 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 			
 	
 func copy_image_directory_recursively(_dir_from: String, _dir_to: String) -> void:
-	var directory = Directory.new()
-	
 	# Creates a target directory and all necessary intermediate directories in its path, by calling make_dir() recursively.
-	if not directory.dir_exists(_dir_to):
+	if DirAccess.dir_exists_absolute(_dir_from):
+		var directory = DirAccess.open(_dir_from)
 		directory.make_dir_recursive(_dir_to)
 	
 	# Initializes the stream used to list all files and directories using the get_next() function, closing the currently opened stream if needed.
-	if directory.open(_dir_from) == OK:
-		directory.list_dir_begin(true)
+	DirAccess.open(_dir_from)
+	if DirAccess.get_open_error() == OK:
+		var directory = DirAccess.open(_dir_from)
+		directory.list_dir_begin()
 		
 		# Returns the next element (file or directory) in the current directory
 		var file_name = directory.get_next()
@@ -257,11 +248,11 @@ func copy_image_directory_recursively(_dir_from: String, _dir_to: String) -> voi
 			
 			var _timer = Timer.new()
 			_timer.wait_time = 0.001
-			_timer.connect("timeout", self, "_on_timer_timeout") 
+			_timer.connect("timeout", Callable(self, "_on_timer_timeout")) 
 			add_child(_timer)
 			_timer.start()
 			
-			yield(_timer, "timeout")
+			await _timer.timeout
 			_timer.stop()
 			_timer = null
 			
@@ -301,11 +292,9 @@ func _on_timer_timeout():
 
 
 func _on_timer_magic_display_panel_timeout():	
-	var directory = Directory.new()
-	
 	# Creates a target directory and all necessary intermediate directories in its path, by calling make_dir() recursively.
 	for _i in range (1, Variables._total_builder_data_directories + 1):
-		if not directory.dir_exists(Variables._project_path + "/builder/magic/data/"+ str(_i)):
+		if not DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magic/data/"+ str(_i)):
 			# this displays the progress text.
 			$Panel/Label.text = "Creating magic "+ str(_i) + "/" + str(Variables._total_builder_data_directories) + " directories."
 			_progress_bar.value = 0
@@ -318,11 +307,9 @@ func _on_timer_magic_display_panel_timeout():
 				
 
 func _on_timer_objects_display_panel_timeout():	
-	var directory = Directory.new()
-	
 	# Creates a target directory and all necessary intermediate directories in its path, by calling make_dir() recursively.
 	for _i in range (1, Variables._total_builder_data_directories + 1):
-		if not directory.dir_exists(Variables._project_path + "/builder/objects/data/"+ str(_i)):
+		if not DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/"+ str(_i)):
 			$Panel/Label.text = "Creating data "+ str(_i) + "/" + str(Variables._total_builder_data_directories) + " directories."
 			_progress_bar.value = 0
 			_reading_data_dir = true
@@ -331,12 +318,12 @@ func _on_timer_objects_display_panel_timeout():
 			copy_directory_recursively(Variables._project_path + "/builder/objects/system/data", Variables._project_path + "/builder/objects/data/"+ str(_i))
 			
 			# if here, then increment this var. if Variables._total_builder_data_directories is greater then this vars value then another call to this func will be done.
-			if directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/"+ str(_i)):
+			if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/"+ str(_i)):
 				_next_builder_data_directory += 1
 			
 			break
 	
-		elif not directory.dir_exists(Variables._project_path + "/builder/objects/images/dictionaries/"+ str(_i)):
+		elif not DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/"+ str(_i)):
 			
 			$Panel/Label.text = "Creating image "+ str(_i) + "/" + str(Variables._total_builder_data_directories) + " directories."
 			_progress_bar.value = 0
@@ -356,7 +343,7 @@ func _show_start_button():
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
-	yield(t, "timeout")
+	await t.timeout
 
 	# free timer from memory.
 	t.queue_free()

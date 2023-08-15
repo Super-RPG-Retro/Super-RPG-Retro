@@ -1,429 +1,282 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c2l8d0p68waf5"]
 
-[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=3]
-[ext_resource path="res://2d/assets/themes/transparent-static.tres" type="Theme" id=4]
-[ext_resource path="res://2d/source/scripts/builder/dictionaries/artifacts.gd" type="Script" id=5]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+[ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="2"]
+[ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="3"]
+[ext_resource type="Theme" uid="uid://fr1lin3sbs06" path="res://2d/assets/themes/transparent-static.tres" id="4"]
+[ext_resource type="Script" path="res://2d/source/scripts/builder/dictionaries/artifacts.gd" id="5"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
-[node name="HeaderMenu" parent="." instance=ExtResource( 1 )]
+[node name="HeaderMenu" parent="." instance=ExtResource("1")]
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 576.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 576.0
 mouse_filter = 2
-theme = ExtResource( 3 )
-custom_styles/bg = SubResource( 1 )
+theme = ExtResource("3")
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 997.0
-margin_bottom = 520.0
-rect_min_size = Vector2( 200, 40 )
-custom_constants/vseparation = 7
-custom_constants/hseparation = 13
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/h_separation = 13
+theme_override_constants/v_separation = 7
 columns = 2
 
 [node name="LabelTitle" type="Label" parent="Container/Grid"]
-margin_top = 12.0
-margin_right = 222.0
-margin_bottom = 34.0
-rect_min_size = Vector2( 222, 0 )
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
 mouse_filter = 1
-custom_colors/font_color = Color( 0, 0.34902, 1, 1 )
-align = 2
+theme_override_colors/font_color = Color(0, 0.34902, 1, 1)
 
 [node name="LabelBody" type="Label" parent="Container/Grid"]
-margin_left = 235.0
-margin_right = 997.0
-margin_bottom = 47.0
+layout_mode = 2
 mouse_filter = 1
-custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
+theme_override_colors/font_color = Color(0, 0.329412, 1, 1)
 text = "Remember to build the mobs dictionary, at builder home, after editing the mobs1 or mobs2 dictionaries so that mobs can be seen while playing the game."
-autowrap = true
 
 [node name="ArtifactNumberLabel" type="Label" parent="Container/Grid"]
-margin_top = 59.0
-margin_right = 222.0
-margin_bottom = 81.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Artifact Number."
-align = 2
+horizontal_alignment = 2
 
 [node name="GridContainer" type="GridContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 54.0
-margin_right = 997.0
-margin_bottom = 86.0
+layout_mode = 2
 columns = 3
 
 [node name="ArtifactNumberSpinBox" type="SpinBox" parent="Container/Grid/GridContainer"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 1.0
 max_value = 99.0
 page = 1.0
 value = 1.0
 
 [node name="ArtifactImage" type="TextureRect" parent="Container/Grid/GridContainer"]
-margin_left = 102.0
-margin_right = 134.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 stretch_mode = 6
 
 [node name="ArtifactNumberDescription" type="Label" parent="Container/Grid/GridContainer"]
-margin_left = 138.0
-margin_top = 5.0
-margin_right = 138.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
-custom_colors/font_color = Color( 0.329412, 1, 0.329412, 1 )
-valign = 1
+theme_override_colors/font_color = Color(0.329412, 1, 0.329412, 1)
 
 [node name="CharismaLabel" type="Label" parent="Container/Grid"]
-margin_top = 105.0
-margin_right = 222.0
-margin_bottom = 127.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Charisma."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 93.0
-margin_right = 997.0
-margin_bottom = 140.0
+layout_mode = 2
 
 [node name="CharismaSpinBox" type="SpinBox" parent="Container/Grid/Grid1"]
-margin_top = 7.0
-margin_right = 98.0
-margin_bottom = 39.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 size_flags_horizontal = 12
 size_flags_vertical = 4
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription" type="Label" parent="Container/Grid/Grid1"]
-margin_left = 102.0
-margin_right = 762.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 660, 0 )
+custom_minimum_size = Vector2(660, 0)
+layout_mode = 2
 mouse_filter = 1
 text = "This is the bonus value of charisma. 1-99 value added to charisma when this artifact is active."
-autowrap = true
 
 [node name="ConstitutionLabel" type="Label" parent="Container/Grid"]
-margin_top = 152.0
-margin_right = 222.0
-margin_bottom = 174.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Constitution."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 147.0
-margin_right = 997.0
-margin_bottom = 179.0
+layout_mode = 2
 
 [node name="ConstitutionSpinBox" type="SpinBox" parent="Container/Grid/Grid2"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription2" type="Label" parent="Container/Grid/Grid2"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 290.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Constitution bonus."
 
 [node name="DefenseLabel" type="Label" parent="Container/Grid"]
-margin_top = 191.0
-margin_right = 222.0
-margin_bottom = 213.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Defense."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 186.0
-margin_right = 997.0
-margin_bottom = 218.0
+layout_mode = 2
 
 [node name="DefenseSpinBox" type="SpinBox" parent="Container/Grid/Grid3"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription3" type="Label" parent="Container/Grid/Grid3"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 251.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Defense bonus."
 
 [node name="DexterityLabel" type="Label" parent="Container/Grid"]
-margin_top = 230.0
-margin_right = 222.0
-margin_bottom = 252.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Dexterity."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 225.0
-margin_right = 997.0
-margin_bottom = 257.0
+layout_mode = 2
 
 [node name="DexteritySpinBox" type="SpinBox" parent="Container/Grid/Grid4"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription4" type="Label" parent="Container/Grid/Grid4"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 261.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Dexterity bonus."
 
 [node name="IntelligenceLabel" type="Label" parent="Container/Grid"]
-margin_top = 269.0
-margin_right = 222.0
-margin_bottom = 291.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Intelligence."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 264.0
-margin_right = 997.0
-margin_bottom = 296.0
+layout_mode = 2
 
 [node name="IntelligenceSpinBox" type="SpinBox" parent="Container/Grid/Grid5"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription5" type="Label" parent="Container/Grid/Grid5"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 281.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Intelligence bonus."
 
 [node name="LuckLabel" type="Label" parent="Container/Grid"]
-margin_top = 308.0
-margin_right = 222.0
-margin_bottom = 330.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Luck."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid6" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 303.0
-margin_right = 997.0
-margin_bottom = 335.0
+layout_mode = 2
 
 [node name="LuckSpinBox" type="SpinBox" parent="Container/Grid/Grid6"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription6" type="Label" parent="Container/Grid/Grid6"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 218.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Luck bonus."
 
 [node name="PerceptionLabel" type="Label" parent="Container/Grid"]
-margin_top = 347.0
-margin_right = 222.0
-margin_bottom = 369.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Perception."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid7" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 342.0
-margin_right = 997.0
-margin_bottom = 374.0
+layout_mode = 2
 
 [node name="PerceptionSpinBox" type="SpinBox" parent="Container/Grid/Grid7"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription7" type="Label" parent="Container/Grid/Grid7"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 276.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Perception bonus."
 
 [node name="StrengthLabel" type="Label" parent="Container/Grid"]
-margin_top = 386.0
-margin_right = 222.0
-margin_bottom = 408.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Strength."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid8" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 381.0
-margin_right = 997.0
-margin_bottom = 413.0
+layout_mode = 2
 
 [node name="StrengthSpinBox" type="SpinBox" parent="Container/Grid/Grid8"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription8" type="Label" parent="Container/Grid/Grid8"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 257.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Strength bonus."
 
 [node name="WillpowerLabel" type="Label" parent="Container/Grid"]
-margin_top = 425.0
-margin_right = 222.0
-margin_bottom = 447.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Willpower."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 420.0
-margin_right = 997.0
-margin_bottom = 452.0
+layout_mode = 2
 
 [node name="WillpowerSpinBox" type="SpinBox" parent="Container/Grid/Grid9"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription9" type="Label" parent="Container/Grid/Grid9"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 267.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Willpower bonus."
 
 [node name="WisdomLabel" type="Label" parent="Container/Grid"]
-margin_top = 464.0
-margin_right = 222.0
-margin_bottom = 486.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Wisdom."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid10" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 459.0
-margin_right = 997.0
-margin_bottom = 491.0
+layout_mode = 2
 
 [node name="WisdomSpinBox" type="SpinBox" parent="Container/Grid/Grid10"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 page = 1.0
 
 [node name="LabelDescription10" type="Label" parent="Container/Grid/Grid10"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 250.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Wisdom bonus."
 
 [node name="EmptyTitle" type="Label" parent="Container/Grid"]
-margin_top = 498.0
-margin_right = 222.0
-margin_bottom = 520.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
-align = 2
 
 [node name="EmptyBody" type="Label" parent="Container/Grid"]
-margin_left = 235.0
-margin_top = 498.0
-margin_right = 997.0
-margin_bottom = 520.0
+layout_mode = 2
 mouse_filter = 1
 
-[node name="StatusBar" parent="." instance=ExtResource( 2 )]
+[node name="StatusBar" parent="." instance=ExtResource("2")]
 
 [node name="AcceptDialogRename" type="AcceptDialog" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -340.0
-margin_top = -65.0
-margin_right = 210.0
-margin_bottom = 65.0
-theme = ExtResource( 4 )
-popup_exclusive = true
+size = Vector2i(500, 100)
+theme = ExtResource("4")
 dialog_autowrap = true
 
 [node name="AcceptDialogReturnToBuilderHome" type="AcceptDialog" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -340.0
-margin_top = -65.0
-margin_right = 210.0
-margin_bottom = 65.0
-theme = ExtResource( 4 )
-popup_exclusive = true
+size = Vector2i(500, 100)
+theme = ExtResource("4")
 dialog_autowrap = true
 
 [connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
@@ -439,6 +292,4 @@ dialog_autowrap = true
 [connection signal="value_changed" from="Container/Grid/Grid9/WillpowerSpinBox" to="." method="_on_SpinBox_willpower_changed"]
 [connection signal="value_changed" from="Container/Grid/Grid10/WisdomSpinBox" to="." method="_on_SpinBox_wisdom_changed"]
 [connection signal="focus_exited" from="AcceptDialogRename" to="." method="_on_AcceptDialog_focus_exited"]
-[connection signal="modal_closed" from="AcceptDialogRename" to="." method="_on_AcceptDialog_modal_closed"]
-[connection signal="popup_hide" from="AcceptDialogRename" to="." method="_on_AcceptDialog_popup_hide"]
 [connection signal="confirmed" from="AcceptDialogReturnToBuilderHome" to="." method="_on_AcceptDialog_return_to_builder_home_confirmed"]

@@ -12,7 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 # remember to delete the settings file at user:// after adding something here, else you will receive a run time error.
 extends Node
-var data = {
+
+
+var data := {
 	"dungeon_number": 		[],
 	"level_number": 		[],
 	"event_number":			0,

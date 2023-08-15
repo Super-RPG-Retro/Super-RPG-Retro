@@ -13,18 +13,13 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node2D
 
 
-onready var _sprite = $Sprite
+@onready var _sprite = $Sprite2D
 
 # this modulates the "press start" text.
 var _pressed_start_modulate:float = 1
 
 
-func _ready():		
-	OS.set_window_maximized(true)
-	OS.set_window_fullscreen(false)
-		
-
-func _process(_delta):
+func _physics_process(_delta):
 	if _pressed_start_modulate > 0:
 		_pressed_start_modulate -= 0.1
 		
@@ -35,8 +30,8 @@ func _process(_delta):
 	
 	
 func _input(event):	
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
 		$PressStart.modulate = Color(1, 1, 1, 1)
 			
-		var _s = get_tree().change_scene("res://source/scenes/server.tscn")
+		var _s = get_tree().change_scene_to_file("res://source/scenes/server.tscn")
 

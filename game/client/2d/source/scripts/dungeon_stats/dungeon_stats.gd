@@ -12,9 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _coordinates_label = $CoordinatesLabel
-onready var _clock_sprite = $ClockSprite
-onready var _clock_label = $ClockLabel
+
+@onready var _coordinates_label := $CoordinatesLabel
+@onready var _clock_label := $ClockLabel
 
 
 func _ready():

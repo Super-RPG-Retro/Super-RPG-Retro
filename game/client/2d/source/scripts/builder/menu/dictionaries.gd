@@ -13,9 +13,9 @@ You should have received a copy of the GNU Affero General Public License along w
 extends MenuButton
 
 
-var _menu_rooms
-var _menu_rooms_sub = PopupMenu.new()
-var _menu_rooms_sub2 = PopupMenu.new()
+var _menu_rooms := PopupMenu.new()
+var _menu_rooms_sub := PopupMenu.new()
+var _menu_rooms_sub2 := PopupMenu.new()
 
 
 func _ready():
@@ -59,10 +59,10 @@ func _ready():
 	_menu_rooms.add_item("Artifacts" 	+ Variables._menu_padding)
 	_menu_rooms.add_item("Starting Statistics" 	+ Variables._menu_padding)
 	
-	_menu_rooms_sub.connect("id_pressed", self, "_on_menu_rooms_sub_item_pressed1")
-	_menu_rooms_sub2.connect("id_pressed", self, "_on_menu_rooms_sub_item_pressed2")
+	_menu_rooms_sub.connect("id_pressed", Callable(self, "_on_menu_rooms_sub_item_pressed1"))
+	_menu_rooms_sub2.connect("id_pressed", Callable(self, "_on_menu_rooms_sub_item_pressed2"))
 		
-	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
+	_menu_rooms.connect("id_pressed", Callable(self, "_on_menu_rooms_item_pressed"))
 
 
 # hide the artifact menu if no artifacts are enabled.
@@ -75,28 +75,28 @@ func _process(_delta):
 
 func _input(_event):
 	if _menu_rooms.has_focus() == true || _menu_rooms_sub.has_focus() == true || _menu_rooms_sub2.has_focus() == true:
-		Variables.a.scancode = 0
+		Variables.a.keycode = 0
 		
 
 func _on_menu_rooms_sub_item_pressed1(ID):
 	Common.directory_names(ID)
 			
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/objects_new.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/dictionary/objects_new.tscn")
 		
 
 func _on_menu_rooms_sub_item_pressed2(ID):
 	Common.directory_names(ID)
 		
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/objects_edit.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/dictionary/objects_edit.tscn")
 
 	
 func _on_menu_rooms_item_pressed(ID):
 	match ID:
 		2:		
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/artifacts.tscn")
+			var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/dictionary/artifacts.tscn")
 	
 		3:		
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/dictionary/starting_statistics.tscn")
+			var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/dictionary/starting_statistics.tscn")
 	
 	
 func _on_exiting_tree(_node):

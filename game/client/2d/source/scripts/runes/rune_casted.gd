@@ -12,10 +12,12 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var game = get_parent()
-onready var build = get_parent().get_node("BuildLevel")
 
-var _text = "" # dialog text about the rune casted, such as, turns amount.
+@onready var game := get_parent()
+@onready var build := get_parent().get_node("BuildLevel")
+
+var _text := "" # dialog text about the rune casted, such as, turns amount.
+
 
 func _ready():
 	set_process_input(true)
@@ -35,7 +37,7 @@ func hit_points_recovered_text(_hp_calc):
 
 # the rune was casted. now do the effect of the rune at object, such as, healing self or turning self invisible.
 func cast_at_object_self():
-	# the rune is casted. therefore, minus the mp from player.	
+	# the rune is casted. therefore, minus the mp from player.
 	P._mp -= Json._magic[Variables._rune_current_selected_name]["MP"]
 		
 	match (Variables._rune_current_selected_name):
@@ -68,7 +70,7 @@ func cast_at_object_self():
 			Variables._reset_player = true
 			Variables._reset_player_position = game._player_tile
 			
-			var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/game/game_ui.tscn")
 				
 		"invisible":	
 			game.player.frame = 1

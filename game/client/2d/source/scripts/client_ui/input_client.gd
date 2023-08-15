@@ -12,10 +12,11 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends LineEdit
 
-onready var _client = get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Client")
 
-onready var _room_commands = get_parent().get_parent().get_node("HBoxContainer/RoomCommands")
-onready var _room_public = get_parent().get_parent().get_node("HBoxContainer/RoomPublic")
+@onready var _client := get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Client")
+
+@onready var _room_commands := get_parent().get_parent().get_node("HBoxContainer/RoomCommands")
+@onready var _room_public := get_parent().get_parent().get_node("HBoxContainer/RoomPublic")
 
 func _clear_focus():
 	Variables._bypass_wait_a_turn = false
@@ -274,14 +275,15 @@ func _on_text_entered(_text):
 		
 	# toggle the size of the client panel, which will also change the size of the main map by 64 app pixels in height.	
 	elif text == "/c":
-		Variables._trigger_commands = Enum.Trigger_commands.Client_panel_toggle_size
+		#Variables._trigger_commands = Enum.Trigger_commands.Client_panel_toggle_size
 		
-		_room_commands.text += "\n" + '-> Normal Client Size: ' + str(Settings._system.small_client_panel)
+		#_room_commands.text += "\n" + '-> Normal Client Size: ' + str(Settings._system.small_client_panel)
 		
-	# connect / disconnect to host.
+		_room_commands.text += "\n" + '-> feature needs to be rewritten.'
+		
 	elif text == "/d":
 		Variables._trigger_commands = Enum.Trigger_commands.Debug
-		_room_commands.text += "\n" + '-> debug '
+		_room_commands.text += "\n" + '-> Debug text outputted to console.'
 			
 	# wait a turn.
 	elif text == "/w" && text.length() == 2:

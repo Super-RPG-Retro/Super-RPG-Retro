@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _confirmation_dialog = $ConfirmationDialog
+
+@onready var _confirmation_dialog := $ConfirmationDialog
 
 
 func _ready():
@@ -50,7 +51,7 @@ func save_game():
 
 	get_tree().call_group("move", "update_visibility_map")
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt", Settings._game)
 	
 	Filesystem.builder_playing_save_data()
 	

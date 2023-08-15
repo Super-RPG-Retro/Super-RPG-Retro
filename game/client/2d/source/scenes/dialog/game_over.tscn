@@ -9,7 +9,7 @@ z_as_relative = false
 script = ExtResource( 1 )
 
 [node name="GameOverDialog" type="AcceptDialog" parent="."]
-rect_min_size = Vector2( 550, 130 )
+custom_minimum_size = Vector2( 550, 130 )
 focus_mode = 2
 theme = ExtResource( 2 )
 dialog_text = "Game Over"
@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="DataRemovedDialog" type="AcceptDialog" parent="."]
-rect_min_size = Vector2( 550, 130 )
+custom_minimum_size = Vector2( 550, 130 )
 focus_mode = 2
 theme = ExtResource( 2 )
 dialog_text = "Game Over"

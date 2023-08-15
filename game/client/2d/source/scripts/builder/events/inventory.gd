@@ -12,23 +12,24 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
+
 var _sprite = []
 
 # select a dictionary from the available list then click the add button to go to a different scene where you select the items to add to the inventory.
-onready var _item_list_select_dictionary = $Container/Grid/Grid4/ItemListSelectDictionary
+@onready var _item_list_select_dictionary := $Container/Grid/Grid4/ItemListSelectDictionary
 
 # items selected from the item list node is placed into this node.
-onready var _item_list_add_these_to_inventory = $Container/Grid/Grid6/ItemListAddTheseToInventory
+@onready var _item_list_add_these_to_inventory := $Container/Grid/Grid6/ItemListAddTheseToInventory
 
 # the total amount of each item in the inventory. if you selected an apple and an orange to be added to the above list and this amount was set to 5 then you would have 5 apples and 5 oranges.
-onready var _stack_amount = $Container/Grid/Grid9/SpinboxAmount
+@onready var _stack_amount := $Container/Grid/Grid9/SpinboxAmount
 
-onready var _event_number = $Container/Grid/Grid8/EventSpinbox
+@onready var _event_number := $Container/Grid/Grid8/EventSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid10/EventEnabled
+@onready var _event_enabled := $Container/Grid/Grid10/EventEnabled
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -39,7 +40,7 @@ func _ready():
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 	_item_list_select_dictionary.select(Variables._dictionary_index, true)
@@ -51,13 +52,13 @@ func _on_event_number_Spinbox_value_changed(value):
 	
 	# if there inventory items to display at ItemList...	
 	for _r in range(20):
-		if Builder._event_inventory.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number][_r].empty() == false:
+		if Builder._event_inventory.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number][_r].is_empty() == false:
 			# loop thur those items...
 			for _i in range (Builder._event_inventory.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number][_r].size()):
 				# add the textures
 				_sprite.append([])
-				_sprite[_sprite.size() - 1] = Sprite.new()
-				_sprite[_sprite.size() - 1].texture = Filesystem._load_external_image(Builder._event_inventory.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number][_r][_i], 1)
+				_sprite[_sprite.size() - 1] = Sprite2D.new()
+				_sprite[_sprite.size() - 1].texture = Filesystem._load_external_image(Builder._event_inventory.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number][_r][_i])
 				_item_list_add_these_to_inventory.add_icon_item(_sprite[_sprite.size() - 1].texture, false)
 				
 				# add the items to the ItemList.
@@ -65,9 +66,9 @@ func _on_event_number_Spinbox_value_changed(value):
 		
 	# is this event enabled?
 	if bool(Builder._event_inventory.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false	
+		_event_enabled.button_pressed = false	
 	
 	_stack_amount.value = Builder._event_inventory.data.amount[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_inventory.data.event_number]
 	
@@ -95,7 +96,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_dictionary_ItemList_item_selected(index):
@@ -118,7 +119,7 @@ func _on_prize_item_list_add_Button_pressed():
 	Variables.select_json_dictionary_singly = false
 	Variables.select_items_data_to_return = Enum.Select_items.Event_inventory
 	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
 	
 
 func _on_prize_item_list_remove_Button_pressed():

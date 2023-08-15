@@ -12,14 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # this refers to the dungeon number. a value of 0 means that dungeon is the first dungeon which may not be the starting dungeon.
-onready var _dungeon_number = $Container/Grid/Grid2/SpinboxDungeonNumber
+@onready var _dungeon_number := $Container/Grid/Grid2/SpinboxDungeonNumber
 
 # enabled: dungeon is active and can be entered from the library. disabled: dungeon is not at the library and dungeon cannot be entered. all features disabled,
-onready var _dungeon_enabled = $Container/Grid/Grid3/DungeonEnabled
+@onready var _dungeon_enabled := $Container/Grid/Grid3/DungeonEnabled
 
 # builder nenu.
-onready var _menu = null
+@onready var _menu = null
+
 
 func _ready():
 	# this is needed so when clicking the red button at the top right corner of sceme, the code will jump to the correct scene.
@@ -32,11 +34,11 @@ func _ready():
 	_dungeon_number.value = Builder._config.dungeon_number
 	_on_spinbox_dungeon_number_value_changed(_dungeon_number.value)
 	
-	_dungeon_enabled.pressed = bool(Builder._config.dungeon_enabled[Builder._config.game_id][_dungeon_number.value - 1])
-	_on_DungeonEnabled_toggled(_dungeon_enabled.pressed)
+	_dungeon_enabled.button_pressed = bool(Builder._config.dungeon_enabled[Builder._config.game_id][_dungeon_number.value - 1])
+	_on_DungeonEnabled_toggled(_dungeon_enabled.button_pressed)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 
@@ -44,12 +46,12 @@ func _on_spinbox_dungeon_number_value_changed(value):
 	Builder._config.dungeon_number = value
 	Builder._data.dungeon_number = value - 1
 	
-	_dungeon_enabled.pressed = Builder._config.dungeon_enabled[Builder._config.game_id][value - 1]
+	_dungeon_enabled.button_pressed = Builder._config.dungeon_enabled[Builder._config.game_id][value - 1]
 
 	
 func _on_spinbox_dungeon_number_mouse_exited():
 	var a = InputEventKey.new()
-	a.scancode = KEY_ENTER
+	a.keycode = KEY_ENTER
 	a.pressed = true
 	Input.parse_input_event(a)
 	
@@ -58,7 +60,7 @@ func _on_spinbox_dungeon_number_mouse_exited():
 
 func _on_spinbox_dungeon_number_focus_exited():
 	var a = InputEventKey.new()
-	a.scancode = KEY_ENTER
+	a.keycode = KEY_ENTER
 	a.pressed = true # change to false to simulate a key release
 	Input.parse_input_event(a)
 	
@@ -77,4 +79,4 @@ func _on_Node2D_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")

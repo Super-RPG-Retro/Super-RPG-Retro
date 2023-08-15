@@ -12,24 +12,25 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
+
 # an array of arrays to hold each tile.
-var map = []
+var map := []
 
 # an array to hold the rooms.
 # rooms[1] is the starting room where the player is at. puzzle room is rooms[0]. a puzzle room is always 15 x 15 tiles wide. puzzle room is first to be drawn because it is the biggest room. to avoid running out of free regions, it is better to draw bigger rooms first. it is easy to find space for smaller rooms.
 # rooms[0].position.x is the top left corner of the room, where the wall is at and in tiles, rooms[0].position.y is the rooms y coordinates in units. rooms[0].size.x and rooms[0].size.y is the amount of tiles including the walls. 
-var rooms = []
-var room_number = -1
-var floor_rooms = []
-var floor_rooms_size = []
-var doors = []
-var ceiling = []
+var rooms := []
+var room_number := -1
+var floor_rooms := []
+var floor_rooms_size := []
+var doors := []
+var ceiling := []
 
-var mobs = []
-var items = []
-var icons = []
+var mobs := []
+var items := []
+var icons := []
 var potion_types  
-var puzzle_blocks = []
+var puzzle_blocks := []
 
 # if false then no puzzle block can be moved because player has moved the allowed amount of puzzle blocks. every time the player places a block on the map, the move total increases until player cannot move anymore pieces.
 var _can_player_move_puzzle_block = true
@@ -38,17 +39,17 @@ var _can_player_move_puzzle_block = true
 var _player_holding_puzzle_block:bool = false
 
 # Node refs -----------------------------
-onready var _timer_move_speed_player = $TimerMoveSpeedPlayer
-onready var tile_map = $TileMap
-onready var overlay_map = $OverlayMap
-onready var visibility_map = $VisibilityMap
+@onready var _timer_move_speed_player = $TimerMoveSpeedPlayer
+@onready var tile_map = $TileMap
+@onready var overlay_map = $OverlayMap
+@onready var visibility_map = $VisibilityMap
 
 # visibility_map takes this data when player returns to a level. this data is saved to disk just before exiting a level. This is not from saved_data folder on hard drive. saved_data is only used when returning to a game from main menu.
-onready var visibility_map_saved = $VisibilityMap
-onready var player = $Player
-onready var build = $BuildLevel
-onready var reference = $Reference
-onready var rune_casting = $RuneCasting
+@onready var visibility_map_saved = $VisibilityMap
+@onready var player = $Player
+@onready var build = $BuildLevel
+@onready var reference = $RefCounted
+@onready var rune_casting = $RuneCasting
 
 # Game State ----------------------------
 var TILE_SIZE = 32
@@ -94,6 +95,11 @@ var _new_ceiling2 = null
 var _event_puzzle_move_total = -1
 
 func _ready():
+	var _temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt")
+		
+	if _temp != null:
+		Settings._game = _temp
+		
 	randomize()
 	
 	# if custom game is enabled, set these variables.
@@ -214,9 +220,7 @@ func game_seed():
 
 # this func deals with data from the user://data folder. for example, the folder names inside of the data/animals folders is read and stored as Variables._file_names for group anaimals.
 func populate_mobs_data():
-	var dir := Directory.new()
-	
-	if !dir.dir_exists(Variables._project_path + "/builder/objects/data/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/"):
+	if !DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/"):
 		return
 	
 	
@@ -231,7 +235,7 @@ func populate_mobs_data():
 	
 	# create an array what stores each mobs and what level the mobs is at and what dungeon that mobs is at. 
 	# var[a][b][c]. a: dungeon. b: mobs dictionary name. c: level mobs is at.
-	# create the array elements for all mobs.
+	# create the array indexes for all mobs.
 	for x in range(8):
 		_level_enemies_names.append([])
 		
@@ -250,7 +254,7 @@ func populate_mobs_data():
 
 	# count how many mobs are at current level. for each level _total_enemy_at_level is used in a random command to display mobs. for example, if two mobs was found at level 3, then this var will have a value of 2 and randi command is used to pick an mobs in a _total_level_enemy loop  
 	for _i in range(Variables.enemy_total_in_game):
-		if _level_enemies_names[Builder_playing._data.dungeon_number][_i][Settings._game.level_number].empty() == false:
+		if _level_enemies_names[Builder_playing._data.dungeon_number][_i][Settings._game.level_number].is_empty() == false:
 			_total_enemy_at_level += 1
 
 
@@ -258,31 +262,31 @@ func populate_mobs_data():
 # TODO this should be at builder.
 func tiles_change_on_level_load():
 	_new_wall = load("res://bundles/assets/images/foundation/wall" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(0, _new_wall)
+	tile_map.tile_set.get_source(0).texture =  _new_wall
 
 	_new_door = load("res://bundles/assets/images/foundation/door" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(1, _new_door)
+	tile_map.tile_set.get_source(1).texture = _new_door
 
 	_new_floor = load("res://bundles/assets/images/foundation/floor" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(2, _new_floor)
+	tile_map.tile_set.get_source(2).texture = _new_floor
 
 	_new_ladder_down = load("res://bundles/assets/images/foundation/ladder_down" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(3, _new_ladder_down)
+	tile_map.tile_set.get_source(3).texture = _new_ladder_down
 
 	_new_ladder_up = load("res://bundles/assets/images/foundation/ladder_up" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(4, _new_ladder_up)
+	tile_map.tile_set.get_source(4).texture = _new_ladder_up
 
 	_new_stone = load("res://bundles/assets/images/foundation/stone" + str(( Settings._game.level_number + 1 )) + ".png")
-	tile_map.tile_set.tile_set_texture(5, _new_stone)
+	tile_map.tile_set.get_source(5).texture =_new_stone
 		
 	_new_floor_rooms = load("res://bundles/assets/images/foundation/floor_rooms" + str(Settings._game.level_number + 1 ) + ".png")
-	tile_map.tile_set.tile_set_texture(6, _new_floor_rooms)
+	tile_map.tile_set.get_source(6).texture = _new_floor_rooms
 
 	_new_ceiling = load("res://bundles/assets/images/foundation/ceiling.png")
-	tile_map.tile_set.tile_set_texture(7, _new_ceiling)
+	tile_map.tile_set.get_source(7).texture = _new_ceiling
 		
 	_new_ceiling2 = load("res://bundles/assets/images/foundation/ceiling.png")
-	overlay_map.tile_set.tile_set_texture(0, _new_ceiling2)
+	overlay_map.tile_set.get_source(0).texture = _new_ceiling2
 			
 
 func try_move(dx, dy):
@@ -343,7 +347,7 @@ func potion_mana():
 func update_visuals():
 	# set the player's position. tile_size is 32 pixels.
 	player.position = _player_tile * TILE_SIZE
-	yield(get_tree().create_timer(0.000001), "timeout")
+	await get_tree().create_timer(0.000001).timeout
 	
 	# ray-casting will be used to determine what the player can see.
 	# for starters, get pixel coordinates for the center of the player's tile.
@@ -357,25 +361,25 @@ func update_visuals():
 			# the ray-cast will be done if there is a zero, a visibility tile. However there is a complication here. If we go from center to center, some tiles will be cut off even though you should be able to see the side of it. So an offset will be used to the closet corner.
 			# see folder ref/5-1.png
 			# a value of zero means player cannot see tile. tile is all black.
-			if visibility_map.get_cell(x, y) == 0:
+			if visibility_map.get_cell_source_id(0, Vector2i(x, y)) == 0:
 				var x_dir = 1 if x < _player_tile.x else -1
 				var y_dir = 1 if y < _player_tile.y else -1
 				# once the direction is found, tile will be multiplied by half its size to get the offset.
 				var test_point = tile_to_pixel_center(x, y) + Vector2(x_dir, y_dir) * TILE_SIZE / 2
 				
 				# now i can do the ray-cast starting from intersect ray. Going from the center to the point that was just calculated.
-				var occlusion = space_state.intersect_ray(player_center, test_point)
+				var occlusion = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(player_center, test_point))
 				
 				# if no occlusion then we can see the tile. However, here is one complication. For tiles that block vision, we always get hit when casting a ray at it, but that does not mean we should not see it, just means we should not see past it. so we need to check the distance between the point of the hit to the point that we were just testing. A value of 1 give a 1 margin error to the tile.
 				if !occlusion || (occlusion.position - test_point).length() < 1:
 					# a value of -1 clears the tile.
-					visibility_map.set_cell(x, y, -1)
+					visibility_map.set_cell(0, Vector2i(x, y), -1)
 					
 	for mob in mobs:
 		mob._sprite_scene.position = mob.tile * TILE_SIZE
 		if !mob._sprite_scene.visible:
 			var mob_center = tile_to_pixel_center(mob.tile.x, mob.tile.y)
-			var occlusion = space_state.intersect_ray(player_center, mob_center)
+			var occlusion = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(player_center, mob_center))
 			
 			if !occlusion && mob.dead == false:
 				mob._sprite_scene.visible = true
@@ -386,7 +390,7 @@ func update_visuals():
 		if !item._sprite_scene.visible:
 			var item_center = tile_to_pixel_center(item.tile.x, item.tile.y)
 			# if the mobs is not already visible, we will cast a ray and if nothing blocks it then we will make it visible.
-			var occlusion = space_state.intersect_ray(player_center, item_center)
+			var occlusion = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(player_center, item_center))
 			if !occlusion:
 				item._sprite_scene.visible = true
 

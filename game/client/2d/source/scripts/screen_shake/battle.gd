@@ -12,26 +12,25 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _slash_sounds: Array
 
+var _slash_sounds := []
 
-onready var shakeTimer = $Timer
-onready var tween = $Tween
+@onready var shakeTimer := $Timer
 
 # mobs or group of mobs.
-onready var _mobs:Array = [$SpriteMobs1]
+@onready var _mobs := [$SpriteMobs1]
 
 # basic sprite used to damaged mobs. this is a none-magic or none-item sprite. just a normal sprite used for hit effect.
-onready var _mobs_slash:Array = [$SpriteMobsSlash1]
+@onready var _mobs_slash := [$SpriteMobsSlash1]
 
 # mobs hit points.
-onready var _mobs_hp:Array = [$TemplateMobs1/GridContainer/LabelHPValue]
+@onready var _mobs_hp := [$TemplateMobs1/GridContainer/LabelHPValue]
 
-onready var _player = $Player
+@onready var _player := $Player
 # sprite used when player is damaged. normal hit sprite. a sprite used for a magic hitting player or an item hitting player are different in appearence than this normal hit sprite.
-onready var _player_slash = $SpritePlayerSlash
+@onready var _player_slash := $SpritePlayerSlash
 
-onready var _player_hp = $TemplatePlayer/GridContainer/LabelHPValue
+@onready var _player_hp := $TemplatePlayer/GridContainer/LabelHPValue
 
 # mobs node passed here from the game_world game script.
 var _e_node
@@ -40,11 +39,12 @@ var _e_node
 var _game
 
 # when player moves, these values change at try_move func.
-var _dx:int
-var _dy:int
+var _dx := 0
+var _dy := 0
 
 # is it the teams turn to move. false equals mobs turn.
-var _is_teams_turn: bool = true
+var _is_teams_turn := true
+
 
 func _ready():
 	# random slash sounds.
@@ -64,12 +64,9 @@ func _battle_system(e_node, dx:int, dy:int):
 		_e_hp.text = str(_e_node._hp).pad_zeros(3) + "/" + str(_e_node._hp_max).pad_zeros(3)
 		_player_hp.text = str(P._hp).pad_zeros(3) + "/" + str(P._hp_max).pad_zeros(3)
 	
-	# gran the mobs sprite using the e_node.	
-	var dir := Directory.new()
-	
 	# if file exists...
-	if dir.file_exists(Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/" + Json.d[str(Builder_playing._config.game_id)]["mobs"][e_node._name]["Class"] + e_node._name.to_lower() + "/1.png"):
-		_mobs[0].texture = Filesystem._load_external_image(Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/" + Json.d[str(Builder_playing._config.game_id)]["mobs"][e_node._name]["Class"] + e_node._name.to_lower() + "/1.png", 2)
+	if FileAccess.file_exists(Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/" + Json.d[str(Builder_playing._config.game_id)]["mobs"][e_node._name]["Class"] + e_node._name.to_lower() + "/1.png"):
+		_mobs[0].texture = Filesystem._load_external_image(Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder_playing._config.game_id + 1) + "/mobs/" + str(Builder_playing._data.dungeon_number + 1) + "/" + str(Builder_playing._data.level_number + 1) + "/" + Json.d[str(Builder_playing._config.game_id)]["mobs"][e_node._name]["Class"] + e_node._name.to_lower() + "/1.png")
 
 
 func _on_ButtonFight_pressed():
@@ -90,7 +87,7 @@ func _player_hits_mobs_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	t.queue_free()
 	
@@ -103,7 +100,7 @@ func _player_hits_mobs_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	# free timer from memory.
 	t.queue_free()
@@ -122,7 +119,7 @@ func _player_hits_mobs_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	t.queue_free()
 	
@@ -152,7 +149,7 @@ func _mobs_hits_player_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	t.queue_free()
 		
@@ -165,7 +162,7 @@ func _mobs_hits_player_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	t.queue_free()
 	
@@ -188,7 +185,7 @@ func _mobs_hits_player_normal():
 	self.add_child(t)
 	t.start()
 	
-	yield(t, "timeout")
+	await t.timeout
 	
 	t.queue_free()
 	_is_teams_turn = true	

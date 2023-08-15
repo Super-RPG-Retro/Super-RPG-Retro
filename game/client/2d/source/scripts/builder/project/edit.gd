@@ -12,15 +12,17 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _game_id_spin_box = $Container/Grid/GameIDspinbox
 
-onready var _game_title_line_edit = $Container/Grid/Grid3/GameTitleLineEdit
+@onready var _game_id_spin_box := $Container/Grid/GameIDspinbox
 
-onready var _menu = null
+@onready var _game_title_line_edit := $Container/Grid/Grid3/GameTitleLineEdit
 
-onready var _confirm_update_mobs_dialog = $ConfirmUpdateMobsDialog
+@onready var _menu = null
 
-onready var _confirm_update_artifacts_dialog = $ConfirmUpdateArtifactsDialog
+@onready var _confirm_update_mobs_dialog := $ConfirmUpdateMobsDialog
+
+@onready var _confirm_update_artifacts_dialog := $ConfirmUpdateArtifactsDialog
+
 
 func _ready():
 	Variables._at_scene = Enum.Scene.Builder
@@ -35,13 +37,13 @@ func _ready():
 		
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 		
 		
 func _input(event):	
 	if event.is_action_pressed("ui_escape", true):
-		var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+		var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 			
 	
 func _on_UseCustomGame_toggled(button_pressed):
@@ -68,7 +70,7 @@ func _on_GameTitleLineEdit_text_changed(new_text):
 	
 func _on_GameTitle_mouse_exited():
 	var a = InputEventKey.new()
-	a.scancode = KEY_ENTER
+	a.keycode = KEY_ENTER
 	a.pressed = true # change to false to simulate a key release
 	Input.parse_input_event(a)
 	
@@ -77,7 +79,7 @@ func _on_GameTitle_mouse_exited():
 
 func _on_GameTitle_focus_exited():
 	var a = InputEventKey.new()
-	a.scancode = KEY_ENTER
+	a.keycode = KEY_ENTER
 	a.pressed = true
 	Input.parse_input_event(a)
 	
@@ -94,7 +96,7 @@ func _on_Node2D_tree_exiting():
 	queue_free()
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_UpdateMobsButton_pressed():
@@ -113,29 +115,35 @@ func _on_mobs_AcceptDialog_confirmed():
 
 # remove files and directories from the "mobs" directory because we are about to copy enabled mobs from mobs1 and mobs2 directory to the mobs directory. the reason is because, mobs directory is sorted based on dungeon numbers and level numbers. when loading a 2d level, if at level 2, only the mobs from that second directory is loaded into memory.
 func _empty_mobs_directory():
-	var dir = Directory.new() 
-	
 	var _list = Filesystem.get_dir_contents(Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/mobs/")
 	
 	# list[0] = files. list[1] = directories.
 	for _i in _list[0]:
-		dir.remove(_i)
-	
+		if FileAccess.file_exists(_i):
+			DirAccess.remove_absolute(_i)
+				
 	# this will remove level directories only because dungeon dictionaries are discovered first and placed in the array list at the beginning, so only empty dictionaries will be removed. therefore, this code is looped twice so to delete all directories.
 	for _n in range (4):
 		for _i in _list[1]:
-			dir.remove(_i)
+			DirAccess.open(_i)
+			if DirAccess.get_open_error() == OK:
+				var _dir = DirAccess.open(_i)
+				_dir.remove(_i)
 	
 		
 	_list = Filesystem.get_dir_contents(Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder._config.game_id + 1) + "/mobs/")
 	
 	for _i in _list[0]:
-		dir.remove(_i)
+		if FileAccess.file_exists(_i):
+			DirAccess.remove_absolute(_i)
 	
 	# a value of 4 makes sure that everything is removed.
 	for _n in range (4):
 		for _i in _list[1]:
-			dir.remove(_i)	
+			DirAccess.open(_i)
+			if DirAccess.get_open_error() == OK:
+				var _dir = DirAccess.open(_i)
+				_dir.remove(_i)
 	
 
 # gets the file_paths, file_names and folder_names for mobs1 and mobs2 then loads the json data into the mobs1 and mobs2 directory. then later a search for each json file to check if the enabled data equals true. those mobs files will be added to the mobs directory not mobs1 nor mobs2. the mobs directory will have only the mobs for that level when playing the game. the reason is for faster game loading. instead on loading all the mobs, most of which will not be used, we will be loading just the mobs for that level at each game level load.
@@ -173,10 +181,9 @@ func _copy_files_to_mobs_directory():
 								
 								# copy file to mobs data directory.
 								if _sub == 0:
-									var dir = Directory.new()
-									dir.copy(Variables._file_paths[_fn], _file_directory + "/" + _file_name[1] + ".json")
+									DirAccess.copy_absolute(Variables._file_paths[_fn], _file_directory + "/" + _file_name[1] + ".json")
 									
-									if !dir.file_exists(_file_directory + "/" + _file_name[1] + ".json"):
+									if !FileAccess.file_exists(_file_directory + "/" + _file_name[1] + ".json"):
 										printerr("failed to copy file to " +  _file_directory + "/" + _file_name[1] + ".json")
 										
 							# file will be placed inside this image directory.	
@@ -187,18 +194,15 @@ func _copy_files_to_mobs_directory():
 							Variables._image_textures[_fn] = Variables._image_textures[_fn].replace(".json", "/1.png")
 							Variables._image_textures[_fn] = Variables._image_textures[_fn].replace("/builder/objects/data/", "/builder/objects/images/dictionaries/")
 							
-							var dir = Directory.new()	
-							dir.copy(Variables._image_textures[_fn], _file_directory2 + "/1.png")
-							if !dir.file_exists(_file_directory2 + "/1.png"):
+							DirAccess.copy_absolute(Variables._image_textures[_fn], _file_directory2 + "/1.png")
+							if !FileAccess.file_exists(_file_directory2 + "/1.png"):
 								printerr("failed to copy file to " +  _file_directory2 + "/1.png")
 							
 
 
 func _check_make_dir(_path):
-	var dir = Directory.new() 
-	
-	if !dir.dir_exists(_path):
-		dir.make_dir(_path)
+	if !DirAccess.dir_exists_absolute(_path):
+		DirAccess.make_dir_absolute(_path)
 
 
 func _on_MenuDungeons_tree_exiting():
@@ -214,29 +218,31 @@ func _on_artifacts_AcceptDialog_confirmed():
 	
 
 func _empty_artifacts_directory():
-	var dir = Directory.new() 
-	
 	var _list = Filesystem.get_dir_contents(Variables._project_path + "/builder/artifacts/")
 	
 	# list[0] = files. list[1] = directories.
 	for _i in _list[0]:
-		dir.remove(_i)
+		var _file = FileAccess.open(_i, FileAccess.READ)
+		_file.remove(_i)
 	
 	# this will remove level directories only because dungeon dictionaries are discovered first and placed in the array list at the beginning, so only empty dictionaries will be removed. therefore, this code is looped (4) so to delete all folders.
 	for _n in range (4):
 		for _i in _list[1]:
-			dir.remove(_i)
+			var _dir = DirAccess.open(_i)
+			_dir.remove(_i)
 	
 		
 	_list = Filesystem.get_dir_contents(Variables._project_path + "/builder/artifacts/")
 	
 	for _i in _list[0]:
-		dir.remove(_i)
+		var _file = FileAccess.open(_i, FileAccess.READ)
+		_file.remove(_i)
 	
 	# code is looped (4) so to delete all folders.
 	for _n in range (4):
 		for _i in _list[1]:
-			dir.remove(_i)	
+			var _dir = DirAccess.open(_i)
+			_dir.remove(_i)
 	
 	
 func _copy_files_to_artifacts_directory():
@@ -292,7 +298,7 @@ func _copy_files_to_artifacts_directory():
 						
 						# copy file to artifacts root directory.
 						if _sub == 0:
-							var dir = Directory.new()
+							var dir = DirAccess.open(Variables._file_paths[_fn])
 							dir.copy(Variables._file_paths[_fn], _file_directory + "/" + _file_name[1] + ".json")
 							
 							if !dir.file_exists(_file_directory + "/" + _file_name[1] + ".json"):
@@ -306,7 +312,7 @@ func _copy_files_to_artifacts_directory():
 					Variables._image_textures[_fn] = Variables._image_textures[_fn].replace(".json", "/1.png")
 					Variables._image_textures[_fn] = Variables._image_textures[_fn].replace("/builder/objects/data/", "/builder/objects/images/dictionaries/")
 					
-					var dir = Directory.new()	
+					var dir = DirAccess.open(Variables._image_textures[_fn])	
 					dir.copy(Variables._image_textures[_fn], _file_directory2 + "/1.png")
 					if !dir.file_exists(_file_directory2 + "/1.png"):
 						printerr("failed to copy file to " +  _file_directory2 + "/1.png")

@@ -12,25 +12,27 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var game = get_parent()
-onready var build = get_parent().get_node("BuildLevel")
-onready var _timer_rune_zorder = get_parent().get_node("TimerRuneZorder")
+
+@onready var game := get_parent()
+@onready var build := get_parent().get_node("BuildLevel")
+@onready var _timer_rune_zorder := get_parent().get_node("TimerRuneZorder")
 
 # after clicking a rune to cast, guide images on map, refering to locations where a rune can be casted, unless you disable that feature at config scene.
-var _rune_guide_value = []
-var _rune_guide_sprite = []
+var _rune_guide_value := []
+var _rune_guide_sprite := []
 
-onready var x = 0
-onready var y = 0
+@onready var x := 0
+@onready var y := 0
 
 # the animation of the rune at the map after casting it. this var is populated when the player casts the rune.	
-onready var _rune_animation = []
+@onready var _rune_animation := []
 
 # a rune could have 5 turns. after the player walks 5 steps then the rune will be removed from the map. each step decrements this value by 1. this var is populated when the player casts the rune.
-onready var _rune_turns_animation = []
+@onready var _rune_turns_animation := []
 
 # the rune name will be used to set the total turns of the casted rune. this var is populated when the player casts the rune.
-onready var _rune_name_animation = []
+@onready var _rune_name_animation := []
+
 
 func _ready():
 	# all rune guide images default at the position of player.
@@ -68,7 +70,7 @@ func create_rune_casting_units():
 	_rune_turns_animation.append(Json._magic[Variables._rune_current_selected_name]["Turns"])
 	_rune_name_animation.append(Variables._rune_current_selected_name)
 	
-	# if there are two runes on the map, this will get the third array element.
+	# if there are two runes on the map, this will get the third array index.
 	var _num = _rune_animation.size() - 1 
 	
 	# this will hold the rows where the guide tiles are set to. 5 will be used here to create all the posible tiles in a row but will later only set those tiles as active from the guide tiles that have a value of 1.
@@ -81,9 +83,9 @@ func create_rune_casting_units():
 			_rune_animation[_num][_x].append([])
 			_rune_animation[_num][_x][_y] = []
 				
-			_rune_animation[_num][_x][_y] = AnimatedSprite.new()
+			_rune_animation[_num][_x][_y] = AnimatedSprite2D.new()
 			
-			# each rune has an animation effects to use. the animaton is taken from the magic dictionary, animation element. the name of the rune is set when clicking the rune button at the rune panel.
+			# each rune has an animation effects to use. the animaton is taken from the magic dictionary. the name of the rune is set when clicking the rune button at the rune panel.
 			var _rune_image1 = ImageTexture.new()
 			_rune_image1 = load("res://bundles/assets/images/magic/animation/" + str(Json._magic[Variables._rune_current_selected_name]["Animation"]) + "a.png")
 			
@@ -95,12 +97,12 @@ func create_rune_casting_units():
 			
 			# add the animation frames for this rune.
 			_rune_animation[_num][_x][_y].frames = SpriteFrames.new()
-			_rune_animation[_num][_x][_y].frames.add_animation(str(Json._magic[Variables._rune_current_selected_name]["Animation"]))
-			_rune_animation[_num][_x][_y].frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image1, 0)
-			_rune_animation[_num][_x][_y].frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image2, 1)
-			_rune_animation[_num][_x][_y].frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image3, 2)
-			_rune_animation[_num][_x][_y].frames.set_animation_loop(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), true)
-			_rune_animation[_num][_x][_y].frames.set_animation_speed(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), 5.0)
+			_rune_animation[_num][_x][_y].sprite_frames.add_animation(str(Json._magic[Variables._rune_current_selected_name]["Animation"]))
+			_rune_animation[_num][_x][_y].sprite_frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image1, 0)
+			_rune_animation[_num][_x][_y].sprite_frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image2, 1)
+			_rune_animation[_num][_x][_y].sprite_frames.add_frame(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), _rune_image3, 2)
+			_rune_animation[_num][_x][_y].sprite_frames.set_animation_loop(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), true)
+			_rune_animation[_num][_x][_y].sprite_frames.set_animation_speed(str(Json._magic[Variables._rune_current_selected_name]["Animation"]), 5.0)
 			
 			# add the animation to the scene.
 			add_child(_rune_animation[_num][_x][_y])

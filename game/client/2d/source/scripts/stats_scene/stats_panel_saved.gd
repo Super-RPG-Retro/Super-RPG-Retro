@@ -12,22 +12,23 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _username_value_label = $Background/UsernameValueLabel
-onready var _xp_value_label = $Background/xpValueLabel
-onready var _xp_next_value_label = $Background/xpNextValueLabel
 
-onready var _stats_text_all_column1_label = $Background/StatsTextAllColumn1Label
-onready var _stats_text_all_column2_label = $Background/StatsTextAllColumn2Label
-onready var _stats_value_all_column1_label = $Background/StatsValueAllColumn1Label
-onready var _stats_value_all_column2_label = $Background/StatsValueAllColumn2Label
+@onready var _username_value_label := $Background/UsernameValueLabel
+@onready var _xp_value_label := $Background/xpValueLabel
+@onready var _xp_next_value_label := $Background/xpNextValueLabel
 
-onready var _health_bar = $Background/HealthBar
-onready var _health_percentage = $Background/HealthPercentage
-onready var _health_text = $Background/HealthText
+@onready var _stats_text_all_column1_label := $Background/StatsTextAllColumn1Label
+@onready var _stats_text_all_column2_label := $Background/StatsTextAllColumn2Label
+@onready var _stats_value_all_column1_label := $Background/StatsValueAllColumn1Label
+@onready var _stats_value_all_column2_label := $Background/StatsValueAllColumn2Label
 
-onready var _magic_bar = $Background/MagicBar
-onready var _magic_percentage = $Background/MagicPercentage
-onready var _mana_text = $Background/MagicText
+@onready var _health_bar := $Background/HealthBar
+@onready var _health_percentage := $Background/HealthPercentage
+@onready var _health_text := $Background/HealthText
+
+@onready var _magic_bar := $Background/MagicBar
+@onready var _magic_percentage := $Background/MagicPercentage
+@onready var _mana_text := $Background/MagicText
 
 	
 func _input(event):
@@ -102,8 +103,7 @@ func stats_saved_empty():
 func stats_saved_value_all_update():
 	call_deferred("stats_saved_value_all_update2")
 	
-	var _file = File.new()
-	if _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+	if FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
 		self.visible = true
 		Variables._is_saved_id_panel_visible = true
 
@@ -123,12 +123,12 @@ func stats_saved_text_all_update():
 			if d == "Class":
 				d = ""
 							
-			_stats_text_all_column1_label.bbcode_text += "[right]" + str(d) + "[/right]\n"
+			_stats_text_all_column1_label.text += "[right]" + str(d) + "[/right]\n"
 		else:
 			if d == "Level":
 				d = ""
 			
-			_stats_text_all_column2_label.bbcode_text += "[right]" + str(d) + "[/right]\n"
+			_stats_text_all_column2_label.text += "[right]" + str(d) + "[/right]\n"
 
 
 # this func is called when the game id value is changed at the main menu. this updates the game data saved panel. this func updates the values of P.character_stats. for example, not the text of "Luck" but instead its value.
@@ -153,21 +153,21 @@ func stats_saved_value_all_update2():
 	_stats_value_all_column1_label.bbcode_enabled = true
 	_stats_value_all_column2_label.bbcode_enabled = true
 	
-	_stats_value_all_column1_label.bbcode_text = ""
-	_stats_value_all_column2_label.bbcode_text = ""
+	_stats_value_all_column1_label.text = ""
+	_stats_value_all_column2_label.text = ""
 	
 	for d in P.character_stats[str(P._number)]["_saved"].values():
 		i += 1
 		if i <= 5:
 			if i == 0:
-				_stats_value_all_column1_label.bbcode_text += "\n"
+				_stats_value_all_column1_label.text += "\n"
 			else:
-				_stats_value_all_column1_label.bbcode_text += str(d).pad_zeros(3) + "\n"
+				_stats_value_all_column1_label.text += str(d).pad_zeros(3) + "\n"
 		else:
 			if i == 6:
-				_stats_value_all_column2_label.bbcode_text += "\n"
+				_stats_value_all_column2_label.text += "\n"
 			else:
-				_stats_value_all_column2_label.bbcode_text += str(d).pad_zeros(3) + "\n"
+				_stats_value_all_column2_label.text += str(d).pad_zeros(3) + "\n"
 
 	_health_text.text = str(P.character_stats[str(P._number)]["_saved"].HP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].HP_max).pad_zeros(4)
 	_mana_text.text = str(P.character_stats[str(P._number)]["_saved"].MP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].MP_max).pad_zeros(4)

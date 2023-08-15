@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://6vja344wdwgc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0uxdu"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iqx7x"]
+material = SubResource("StandardMaterial3D_0uxdu")
+
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_color = Color(0.313726, 0, 0.286275, 1)
+
+[sub_resource type="CylinderMesh" id="5"]
+material = SubResource("4")
+
+[sub_resource type="StandardMaterial3D" id="6"]
+
+[sub_resource type="CylinderMesh" id="7"]
+material = SubResource("6")
+
+[sub_resource type="StandardMaterial3D" id="8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="9"]
+material = SubResource("8")
+
+[node name="Torch" type="MeshInstance3D"]
+transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 1, 2, 4)
+visible = false
+mesh = SubResource("BoxMesh_iqx7x")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.05, -4.37114e-08, 0, 4.37114e-09, -0.5, 0, 0, 0, 0.05, 0.392702, -1.19209e-07, -0.0179999)
+mesh = SubResource("5")
+skeleton = NodePath("../..")
+
+[node name="Lamp" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.09, -1.31134e-08, 1.34885e-15, 7.86805e-09, -0.15, -1.1792e-22, 1.34885e-15, 0, 0.09, 0.392702, -0.25, -0.0179999)
+mesh = SubResource("7")
+skeleton = NodePath("../Base")
+
+[node name="WallMount" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.27, -2.18994e-09, 5.3954e-16, 2.36042e-08, -0.02505, -4.71681e-23, 4.04655e-15, 0, 0.036, 0.557701, 3.57628e-07, -0.0179994)
+mesh = SubResource("9")
+skeleton = NodePath("../Lamp")
+
+[node name="OmniLight" type="OmniLight3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 7.38965e-14, 8.74228e-08, -1, -6.46024e-21, 7.38965e-14, 0, 1, 0.392702, -0.3, -0.0179999)
+light_color = Color(0, 0.607843, 0.811765, 1)
+light_energy = 0.3
+light_indirect_energy = 0.0
+light_size = 1.0
+light_specular = 0.0
+light_bake_mode = 0
+omni_range = 0.719
+omni_attenuation = 2.25313

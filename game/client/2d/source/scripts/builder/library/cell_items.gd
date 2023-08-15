@@ -12,21 +12,19 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _grid = $Container/Grid
 
-var _label 			= []
-var _empty 			= []
-var _grid_child 	= []
-var _image 			= []
+@onready var _grid := $Container/Grid
+
+var _image	:= []
 
 # increments array elements.
-var _e = 0
+var _e := 0
 
 # cell button number
-var _b = 0
+var _b := 0
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -51,11 +49,11 @@ func _draw_cells():
 			_grid.add_child(_image[_e])
 			
 			# remove the signal..
-			if _image[_e].is_connected("pressed", self, "_on_pressed"):
+			if _image[_e].is_connected("pressed", Callable(self, "_on_pressed")):
 				_image[_e].disconnect("pressed", self, "_on_pressed", [_e])
 				
 			# create the signal.
-			var _z = _image[_e].connect("pressed", self, "_on_pressed", [_e])
+			var _z = _image[_e].connect("pressed", Callable(self, "_on_pressed").bind(_e))
 	
 			_e += 1
 			
@@ -87,7 +85,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_CellButton1_pressed():

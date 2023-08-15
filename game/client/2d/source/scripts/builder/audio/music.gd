@@ -12,28 +12,28 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _select_button = $SelectButton
+
+@onready var _select_button:= $SelectButton
 
 # this is the number of the OptionButton selected. the other var that also refer to this number is _i which is used in a loop at ready func and also as _on_focus_entered() parameter
-var _num:int = -1
+var _num := -1
 # this var does not get reset back to -1. it is used to save the pressed state of the OptionButton to builder.
-var _num_current = -1
+var _num_current := -1
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
-var _padding 	= 	[] # grid row padding
-var _padding2 	= 	[]
-var _padding3 	= 	[]
+var _padding 	:= 	[] # grid row padding
+var _padding2 	:= 	[]
+var _padding3 	:= 	[]
 
-var _scene_name = 	[] # name of scene where music is played.
-var _music_name = 	[] # name of the music assigned to the scene.
+var _scene_name := 	[] # name of scene where music is played.
+var _music_name := 	[] # name of the music assigned to the scene.
 
-var _play_button = 	[] # play the music.
-var _stop_button = 	[] # stop playing the music.
+var _play_button := [] # play the music.
+var _stop_button := [] # stop playing the music.
 
-
-onready var _grid = $Container/Grid
+@onready var _grid := $Container/Grid
 
 
 func _ready():
@@ -61,11 +61,11 @@ func _ready():
 		
 				
 		# here are the signals for all OptionButton. these signals will capture the entering and exiting of any OptionButton and will then go to the respective func. The toggle signal will also to a toggle func when the mouse or space/enter key is pressed.
-		if _music_name[_i].is_connected("focus_entered", self, "_on_focus_entered"):
+		if _music_name[_i].is_connected("focus_entered", Callable(self, "_on_focus_entered")):
 			_music_name[_i].disconnect("focus_entered", self, "_on_focus_entered", [_i])
 			
 		# create the signals for the mouse entering /exiting the nodes.
-		var _x = _music_name[_i].connect("focus_entered", self, "_on_focus_entered", [_i])
+		var _x = _music_name[_i].connect("focus_entered", Callable(self, "_on_focus_entered").bind(_i))
 		
 		_padding2.append([])
 		_padding2[_i] = Label.new()
@@ -74,29 +74,29 @@ func _ready():
 		
 		_play_button.append([])
 		_play_button[_i] = Button.new()
-		_play_button[_i].icon_align = HALIGN_CENTER 
+		_play_button[_i].icon_alignment = HORIZONTAL_ALIGNMENT_CENTER 
 		_play_button[_i].theme = load("res://2d/assets/themes/rounded_button.tres") 
 		_play_button[_i].icon = load("res://2d/assets/images/audio_play_button.png")
 		_grid.add_child(_play_button[_i])
 
-		if _play_button[_i].is_connected("pressed", self, "_on_music_play"):
+		if _play_button[_i].is_connected("pressed", Callable(self, "_on_music_play")):
 			_play_button[_i].disconnect("pressed", self, "_on_music_play", [_i])
 			
-		var _y = _play_button[_i].connect("pressed", self, "_on_music_play", [_i])
+		var _y = _play_button[_i].connect("pressed", Callable(self, "_on_music_play").bind(_i))
 			
 			
 	
 		_stop_button.append([])
 		_stop_button[_i] = Button.new()
-		_stop_button[_i].icon_align = HALIGN_CENTER 
+		_stop_button[_i].icon_alignment = HORIZONTAL_ALIGNMENT_CENTER 
 		_stop_button[_i].theme = load("res://2d/assets/themes/rounded_button.tres") 
 		_stop_button[_i].icon = load("res://2d/assets/images/audio_stop_button.png")
 		_grid.add_child(_stop_button[_i])
 		
-		if _stop_button[_i].is_connected("pressed", self, "_on_music_stop"):
-			_stop_button[_i].disconnect("pressed", self, "_on_music_stop")
+		if _stop_button[_i].is_connected("pressed", Callable(self, "_on_music_stop")):
+			_stop_button[_i].disconnect("pressed", Callable(self, "_on_music_stop"))
 			
-		var _z = _stop_button[_i].connect("pressed", self, "_on_music_stop")
+		var _z = _stop_button[_i].connect("pressed", Callable(self, "_on_music_stop"))
 		
 		
 		_padding3.append([])
@@ -112,21 +112,21 @@ func _process(_delta):
 	
 	if Variables._mouse_cursor_position.y <= 263: # bottom of screen.
 		# this is the button that follows the cursor.
-		_select_button.rect_position.y = 135
+		_select_button.position.y = 135
 		
 	elif Variables._mouse_cursor_position.y >= 663: # bottom of screen.
 		# this is the button that follows the cursor.
-		_select_button.rect_position.y = 535
+		_select_button.position.y = 535
 		
 	else:
 		# -16 -128 will center button to tip of cursor.
-		_select_button.rect_position.y = Variables._mouse_cursor_position.y - 144
+		_select_button.position.y = Variables._mouse_cursor_position.y - 144
 		
 	
 	# hide the _select_button when clicked, so that the OptionButton can show the options for that _music_text. Once a selection is made, the OptionButton will close and then the _select_button will be set back to visible. 
 	var _found = false
 	for _i in range (9):
-		if _music_name[_i].pressed == true:
+		if _music_name[_i].button_pressed == true:
 			_num_current = _i
 			Builder._audio_music.data.file_name[_i] = _music_name[_i].get_item_index(Builder._audio_music.data.id[_i])
 			_found = true
@@ -183,5 +183,5 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 

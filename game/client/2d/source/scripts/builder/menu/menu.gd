@@ -12,27 +12,24 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _menu_project = $MenuProject
+
+@onready var _menu_project := $MenuProject
 
 func _ready():
 	_menu_project.grab_focus()
 
+
 func _gui_input(event):
 	if $SceneHeader/ButtonExit.has_focus() == true || $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true || $MenuLibrary.has_focus() == true:
-		Variables.a.scancode = 0
-		
-	else:
-		# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
-		if Variables._scene_title != "Builder: Audio Music.":
-			Common._scancode_if_pressed_enter(event)
-		
-		
+		Variables.a.keycode = 0
+	
+	
 	if(event.is_pressed()) && Variables._child_scene_open == false:
 		if (event.is_action_pressed("ui_escape", true)):
 			
 			Filesystem.populate_json_dictionaries()
 			
-			var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 	
 
 func _process(_delta):
@@ -57,10 +54,18 @@ func _process(_delta):
 		
 		
 func _on_Node2D_tree_exiting():
+	Common._parse_input_event()
 	Filesystem.builder_save_data()
 	
 	call_deferred("remove_child", _menu_project)
 	call_deferred("queue_free", _menu_project)
 	
 	queue_free()
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		Common._parse_input_event()
+		Filesystem.builder_save_data()
+	
 

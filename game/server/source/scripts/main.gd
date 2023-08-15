@@ -15,28 +15,26 @@ extends Node
 # this is used to send updated item_list data to all clients.
 var _ticks = 0
 
-onready var _port = $VBoxContainer/HBoxContainer/Port
-onready var _server_message = $VBoxContainer/HBoxContainer/ServerMessage
-onready var _rich_text_messages = $VBoxContainer/GridContainer/RichTextMessages
-onready var _item_list = $VBoxContainer/GridContainer/ItemList
-onready var _listen_button = $VBoxContainer/HBoxContainer/ListenButton
+@onready var _port = $VBoxContainer/HBoxContainer/Port
+@onready var _server_message = $VBoxContainer/HBoxContainer/ServerMessage
+@onready var _rich_text_messages = $VBoxContainer/GridContainer/RichTextMessages
+@onready var _item_list = $VBoxContainer/GridContainer/ItemList
+@onready var _listen_button = $VBoxContainer/HBoxContainer/ListenButton
 
 
-var _server = WebSocketServer.new()
-var _protocol = PoolStringArray(["protocol", "binary"])
+var _server = TCPServer.new()
+var _protocol = "*"
 
 
 func _init():
-	OS.set_window_maximized(true)
+	_server.connect("client_connected", Callable(self, "_client_connected"))
+	_server.connect("client_disconnected", Callable(self, "_client_disconnected"))
+	_server.connect("client_close_request", Callable(self, "_client_close_request"))
+	_server.connect("data_received", Callable(self, "_data_received"))
 
-	_server.connect("client_connected", self, "_client_connected")
-	_server.connect("client_disconnected", self, "_client_disconnected")
-	_server.connect("client_close_request", self, "_client_close_request")
-	_server.connect("data_received", self, "_data_received")
-
-	_server.connect("peer_packet", self, "_data_received")
-	_server.connect("peer_connected", self, "_client_connected")
-	_server.connect("peer_disconnected", self, "_client_disconnected")
+	_server.connect("peer_packet", Callable(self, "_data_received"))
+	_server.connect("peer_connected", Callable(self, "_client_connected"))
+	_server.connect("peer_disconnected", Callable(self, "_client_disconnected"))
 	
 
 func _ready():
@@ -60,22 +58,22 @@ func _process(_delta):
 # connect/disconnect: server.
 func _on_Listen_button_toggled(_pressed):
 	if _pressed:
-		if _server.listen(_port.value, _protocol, true) == OK:
+		if _server.listen(_port.value, _protocol) == OK:
 			_rich_text_messages.text +=  "Listening on port " + str(_port.value) + ". Maximum Connections: " + str(Variables._connections_maximum) + ".\n"
 			
 			_listen_button.icon = load("res://assets/images/host/host_disconnect.png")
-			_listen_button.pressed = true
+			_listen_button.button_pressed = true
 			
 		else:
 			_rich_text_messages.text +=  "Error listening on port " + str(_port.value) + "\n"
-			_listen_button.pressed = false
+			_listen_button.button_pressed = false
 			
 	else:
 		_rich_text_messages.text +=  "Server stopped" + "\n"
 		_server.stop()
 		
 		_listen_button.icon = load("res://assets/images/host/host_connect.png")
-		_listen_button.pressed = false
+		_listen_button.button_pressed = false
 		
 	
 func _on_server_message_text_entered(_text):
@@ -125,7 +123,7 @@ func _client_disconnected(_id, _was_clean_close = true):
 	_rich_text_messages.text +=  _name + " disconnection was clean: " + str(_was_clean_close) + "\n"
 		
 	if Variables._connections_current >= Variables._connections_maximum:
-		_server.disconnect_peer(_id, 1000, "Server is too busy. Try again later.")
+		_server.disconnect_peer(_id)
 	
 	for _i in range (_item_list.get_item_count()):
 		var _text = _item_list.get_item_text(_i)
@@ -156,7 +154,7 @@ func _get_name_of_user(_id:int) -> String:
 # send data to all users or to 1 user.
 func _data_received(_id):
 	# get data from server.
-	var _data = bytes2var(_server.get_packet())
+	var _data = bytes_to_var(_server.get_packet())
 	Json._client_text = _data
 	
 	# store server data into json.
@@ -182,7 +180,7 @@ func _data_received(_id):
 # server sends data to all clients.
 # see sever_ui.gd _on_Send_button_pressed()
 func send_data(data):
-	var _data = var2bytes(data)
+	var _data = var_to_bytes(data)
 	_server.put_packet(_data)
 	
 

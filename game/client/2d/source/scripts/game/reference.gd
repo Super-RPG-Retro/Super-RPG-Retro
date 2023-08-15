@@ -13,14 +13,15 @@ You should have received a copy of the GNU Affero General Public License along w
 # game -> reference file.
 extends Node2D
 
+
 const TILE_SIZE = 32
 
-class Item extends Reference:
-	var _type = ""
-	var _name = ""
+class Item extends RefCounted:
+	var _type := ""
+	var _name := ""
 	
 	# the item description, such as what kind of potion is on the floor.
-	var _description = ""
+	var _description := ""
 	
 	# sprite scene that this Item uses.
 	var _sprite_scene
@@ -29,18 +30,19 @@ class Item extends Reference:
 	var tile
 	
 	# _item_id  0: paper, 1:potion, ect. see Items.gd.
-	var _item_id:int
+	var _item_id := -1
+	
 	
 	func _init(game, x, y, item_id, name):
 		self._item_id = item_id
 				
 		# tile in x and y coordinate.
 		tile = Vector2(x, y)
-				 
+		
 		if _item_id == 0:
-			_sprite_scene = Preload.PaperScene.instance()
+			_sprite_scene = Preload.PaperScene.instantiate()
 		else:
-			_sprite_scene = Preload.PotionScene.instance()
+			_sprite_scene = Preload.PotionScene.instantiate()
 		
 		# after adding an item from the Item dictionary, remember to go to mouse_command scene and add the code there.
 		_name = name
@@ -80,74 +82,74 @@ class Item extends Reference:
 	
 	
 # define a class to hold the mobs information.
-class Mobs extends Reference:
-	var _move_tile = Vector2(0, 0)
+class Mobs extends RefCounted:
+	var _move_tile := Vector2(0, 0)
 	
 	# mob goodbye/hit timer.
-	var timer = Timer.new()
+	var timer := Timer.new()
 	
 	# this var is used at tiles.gd to display tile information. this var is either "item", "mobs" or "player". 
-	var _type = ""
+	var _type := ""
 	
 	# how does this object move. follows player, moves in opposite direction of player...
-	var _movement_type:int = Enum.Movement_type.Target_player
+	var _movement_type := Enum.Movement_type.Target_player
 	
 	# this holds the last direction the mob moved in. 0:left, 1:up, 2:right, 3:down.
-	var _movement_direction:int = 0
+	var _movement_direction := 0
 	
 	# this will hold a reference to the mobs scene.
 	var _sprite_scene
 	
 	# this will be assigned the "position / TILE_SIZE" of the mobs, used to get tile coordinates of the mobs.
-	var tile: Vector2
+	var tile := Vector2(0, 0)
 	
 	# how much gold the mobs has.
-	var _gold
+	var _gold := 0
 	
-	var _str
-	var _def
-	var _con
-	var _dex
-	var _int
-	var _cha
-	var _wis
-	var _wil
-	var _per
-	var _luc
-	var _des
+	var _str := 0
+	var _def := 0
+	var _con := 0
+	var _dex := 0
+	var _int := 0
+	var _cha := 0
+	var _wis := 0
+	var _wil := 0
+	var _per := 0
+	var _luc := 0
+	var _des := ""
 	
 	# starting hit points. Variable hp will be given to this var.
-	var _hp_max
+	var _hp_max := 0
 	
 	# current hp. mobs dies once this value reaches 0. this hp max is the hp_max var.
-	var _hp
-	var _mp_max
-	var _mp
-	var	_xp_given
+	var _hp			:= 0
+	var _mp_max		:= 0
+	var _mp			:= 0
+	var	_xp_given	:= 0
 
 	# is mobs died. this can trigger a respawn.
-	export var dead = false
+	@export var dead := false
 	
 	# name of the mobs.
-	var _name
+	var _name := ""
 	
 	# respawn mobs when value is 0 when dead is true.
-	var respawn_position = Vector2(0, 0)
+	var respawn_position := Vector2(0, 0)
 	
 	# mobs are set invisible when mobs are too far from their starting position.
-	var _dead_at_tile_distance_from_start: int
+	var _dead_at_tile_distance_from_start := 0
 	
 	# this is the current game turns after mobs had died.
-	var _respawn_after_these_turns_current = 0
+	var _respawn_after_these_turns_current := 0
 	
 	# amount of game turns needed before an mobs respawn. when _respawn_after_these_turns_current reaches this value, the mobs will respawn.
-	var _respawn_after_these_turns_max: int
+	var _respawn_after_these_turns_max := 0
 	
 	# these values are hardcoded. no been to be concerned with them. they are used for the haste spells, to slow the movement of the mobs.
-	var _move_speed
-	var _move_speed_reset_min = 3
-	var _move_speed_min
-	var _move_speed_max
+	var _move_speed					:= 0
+	var _move_speed_reset_min 		:= 3
+	var _move_speed_min				:= 0
+	var _move_speed_max				:= 0
 
 	# godot calls this before scene is ready. This func is called when you create a new instance.
 	# game				is the reference to the game node.
@@ -158,7 +160,7 @@ class Mobs extends Reference:
 		tile = Vector2(x, y)
 			
 		# this holds the funcs and vars of the mobs instance.
-		_sprite_scene = Preload.MobsScene.instance()
+		_sprite_scene = Preload.MobsScene.instantiate()
 		
 		if Settings._game.show_mobs_when_door_closed == true:
 			_sprite_scene.visible = true
@@ -169,7 +171,7 @@ class Mobs extends Reference:
 		_name =		_level_enemies_names[Builder_playing._data.dungeon_number][id][mobs_level]
 		
 		# return if no mobs at level. this avoids a runtime crash.
-		if _name.empty() == true:
+		if _name.is_empty() == true:
 			return
 		
 		_gold = int(Json.d[str(Builder_playing._config.game_id)]["mobs"][_name].Drop_gold + Settings._game.difficulty_level)   
@@ -233,7 +235,7 @@ class Mobs extends Reference:
 		game.add_child(_sprite_scene)
 		
 		# when mobs dies, there will be a short delay where player cannot move that the tile. the reason is timer is set to 0.7s while animation is set for 0.65s. this is to avoid any assertion errors.
-		timer.connect("timeout", self, "_on_goodbye_timer_timeout") 
+		timer.connect("timeout", Callable(self, "_on_goodbye_timer_timeout")) 
 		game.add_child(timer)
 		
 	# we need to remove the instance when needed. you could do a instance notification and have godot clear the instance (see folder ref/6-1.png) but when changing scenes, godot will clear it there and that would give you an error since the instance is already removed. instead we can do the following.
@@ -251,7 +253,7 @@ class Mobs extends Reference:
 		
 		# change the width of the hp bar, depending on the percentage of the hp value.
 		if _hp_max > 0:
-			_sprite_scene.get_node("EntityChildScene/HP").rect_size.x = TILE_SIZE * _hp / _hp_max
+			_sprite_scene.get_node("EntityChildScene/HP").size.x = TILE_SIZE * _hp / _hp_max
 		
 		# change the color of the hp bar, based on the hp percent of the hp_max.
 		if _hp >= _hp_max * 0.7:
@@ -263,13 +265,11 @@ class Mobs extends Reference:
 		if _hp < _hp_max * 0.35:
 			_sprite_scene.get_node("EntityChildScene/HP").color = Color("7d0000")
 		
-		if _hp <= 0 && timer.time_left == 0:
-			Variables._type.clear()
 			_sprite_scene.get_node("AnimationPlayer").play("goodbye")
 					
 			P._xp += _xp_given			
 			_sprite_scene.get_tree().call_group("stats_loaded", "stats_value_all_update", _xp_given)
-						 
+			
 			timer.wait_time = 0.265
 			timer.one_shot = true
 			timer.start()
@@ -301,11 +301,6 @@ class Mobs extends Reference:
 			# place the mobs off map.
 			tile.x = -1
 			tile.y = -1
-						
-			# clear tile indormation.
-			Variables._name.clear()
-			Variables._type.clear()
-			_sprite_scene.get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "unit_description", "clear_i_node")
 			
 	
 	# mobs movement.			
@@ -326,7 +321,7 @@ class Mobs extends Reference:
 		#if path:			
 		# exit this func and try next move if player is standing on a mob. if this is true then mob respawned at player's position. mob will be seen standing with player but no errors will be giving because of this return.
 		# cannot stand on mob at corridor. enter this function regardless of path size because mob might be running from player.
-		if path.size() <= 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y)) != Enum.Tile.Floor:
+		if path.size() <= 1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y)) != Enum.Tile.Floor:
 			return
 		
 		# if mob stands still, return if player is not next to mob. else mob will attack.
@@ -372,7 +367,7 @@ class Mobs extends Reference:
 		else:
 			_move_tile = Vector2(path[0].x, path[0].y)
 			
-		 # if mobs wants to move to the player then give player damage.
+		# if mobs wants to move to the player then give player damage.
 		if _move_tile == game._player_tile && timer.time_left == 0:
 			game.player.get_node("Damage").damage_player(1)
 		
@@ -397,7 +392,7 @@ class Mobs extends Reference:
 					tile = _move_tile
 	
 	# type of movement that a mob can do.
-	func _mob_movement_type(game, path:PoolVector3Array, _dx:int, _dy:int):
+	func _mob_movement_type(game, path:PackedVector3Array, _dx:int, _dy:int):
 		if _movement_type == Enum.Movement_type.Run_away_from_player:
 			if game._player_tile.x < tile.x && tile.x - game._player_tile.x == 1 && game._player_tile.y < tile.y && tile.y - game._player_tile.y == 1 || game._player_tile.x > tile.x && game._player_tile.x - tile.x == 1 && game._player_tile.y < tile.y && tile.y - game._player_tile.y == 1:
 				_dx = 0
@@ -445,7 +440,7 @@ class Mobs extends Reference:
 		
 		if _movement_type == Enum.Movement_type.Random_movement:
 			randomize()
-			var _ra = int(rand_range(0, 4)) 
+			var _ra = int(randf_range(0, 4)) 
 			
 			if _ra == 0:
 				_dx = -1
@@ -466,7 +461,7 @@ class Mobs extends Reference:
 		
 		if _movement_type == Enum.Movement_type.Trace_walls:
 			# if game is not using Floor_rooms, change this mob movement type to random. this code is needed because mobs would run outside of room, braking the trace wall movement.
-			if game.tile_map.get_cellv(Vector2(tile.x, tile.y)) != Enum.Tile.Floor_rooms:
+			if game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y)) != Enum.Tile.Floor_rooms:
 				_movement_type = Enum.Movement_type.Random_movement
 			
 			if _movement_direction == 0:
@@ -478,7 +473,7 @@ class Mobs extends Reference:
 				if blocked == true:
 					_movement_direction = 1
 				
-				elif game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+				elif game.tile_map.get_cell_source_id(0, Vector2i(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
 					_dx = 1 # this value will be reversed before mob is moved.
 					_dy = 0
 				
@@ -494,7 +489,7 @@ class Mobs extends Reference:
 				if blocked == true:
 					_movement_direction = 2
 				
-				elif game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
+				elif game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
 					_dx = 0
 					_dy = 1
 				
@@ -510,7 +505,7 @@ class Mobs extends Reference:
 				if blocked == true:
 					_movement_direction = 3
 				
-				elif game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
+				elif game.tile_map.get_cell_source_id(0, Vector2i(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
 					_dx = -1
 					_dy = 0
 				
@@ -526,7 +521,7 @@ class Mobs extends Reference:
 				if blocked == true:
 					_movement_direction = 0
 				
-				elif game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
+				elif game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
 					_dx = 0
 					_dy = -1
 				
@@ -543,7 +538,7 @@ class Mobs extends Reference:
 				if blocked == true:
 					_movement_direction = 1
 				
-				elif game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+				elif game.tile_map.get_cell_source_id(0, Vector2i(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
 					_dx = 1 # this value will be reversed before mob is moved.
 					_dy = 0
 				
@@ -558,38 +553,38 @@ class Mobs extends Reference:
 				_move_tile = Vector2(tile.x, tile.y)
 				
 			# left.
-			if _dx == -1 && game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor || _dx == -1 && game.tile_map.get_cellv(Vector2(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
+			if _dx == -1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x + 1, tile.y)) == Enum.Tile.Floor || _dx == -1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x + 1, tile.y)) == Enum.Tile.Floor_rooms:
 				_move_tile = Vector2(tile.x + 1, tile.y)
 			
 			# right.
-			if _dx == 1 && game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor || _dx == 1 && game.tile_map.get_cellv(Vector2(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
+			if _dx == 1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x - 1, tile.y)) == Enum.Tile.Floor || _dx == 1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x - 1, tile.y)) == Enum.Tile.Floor_rooms:
 				_move_tile = Vector2(tile.x - 1, tile.y)
 			
 			# up.
-			if _dy == -1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor || _dy == -1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
+			if _dy == -1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y + 1)) == Enum.Tile.Floor || _dy == -1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y + 1)) == Enum.Tile.Floor_rooms:
 				_move_tile = Vector2(tile.x, tile.y + 1)
 			
 			# down.
-			if _dy == 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor || _dy == 1 && game.tile_map.get_cellv(Vector2(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
+			if _dy == 1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y - 1)) == Enum.Tile.Floor || _dy == 1 && game.tile_map.get_cell_source_id(0, Vector2i(tile.x, tile.y - 1)) == Enum.Tile.Floor_rooms:
 				_move_tile = Vector2(tile.x, tile.y - 1)
 					
 
 # puzzle is blocks in only one room when enabled. blocks are displayed on the floor. each block is red on one side and yellow on the other, the object is to move the blocks around, making them appear to be all one color, but in so many turns. puzzle uses room 1. that room is 15 x 15 tiles wide,
-class Puzzle extends Reference:
+class Puzzle extends RefCounted:
 	# block red:0, yellow:1.
 	# this is the piece value of the currently selected piece the player just placed back to the ground.
-	var _block_placed_on_ground:int = 1
-	var _block_to_be_flipped:int = 2
+	var _block_placed_on_ground := 1
+	var _block_to_be_flipped := 2
 	
-	var _block_grabbed_at = Vector2(0,0)
+	var _block_grabbed_at := Vector2(0,0)
 	
-	var tile: Vector2
+	var tile := Vector2(0, 0)
 		
 	var _sprite_scene
 	
-	var _frame:int = 0
-	var _id:int = 0
-	var _default_id
+	var _frame := 0
+	var _id := 0
+	#var _default_id
 	
 	# game				is the reference to the game node.
 	# x and y			main map coordinates in unit.
@@ -598,29 +593,29 @@ class Puzzle extends Reference:
 		_id = id
 				
 		# this holds the funcs and vars of the puzzle sprite node.
-		_sprite_scene = Preload.PuzzleScene.instance()
+		_sprite_scene = Preload.PuzzleScene.instantiate()
 		
 		tile = Vector2(x, y)
 			
 		# the puzzle position.
-		_sprite_scene.get_node("Sprite").set_frame(_frame)
+		_sprite_scene.get_node("Sprite2D").set_frame(_frame)
 		_sprite_scene.position = tile * TILE_SIZE
 		
 		game.add_child(_sprite_scene)
 				
-		var _i:int = -1
+		"""var _i:int = -1
 		for yy in range (13):
 			for xx in range (13):
 				_i += 1
 				# place the puzzle in this 2 dimentional var, so that it is easier to process later when player moves puzzle blocks at reference.gd.
 				if Variables._block_id == _default_id:
 					Variables._puzzle_room_block_values[xx][yy] = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i]
-	
+		"""
 						
 	# this func is used to move the block in the direction the player is moving, so the block stays overtop of the player's head.			
 	func move_puzzle_block(game, dx, dy, x, y):
 		for blocks in game.puzzle_blocks:
-			if blocks.tile.x == x - dx && blocks.tile.y == y - dy && blocks._sprite_scene.get_node("Sprite").z_index == 100:
+			if blocks.tile.x == x - dx && blocks.tile.y == y - dy && blocks._sprite_scene.get_node("Sprite2D").z_index == 100:
 				
 				# game.rooms[0].position.x is top-left corner of puzzle room, minus that value because this var starts at 0.
 				_block_grabbed_at.x = game._player_tile.x - game.rooms[0].position.x - 1
@@ -638,7 +633,7 @@ class Puzzle extends Reference:
 							Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i] = Variables._puzzle_room_block_values[xx][yy]
 				
 				if dx == 1:
-					blocks._sprite_scene.get_node("Sprite").position.x += 32
+					blocks._sprite_scene.get_node("Sprite2D").position.x += 32
 					blocks.tile.x += 1
 					
 					# the position of the block might have changed, so update the id which refers to the location of that block on the main map.					
@@ -647,7 +642,7 @@ class Puzzle extends Reference:
 					Variables._block_id += 1
 										
 				if dx == -1:
-					blocks._sprite_scene.get_node("Sprite").position.x -= 32
+					blocks._sprite_scene.get_node("Sprite2D").position.x -= 32
 					blocks.tile.x -= 1
 					
 					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
@@ -655,7 +650,7 @@ class Puzzle extends Reference:
 					Variables._block_id -= 1
 					
 				if dy == 1:
-					blocks._sprite_scene.get_node("Sprite").position.y += 32
+					blocks._sprite_scene.get_node("Sprite2D").position.y += 32
 					blocks.tile.y += 1
 					
 					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
@@ -663,7 +658,7 @@ class Puzzle extends Reference:
 					Variables._block_id += 13
 					
 				if dy == -1:
-					blocks._sprite_scene.get_node("Sprite").position.y -= 32
+					blocks._sprite_scene.get_node("Sprite2D").position.y -= 32
 					blocks.tile.y -= 1
 					
 					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
@@ -677,14 +672,14 @@ class Puzzle extends Reference:
 			
 		# if the player is standing at the location of a block, put the block overtop at the player's head.
 		# this value is 100 when the mouse is clicked.
-		if blocks.tile.x == x && blocks.tile.y == y && blocks._sprite_scene.get_node("Sprite").z_index == 0:
-			blocks._sprite_scene.get_node("Sprite").set_offset(Vector2(16, 11))
-			blocks._sprite_scene.get_node("Sprite").set_z_index(100)
-			blocks._sprite_scene.get_node("Sprite").set_modulate(Color(0.7, 0.7, 0.7, 0.7))
+		if blocks.tile.x == x && blocks.tile.y == y && blocks._sprite_scene.get_node("Sprite2D").z_index == 0:
+			blocks._sprite_scene.get_node("Sprite2D").set_offset(Vector2(16, 11))
+			blocks._sprite_scene.get_node("Sprite2D").set_z_index(100)
+			blocks._sprite_scene.get_node("Sprite2D").set_modulate(Color(0.7, 0.7, 0.7, 0.7))
 			
 			game._player_holding_puzzle_block = true
 			
-			_block_placed_on_ground = blocks._sprite_scene.get_node("Sprite").frame 
+			_block_placed_on_ground = blocks._sprite_scene.get_node("Sprite2D").frame 
 			
 			# this var will now always be the opposite value of _block_to_be_flipped.
 			if _block_placed_on_ground == 1:
@@ -711,10 +706,10 @@ class Puzzle extends Reference:
 			Enum.Puzzle_sounds.Puzzle_block_move)
 			
 		# if the player is standing at the location of a block, put the block back on the tile
-		elif blocks.tile.x == x && blocks.tile.y == y && blocks._sprite_scene.get_node("Sprite").z_index == 100 && Variables._block_id != -1:
-			blocks._sprite_scene.get_node("Sprite").set_offset(Vector2(16, 16))
-			blocks._sprite_scene.get_node("Sprite").set_z_index(0)
-			blocks._sprite_scene.get_node("Sprite").set_modulate(Color(1, 1, 1, 1))
+		elif blocks.tile.x == x && blocks.tile.y == y && blocks._sprite_scene.get_node("Sprite2D").z_index == 100 && Variables._block_id != -1:
+			blocks._sprite_scene.get_node("Sprite2D").set_offset(Vector2(16, 16))
+			blocks._sprite_scene.get_node("Sprite2D").set_z_index(0)
+			blocks._sprite_scene.get_node("Sprite2D").set_modulate(Color(1, 1, 1, 1))
 			
 			game._player_holding_puzzle_block = false
 			
@@ -772,7 +767,7 @@ class Puzzle extends Reference:
 		# update all the sprites textures.
 		for blocks in game.puzzle_blocks:		
 			if Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] > 0:
-				blocks._sprite_scene.get_node("Sprite").frame = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id]
+				blocks._sprite_scene.get_node("Sprite2D").frame = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id]
 						
 		Variables._block_id = -1
 					
@@ -840,13 +835,13 @@ class Puzzle extends Reference:
 		_sprite_scene.queue_free()
 
 
-class Icons extends Reference:
-	var tile: Vector2
+class Icons extends RefCounted:
+	var tile := Vector2(0, 0)
 		
 	var _sprite_scene
 	
-	var _frame:int = 0
-	var _id:int = 0
+	var _frame := 0
+	var _id := 0
 	
 	# game				is the reference to the game node.
 	# x and y			main map coordinates in unit.
@@ -854,7 +849,7 @@ class Icons extends Reference:
 		_id = id
 		
 		# this holds the funcs and vars of the puzzle sprite node.
-		_sprite_scene = Preload.Icons.instance()
+		_sprite_scene = Preload.Icons.instantiate()
 		
 		tile = Vector2(x, y)
 		

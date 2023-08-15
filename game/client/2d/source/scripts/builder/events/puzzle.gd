@@ -12,44 +12,45 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _group_item_list_index = 0
-onready var _group_item_list = $Container/Grid/Grid3/ItemList
 
-onready var _event_number = $Container/Grid/Grid8/EventSpinbox
+var _group_item_list_index := 0
+@onready var _group_item_list := $Container/Grid/Grid3/ItemList
 
-onready var _dungeon_number = $Container/Grid/Grid4/DungeonSpinbox
+@onready var _event_number := $Container/Grid/Grid8/EventSpinbox
+
+@onready var _dungeon_number := $Container/Grid/Grid4/DungeonSpinbox
 
 # total available levels for each dungeon. this var is passed to Builder._event_puzzles.data.event_number
-onready var _level_number = $Container/Grid/Grid1/LevelSpinbox
+@onready var _level_number := $Container/Grid/Grid1/LevelSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid5/EventEnabled
+@onready var _event_enabled := $Container/Grid/Grid5/EventEnabled
 
 # size of a room in the dungeon in tiles. size includes the one wall on each side of the room. so a five tile room will have a floor width of 3 tiles.
-onready var _event_room_size = $Container/Grid/KeepTheseNodesHidden/SpinboxEventRoomSize
+@onready var _event_room_size := $Container/Grid/KeepTheseNodesHidden/SpinboxEventRoomSize
 
 # The amount of moves it takes to complete this puzzle.
-onready var _move_total = $Container/Grid/Grid2/MoveTotalSpinbox
+@onready var _move_total := $Container/Grid/Grid2/MoveTotalSpinbox
 
 # s: puzzle layout at the start of the level.
 # e: puzzle layout at the end when the gift or prize is given.
 	
 # true if mouse is hovering over a puzzle blocked. this is needed so that if true and mouse is clicked then block can be displayed differently
-var _is_mouse_selecting_block_s_location:bool = false
-var _is_mouse_selecting_block_e_location:bool = false
+var _is_mouse_selecting_block_s_location := false
+var _is_mouse_selecting_block_e_location := false
 
 # this is the selected block number refering to the block clicked, used to change the block's texture.
-var _selected_block_number_s_location:int = - 1
-var _selected_block_number_e_location:int = - 1
+var _selected_block_number_s_location := - 1
+var _selected_block_number_e_location := - 1
 
 # this is the row and column coordinates refering to the location of the block that was selected. this is used to display a different texture for the block.
-var _block_row_s_location:int = 0
-var _block_row_e_location:int = 0
+var _block_row_s_location := 0
+var _block_row_e_location := 0
 
-var _block_column_s_location:int = 0
-var _block_column_e_location:int = 0
+var _block_column_s_location := 0
+var _block_column_e_location := 0
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -64,7 +65,7 @@ func _ready():
 	_on_move_total_Spinbox_value_changed(_move_total.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 	var value = Builder._event_puzzles.data.event_number + 1
@@ -76,10 +77,10 @@ func _ready():
 	
 	_event_room_size.value = Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number]
 		
-	_event_enabled.pressed = bool(Builder._event_puzzles.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number])
+	_event_enabled.button_pressed = bool(Builder._event_puzzles.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number])
 		
 	# this needs to be near the bottom of this func, so to set _event_room_size to zero if this _event_enabled node equals zero because if this is disabled then the room size for the level needs to be smaller because the puzzle room size that uses the event would not need to be bigger.
-	_on_EventEnabled_toggled(_event_enabled.pressed)
+	_on_EventEnabled_toggled(_event_enabled.button_pressed)
 
 	
 func _on_event_number_Spinbox_value_changed(value):
@@ -88,16 +89,16 @@ func _on_event_number_Spinbox_value_changed(value):
 	Builder._event_puzzles.data.event_number = value - 1
 	
 	if bool(Builder._event_puzzles.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false
+		_event_enabled.button_pressed = false
 		Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] = 0
 	
 	_event_room_size.value = Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] # not + 1
 			
 	_move_total.value = Builder._event_puzzles.data.move_total[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] + 1
 	
-	_group_item_list_index = Builder._event_puzzles.data.color_when_solved[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] + 1
+	_group_item_list_index = Builder._event_puzzles.data.color_when_solved[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number]
 	
 	_group_item_list.select(_group_item_list_index, true)
 	
@@ -158,28 +159,28 @@ func _display_puzzles(value):
 func _did_mouse_select_block():
 	for _r in range (1, 14):
 		for _i in range (1, 14):
-			if get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).is_connected("mouse_entered", self, "_on_mouse_s_entered"):
-				get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_entered", self, "_on_mouse_s_entered")
+			if get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).is_connected("mouse_entered", Callable(self, "_on_mouse_s_entered")):
+				get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_entered", Callable(self, "_on_mouse_s_entered"))
 				
-				get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_exited", self, "_on_mouse_s_exited")
+				get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_exited", Callable(self, "_on_mouse_s_exited"))
 				
 			# create the signals for the mosue entering/exiting the nodes.
-			var _y = get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_entered", self, "_on_mouse_s_entered", [_r, _i, ((_r - 1) * 13) + _i])
+			var _y = get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_entered", Callable(self, "_on_mouse_s_entered").bind(_r, _i, ((_r - 1) * 13) + _i))
 
-			var _z = get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_exited", self, "_on_mouse_s_exited")
+			var _z = get_node("Container/Grid/PuzzleStartSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_exited", Callable(self, "_on_mouse_s_exited"))
 
 	for _r in range (1, 14):
 		for _i in range (1, 14):
 			# disconnect any signals
-			if get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).is_connected("mouse_entered", self, "_on_mouse_e_entered"):
-				get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_entered", self, "_on_mouse_e_entered")
+			if get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).is_connected("mouse_entered", Callable(self, "_on_mouse_e_entered")):
+				get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_entered", Callable(self, "_on_mouse_e_entered"))
 				
-				get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_exited", self, "_on_mouse_e_exited")
+				get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).disconnect("mouse_exited", Callable(self, "_on_mouse_e_exited"))
 				
 			# create the signals for the mosue entering/exiting the nodes.
-			var _y = get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_entered", self, "_on_mouse_e_entered", [_r, _i, ((_r - 1) * 13) + _i])
+			var _y = get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_entered", Callable(self, "_on_mouse_e_entered").bind(_r, _i, ((_r - 1) * 13) + _i))
 
-			var _z = get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_exited", self, "_on_mouse_e_exited")
+			var _z = get_node("Container/Grid/PuzzleEndSpritesRow" + str(_r) + "/Block" + str(_i)).connect("mouse_exited", Callable(self, "_on_mouse_e_exited"))
 
 
 func _on_mouse_s_entered(_row:int = 0, _column:int = 0, _num: int = 0):
@@ -205,7 +206,7 @@ func _on_mouse_e_exited():
 
 
 func _on_ItemList_item_selected(index):
-	_group_item_list_index = index - 1
+	_group_item_list_index = index
 	_group_item_list.select(index, true)
 	
 	Builder._event_puzzles.data.color_when_solved[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] = _group_item_list_index
@@ -241,7 +242,7 @@ func _on_EventEnabled_toggled(button_pressed):
 	# update the builder event_enabled data. 	
 	Builder._event_puzzles.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] = button_pressed
 	
-	if _event_enabled.pressed == false:	
+	if _event_enabled.button_pressed == false:	
 		Builder._data.event_room_size[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number] = 0
 		_event_room_size.value = 0
 
@@ -255,7 +256,7 @@ func _on_EventEnabled_toggled(button_pressed):
 		var _room_total = Builder._data.room_total[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number]
 		
 		# this is the math formula used to create the size of the room.
-		# TODO if game crashes, you can increase this value of Settings._system.corridor_length_between_rooms or increase the _extra_room_size var below.
+		# TODO if game crashes, you can decrease this value of Settings._system.corridor_length_between_rooms or increase the _extra_room_size var below.
 		var _math = float("0." + str(_room_total))
 		if _room_total >= 10:
 			_math = float(str(_room_total))
@@ -286,7 +287,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():	
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _update_coordinates_static():

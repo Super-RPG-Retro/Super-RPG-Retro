@@ -12,19 +12,20 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _sprite = Sprite.new()
 
-onready var _item_list_select_dictionary = $Container/Grid/Grid4/ItemListSelectDictionary
+var _sprite = Sprite2D.new()
+
+@onready var _item_list_select_dictionary := $Container/Grid/Grid4/ItemListSelectDictionary
 
 # this is the target for the event.
-onready var _item_list_do_this_task = $Container/Grid/Grid6/ItemListDoThisTask
+@onready var _item_list_do_this_task := $Container/Grid/Grid6/ItemListDoThisTask
 
-onready var _event_number = $Container/Grid/Grid9/EventSpinbox
+@onready var _event_number := $Container/Grid/Grid9/EventSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid11/EventEnabled
+@onready var _event_enabled := $Container/Grid/Grid11/EventEnabled
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -36,7 +37,7 @@ func _ready():
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 	_item_list_select_dictionary.select(Variables._dictionary_index, true)
@@ -56,7 +57,7 @@ func _on_event_number_Spinbox_value_changed(value):
 		for _i in range (Builder._event_tasks.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number][_r].size()):
 			
 			# add the textures
-			_sprite.texture = Filesystem._load_external_image(Builder._event_tasks.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number][_r][_i], 1)
+			_sprite.texture = Filesystem._load_external_image(Builder._event_tasks.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number][_r][_i])
 			_item_list_do_this_task.add_icon_item(_sprite.texture, false)
 			
 			# ItemList task.
@@ -64,9 +65,9 @@ func _on_event_number_Spinbox_value_changed(value):
 		
 			
 	if bool(Builder._event_tasks.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_tasks.data.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false	
+		_event_enabled.button_pressed = false	
 	
 
 func _on_EventEnabled_toggled(button_pressed):
@@ -83,7 +84,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_dictionary_ItemList_item_selected(index):
@@ -99,7 +100,7 @@ func _on_prize_item_list_add_Button_pressed():
 	Variables.select_json_dictionary_singly = true
 	Variables.select_items_data_to_return = Enum.Select_items.Event_hunting_tasks	
 	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
 	
 	
 func _on_prize_item_list_remove_Button_pressed():

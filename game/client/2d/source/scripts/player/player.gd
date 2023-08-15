@@ -10,11 +10,12 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-extends Sprite
+extends Sprite2D
 
-onready var _type = ""
-onready var _name = P.character_stats[str(P._number)]["_loaded"].Username
-onready var tile = Vector2(0,  0)
+
+@onready var _type := ""
+@onready var _name = P.character_stats[str(P._number)]["_loaded"].Username
+@onready var tile := Vector2(0,  0)
 
 
 func _ready():

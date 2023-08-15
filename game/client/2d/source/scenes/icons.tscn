@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://bundles/assets/images/icons/tiles.png" type="Texture" id=1]
+[ext_resource path="res://bundles/assets/images/icons/tiles.png" type="Texture2D" id=1]
 
-[node name="Sprite" type="Sprite"]
+[node name="Sprite2D" type="Sprite2D"]
 texture = ExtResource( 1 )
 offset = Vector2( 16, 16 )
 hframes = 4

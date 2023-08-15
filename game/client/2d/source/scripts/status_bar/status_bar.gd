@@ -13,7 +13,9 @@ You should have received a copy of the GNU Affero General Public License along w
 # status bar.
 extends Panel
 
-onready var _game_id = $GameID
+
+@onready var _game_id := $GameID
+
 
 func _ready():
 	pass

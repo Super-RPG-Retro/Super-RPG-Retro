@@ -1,0 +1,301 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7tytvtg0adnx"]
+
+[ext_resource type="Script" path="res://2d/source/scripts/stats_scene/stats_panel_loaded.gd" id="1_2kr0h"]
+[ext_resource type="Theme" uid="uid://fr1lin3sbs06" path="res://2d/assets/themes/transparent-static.tres" id="2_ose7u"]
+[ext_resource type="Texture2D" uid="uid://b7rva5w4ttxml" path="res://2d/assets/images/healthbar_gray.png" id="3_q00x4"]
+[ext_resource type="Texture2D" uid="uid://b3gecsohpbru2" path="res://2d/assets/images/healthbar_blue.png" id="4_pnhx1"]
+[ext_resource type="FontFile" uid="uid://dwlpi7uf0ov0c" path="res://bundles/assets/fonts/xolonium/Xolonium.tres" id="5_qyo82"]
+[ext_resource type="Texture2D" uid="uid://tj2a17bp22gc" path="res://2d/assets/images/arrows/arrow_small_up.png" id="6_v06ho"]
+[ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="7_tdusl"]
+[ext_resource type="Texture2D" uid="uid://c1ypn5h3ovbgl" path="res://2d/assets/images/arrows/arrow_small_down.png" id="8_ox8ox"]
+[ext_resource type="AudioStream" uid="uid://bf71a5ukqge7u" path="res://audio/sound/click.ogg" id="9_l7ilq"]
+
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.352941, 0, 0, 1)
+
+[node name="stats" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_2kr0h")
+
+[node name="Background" type="Panel" parent="."]
+offset_left = 670.0
+offset_right = 1021.0
+offset_bottom = 268.0
+theme = ExtResource("2_ose7u")
+
+[node name="UsernameValueLabel" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 4.0
+offset_right = 306.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+scroll_active = false
+
+[node name="HealthBar" type="TextureProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 35.0
+offset_right = 340.0
+offset_bottom = 48.0
+max_value = 10.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_q00x4")
+texture_progress = ExtResource("4_pnhx1")
+
+[node name="HealthPercentage" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 30.0
+offset_right = 340.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+text = "100%"
+
+[node name="MagicBar" type="TextureProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 57.0
+offset_right = 340.0
+offset_bottom = 70.0
+max_value = 10.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_q00x4")
+texture_progress = ExtResource("4_pnhx1")
+
+[node name="MagicPercentage" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 52.0
+offset_right = 340.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+text = "100%"
+
+[node name="HealthAndMagicTextLabel" type="RichTextLabel" parent="Background"]
+layout_direction = 2
+layout_mode = 0
+offset_top = 30.0
+offset_right = 125.0
+offset_bottom = 76.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+text = "[right]Health
+Magic[/right]"
+
+[node name="xpLabel" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_top = 76.0
+offset_right = 125.0
+offset_bottom = 98.0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+text = "[right]XP[/right]"
+scroll_active = false
+
+[node name="xpValueLabel" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 76.0
+offset_right = 348.0
+offset_bottom = 98.0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+bbcode_enabled = true
+text = "0"
+scroll_active = false
+
+[node name="xpNextLabel" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_top = 99.0
+offset_right = 125.0
+offset_bottom = 121.0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+text = "[right]XP Next[/right]"
+scroll_active = false
+
+[node name="xpNextValueLabel" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 99.0
+offset_right = 348.0
+offset_bottom = 121.0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+bbcode_enabled = true
+text = "0"
+scroll_active = false
+
+[node name="HealthText" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 30.0
+offset_right = 269.0
+offset_bottom = 52.0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+bbcode_enabled = true
+text = "0/0"
+scroll_active = false
+
+[node name="MagicText" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 53.0
+offset_right = 269.0
+offset_bottom = 75.0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+bbcode_enabled = true
+text = "0/0"
+scroll_active = false
+
+[node name="StatsTextAllColumn1Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_top = 164.0
+offset_right = 125.0
+offset_bottom = 264.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="StatsValueAllColumn1Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 164.0
+offset_right = 195.0
+offset_bottom = 264.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="StatsTextAllColumn2Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 164.0
+offset_right = 296.0
+offset_bottom = 264.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="StatsValueAllColumn2Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 164.0
+offset_right = 355.0
+offset_bottom = 264.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="MiscTextAllColumn1Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_top = 282.0
+offset_right = 125.0
+offset_bottom = 417.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+text = "[right]Skill Total[/right]
+[right]Player Level[/right]"
+scroll_active = false
+
+[node name="MiscValueAllColumn1Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 282.0
+offset_right = 327.0
+offset_bottom = 417.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+text = "0000/0000
+000"
+scroll_active = false
+
+[node name="MiscTextAllColumn2Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 282.0
+offset_right = 296.0
+offset_bottom = 417.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="MiscValueAllColumn2Label" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 282.0
+offset_right = 355.0
+offset_bottom = 417.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.27451, 0.666667, 0.27451, 1)
+theme_override_fonts/normal_font = ExtResource("5_qyo82")
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ArrowUp" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.00002
+offset_right = 35.0
+offset_bottom = 40.0
+scale = Vector2(0.4, 0.4)
+focus_mode = 2
+texture = ExtResource("6_v06ho")
+
+[node name="ArrowDown" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 8.00002
+offset_right = 53.0
+offset_bottom = 40.0
+scale = Vector2(0.4, 0.4)
+focus_neighbor_left = NodePath("../ArrowUp")
+focus_mode = 2
+theme = ExtResource("7_tdusl")
+texture = ExtResource("8_ox8ox")
+
+[node name="ButtonExit" type="Button" parent="."]
+offset_left = 988.0
+offset_top = 5.0
+offset_right = 1014.0
+offset_bottom = 31.0
+theme_override_styles/normal = SubResource("1")
+text = "X"
+
+[node name="SoundClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_l7ilq")
+
+[connection signal="mouse_entered" from="Background/ArrowUp" to="." method="_on_ArrowUp_mouse_entered"]
+[connection signal="mouse_exited" from="Background/ArrowUp" to="." method="_on_ArrowUp_mouse_exited"]
+[connection signal="mouse_entered" from="Background/ArrowDown" to="." method="_on_ArrowDown_mouse_entered"]
+[connection signal="mouse_exited" from="Background/ArrowDown" to="." method="_on_ArrowDown_mouse_exited"]
+[connection signal="pressed" from="ButtonExit" to="." method="_on_ButtonExit_pressed"]

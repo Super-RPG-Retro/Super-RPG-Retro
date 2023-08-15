@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _accept_dialog = $AcceptDialog
+
+@onready var _accept_dialog := $AcceptDialog
 
 
 func _ready():

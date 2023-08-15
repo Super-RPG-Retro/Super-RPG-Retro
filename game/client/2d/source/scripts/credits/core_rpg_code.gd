@@ -15,9 +15,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "core RPG code.\nAuthors website [color=#bbbbff][url=_link]thoughtquake.com[/url][/color] and [color=#bbbbff][url=_link2]video[/url][/color]."
+	text = "core RPG code.\nAuthors website [color=#bbbbff][url=_link]thoughtquake.com[/url][/color] and [color=#bbbbff][url=_link2]video[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	OS.shell_open("http://thoughtquake.com/") 

@@ -12,11 +12,12 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends RichTextLabel
 
+
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "Music.\nCopyright Jim Paterson. Author's website: [color=#bbbbff][url=_link2]mfiles[/url][/color].\nMusic used with his permission."
+	text = "Music.\nCopyright Jim Paterson. Author's website: [color=#bbbbff][url=_link2]mfiles[/url][/color].\nMusic used with his permission."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	OS.shell_open("https://mfiles.co.uk/") 

@@ -12,9 +12,11 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _game_over_dialog = $GameOverDialog
-onready var _data_removed_dialog = $DataRemovedDialog
-var _timer = Timer.new()
+
+@onready var _game_over_dialog := $GameOverDialog
+@onready var _data_removed_dialog := $DataRemovedDialog
+var _timer := Timer.new()
+
 
 func _ready():
 	_game_over_dialog.grab_focus()
@@ -36,10 +38,6 @@ func _on_AcceptDialog_modal_closed():
 	close()
 
 
-func _on_AcceptDialog_popup_hide():
-	close()
-	
-	
 func close():
 	if Variables._game_over == true:
 		if _game_over_dialog != null:
@@ -53,7 +51,7 @@ func close():
 
 func _save_data():
 	# save settings game.	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt", Settings._game)
 	
 	# load the high score data.
 	Filesystem.load_array_high_scores()
@@ -80,24 +78,23 @@ func _save_data():
 	var _does_file_exist2 # verification of data.
 	
 	# determine if file exists	
-	var _file = File.new()
-	_does_file_exist = _file.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
 	
 	if _does_file_exist == true:
 		# game is over. it is important to remove game from hard drive so that there are no conflicting visibility maps when playing a new game using the same game id.
 		Filesystem._delete_game_data()
 		
 		# determine if file was removed
-		_does_file_exist2 = _file.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
 	
 	# if file existed and was removed then show dialog box.
 	if _does_file_exist == true && _does_file_exist2 == false:
 		_timer.wait_time = 0.2
-		_timer.connect("timeout", self, "_on_timer_timeout") 
+		_timer.connect("timeout", Callable(self, "_on_timer_timeout")) 
 		add_child(_timer)
 		_timer.start()
 		
-		yield(_timer, "timeout")
+		await _timer.timeout
 		_timer.stop()
 		_timer = null
 		
@@ -106,11 +103,11 @@ func _save_data():
 		
 	else:
 		_timer.wait_time = 0.2
-		_timer.connect("timeout", self, "_on_timer_timeout") 
+		_timer.connect("timeout", Callable(self, "_on_timer_timeout")) 
 		add_child(_timer)
 		_timer.start()
 		
-		yield(_timer, "timeout")
+		await _timer.timeout
 		_timer.stop()
 		_timer = null
 		
@@ -127,7 +124,7 @@ func _on_DataRemoved_AcceptDialog_popup_hide():
 	# this is needed to show the stats_loaded panel correctly.
 	Variables._at_scene = Enum.Scene.Main_Menu
 
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 
 func _on_timer_timeout():

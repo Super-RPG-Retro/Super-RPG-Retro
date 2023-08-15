@@ -12,44 +12,45 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # Charisma aka Presence, Charm, Social.
-onready var _charisma = $Container/Grid/Grid1/CharismaSpinBox
+@onready var _charisma := $Container/Grid/Grid1/CharismaSpinBox
 
 # Constitution aka Stamina, Endurance, Vitality, Recovery.
-onready var _constitution = $Container/Grid/Grid2/ConstitutionSpinBox
+@onready var _constitution := $Container/Grid/Grid2/ConstitutionSpinBox
 
 # Defense aka Resistance, Fortitude, Resilience.
-onready var _defense = $Container/Grid/Grid3/DefenseSpinBox
+@onready var _defense := $Container/Grid/Grid3/DefenseSpinBox
 
 # Dexterity aka Agility, Reflexes, Quickness.
-onready var _dexterity = $Container/Grid/Grid4/DexteritySpinBox
+@onready var _dexterity := $Container/Grid/Grid4/DexteritySpinBox
 
 # Intelligence aka Intellect, Mind, Knowledge.
-onready var _intelligence = $Container/Grid/Grid5/IntelligenceSpinBox
+@onready var _intelligence := $Container/Grid/Grid5/IntelligenceSpinBox
 
 # Luck aka Fate, Chance.
-onready var _luck = $Container/Grid/Grid6/LuckSpinBox
+@onready var _luck := $Container/Grid/Grid6/LuckSpinBox
 
 # Perception aka Alertness, Awareness, Cautiousness.
-onready var _perception = $Container/Grid/Grid7/PerceptionSpinBox
+@onready var _perception := $Container/Grid/Grid7/PerceptionSpinBox
 
 # Strength aka Body, Might, Brawn, Power.
-onready var _strength = $Container/Grid/Grid8/StrengthSpinBox
+@onready var _strength := $Container/Grid/Grid8/StrengthSpinBox
 
 # Willpower aka Sanity, Personality, Ego, Resolve.
-onready var _willpower = $Container/Grid/Grid9/WillpowerSpinBox
+@onready var _willpower := $Container/Grid/Grid9/WillpowerSpinBox
 
 # Wisdom aka Spirit, Wits, Psyche, Sense.
-onready var _wisdom = $Container/Grid/Grid10/WisdomSpinBox
+@onready var _wisdom := $Container/Grid/Grid10/WisdomSpinBox
 
-onready var _artifact_number = $Container/Grid/GridContainer/ArtifactNumberSpinBox
-onready var _artifact_number_description = $Container/Grid/GridContainer/ArtifactNumberDescription
+@onready var _artifact_number := $Container/Grid/GridContainer/ArtifactNumberSpinBox
+@onready var _artifact_number_description := $Container/Grid/GridContainer/ArtifactNumberDescription
 
-onready var _artifact_image = $Container/Grid/GridContainer/ArtifactImage 
-onready var _title_text = $Container/Grid/LabelTitle
+@onready var _artifact_image := $Container/Grid/GridContainer/ArtifactImage 
+@onready var _title_text := $Container/Grid/LabelTitle
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -133,7 +134,7 @@ func _on_SpinBox_wisdom_changed(value):
 
 	
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_Node2D_tree_exiting():

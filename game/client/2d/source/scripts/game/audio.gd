@@ -13,7 +13,7 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node
 
 
-onready var _sound_walk_timer = $SoundWalkTimer
+@onready var _sound_walk_timer := $SoundWalkTimer
 
 
 # at try_move() func, if blocked var is not true then play this walk sound.

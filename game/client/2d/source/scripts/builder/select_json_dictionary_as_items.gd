@@ -15,60 +15,61 @@ You should have received a copy of the GNU Affero General Public License along w
 # if coping this file for use at game_world, remember to replace Builder var with Builder_playing var.
 extends Node2D
 
+
 # _column_d is the dictionary column that was selected using the sort button.
 var _d_column
 	
 # select a column that you would like to sort...
-onready var _item_list = $ItemList
+@onready var _item_list := $ItemList
 # then press this button to sort all items from least to greatest.
-onready var _button_sort = $ButtonSort
+@onready var _button_sort := $ButtonSort
 
 # this is the large button that highlights a grid row.
-onready var _select_button = $SelectButton
+@onready var _select_button := $SelectButton
 
-onready var _grid_dynamic = $Panel/EventContainerItemsDynamic/Grid
-onready var _scroll = $Panel/EventContainerItemsStatic
-onready var _scroll2 = $Panel/EventContainerItemsDynamic
+@onready var _grid_dynamic := $Panel/EventContainerItemsDynamic/Grid
+@onready var _scroll := $Panel/EventContainerItemsStatic
+@onready var _scroll2 := $Panel/EventContainerItemsDynamic
 
-var _item_name = []
-var _image = []
-var _check_button = []
-var _category = []
+var _item_name		:= []
+var _image 			:= []
+var _check_button 	:= []
+var _category 		:= []
 
 # the name of the item currently selected.
-var _selected_item_name = ""
+var _selected_item_name := ""
 
-var _cha = []
-var _con = []
-var _def = []
-var _dex = []
-var _int = []
-var _luc = []
-var _per = []
-var _str = []
-var _wis = []
-var _wil = []
+var _cha := []
+var _con := []
+var _def := []
+var _dex := []
+var _int := []
+var _luc := []
+var _per := []
+var _str := []
+var _wis := []
+var _wil := []
 
-var _data_file_name = []
-var _data_file_path_json = []
-var _data_image_texture = []
-var _data_directory_name = []
+var _data_file_name 		:= []
+var _data_file_path_json 	:= []
+var _data_image_texture 	:= []
+var _data_directory_name 	:= []
 
 # this is the number of the checkbox selected. the other var that also refer to this number is _i which is used in a loop at ready func and also as _on_focus_entered() parameter
-var _num:int = -1
+var _num := -1
 # this var does not get reset back to -1. it is used to save the pressed state of the checkbox to builder.
-var _num_current = -1
+var _num_current := -1
 
-var _item_list_current_index = 0
+var _item_list_current_index := 0
 
 # this is used to loop thur the file_names searching for an item incrementing in order, an item that is visible. once found this value will be set to true.
 # this var is used to checkmark the first visible item in the list.
-var _found_first_item:bool = false
+var _found_first_item := false
 
 # this var stops the adding of a node to scene when it has already been added to scene.
-var _nodes_added_to_scene:bool = false
+var _nodes_added_to_scene := false
 
-var _mouse_clicked:bool = false
+var _mouse_clicked := false
 
 
 func _ready():
@@ -77,9 +78,9 @@ func _ready():
 	
 	_item_list_current_index = Variables._item_list_current_index
 	
-	_item_list.get_v_scroll().value = Variables._item_list_current_scroll_value
+	_item_list.get_v_scroll_bar().value = Variables._item_list_current_scroll_value
 		
-	_scroll.get_h_scrollbar().modulate = Color(0, 0, 0, 0)
+	_scroll.get_h_scroll_bar().modulate = Color(0, 0, 0, 0)
 	
 	_populate_data_vars()
 	
@@ -98,12 +99,12 @@ func _process(_delta):
 	
 	if Variables._mouse_cursor_position.y > 442: # bottom of screen.
 		# this is the button that follows the cursor.
-		_select_button.rect_position.y = 556
+		_select_button.position.y = 556
 		
 	elif Variables._mouse_cursor_position.y >= 81: # current starting location.
-		_select_button.rect_position.y = Variables._mouse_cursor_position.y + 114
+		_select_button.position.y = Variables._mouse_cursor_position.y + 114
 	else:
-		_select_button.rect_position.y = 194
+		_select_button.position.y = 194
 		
 
 func _input(event):
@@ -116,9 +117,9 @@ func _input(event):
 	
 	# this stops setting more than one radio button to active simultaneously.
 	if event is InputEventKey && event.pressed && Variables.select_json_dictionary_singly == true:
-		if event.scancode == KEY_SPACE || event.scancode == KEY_ENTER:
+		if event.keycode == KEY_SPACE || event.keycode == KEY_ENTER:
 			for _i in _check_button.size():
-				_check_button[_i].pressed = false
+				_check_button[_i].button_pressed = false
 					
 	if event is InputEventMouseButton && event.is_action_released("ui_left_mouse_click") && Variables._mouse_cursor_position.x <= 868 && Variables._mouse_cursor_position.y >= 61 && Variables._mouse_cursor_position.y <= 460:
 		_mouse_clicked = true
@@ -126,7 +127,7 @@ func _input(event):
 		if Variables.select_json_dictionary_singly == true:
 			#looping through the group node children and uncheck every one except the sender checkbox
 			for _i in _check_button.size():
-				_check_button[_i].pressed = false
+				_check_button[_i].button_pressed = false
 				
 		var _i = -1
 		
@@ -134,22 +135,22 @@ func _input(event):
 			var _split = _fn.split("/")
 			_i += 1
 				
-			# if code reached the end element of the array, break out of the loop to avoid a null array crash.
+			# if code reached the end index of the array, break out of the loop to avoid a null array crash.
 			if _i >= Variables._file_names.size():
 				break
 								
 			# 41 is the offset value between SelectButton at the first CheckBox. 32 is the width of the SelectButton.
 			if Variables._mouse_cursor_position.y >= 61:
-				if Variables._mouse_cursor_position.y - 41 - 32 + _scroll2.scroll_vertical <= _check_button[_i].rect_position.y:
+				if Variables._mouse_cursor_position.y - 41 - 32 + _scroll2.scroll_vertical <= _check_button[_i].position.y:
 					_selected_item_name = _split[1]
 					
 					if Variables.select_json_dictionary_singly == false:
-						_check_button[_i].pressed = !_check_button[_i].pressed
+						_check_button[_i].button_pressed = !_check_button[_i].button_pressed
 						_num = _i
 						_save_builder_data()
 						
 					else:
-						_check_button[_i].pressed = true
+						_check_button[_i].button_pressed = true
 						_num = _i
 						_save_builder_data()
 						
@@ -158,7 +159,7 @@ func _input(event):
 					break
 
 	_num = -1
-	Variables._item_list_current_scroll_value = _item_list.get_v_scroll().value
+	Variables._item_list_current_scroll_value = _item_list.get_v_scroll_bar().value
 
 func _sort():
 	# Variables._item_list_current_index holds the state of the item list node. this gets the current name from the item list node.
@@ -172,7 +173,7 @@ func _sort():
 	Json.make_directories()
 	Json.refresh_dictionaries(Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/")
 	
-	# create the array elements.
+	# create the array indexes.
 	# id
 	for w in range (Variables._total_builder_data_directories):
 		_data_file_name.append([])
@@ -219,7 +220,7 @@ func _sort():
 	
 	for _key in Variables._file_names:
 		_i += 1
-		# if code reached the end element of the array, break out of the loop to avoid a null array crash.
+		# if code reached the end index of the array, break out of the loop to avoid a null array crash.
 		if _i >= Variables._file_names.size():
 			break
 				
@@ -236,7 +237,7 @@ func _sort():
 			_num = _i
 			_save_builder_data()
 			
-	_check_button[_uncheck_first_item].pressed = false
+	_check_button[_uncheck_first_item].button_pressed = false
 	_nodes_added_to_scene = true
 	
 	_save_builder_data()
@@ -321,29 +322,29 @@ func _draw_dictionary_items(_key, _i:int):
 		_check_button[_i] = CheckBox.new()
 		_check_button[_i].add_to_group("grid_container")
 		_grid_dynamic.add_child(_check_button[_i])
-		_check_button[_i].pressed = false
+		_check_button[_i].button_pressed = false
 		
 		# here are the signals for all checkbox, these signals will capture the entering and exiting of any checkbox and will then go to the respective func. The toggle signal will go to a toggle func when the mouse or space/enter key is pressed.
-		if _check_button[_i].is_connected("focus_entered", self, "_on_focus_entered"):
+		if _check_button[_i].is_connected("focus_entered", Callable(self, "_on_focus_entered")):
 			_check_button[_i].disconnect("focus_entered", self, "_on_focus_entered", [_i])
 			
 		# create the signals for the mouse entering /exiting the nodes.
-		var _x = _check_button[_i].connect("focus_entered", self, "_on_focus_entered", [_i])
+		var _x = _check_button[_i].connect("focus_entered", Callable(self, "_on_focus_entered").bind(_i))
 		
-		if _check_button[_i].is_connected("focus_exited", self, "_on_focus_exited"):
-			_check_button[_i].disconnect("focus_exited", self, "_on_focus_exited")
+		if _check_button[_i].is_connected("focus_exited", Callable(self, "_on_focus_exited")):
+			_check_button[_i].disconnect("focus_exited", Callable(self, "_on_focus_exited"))
 
-		var _y = _check_button[_i].connect("focus_exited", self, "_on_focus_exited")
+		var _y = _check_button[_i].connect("focus_exited", Callable(self, "_on_focus_exited"))
 				
-		if _check_button[_i].is_connected("toggled", self, "_on_item_toggled"):
-			_check_button[_i].disconnect("toggled", self, "_on_item_toggled")
+		if _check_button[_i].is_connected("toggled", Callable(self, "_on_item_toggled")):
+			_check_button[_i].disconnect("toggled", Callable(self, "_on_item_toggled"))
 
-		var _z = _check_button[_i].connect("toggled", self, "_on_item_toggled")
+		var _z = _check_button[_i].connect("toggled", Callable(self, "_on_item_toggled"))
 			
 			
 		# check the first CheckBox. User can then change focus using the arrow keys. 
 		if _event == 1:
-			_check_button[_i].pressed = true
+			_check_button[_i].button_pressed = true
 			_check_button[_i].visible = false
 			
 			_save_builder_data()
@@ -352,14 +353,12 @@ func _draw_dictionary_items(_key, _i:int):
 		elif _found_first_item == false:
 			_found_first_item = true
 			
-			_check_button[_i].pressed = true
+			_check_button[_i].button_pressed = true
 			_num = _i
 		
 		if _nodes_added_to_scene == false:
-			
-			# if true, checkboxes now in to radio elements.
 			if Variables.select_json_dictionary_singly == true:
-				_check_button[_i].group = ButtonGroup.new()
+				_check_button[_i].button_group = ButtonGroup.new()
 		
 			
 	if _nodes_added_to_scene == false:
@@ -369,7 +368,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_image[_i].add_to_group("grid_container")
 		if _event == 1:
 			_image[_i].visible = false
-	_image[_i].texture = Filesystem._load_external_image(Variables._image_textures[_i], 1)
+	_image[_i].texture = Filesystem._load_external_image(Variables._image_textures[_i])
 	
 		
 	if _nodes_added_to_scene == false:
@@ -522,28 +521,28 @@ func _set_focus_to_nodes():
 				
 	_check_button[_i].focus_previous = NodePath("../../../../ButtonSort")
 	
-	_check_button[_i].focus_neighbour_top = NodePath("../../../../ButtonSort")
+	_check_button[_i].focus_neighbor_top = NodePath("../../../../ButtonSort")
 	
 	
 	_button_sort.focus_previous = NodePath("../ItemList")
 	
-	_button_sort.focus_neighbour_left = NodePath("../ItemList")
+	_button_sort.focus_neighbor_left = NodePath("../ItemList")
 	
 	
 	_button_sort.focus_next = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
-	_button_sort.focus_neighbour_right = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
+	_button_sort.focus_neighbor_right = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
-	_button_sort.focus_neighbour_bottom = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
+	_button_sort.focus_neighbor_bottom = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
 
 	_item_list.focus_previous = NodePath("../ButtonBuy")
 		
-	_item_list.focus_neighbour_left = NodePath("../ButtonBuy")
+	_item_list.focus_neighbor_left = NodePath("../ButtonBuy")
 		
 	_item_list.focus_next = NodePath("../ButtonSort")
 	
-	_item_list.focus_neighbour_right = NodePath("../ButtonSort")
+	_item_list.focus_neighbor_right = NodePath("../ButtonSort")
 
 	
 func _save_builder_data():
@@ -629,10 +628,10 @@ func _on_ButtonExit_pressed():
 			# remember to save builder data.
 			Filesystem.save("user://saved_data/builder_event_parent_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_parent)
 
-			var _s = get_tree().change_scene("res://2d/source/scenes/builder/events/parent.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/events/parent.tscn")
 	
 		1:
-			if _check_button[_num_current].pressed == true:
+			if _check_button[_num_current].button_pressed == true:
 				# clear previous task, so that the item will display when user is selecting an item at at this file.
 				for _r in range (20):
 					if _r != Variables._dictionary_index:
@@ -654,7 +653,7 @@ func _on_ButtonExit_pressed():
 				Filesystem.save("user://saved_data/builder_event_tasks_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_tasks.data)
 
 			
-			var _s = 	get_tree().change_scene("res://2d/source/scenes/builder/events/hunting_tasks.tscn")
+			var _s = 	get_tree().change_scene_to_file("res://2d/source/scenes/builder/events/hunting_tasks.tscn")
 		
 		2:
 			Builder._event_inventory.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.event_number][Variables._dictionary_index] = _data_file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.event_number][Variables._dictionary_index].duplicate(true)
@@ -667,11 +666,11 @@ func _on_ButtonExit_pressed():
 			
 			Filesystem.save("user://saved_data/builder_event_inventory_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_inventory.data)
 
-			var _s = get_tree().change_scene("res://2d/source/scenes/builder/events/inventory.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/events/inventory.tscn")
 
 		
 		3:
-			if _check_button[_num_current].pressed == true:
+			if _check_button[_num_current].button_pressed == true:
 				# clear previous task, so that the item will display when user is selecting an item at at this file.
 				for _r in range (20):
 					if _r != Variables._dictionary_index:
@@ -693,7 +692,7 @@ func _on_ButtonExit_pressed():
 				Filesystem.save("user://saved_data/builder_event_story_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_story.data)
 
 			
-			var _s = 	get_tree().change_scene("res://2d/source/scenes/builder/events/story.tscn")
+			var _s = 	get_tree().change_scene_to_file("res://2d/source/scenes/builder/events/story.tscn")
 		
 		
 func _on_ButtonSort_pressed():

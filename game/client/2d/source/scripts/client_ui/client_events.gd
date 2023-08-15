@@ -11,14 +11,14 @@ You should have received a copy of the GNU Affero General Public License along w
 """
 
 extends Node
+"""
+@onready var _room_public = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPublic")
+@onready var _room_private = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPrivate")
+@onready var _room_commands = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomCommands")
+@onready var _room_game = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomGame")
 
-onready var _room_public = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPublic")
-onready var _room_private = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomPrivate")
-onready var _room_commands = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomCommands")
-onready var _room_game = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/RoomGame")
-
-onready var _item_list = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/ItemList")
-onready var _listen_button = get_parent().get_node("Panel/VBoxContainer/Send/ButtonPanel/ListenButton")
+@onready var _item_list = get_parent().get_node("Panel/VBoxContainer/HBoxContainer/ItemList")
+@onready var _listen_button = get_parent().get_node("Panel/VBoxContainer/Send/ButtonPanel/ListenButton")
 
 var _client = WebSocketClient.new()
 
@@ -147,3 +147,4 @@ func send_data(data):
 	var _data = var2bytes(data)
 	_client.put_packet(_data)
 	
+"""

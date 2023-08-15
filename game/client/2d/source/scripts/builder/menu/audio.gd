@@ -13,19 +13,19 @@ You should have received a copy of the GNU Affero General Public License along w
 extends MenuButton
 
 
-var _menu_rooms
+var _menu_rooms := PopupMenu.new()
 
 func _ready():
 	_menu_rooms = get_popup()	
 	
 	_menu_rooms.add_item("Music" + Variables._menu_padding)
-	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
+	_menu_rooms.connect("id_pressed", Callable(self, "_on_menu_rooms_item_pressed"))
 
 
 func _on_menu_rooms_item_pressed(ID):
 	match ID:
 		0:
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/audio/music.tscn")
+			var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/audio/music.tscn")
 		
 		
 func _on_exiting_tree(_node):

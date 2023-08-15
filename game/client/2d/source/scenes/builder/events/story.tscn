@@ -1,349 +1,243 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c4eh21q4uymjb"]
 
-[ext_resource path="res://2d/source/scenes/builder/next_event.tscn" type="PackedScene" id=1]
-[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=4]
-[ext_resource path="res://2d/source/scripts/builder/events/story.gd" type="Script" id=5]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+[ext_resource type="PackedScene" uid="uid://dwsjq4q12xh8r" path="res://2d/source/scenes/builder/next_event.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="3"]
+[ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="4"]
+[ext_resource type="Script" path="res://2d/source/scripts/builder/events/story.gd" id="5"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
-[node name="HeaderMenu" parent="." instance=ExtResource( 3 )]
+[node name="HeaderMenu" parent="." instance=ExtResource("3")]
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 464.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 448.0
 mouse_filter = 2
-theme = ExtResource( 4 )
-custom_styles/bg = SubResource( 1 )
-scroll_horizontal_enabled = false
+theme = ExtResource("4")
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 956.0
-margin_bottom = 729.0
-rect_min_size = Vector2( 200, 40 )
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
 columns = 2
 
 [node name="MarginLabelDontRemove" type="Label" parent="Container/Grid"]
-margin_right = 222.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 222, 0 )
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
 
 [node name="MarginDescription" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_right = 956.0
-margin_bottom = 22.0
+layout_mode = 2
 
 [node name="EventNumber2" type="Label" parent="Container/Grid"]
-margin_top = 31.0
-margin_right = 222.0
-margin_bottom = 53.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Event number."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 26.0
-margin_right = 956.0
-margin_bottom = 58.0
+layout_mode = 2
 alignment = 2
 
 [node name="EventSpinbox" type="SpinBox" parent="Container/Grid/Grid1"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 min_value = 1.0
 max_value = 801.0
 page = 1.0
 value = 1.0
 
 [node name="LabelDescription4" type="Label" parent="Container/Grid/Grid1"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 730.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Changing the value here will change everything below this option."
 
 [node name="Dungeon" type="Label" parent="Container/Grid"]
-margin_top = 67.0
-margin_right = 222.0
-margin_bottom = 89.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
-custom_styles/normal = SubResource( 2 )
 text = "Dungeon."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 62.0
-margin_right = 956.0
-margin_bottom = 94.0
+layout_mode = 2
 
 [node name="DungeonSpinbox" type="SpinBox" parent="Container/Grid/Grid3"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 min_value = 1.0
 page = 1.0
 value = 1.0
 
 [node name="LabelDescription2" type="Label" parent="Container/Grid/Grid3"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 452.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "This event happens at this dungeon."
 
 [node name="Level" type="Label" parent="Container/Grid"]
-margin_top = 103.0
-margin_right = 222.0
-margin_bottom = 125.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
-custom_styles/normal = SubResource( 2 )
 text = "Level."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 98.0
-margin_right = 956.0
-margin_bottom = 130.0
+layout_mode = 2
 
 [node name="LevelSpinbox" type="SpinBox" parent="Container/Grid/Grid2"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 min_value = 1.0
 page = 1.0
 value = 1.0
 
 [node name="LabelDescription" type="Label" parent="Container/Grid/Grid2"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 413.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "This event happens at this level."
 
 [node name="EventEnabled" type="Label" parent="Container/Grid"]
-margin_top = 143.0
-margin_right = 222.0
-margin_bottom = 165.0
+layout_mode = 2
 text = "Event Enabled."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 134.0
-margin_right = 956.0
-margin_bottom = 174.0
+layout_mode = 2
 
 [node name="EventEnabled" type="CheckButton" parent="Container/Grid/Grid4"]
-margin_right = 76.0
-margin_bottom = 40.0
-align = 2
+layout_mode = 2
 
 [node name="LabelDescription3" type="Label" parent="Container/Grid/Grid4"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 469.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Is this child event enabled for this level?"
 
 [node name="ItemListTitleAdd" type="Label" parent="Container/Grid"]
-margin_top = 210.0
-margin_right = 222.0
-margin_bottom = 257.0
+layout_mode = 2
 mouse_filter = 1
 text = "The category for this story."
-align = 2
-autowrap = true
+horizontal_alignment = 2
+autowrap_mode = 2
 
 [node name="Grid5" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 178.0
-margin_right = 956.0
-margin_bottom = 289.0
+layout_mode = 2
 columns = 2
 
 [node name="ItemListSelectDictionary" type="ItemList" parent="Container/Grid/Grid5"]
-margin_right = 500.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 500, 111 )
-items = [ "mobs1", null, false, "mobs2", null, false, "amulet", null, false, "armor", null, false, "book", null, false, "food", null, false, "gold", null, false, "ring", null, false, "scroll", null, false, "wand", null, false, "weapon", null, false ]
+custom_minimum_size = Vector2(500, 111)
+layout_mode = 2
 allow_reselect = true
+item_count = 11
+item_0/text = "mobs1"
+item_1/text = "mobs2"
+item_2/text = "amulet"
+item_3/text = "armor"
+item_4/text = "book"
+item_5/text = "food"
+item_6/text = "gold"
+item_7/text = "ring"
+item_8/text = "scroll"
+item_9/text = "wand"
+item_10/text = "weapon"
 
 [node name="ItemListBody" type="Label" parent="Container/Grid/Grid5"]
-margin_left = 504.0
-margin_top = 44.0
-margin_right = 504.0
-margin_bottom = 66.0
+layout_mode = 2
 
 [node name="ItemListTitleEmpty3" type="Label" parent="Container/Grid"]
-margin_top = 296.0
-margin_right = 222.0
-margin_bottom = 318.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="Grid6" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 293.0
-margin_right = 956.0
-margin_bottom = 321.0
+layout_mode = 2
 columns = 2
 
 [node name="Padding" type="Label" parent="Container/Grid/Grid6"]
-margin_top = 3.0
-margin_bottom = 25.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="Container/Grid/Grid6"]
-margin_left = 4.0
-margin_right = 54.0
-margin_bottom = 28.0
+layout_mode = 2
 text = "Add"
 
 [node name="EmptyTitle" type="Label" parent="Container/Grid"]
-margin_top = 325.0
-margin_right = 222.0
-margin_bottom = 347.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="EmptyBody" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 325.0
-margin_right = 956.0
-margin_bottom = 347.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="ItemListTitleRemove" type="Label" parent="Container/Grid"]
-margin_top = 383.0
-margin_right = 222.0
-margin_bottom = 430.0
+layout_mode = 2
 mouse_filter = 1
 text = "The object representing the story."
-align = 2
-autowrap = true
+horizontal_alignment = 2
+autowrap_mode = 2
 
 [node name="Grid7" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 351.0
-margin_right = 956.0
-margin_bottom = 462.0
+layout_mode = 2
 columns = 2
 
 [node name="ItemListRemove" type="ItemList" parent="Container/Grid/Grid7"]
-margin_right = 500.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 500, 111 )
+custom_minimum_size = Vector2(500, 111)
+layout_mode = 2
 select_mode = 1
 allow_reselect = true
 max_columns = 2
-fixed_icon_size = Vector2( 96, 96 )
+fixed_icon_size = Vector2i(32, 32)
 
 [node name="ItemListBody" type="Label" parent="Container/Grid/Grid7"]
-margin_left = 504.0
-margin_top = 44.0
-margin_right = 504.0
-margin_bottom = 66.0
+layout_mode = 2
 
 [node name="ItemListTitle4" type="Label" parent="Container/Grid"]
-margin_top = 469.0
-margin_right = 222.0
-margin_bottom = 491.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="Grid8" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 466.0
-margin_right = 956.0
-margin_bottom = 494.0
+layout_mode = 2
 columns = 2
 
 [node name="Padding" type="Label" parent="Container/Grid/Grid8"]
-margin_top = 3.0
-margin_bottom = 25.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="Container/Grid/Grid8"]
-margin_left = 4.0
-margin_right = 92.0
-margin_bottom = 28.0
+layout_mode = 2
 text = "Remove"
 
 [node name="EmptyLabel" type="Label" parent="Container/Grid"]
-margin_top = 498.0
-margin_right = 222.0
-margin_bottom = 520.0
+layout_mode = 2
 
 [node name="LabelEmpty" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 498.0
-margin_right = 956.0
-margin_bottom = 520.0
+layout_mode = 2
 
 [node name="EventNumber" type="Label" parent="Container/Grid"]
-margin_top = 524.0
-margin_right = 222.0
-margin_bottom = 546.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
-align = 2
 
 [node name="LabelDescription5" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 524.0
-margin_right = 956.0
-margin_bottom = 546.0
+layout_mode = 2
 mouse_filter = 1
 text = "This could be the discription of object or mobs chat, etc,"
 
 [node name="StoryLabel" type="Label" parent="Container/Grid"]
-margin_top = 615.0
-margin_right = 222.0
-margin_bottom = 637.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "The story."
-align = 2
+horizontal_alignment = 2
 
 [node name="StoryTextEdit" type="TextEdit" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 550.0
-margin_right = 956.0
-margin_bottom = 703.0
-rect_min_size = Vector2( 330, 153 )
-wrap_enabled = true
+custom_minimum_size = Vector2(330, 153)
+layout_mode = 2
 
 [node name="Empty1a" type="Label" parent="Container/Grid"]
-margin_top = 707.0
-margin_right = 222.0
-margin_bottom = 729.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
-align = 2
 
 [node name="Empty1b" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 707.0
-margin_right = 956.0
-margin_bottom = 729.0
+layout_mode = 2
 mouse_filter = 1
 
-[node name="StatusBar" parent="." instance=ExtResource( 2 )]
+[node name="StatusBar" parent="." instance=ExtResource("2")]
 
-[node name="NextEvent" parent="." instance=ExtResource( 1 )]
+[node name="NextEvent" parent="." instance=ExtResource("1")]
 
 [connection signal="value_changed" from="Container/Grid/Grid1/EventSpinbox" to="." method="_on_event_number_Spinbox_value_changed"]
 [connection signal="value_changed" from="Container/Grid/Grid3/DungeonSpinbox" to="." method="_on_dungeon_Spinbox_value_changed"]

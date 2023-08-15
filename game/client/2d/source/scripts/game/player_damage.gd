@@ -13,8 +13,9 @@ You should have received a copy of the GNU Affero General Public License along w
 # player_damage.gd from Game/Player/Damage node.
 extends Node2D
 
-onready var game = get_parent().get_parent()
-onready var timer_yield = get_parent().get_parent().get_node("TimerYield")
+
+@onready var game := get_parent().get_parent()
+@onready var timer_yield := get_parent().get_parent().get_node("TimerYield")
 	
 func _ready():
 	pass
@@ -29,10 +30,10 @@ func damage_player(dmg):
 	if P._mp > P._mp_max:
 			P._mp = P._mp_max
 	
-	get_parent().get_node("EntityChildScene/HP").rect_size.x = game.TILE_SIZE * P._hp / P._hp_max
+	get_parent().get_node("EntityChildScene/HP").size.x = game.TILE_SIZE * P._hp / P._hp_max
 	
-	if get_parent().get_node("EntityChildScene/HP").rect_size.x > game.TILE_SIZE:
-		get_parent().get_node("EntityChildScene/HP").rect_size.x = game.TILE_SIZE
+	if get_parent().get_node("EntityChildScene/HP").size.x > game.TILE_SIZE:
+		get_parent().get_node("EntityChildScene/HP").size.x = game.TILE_SIZE
 	
 	get_parent().get_node("EntityChildScene/HP").color = Color("00007d")
 	

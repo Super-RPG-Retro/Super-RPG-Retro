@@ -12,42 +12,43 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _event_number = $Container/Grid/Grid1/EventSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid6/EventEnabled
+@onready var _event_number := $Container/Grid/Grid1/EventSpinbox
 
-onready var _dungeon_number = $Container/Grid/Grid3/DungeonSpinbox
+@onready var _event_enabled := $Container/Grid/Grid6/EventEnabled
 
-onready var _level_number = $Container/Grid/Grid2/LevelSpinbox
+@onready var _dungeon_number := $Container/Grid/Grid3/DungeonSpinbox
 
-onready var _unlock_at_dungeon_number = $Container/Grid/Grid4/UnlockAtDungeonSpinbox
+@onready var _level_number := $Container/Grid/Grid2/LevelSpinbox
 
-onready var _unlock_at_level_number = $Container/Grid/Grid5/UnlockAtLevelSpinbox
+@onready var _unlock_at_dungeon_number := $Container/Grid/Grid4/UnlockAtDungeonSpinbox
 
-onready var _sprite = $Container/Grid/GridContainer/Sprite
+@onready var _unlock_at_level_number := $Container/Grid/Grid5/UnlockAtLevelSpinbox
 
-onready var _image_textures = []
+@onready var _sprite := $Container/Grid/GridContainer/Sprite2D
+
+@onready var _image_textures := []
 
 # selecting an item list will change the sprite appearence.
-onready var _image_item_list = $Container/Grid/GridContainer/ImageItemList
+@onready var _image_item_list := $Container/Grid/GridContainer/ImageItemList
 
 # when selecting the sprite with the arrows keys, this var is used to change that sprite texture. the value of 2 will display the third sprite in the Variables._file_paths array.
-onready var _sprite_index = 0
+@onready var _sprite_index := 0
 
 # this is used to change the json dictionary sprite texture.
-onready var _arrow_left = $Container/Grid/GridContainer/ArrowLeft
+@onready var _arrow_left := $Container/Grid/GridContainer/ArrowLeft
 
 # this is used to stop a trigger of a left arrow when the mouse is not at the left arrow image. the problem is that when first clicking the left arrow image, the code will remember that state even when the mouse is no longer at that location.
-var _arrow_left_hover = false
+var _arrow_left_hover := false
 
-onready var _arrow_right = $Container/Grid/GridContainer/ArrowRight
-var _arrow_right_hover = false
+@onready var _arrow_right := $Container/Grid/GridContainer/ArrowRight
+var _arrow_right_hover := false
 
 # this is the story about the event before you are asked if you accept the event. this story could be about the dungeon, level, an NPC talking to you.
-onready var _story = $Container/Grid/StoryTextEdit
+@onready var _story := $Container/Grid/StoryTextEdit
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -66,14 +67,14 @@ func _ready():
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 
 func _input(event):
 	# these arrows are used to change to the next dictionary,
 	if _arrow_left.has_focus() == true && _arrow_left_hover == true:
-		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && !event.pressed:
+		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
 			
 			_sprite_index -= 1
 			_sprite_index = clamp(_sprite_index, 0, 9)
@@ -88,7 +89,7 @@ func _input(event):
 			Builder._event_locked_doors.data.sprite_index[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_locked_doors.data.event_number] = _sprite_index
 	
 	if _arrow_right.has_focus() == true && _arrow_right_hover == true:
-		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && !event.pressed:
+		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
 			
 			_sprite_index += 1
 			_sprite_index = clamp(_sprite_index, 0, 9)
@@ -106,9 +107,9 @@ func _on_event_number_Spinbox_value_changed(value):
 	Builder._event_locked_doors.data.event_number = value - 1
 	
 	if bool(Builder._event_locked_doors.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_locked_doors.data.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false	
+		_event_enabled.button_pressed = false	
 	
 	
 	_sprite_index = Builder._event_locked_doors.data.sprite_index[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_locked_doors.data.event_number]
@@ -143,7 +144,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 # modulate is used to change the color of the sprite.

@@ -1,25 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dudv5w3ai20af"]
 
-[ext_resource path="res://2d/assets/images/title.png" type="Texture" id=1]
-[ext_resource path="res://2d/source/scripts/boot_splash/boot_splash.gd" type="Script" id=2]
-[ext_resource path="res://2d/source/scenes/boot_splash/progress_bar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://bundles/assets/images/splash_background/background.png" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://dukvn5etacwkn" path="res://2d/assets/images/title.png" id="1"]
+[ext_resource type="Script" path="res://2d/source/scripts/boot_splash/boot_splash.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bnfsx638ft3wl" path="res://2d/source/scenes/boot_splash/progress_bar.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://btibf4dxpo8r4" path="res://bundles/assets/images/splash_background/background.png" id="4"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 512, 300 )
-texture = ExtResource( 4 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(512, 300)
+texture = ExtResource("4")
 
-[node name="Title" type="Sprite" parent="."]
-position = Vector2( 511.5, 100 )
-scale = Vector2( 0.994444, 1 )
-texture = ExtResource( 1 )
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(511.5, 100)
+scale = Vector2(0.994444, 1)
+texture = ExtResource("1")
 
-[node name="Node2D" parent="." instance=ExtResource( 3 )]
-
-[node name="PressStart" parent="Node2D" index="3"]
-align = 1
-
-[editable path="Node2D"]
+[node name="Node2D" parent="." instance=ExtResource("3")]

@@ -12,7 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Panel
 
-onready var _label = $Label
+
+@onready var _label := $Label
+
 
 func _process(_delta):
 	if Variables._scene_title != "":

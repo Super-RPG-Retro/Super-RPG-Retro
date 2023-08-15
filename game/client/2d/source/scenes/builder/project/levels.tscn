@@ -1,408 +1,270 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://d2o4q7d3cie4c"]
 
-[ext_resource path="res://2d/source/scripts/builder/project/levels.gd" type="Script" id=1]
-[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=2]
-[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+[ext_resource type="Script" path="res://2d/source/scripts/builder/project/levels.gd" id="1"]
+[ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="4"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="HeaderMenu" parent="." instance=ExtResource( 3 )]
+[node name="HeaderMenu" parent="." instance=ExtResource("3")]
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 576.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 576.0
 mouse_filter = 2
-theme = ExtResource( 2 )
-custom_styles/bg = SubResource( 1 )
+theme = ExtResource("2")
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 996.0
-margin_bottom = 594.0
-rect_min_size = Vector2( 200, 40 )
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
 columns = 2
 
 [node name="Level" type="Label" parent="Container/Grid"]
-margin_top = 5.0
-margin_right = 222.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 222, 0 )
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "            Level."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid1" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_right = 996.0
-margin_bottom = 32.0
-alignment = 2
+layout_mode = 2
 
 [node name="LevelSpinbox" type="SpinBox" parent="Container/Grid/Grid1"]
-margin_left = 40.0
-margin_right = 138.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 1.0
 page = 1.0
 value = 1.0
 
 [node name="Label2" type="Label" parent="Container/Grid/Grid1"]
-margin_left = 142.0
-margin_top = 5.0
-margin_right = 770.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Changing the value here will change everything below this option."
 
 [node name="LabelStartingLevel" type="Label" parent="Container/Grid"]
-margin_top = 45.0
-margin_right = 222.0
-margin_bottom = 67.0
+layout_mode = 2
 text = "Player Starts Here?"
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid3" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 36.0
-margin_right = 996.0
-margin_bottom = 76.0
+layout_mode = 2
 
 [node name="StartingLevel2" type="CheckButton" parent="Container/Grid/Grid3"]
-margin_right = 76.0
-margin_bottom = 40.0
-align = 2
+layout_mode = 2
 
 [node name="Label3" type="Label" parent="Container/Grid/Grid3"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 557.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Player starts at this level when entering dungeon."
 
 [node name="LevelSizeLabel" type="Label" parent="Container/Grid"]
-margin_top = 85.0
-margin_right = 222.0
-margin_bottom = 107.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Level Size."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid2" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 80.0
-margin_right = 996.0
-margin_bottom = 112.0
+layout_mode = 2
 
 [node name="LevelSizeSpinbox" type="SpinBox" parent="Container/Grid/Grid2" groups=["builder", "levels"]]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 48.0
 max_value = 300.0
 value = 60.0
 
 [node name="Label4" type="Label" parent="Container/Grid/Grid2"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 515.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Level size in units. Unit height / unit width."
 
 [node name="DontSetSpinBoxValueGreaterThan12" type="Label" parent="Container/Grid"]
-margin_top = 121.0
-margin_right = 222.0
-margin_bottom = 143.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Room Total."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid4" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 116.0
-margin_right = 996.0
-margin_bottom = 148.0
+layout_mode = 2
 
 [node name="RoomTotalSpinbox" type="SpinBox" parent="Container/Grid/Grid4"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 5.0
 max_value = 12.0
 value = 5.0
 
 [node name="Label6" type="Label" parent="Container/Grid/Grid4"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 428.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Number of total room in this level."
 
 [node name="RoomSizeMax" type="Label" parent="Container/Grid"]
-margin_top = 157.0
-margin_right = 222.0
-margin_bottom = 179.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "  Room Size Max."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid5" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 152.0
-margin_right = 996.0
-margin_bottom = 184.0
+layout_mode = 2
 
 [node name="RoomSizeMaxSpinbox" type="SpinBox" parent="Container/Grid/Grid5"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 5.0
 max_value = 10.0
 value = 5.0
 
 [node name="Label7" type="Label" parent="Container/Grid/Grid5"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 708.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Maximum value in units. Random integer between min and max."
 
 [node name="RoomSizeMin" type="Label" parent="Container/Grid"]
-margin_top = 193.0
-margin_right = 222.0
-margin_bottom = 215.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Room Size Min."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid6" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 188.0
-margin_right = 996.0
-margin_bottom = 220.0
+layout_mode = 2
 
 [node name="RoomSizeMinSpinbox" type="SpinBox" parent="Container/Grid/Grid6"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 5.0
 max_value = 10.0
 value = 5.0
 
 [node name="Label8" type="Label" parent="Container/Grid/Grid6"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 703.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Minimum value in units. Random integer between min and max."
 
 [node name="MobsTotal" type="Label" parent="Container/Grid"]
-margin_top = 229.0
-margin_right = 222.0
-margin_bottom = 251.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Mobs Total."
-align = 2
-valign = 1
+horizontal_alignment = 2
 
 [node name="Grid7" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 224.0
-margin_right = 996.0
-margin_bottom = 256.0
+layout_mode = 2
 
 [node name="MobsTotalSpinbox" type="SpinBox" parent="Container/Grid/Grid7"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 min_value = 1.0
 max_value = 99.0
 value = 1.0
 
 [node name="Label9" type="Label" parent="Container/Grid/Grid7"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 409.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Total mobs amount at this level."
 
 [node name="ItemTotal" type="Label" parent="Container/Grid"]
-margin_top = 265.0
-margin_right = 222.0
-margin_bottom = 287.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Item Total."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid8" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 260.0
-margin_right = 996.0
-margin_bottom = 292.0
+layout_mode = 2
 
 [node name="ItemTotalSpinbox" type="SpinBox" parent="Container/Grid/Grid8"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 max_value = 99.0
 value = 1.0
 
 [node name="Label10" type="Label" parent="Container/Grid/Grid8"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 398.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "Total item amount at this level."
 
 [node name="LabelHideRandomCorridor" type="Label" parent="Container/Grid"]
-margin_top = 333.0
-margin_right = 222.0
-margin_bottom = 380.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Hide Random Corridor?"
-align = 2
-autowrap = true
+horizontal_alignment = 2
 
 [node name="Grid13" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 296.0
-margin_right = 996.0
-margin_bottom = 418.0
+layout_mode = 2
 
 [node name="CheckButtonHideRandomCorridor" type="CheckButton" parent="Container/Grid/Grid13"]
-margin_right = 76.0
-margin_bottom = 122.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Grid/Grid13"]
-margin_left = 80.0
-margin_right = 770.0
-margin_bottom = 122.0
-rect_min_size = Vector2( 690, 0 )
+custom_minimum_size = Vector2(690, 0)
+layout_mode = 2
 mouse_filter = 1
 text = "for this feature to work, Set settings hide_stone_walls to true. Hide a corridor that starts at room one and ends at a random room. Only a random value from 0 to 3 for rooms 1 to 4  are used. When creating the corridors, room 5 is excluded since that room is used to create the corridors."
-autowrap = true
 
 [node name="LabelStoreItems" type="Label" parent="Container/Grid"]
-margin_top = 431.0
-margin_right = 222.0
-margin_bottom = 453.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "An item store?"
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 422.0
-margin_right = 996.0
-margin_bottom = 462.0
+layout_mode = 2
 
 [node name="CheckButtonStoreItems" type="CheckButton" parent="Container/Grid/Grid9"]
-margin_right = 76.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Grid/Grid9"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 482.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Is the store that sells only items enabled?"
 
 [node name="LabelStoreArmor" type="Label" parent="Container/Grid"]
-margin_top = 475.0
-margin_right = 222.0
-margin_bottom = 497.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "An armor store?"
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid10" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 466.0
-margin_right = 996.0
-margin_bottom = 506.0
+layout_mode = 2
 
 [node name="CheckButtonStoreArmor" type="CheckButton" parent="Container/Grid/Grid10"]
-margin_right = 76.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Grid/Grid10"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 486.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Is the store that sells only armor enabled?"
 
 [node name="LabelStoreWeapons" type="Label" parent="Container/Grid"]
-margin_top = 519.0
-margin_right = 222.0
-margin_bottom = 541.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "A weapon store?"
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid11" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 510.0
-margin_right = 996.0
-margin_bottom = 550.0
+layout_mode = 2
 
 [node name="CheckButtonStoreWeapons" type="CheckButton" parent="Container/Grid/Grid11"]
-margin_right = 76.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Grid/Grid11"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 515.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Is the store that sells only weapons enabled?"
 
 [node name="LabelSavePoint" type="Label" parent="Container/Grid"]
-margin_top = 563.0
-margin_right = 222.0
-margin_bottom = 585.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Save Point Enabled?"
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid12" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 554.0
-margin_right = 996.0
-margin_bottom = 594.0
+layout_mode = 2
 
 [node name="CheckButtonSavePoint" type="CheckButton" parent="Container/Grid/Grid12"]
-margin_right = 76.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 50, 0 )
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Grid/Grid12"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 510.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "Should a save point be enabled for this level."
 
-[node name="StatusBar" parent="." instance=ExtResource( 4 )]
+[node name="StatusBar" parent="." instance=ExtResource("4")]
 
 [connection signal="value_changed" from="Container/Grid/Grid1/LevelSpinbox" to="." method="_on_LevelSpinbox_value_changed"]
 [connection signal="toggled" from="Container/Grid/Grid3/StartingLevel2" to="." method="_on_StartingLevel_toggled"]

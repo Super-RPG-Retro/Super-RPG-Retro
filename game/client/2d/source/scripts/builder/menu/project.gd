@@ -13,7 +13,8 @@ You should have received a copy of the GNU Affero General Public License along w
 extends MenuButton
 
 
-onready var _menu_rooms
+@onready var _menu_rooms := PopupMenu.new()
+
 
 func _ready():
 	_menu_rooms = get_popup()
@@ -23,27 +24,27 @@ func _ready():
 	_menu_rooms.add_item("Dungeons" + Variables._menu_padding)
 	_menu_rooms.add_item("Reset Game" + Variables._menu_padding)
 		
-	_menu_rooms.connect("id_pressed", self, "_on_menu_rooms_item_pressed")
+	_menu_rooms.connect("id_pressed", Callable(self, "_on_menu_rooms_item_pressed"))
 
 
 func _input(_event):
 	if _menu_rooms.has_focus() == true:
-		Variables.a.scancode = 0
+		Variables.a.keycode = 0
 
 
 func _on_menu_rooms_item_pressed(ID):
 	match ID:
 		0:
-			var _s = get_tree().change_scene("res://2d/source/scenes/builder/project/home.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project/home.tscn")
 		
 		1:
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/project/levels.tscn")
+			var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project/levels.tscn")
 		
 		2:
-			var _scene = get_tree().change_scene("res://2d/source/scenes/builder/project/dungeons.tscn")
+			var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project/dungeons.tscn")
 		
 		3:
-			var _scene2 = get_tree().change_scene("res://2d/source/scenes/builder/project/reset_game.tscn")
+			var _scene2 = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project/reset_game.tscn")
 			
 			
 func _on_MenuProject_tree_exiting():

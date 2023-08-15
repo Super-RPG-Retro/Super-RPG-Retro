@@ -14,9 +14,10 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # this is all the rows from the selected ItemList.
-var _d_rows = []
-var _append: bool = true
+var _d_rows := []
+var _append := true
 
 var player = null
 
@@ -28,13 +29,22 @@ func _process(_delta):
 
 # this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
 func _scancode_if_pressed_enter(event):
-	if event is InputEventScreenTouch || event is InputEventMouse:
+	if event is InputEventScreenTouch || event is InputEventMouseButton:
 		Variables.a.pressed = true # change to false to simulate a key release
-		Variables.a.scancode = KEY_ENTER
-			
+		Variables.a.keycode = KEY_ENTER
+		
 		Input.parse_input_event(Variables.a)
 		
-		
+
+func _parse_input_event():
+	# simulate a key press just before exiting so that the last edited builder data is saved.
+	Variables.a.pressed = true
+	Variables.a.keycode = KEY_ENTER
+	
+	Input.use_accumulated_input = false
+	Input.parse_input_event(Variables.a)
+
+
 func _skills_loaded_total():
 	var _str = str(P.character_stats[str(P._number)]["_loaded"].Strength + P.character_stats[str(P._number)]["_loaded"].Defense + P.character_stats[str(P._number)]["_loaded"].Constitution + P.character_stats[str(P._number)]["_loaded"].Dexterity + P.character_stats[str(P._number)]["_loaded"].Intelligence + P.character_stats[str(P._number)]["_loaded"].Charisma + P.character_stats[str(P._number)]["_loaded"].Wisdom + P.character_stats[str(P._number)]["_loaded"].Willpower + P.character_stats[str(P._number)]["_loaded"].Perception + P.character_stats[str(P._number)]["_loaded"].Luck).pad_zeros(4) + "/9990."
 	
@@ -67,7 +77,7 @@ func _sort(_dictionary, _d_column, _item_list_current_index = 0):
 		
 		if _item_list_current_index == 1:
 			_d_rows = Variables._file_names.duplicate()
-			_d_rows.sort_custom(MyCustomSorter, "sort_ascending")
+			_d_rows.sort_custom(Callable(MyCustomSorter, "sort_ascending"))
 			
 		else:
 			for _key in _dictionary.keys():
@@ -76,7 +86,7 @@ func _sort(_dictionary, _d_column, _item_list_current_index = 0):
 				if _i < Variables._file_names.size(): 
 					_d_rows.append([_i, _dictionary[_key][_d_column]])
 						
-			_d_rows.sort_custom(MyCustomSorter, "sort_ascending")
+			_d_rows.sort_custom(Callable(MyCustomSorter, "sort_ascending"))
 		
 			for _r in _d_rows:
 				Variables._file_names_sorted.append( Variables._file_names[_r[0]])
@@ -93,7 +103,7 @@ func _sort(_dictionary, _d_column, _item_list_current_index = 0):
 			if _i < Json._magic.size(): 
 				_d_rows.append([_i, _dictionary[_key][_d_column]])
 		
-		_d_rows.sort_custom(MyCustomSorter, "sort_ascending")
+		_d_rows.sort_custom(Callable(MyCustomSorter, "sort_ascending"))
 		
 		
 	return _d_rows
@@ -108,9 +118,9 @@ class MyCustomSorter:
 
 func _game_title():
 	if Builder._config.game_id > 0:
-		OS.set_window_title("Super RPG Retro: " +  Builder._config.game_title[Builder._config.game_id])
+		get_window().set_title("Super RPG Retro: " +  Builder._config.game_title[Builder._config.game_id])
 	else:
-		OS.set_window_title("Super RPG Retro.")
+		get_window().set_title("Super RPG Retro.")
 
 
 func _update_stats_last_player(_i):

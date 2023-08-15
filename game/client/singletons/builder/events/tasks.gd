@@ -14,7 +14,8 @@ You should have received a copy of the GNU Affero General Public License along w
 # game builder, creator, construction set variables.
 extends Node
 
-var data = {
+
+var data := {
 	"event_number":			0,
 	"event_enabled":		[],
 	"file_name":			[], # json file name.

@@ -15,77 +15,78 @@ You should have received a copy of the GNU Affero General Public License along w
 # if coping this file for use at game_world,
 extends Node2D
 
+
 # _column_d is the dictionary column that was selected using the sort button.
 var _d_column
 	
 # do not delete this node. it is needed for buying disabled message and for incrementing/decrements item purchase amount.
-onready var _label_buy_disabled_message = $LabelBuyDisabledMessage
+@onready var _label_buy_disabled_message := $LabelBuyDisabledMessage
 
 # select a column that you would like to sort...
-onready var _item_list = $ItemList
+@onready var _item_list := $ItemList
 # then press this button to sort all items from least to greatest.
-onready var _button_sort = $ButtonSort
+@onready var _button_sort := $ButtonSort
 
 # this is the large button that highlights a grid row.
-onready var _select_button = $SelectButton
-onready var _button_buy = $ButtonBuy
-onready var _dialog_buy = $DialogBuy
-onready var _dialog_bought = $DialogBought
-onready var _spinbox_amount = $SpinBoxAmount
-onready var _gold_total = $LabelGold
+@onready var _select_button := $SelectButton
+@onready var _button_buy := $ButtonBuy
+@onready var _dialog_buy := $DialogBuy
+@onready var _dialog_bought := $DialogBought
+@onready var _spinbox_amount := $SpinBoxAmount
+@onready var _gold_total := $LabelGold
 # this is the total price of the item amount selected.
-onready var _total_price = $LabelTotalPrice
+@onready var _total_price := $LabelTotalPrice
 
-onready var _grid_dynamic = $Panel/EventContainerItemsDynamic/Grid
-onready var _scroll = $Panel/EventContainerItemsStatic
-onready var _scroll2 = $Panel/EventContainerItemsDynamic
+@onready var _grid_dynamic := $Panel/EventContainerItemsDynamic/Grid
+@onready var _scroll := $Panel/EventContainerItemsStatic
+@onready var _scroll2 := $Panel/EventContainerItemsDynamic
 
-var _item_name = []
-var _image = []
-var _check_button = []
-var _category = []
+var _item_name 		:= []
+var _image			:= []
+var _check_button 	:= []
+var _category 		:= []
 
 # the name of the item currently selected.
-var _selected_rune_name = ""
+var _selected_rune_name := ""
 
-var _stack_amount = [] # how many of the current selected item.
-var _mp = []
-var _group = []
-var _gold = []
-var _level = []
-var _range = []
-var _location = []
-var _defense = []
-var _strength = []
+var _stack_amount := [] # how many of the current selected item.
+var _mp 		:= []
+var _group 		:= []
+var _gold 		:= []
+var _level 		:= []
+var _range 		:= []
+var _location 	:= []
+var _defense 	:= []
+var _strength 	:= []
 
-var _data_file_name = [] 
-var _data_file_path_json = []
-var _data_image_texture = []
-var _data_directory_name = []
+var _data_file_name 		:= [] 
+var _data_file_path_json 	:= []
+var _data_image_texture 	:= []
+var _data_directory_name 	:= []
 
 # this is the number of the checkbox selected. the other var that also refer to this number is _i which is used in a loop at ready func and also as _on_focus_entered() parameter
-var _num:int = -1
+var _num := -1
 
 # this var does not get reset back to -1. it is used to save the pressed state of the checkbox.
-var _num_current = -1
+var _num_current := -1
 
-var _item_list_current_index = 0
+var _item_list_current_index := 0
 
 # this is used to loop thur the file_names searching for an item incrementing in order, an item that is visible. once found this value will be set to true.
 # this var is used to checkmark the first visible item in the list.
-var _found_first_item:bool = false
+var _found_first_item := false
 
 # this var stops the adding of a node to scene when it has already been added to scene.
-var _nodes_added_to_scene:bool = false
+var _nodes_added_to_scene := false
 
-var _mouse_clicked:bool = false
+var _mouse_clicked := false
 
 
 func _ready():
 	Variables._dictionary_name = "weapon"
 	Variables.select_json_dictionary_singly = true
 	
-	_scroll.get_h_scrollbar().modulate = Color(0, 0, 0, 0)
+	_scroll.get_h_scroll_bar().modulate = Color(0, 0, 0, 0)
 	_item_list.select(0) # select the first index in the list.
 	
 	_gold_total.text = str(Hud._loaded.Gold)	
@@ -106,12 +107,12 @@ func _process(_delta):
 	
 	if Variables._mouse_cursor_position.y > 442: # bottom of screen.
 		# this is the button that follows the cursor.
-		_select_button.rect_position.y = 442 + 41 + 41 + 32
+		_select_button.position.y = 442 + 41 + 41 + 32
 		
 	elif Variables._mouse_cursor_position.y >= 81: # current starting location.
-		_select_button.rect_position.y = Variables._mouse_cursor_position.y + 41 + 41 + 32
+		_select_button.position.y = Variables._mouse_cursor_position.y + 41 + 41 + 32
 	else:
-		_select_button.rect_position.y = 194
+		_select_button.position.y = 194
 	
 	
 	if Variables._num_first_rune_selected == -1 && _found_first_item == true:
@@ -130,19 +131,19 @@ func _input(event):
 	if event.is_action_pressed("ui_escape", true):
 		Variables._child_scene_open = false
 		visible = false
-		event.scancode = 0 # don't trigger the esc from elsewhere.
+		event.keycode = 0 # don't trigger the esc from elsewhere.
 		
 	
 	# this stops setting more than one radio button to active simultaneously.
 	if event is InputEventKey && event.pressed && Variables.select_json_dictionary_singly == true:
-		if event.scancode == KEY_SPACE || event.scancode == KEY_ENTER || event.is_action_pressed("ui_left", true) || event.is_action_pressed("ui_right", true):		
+		if event.keycode == KEY_SPACE || event.keycode == KEY_ENTER || event.is_action_pressed("ui_left", true) || event.is_action_pressed("ui_right", true):		
 			var _i = -1
 			for _key in Json._magic.keys():	
 				_i += 1
 				if _num != _i:
-					_check_button[_i].pressed = false
+					_check_button[_i].button_pressed = false
 				else:					
-					_check_button[_i].pressed = true
+					_check_button[_i].button_pressed = true
 					_num = _i
 					_check_button[_i].grab_focus()
 					
@@ -150,7 +151,7 @@ func _input(event):
 					_selected_rune_name = _key
 					_on_SpinBoxAmount_value_changed(_spinbox_amount.value)
 					
-				if _check_button[_i].pressed == true && _button_buy.has_focus() == false && _item_list.has_focus() == false && _button_sort.has_focus() == false:
+				if _check_button[_i].button_pressed == true && _button_buy.has_focus() == false && _item_list.has_focus() == false && _button_sort.has_focus() == false:
 						_num_current = _i
 								
 	if event is InputEventMouseButton && event.is_action_released("ui_left_mouse_click") && Variables._mouse_cursor_position.x <= 868 && Variables._mouse_cursor_position.y >= 61 && Variables._mouse_cursor_position.y <= 460:
@@ -158,7 +159,7 @@ func _input(event):
 		if Variables.select_json_dictionary_singly == true:
 			#looping through the group node children and uncheck every one except the sender checkbox
 			for _i in _check_button.size():
-				_check_button[_i].pressed = false
+				_check_button[_i].button_pressed = false
 		
 		var _i = -1
 		
@@ -171,16 +172,16 @@ func _input(event):
 				
 			# 41 is the offset value between SelectButton at the first CheckBox. 32 is the width of the SelectButton.
 			if Variables._mouse_cursor_position.y >= 61:
-				if Variables._mouse_cursor_position.y - 41 - 32 + _scroll2.scroll_vertical <= _check_button[_i].rect_position.y:
+				if Variables._mouse_cursor_position.y - 41 - 32 + _scroll2.scroll_vertical <= _check_button[_i].position.y:
 					_selected_rune_name = _key
 				
 					if Variables.select_json_dictionary_singly == false:
-						_check_button[_i].pressed = !_check_button[_i].pressed
+						_check_button[_i].button_pressed = !_check_button[_i].button_pressed
 						_num = _i
 						_check_button[_i].grab_focus()	
 					
 					else:
-						_check_button[_i].pressed = true
+						_check_button[_i].button_pressed = true
 						_num = _i
 						_check_button[_i].grab_focus()	
 						
@@ -202,38 +203,38 @@ func _set_focus_to_nodes():
 				
 	_check_button[_i].focus_previous = NodePath("../../../../ButtonSort")
 	
-	_check_button[_i].focus_neighbour_top = NodePath("../../../../ButtonSort")
+	_check_button[_i].focus_neighbor_top = NodePath("../../../../ButtonSort")
 	
 	
 	_button_sort.focus_previous = NodePath("../ItemList")
 	
-	_button_sort.focus_neighbour_left = NodePath("../ItemList")
+	_button_sort.focus_neighbor_left = NodePath("../ItemList")
 	
 	
 	_button_sort.focus_next = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
-	_button_sort.focus_neighbour_right = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
+	_button_sort.focus_neighbor_right = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
-	_button_sort.focus_neighbour_bottom = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
+	_button_sort.focus_neighbor_bottom = NodePath("../Panel/EventContainerItemsDynamic/Grid/CheckButton-01")
 	
 
 	_item_list.focus_previous = NodePath("../ButtonBuy")
 		
-	_item_list.focus_neighbour_left = NodePath("../ButtonBuy")
+	_item_list.focus_neighbor_left = NodePath("../ButtonBuy")
 		
 	_item_list.focus_next = NodePath("../ButtonSort")
 	
-	_item_list.focus_neighbour_right = NodePath("../ButtonSort")
+	_item_list.focus_neighbor_right = NodePath("../ButtonSort")
 
 
 
 	_button_buy.focus_previous = NodePath("../SpinBoxAmount")
 		
-	_button_buy.focus_neighbour_left = NodePath("../SpinBoxAmount")
+	_button_buy.focus_neighbor_left = NodePath("../SpinBoxAmount")
 		
 	_button_buy.focus_next = NodePath("../ItemList")
 	
-	_button_buy.focus_neighbour_right = NodePath("../ItemList")
+	_button_buy.focus_neighbor_right = NodePath("../ItemList")
 
 	
 # add the text/image of the selected dictionary to the columns and rows of the grid nodes.	
@@ -243,11 +244,11 @@ func _draw_dictionary_items(_key, _r:int):
 		
 	_check_button.append([])
 	_check_button[_r] = CheckBox.new()
-	_check_button[_r].pressed = false
+	_check_button[_r].button_pressed = false
 	_check_button[_r].add_to_group("grid_container") 
 	
 	if Variables.select_json_dictionary_singly == true:		
-		_check_button[_r].group = ButtonGroup.new()
+		_check_button[_r].button_group = ButtonGroup.new()
 	
 	if _found_first_item == false:
 		_found_first_item = true
@@ -257,16 +258,16 @@ func _draw_dictionary_items(_key, _r:int):
 	_grid_dynamic.add_child(_check_button[_r])
 	
 	
-	if _check_button[_r].is_connected("focus_entered", self, "_on_focus_entered"):
+	if _check_button[_r].is_connected("focus_entered", Callable(self, "_on_focus_entered")):
 		_check_button[_r].disconnect("focus_entered", self, "_on_focus_entered", [_r])
 		
 	# create the signals for the mouse entering /exiting the nodes.
-	var _x = _check_button[_r].connect("focus_entered", self, "_on_focus_entered", [_r])
+	var _x = _check_button[_r].connect("focus_entered", Callable(self, "_on_focus_entered").bind(_r))
 	
-	if _check_button[_r].is_connected("focus_exited", self, "_on_focus_exited"):
-		_check_button[_r].disconnect("focus_exited", self, "_on_focus_exited")
+	if _check_button[_r].is_connected("focus_exited", Callable(self, "_on_focus_exited")):
+		_check_button[_r].disconnect("focus_exited", Callable(self, "_on_focus_exited"))
 
-	var _y = _check_button[_r].connect("focus_exited", self, "_on_focus_exited")
+	var _y = _check_button[_r].connect("focus_exited", Callable(self, "_on_focus_exited"))
 			
 
 	if _r == 0:
@@ -417,7 +418,7 @@ func _on_DialogBuy_confirmed():
 	
 	_dialog_buy.visible = false
 		
-	P._gold -= _spinbox_amount.value * Json._magic[_selected_rune_name]["Gold"]
+	Hud._loaded.Gold -= _spinbox_amount.value * Json._magic[_selected_rune_name]["Gold"]
 	Json._magic[_selected_rune_name]["Stack_amount"] += _spinbox_amount.value
 	
 	Filesystem.save_dictionary_json3("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt", Json._magic)
@@ -426,7 +427,7 @@ func _on_DialogBuy_confirmed():
 	
 	_stack_amount[_num_current].text = str(Json._magic[_selected_rune_name]["Stack_amount"]).pad_zeros(3)
 	
-	_gold_total.text = str(P._gold)
+	_gold_total.text = str(Hud._loaded.Gold)
 	
 	var _str = _selected_rune_name.replace("_", " ")
 			
@@ -436,7 +437,7 @@ func _on_DialogBuy_confirmed():
 
 func _on_ButtonExit_pressed():
 	for _i in _check_button.size():
-		_check_button[_i].pressed = false
+		_check_button[_i].button_pressed = false
 			
 	Variables._child_scene_open = false
 	self.visible = false
@@ -444,7 +445,7 @@ func _on_ButtonExit_pressed():
 
 func _on_SpinBoxAmount_value_changed(value):
 	# value var was plus 1 in total because in this code there is no longer enought gold for a purchase. therefore, minus 1 from value because user does not have enough gold. 
-	if _spinbox_amount.value * Json._magic[_selected_rune_name]["Gold"] > P._gold && Json._magic[_selected_rune_name]["Stack_amount"] < 999:
+	if _spinbox_amount.value * Json._magic[_selected_rune_name]["Gold"] > Hud._loaded.Gold && Json._magic[_selected_rune_name]["Stack_amount"] < 999:
 		_spinbox_amount.max_value = value - 1
 			
 		return

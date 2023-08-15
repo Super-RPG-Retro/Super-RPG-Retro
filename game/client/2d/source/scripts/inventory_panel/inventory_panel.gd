@@ -13,15 +13,17 @@ You should have received a copy of the GNU Affero General Public License along w
 # inventory_panel.gd
 extends Node2D
 
-const _inventory_icons = []
 
-var _inventory_current_amount = 0
+var _inventory_icons := []
+
+var _inventory_current_amount := 0
 
 # a value is set to Variables._inventory_currently_selected when the mouse clicks a inventory location. when mouse hovers an item, a value is set to this var when the mouse enters or leaves a inventory location. both vars will be the same value when a inventory has been selected to cast it.
-var _inventory_currently_selected = -1
+var _inventory_currently_selected := -1
 
 # name of the inventory currently selected when hovering the inventory. for clicking the inventory, see: Variables._inventory_current_selected_name
-var _inventory_current_selected_name = ""
+var _inventory_current_selected_name := ""
+
 
 # draw Inventory to scene.
 func _ready():
@@ -47,7 +49,7 @@ func _input(event):
 		if event is InputEventMouseMotion:	
 			if Variables._mouse_cursor_position.x > 529 && Variables._mouse_cursor_position.y >= 178 && Variables._mouse_cursor_position.y <= 278:
 				
-				$Node2D/InventorySummary.rect_position.y = get_global_mouse_position().y + 24
+				$Node2D/InventorySummary.position.y = get_global_mouse_position().y + 24
 		
 				$Node2D/InventorySummary.visible = true
 				
@@ -86,7 +88,7 @@ func _input(event):
 				draw_inventory_icons(Variables._inventory_current_group_selected);
 			
 		# inventory currently selected.
-		if event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") && _inventory_currently_selected != -1:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") && _inventory_currently_selected != -1:
 			Inventory.use(((Variables._inventory_current_group_selected - 1) * 24) + _inventory_currently_selected)
 			
 
@@ -138,15 +140,15 @@ func draw_inventory_icons(_group: int = 1):
 			get_node("Inventory/Sprite" + str(_i + 1)).expand = true
 			
 			# remove signals because we are about to add new signals for this group.
-			if get_node("Inventory/Sprite" + str(_i + 1)).is_connected("mouse_entered", self, "_on_mouse_entered"):
-				get_node("Inventory/Sprite" + str(_i + 1)).disconnect("mouse_entered", self, "_on_mouse_entered")
+			if get_node("Inventory/Sprite" + str(_i + 1)).is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
+				get_node("Inventory/Sprite" + str(_i + 1)).disconnect("mouse_entered", Callable(self, "_on_mouse_entered"))
 				
-				get_node("Inventory/Sprite" + str(_i + 1)).disconnect("mouse_exited", self, "_on_mouse_exited")
+				get_node("Inventory/Sprite" + str(_i + 1)).disconnect("mouse_exited", Callable(self, "_on_mouse_exited"))
 				
 			# create the signals for the mouse entering/exiting the nodes.
-			var _y = get_node("Inventory/Sprite" + str(_i + 1)).connect("mouse_entered", self, "_on_mouse_entered", [_i])
+			var _y = get_node("Inventory/Sprite" + str(_i + 1)).connect("mouse_entered", Callable(self, "_on_mouse_entered").bind(_i))
 
-			var _z = get_node("Inventory/Sprite" + str(_i + 1)).connect("mouse_exited", self, "_on_mouse_exited")
+			var _z = get_node("Inventory/Sprite" + str(_i + 1)).connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 			
 			if _i == 23:
 				break
@@ -155,10 +157,10 @@ func draw_inventory_icons(_group: int = 1):
 	for _r in range (_i + 1, 24, 1):
 		get_node("Inventory/Sprite" + str(_r + 1)).texture = null
 		
-		if get_node("Inventory/Sprite" + str(_r + 1)).is_connected("mouse_entered", self, "_on_mouse_entered"):
-			get_node("Inventory/Sprite" + str(_r + 1)).disconnect("mouse_entered", self, "_on_mouse_entered")
+		if get_node("Inventory/Sprite" + str(_r + 1)).is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
+			get_node("Inventory/Sprite" + str(_r + 1)).disconnect("mouse_entered", Callable(self, "_on_mouse_entered"))
 			
-			get_node("Inventory/Sprite" + str(_r + 1)).disconnect("mouse_exited", self, "_on_mouse_exited")
+			get_node("Inventory/Sprite" + str(_r + 1)).disconnect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 
 # _num is the value of the image that was mouse entered.
@@ -183,8 +185,8 @@ func inventory_select(_num = 0):
 		return
 		
 	# the "InventorySelect" is the square image that borders and selected inventory.
-	get_node("Inventory/InventorySelect").position.x = get_node("Inventory/Sprite" + str(_num + 1)).rect_position.x + 18
-	get_node("Inventory/InventorySelect").position.y = get_node("Inventory/Sprite" + str(_num + 1)).rect_position.y + 18
+	get_node("Inventory/InventorySelect").position.x = get_node("Inventory/Sprite" + str(_num + 1)).position.x + 18
+	get_node("Inventory/InventorySelect").position.y = get_node("Inventory/Sprite" + str(_num + 1)).position.y + 18
 	
 	get_node("Inventory/InventorySelect").visible = true
 

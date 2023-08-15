@@ -13,10 +13,11 @@ You should have received a copy of the GNU Affero General Public License along w
 # try_move,gd
 extends Node2D
 
-onready var game = get_parent()
-onready var build = get_parent().get_node("BuildLevel")
-onready var damage = get_parent().get_node("Player/Damage")
-onready var timer_yield = get_parent().get_node("TimerYield")
+
+@onready var game := get_parent()
+@onready var build := get_parent().get_node("BuildLevel")
+@onready var damage := get_parent().get_node("Player/Damage")
+@onready var timer_yield := get_parent().get_node("TimerYield")
 
 func _ready():
 	pass
@@ -149,7 +150,7 @@ func try_move(dx, dy):
 						# enter the battle system game loop.
 						get_tree().call_group("battle_system", "_battle_system", mobs, dx, dy)
 						
-						yield(timer_yield, "timeout")
+						await timer_yield.timeout
 						
 					# the second parameter is the damage taken to the mobs.
 					mobs.take_damage(game, 1)
@@ -189,7 +190,7 @@ func try_move(dx, dy):
 						# enter the battle system game loop.
 						get_tree().call_group("battle_system", "_battle_system", mobs, dx, dy)
 						
-						yield(timer_yield, "timeout")
+						await timer_yield.timeout
 						
 					# the second parameter is the damage taken to the mobs.
 					mobs.take_damage(game, 1)
@@ -214,7 +215,7 @@ func try_move(dx, dy):
 		# if tile is a door then change that door into a tile.
 		Enum.Tile.Door:
 			# when at this code, the player walked in the room, so remove door if exists.
-			if game.tile_map.get_cellv(Vector2(x, y)) == Enum.Tile.Door:
+			if game.tile_map.get_cell_source_id(0, Vector2i(x, y)) == Enum.Tile.Door:
 				build.clear_path(Vector2(x, y))
 					
 			# if we are here, the door was just opened.
@@ -232,7 +233,7 @@ func try_move(dx, dy):
 								if game.map[game.ceiling[_ii].x][game.ceiling[_ii].y] == Enum.Tile.Ceiling:
 									build.set_tile(game.ceiling[_ii].x, game.ceiling[_ii].y, Variables._floor_rooms_tile_value )
 				# remove ceiling for ladder_down.
-				game.overlay_map.set_cellv(Variables._ladder_down, -1)
+				game.overlay_map.set_cell(0, Variables._ladder_down, -1)
 			
 			build.set_tile(x, y, Enum.Tile.Floor)
 			
@@ -255,46 +256,51 @@ func try_move(dx, dy):
 			
 			# go to next level if Settings._game.level_number is less than max level.
 			if Settings._game.level_number < game.LEVEL_SIZE:
-				var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+				var _s = get_tree().change_scene_to_file("res://2d/source/scenes/game/game_ui.tscn")
 			
 		Enum.Tile.Ladder_up:
-			# before going up the ladder, save the state of this level's visibility map.
-			# "false" means game was not requested to be saved.
-			Filesystem.save_visibility_map(game.LEVEL_SIZE, game.visibility_map, false)
+			# if true then a wait turn is used. player should stand still. so do not climb up ladder.
+			if dx == 0 && dy == 0:
+				pass
+			
+			else:	
+				# before going up the ladder, save the state of this level's visibility map.
+				# "false" means game was not requested to be saved.
+				Filesystem.save_visibility_map(game.LEVEL_SIZE, game.visibility_map, false)
+							
+				# climbing out of the dungeon? exit to the library.
+				if Settings._game.level_number == 0:
+					# Cannot enter library using a mouse click because there is a bug. without this code, player could not return to dungeon.
+					if Variables._wait_a_turn == 0:
+						Variables._wait_a_turn = -2
+						return
 						
-			# climbing out of the dungeon? exit to the library.
-			if Settings._game.level_number == 0:
-				# Cannot enter library using a mouse click because there is a bug. without this code, player could not return to dungeon.
-				if Variables._wait_a_turn == 0:
-					Variables._wait_a_turn = -2
+				
+					Variables._at_library = true
+					Variables._compass = Variables._compass_last_known_for_3d
+						
+					game._player_tile = Vector2(x, y)
+					game.call_deferred("update_visuals")
+					
+					get_tree().call_group("game_ui", "scene_3d")
+					
+					get_parent().get_node("TimerDelayMove").start()
+					
 					return
-					
-			
-				Variables._at_library = true
-				Variables._compass = Variables._compass_last_known_for_3d
-					
-				game._player_tile = Vector2(x, y)
-				game.call_deferred("update_visuals")
 				
-				get_tree().call_group("game_ui", "scene_3d")
+				Settings._game.level_number -= 1
+				Builder_playing._data.level_number -= 1
 				
-				get_parent().get_node("TimerDelayMove").start()
+				# returning up ladder.
+				Variables._going_down_level = false
 				
-				return
-			
-			Settings._game.level_number -= 1
-			Builder_playing._data.level_number -= 1
-			
-			# returning up ladder.
-			Variables._going_down_level = false
-			
-			# player (x/y) is now at the positon of the current down ladder.			
-			x = Variables._ladder_down.x
-			y = Variables._ladder_down.y
-			
-			# go to next level if Settings._game.level_number is less than max level.
-			if Settings._game.level_number < game.LEVEL_SIZE:
-				var _s = get_tree().change_scene("res://2d/source/scenes/game/game_ui.tscn")
+				# player (x/y) is now at the positon of the current down ladder.			
+				x = Variables._ladder_down.x
+				y = Variables._ladder_down.y
+				
+				# go to next level if Settings._game.level_number is less than max level.
+				if Settings._game.level_number < game.LEVEL_SIZE:
+					var _s = get_tree().change_scene_to_file("res://2d/source/scenes/game/game_ui.tscn")
 		
 	# mobs movement.
 	for mobs in game.mobs:

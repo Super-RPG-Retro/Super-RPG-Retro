@@ -17,6 +17,12 @@ func _ready():
 	Variables._at_scene = Enum.Scene.Settings_game
 	Variables._scene_title = "Settings Game."
 	
+	# load settings game file.
+	var _temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt")
+		
+	if _temp != null:
+		Settings._game = _temp
+	
 	get_node("Container").set_follow_focus(true)	
 	get_node("Container/Grid/UseClock").grab_focus()
 	get_node("Container/Grid/GridChild/DifficultySpinbox").value = Settings._game.difficulty_level
@@ -32,13 +38,13 @@ func _ready():
 		get_node("Container/Grid/VisibilityMap").set_pressed(true)
 	
 	if Settings._game.show_mobs_when_door_closed == false:
-		get_node("Container/Grid/ShowMobsDoorClosed").set_pressed(true)
+		get_node("Container/Grid/ShowMobsDoorClosed").set_pressed(false)
 		
 	if Settings._game.show_item_when_door_closed == false:
-		get_node("Container/Grid/ShowItemDoorClosed").set_pressed(true)
+		get_node("Container/Grid/ShowItemDoorClosed").set_pressed(false)
 		
-	if Settings._game.room_ceiling == true:
-		get_node("Container/Grid/RoomCeiling").set_pressed(true)
+	if Settings._game.room_ceiling == false:
+		get_node("Container/Grid/RoomCeiling").set_pressed(false)
 	
 	if Settings._game.normal_doors_exist == false:
 		get_node("Container/Grid/NormalDoorsExist").set_pressed(false)
@@ -46,14 +52,14 @@ func _ready():
 	if Settings._game.different_floor_tiles == false:
 		get_node("Container/Grid/DifferentFloorTiles").set_pressed(false)
 		
-	if Settings._game.use_battle_system == true:
-		get_node("Container/Grid/UseBattleSystem").set_pressed(true)
+	if Settings._game.use_battle_system == false:
+		get_node("Container/Grid/UseBattleSystem").set_pressed(false)
 			
 	if Settings._game.down_ladder_always_shown == false:
 		get_node("Container/Grid/DownLadderAlwaysShown").set_pressed(false)
 		
-	if Settings._game.return_to_last_level == true:
-		get_node("Container/Grid/ReturnToLastLevel").set_pressed(true)
+	if Settings._game.return_to_last_level == false:
+		get_node("Container/Grid/ReturnToLastLevel").set_pressed(false)
 
 	if Settings._game.can_continue_saved_game == false:
 		get_node("Container/Grid/CanContinueSavedGame").set_pressed(false)
@@ -84,7 +90,6 @@ func different_floor_tiles():
 	else:
 		get_node("Container/Grid/DifferentFloorTiles").set_pressed(true)
 		get_node("Container/Grid/RoomCeiling").disabled = false
-		get_node("Container/Grid/RoomCeiling").set_pressed(false)
 		
 	
 func normal_doors_exist():
@@ -96,19 +101,17 @@ func normal_doors_exist():
 
 
 func _input(event):
-	# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
-	if Variables._at_scene == Enum.Scene.Settings_game:
-		Common._scancode_if_pressed_enter(event)
-		
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
-			var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 
-func _on_clock_toggled(button_pressed):
-	Settings._game.clock = button_pressed
-
+func _gui_input(event):
+	# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
+	if Variables._at_scene == Enum.Scene.Settings_game:
+		Common._scancode_if_pressed_enter(event)
+	
 	
 func _on_respawn_direct_sight_Enabled_toggled(button_pressed):
 	Settings._game.respawn_direct_sight = button_pressed	
@@ -119,7 +122,7 @@ func _on_visibility_Map_Enabled_toggled(button_pressed):
 	
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 
 func _on_difficulty_spinbox_value_changed(value):
@@ -156,7 +159,7 @@ func _on_keep_mobs_in_room_Enabled_toggled(button_pressed):
 	
 func _on_mobs_dead_distance_spinbox_value_changed(value):
 	Settings._game.mobs_dead_distance = value		
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt", Settings._game)
 
 
 func _on_respawn_turn_elapses_spinbox_value_changed(value):
@@ -174,14 +177,14 @@ func _on_down_ladder_always_shown_Enabled_toggled(button_pressed):
 
 func _on_time_system_toggled(button_pressed):
 	Settings._game.clock = button_pressed
-	
+
 
 func _on_return_to_last_level_Enabled_toggled(button_pressed):
 	Settings._game.return_to_last_level = button_pressed
 	
 
 func _on_Node2D_tree_exiting():
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt", Settings._game)
 
 
 func _on_continue_saved_game_Enabled_toggled(button_pressed):

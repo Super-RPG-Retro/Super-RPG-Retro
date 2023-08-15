@@ -13,6 +13,7 @@ You should have received a copy of the GNU Affero General Public License along w
 # enum and anything related to enum are here.
 extends Node
 
+
 # you can refer to these tiles by name to get a TILE INDEX, not tile x and y values.
 enum Tile {Wall, Door, Floor, Ladder_down, Ladder_up, Stone, Floor_rooms, Ceiling}
 var _tile_name = ["Wall", "Door", "Floor", "Ladder_down", "Ladder_up", "Stone", "Floor_rooms", "Ceiling"]

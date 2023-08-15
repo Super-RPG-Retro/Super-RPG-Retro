@@ -1,277 +1,256 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://cl6kqe7r4gvey"]
 
-[ext_resource path="res://2d/source/scripts/screen_shake/battle.gd" type="Script" id=1]
-[ext_resource path="res://2d/source/scenes/battle/screen_shake.tscn" type="PackedScene" id=2]
-[ext_resource path="res://bundles/assets/images/battle_background/1.png" type="Texture" id=3]
-[ext_resource path="res://bundles/assets/images/player_characters/0.png" type="Texture" id=4]
-[ext_resource path="res://2d/assets/themes/theme_small_font.tres" type="Theme" id=5]
-[ext_resource path="res://2d/assets/animation/slash.tres" type="Animation" id=6]
-[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=7]
-[ext_resource path="res://2d/assets/themes/theme.tres" type="Theme" id=8]
-[ext_resource path="res://bundles/assets/images/hit_effects/fight.png" type="Texture" id=9]
-[ext_resource path="res://2d/assets/animation/fight.tres" type="Animation" id=10]
-[ext_resource path="res://2d/assets/animation/hit.tres" type="Animation" id=11]
+[ext_resource type="Script" path="res://2d/source/scripts/screen_shake/battle.gd" id="1"]
+[ext_resource type="PackedScene" path="res://2d/source/scenes/battle/screen_shake.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cpik5it1q2neu" path="res://bundles/assets/images/battle_background/1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dgl4rp02oqq2i" path="res://bundles/assets/images/player_characters/0.png" id="4"]
+[ext_resource type="Theme" uid="uid://c5jg8sho14qvp" path="res://2d/assets/themes/theme_small_font.tres" id="5"]
+[ext_resource type="Animation" path="res://2d/assets/animation/slash.tres" id="6"]
+[ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="7"]
+[ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="8"]
+[ext_resource type="Texture2D" uid="uid://wh5o1brjmhvp" path="res://bundles/assets/images/hit_effects/fight.png" id="9"]
+[ext_resource type="Animation" path="res://2d/assets/animation/fight.tres" id="10"]
+[ext_resource type="Animation" path="res://2d/assets/animation/hit.tres" id="11"]
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ktq"]
+_data = {
+"fight": ExtResource("10"),
+"hit": ExtResource("11")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pkmnf"]
+_data = {
+"slash": ExtResource("6")
+}
+
+[sub_resource type="StyleBoxFlat" id="6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6h5aj"]
+_data = {
+"RESET": SubResource("10"),
+"fight": ExtResource("10"),
+"hit": ExtResource("11")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrxem"]
+_data = {
+"slash": ExtResource("6")
 }
 
 [node name="Node" type="Node2D" groups=["battle_system"]]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 128.0 ],
-"_edit_vertical_guides_": [  ]
-}
+script = ExtResource("1")
 
-[node name="Background" type="Sprite" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 z_index = 4096
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 centered = false
 
-[node name="SpriteMobs1" type="Sprite" parent="."]
-position = Vector2( 714, 135 )
+[node name="SpriteMobs1" type="Sprite2D" parent="."]
 z_index = 4096
 z_as_relative = false
+position = Vector2(714, 135)
 
 [node name="AnimationMobsFight" type="AnimationPlayer" parent="SpriteMobs1"]
-anims/fight = ExtResource( 10 )
-anims/hit = ExtResource( 11 )
+libraries = {
+"": SubResource("AnimationLibrary_r5ktq")
+}
 
 [node name="TemplateMobs1" type="Node2D" parent="."]
-position = Vector2( 874, 168 )
-scale = Vector2( 6, 6 )
 z_index = 4096
 z_as_relative = false
+position = Vector2(874, 168)
+scale = Vector2(6, 6)
 
 [node name="GridContainer" type="GridContainer" parent="TemplateMobs1"]
-margin_left = -17.8332
-margin_top = -12.3333
-margin_right = 83.1668
-margin_bottom = 35.6667
-rect_scale = Vector2( 0.333, 0.333 )
-theme = ExtResource( 7 )
+offset_left = -17.8332
+offset_top = -12.3333
+offset_right = 83.1668
+offset_bottom = 35.6667
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("7")
 columns = 2
 
 [node name="LabelHP" type="Label" parent="TemplateMobs1/GridContainer"]
-margin_right = 25.0
-margin_bottom = 18.0
-theme = ExtResource( 5 )
-custom_colors/font_color = Color( 0.0392157, 0.494118, 0.14902, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+layout_mode = 2
+theme = ExtResource("5")
+theme_override_colors/font_color = Color(0.0392157, 0.494118, 0.14902, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "HP"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="LabelHPValue" type="Label" parent="TemplateMobs1/GridContainer"]
-margin_left = 29.0
-margin_right = 96.0
-margin_bottom = 18.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "000/000"
 
 [node name="LabelMP" type="Label" parent="TemplateMobs1/GridContainer"]
-margin_top = 22.0
-margin_right = 25.0
-margin_bottom = 40.0
-theme = ExtResource( 5 )
-custom_colors/font_color = Color( 0.0235294, 0.439216, 0.713726, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+layout_mode = 2
+theme = ExtResource("5")
+theme_override_colors/font_color = Color(0.0235294, 0.439216, 0.713726, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "MP"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="LabelMPValue" type="Label" parent="TemplateMobs1/GridContainer"]
-margin_left = 29.0
-margin_top = 22.0
-margin_right = 96.0
-margin_bottom = 40.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "000/000"
 
-[node name="SpriteMobsSlash1" type="Sprite" parent="."]
+[node name="SpriteMobsSlash1" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 773, 88 )
-scale = Vector2( 2, 2 )
 z_index = 4096
-texture = ExtResource( 9 )
+position = Vector2(773, 88)
+scale = Vector2(2, 2)
+texture = ExtResource("9")
 hframes = 2
 frame = 1
 
 [node name="AnimationMobsSlash" type="AnimationPlayer" parent="SpriteMobsSlash1"]
-anims/slash = ExtResource( 6 )
+libraries = {
+"": SubResource("AnimationLibrary_pkmnf")
+}
 
 [node name="Node" type="Node2D" parent="."]
-position = Vector2( 183, 0 )
 z_index = 4096
+position = Vector2(183, 0)
 
 [node name="Border" type="Panel" parent="Node"]
-modulate = Color( 0.0666667, 0.32549, 0.682353, 1 )
-margin_left = -183.0
-margin_right = 841.0
-margin_bottom = 600.0
-custom_styles/panel = SubResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
+modulate = Color(0.0666667, 0.32549, 0.682353, 1)
+offset_left = -183.0
+offset_right = 841.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 visible = false
-follow_viewport_enable = true
+follow_viewport_enabled = true
 
-[node name="Camera2D" parent="." instance=ExtResource( 2 )]
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-
-[node name="Tween" type="Tween" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("2")]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Player" type="Sprite" parent="."]
-position = Vector2( 532, 360 )
-scale = Vector2( 2, 2 )
+[node name="Player" type="Sprite2D" parent="."]
 z_index = 4096
-texture = ExtResource( 4 )
+position = Vector2(532, 360)
+scale = Vector2(2, 2)
+texture = ExtResource("4")
 centered = false
 hframes = 3
 
 [node name="AnimationPlayerFight" type="AnimationPlayer" parent="Player"]
-anims/RESET = SubResource( 10 )
-anims/fight = ExtResource( 10 )
-anims/hit = ExtResource( 11 )
+libraries = {
+"": SubResource("AnimationLibrary_6h5aj")
+}
 
 [node name="TemplatePlayer" type="Node2D" parent="."]
-position = Vector2( 570, 512 )
-scale = Vector2( 6, 6 )
 z_index = 4096
 z_as_relative = false
+position = Vector2(570, 512)
+scale = Vector2(6, 6)
 
 [node name="GridContainer" type="GridContainer" parent="TemplatePlayer"]
-margin_left = -17.8332
-margin_top = -12.3333
-margin_right = 83.1668
-margin_bottom = 35.6667
-rect_scale = Vector2( 0.333, 0.333 )
-theme = ExtResource( 7 )
+offset_left = -17.8332
+offset_top = -12.3333
+offset_right = 83.1668
+offset_bottom = 35.6667
+scale = Vector2(0.333, 0.333)
+theme = ExtResource("7")
 columns = 2
 
 [node name="LabelHP" type="Label" parent="TemplatePlayer/GridContainer"]
-margin_right = 25.0
-margin_bottom = 18.0
-theme = ExtResource( 5 )
-custom_colors/font_color = Color( 0.0392157, 0.494118, 0.14902, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+layout_mode = 2
+theme = ExtResource("5")
+theme_override_colors/font_color = Color(0.0392157, 0.494118, 0.14902, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "HP"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="LabelHPValue" type="Label" parent="TemplatePlayer/GridContainer"]
-margin_left = 29.0
-margin_right = 96.0
-margin_bottom = 18.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "000/000"
 
 [node name="LabelMP" type="Label" parent="TemplatePlayer/GridContainer"]
-margin_top = 22.0
-margin_right = 25.0
-margin_bottom = 40.0
-theme = ExtResource( 5 )
-custom_colors/font_color = Color( 0.0235294, 0.439216, 0.713726, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+layout_mode = 2
+theme = ExtResource("5")
+theme_override_colors/font_color = Color(0.0235294, 0.439216, 0.713726, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "MP"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="LabelMPValue" type="Label" parent="TemplatePlayer/GridContainer"]
-margin_left = 29.0
-margin_top = 22.0
-margin_right = 96.0
-margin_bottom = 40.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "000/000"
 
-[node name="SpritePlayerSlash" type="Sprite" parent="."]
+[node name="SpritePlayerSlash" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 632, 336 )
-scale = Vector2( 2, 2 )
 z_index = 4096
-texture = ExtResource( 9 )
-offset = Vector2( -5, 5 )
+position = Vector2(632, 336)
+scale = Vector2(2, 2)
+texture = ExtResource("9")
+offset = Vector2(-5, 5)
 hframes = 2
 frame = 1
 
 [node name="AnimationPlayerSlash" type="AnimationPlayer" parent="SpritePlayerSlash"]
-anims/slash = ExtResource( 6 )
+libraries = {
+"": SubResource("AnimationLibrary_rrxem")
+}
 
 [node name="Node2D" type="Node2D" parent="."]
 z_index = 4096
 
 [node name="ButtonFight" type="Button" parent="Node2D"]
-margin_left = 203.0
-margin_top = 550.0
-margin_right = 343.0
-margin_bottom = 576.0
-theme = ExtResource( 8 )
+offset_left = 203.0
+offset_top = 550.0
+offset_right = 343.0
+offset_bottom = 576.0
+theme = ExtResource("8")
 text = "Fight"
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="ButtonMagic" type="Button" parent="Node2D"]
-margin_left = 363.0
-margin_top = 550.0
-margin_right = 503.0
-margin_bottom = 576.0
-theme = ExtResource( 8 )
+offset_left = 363.0
+offset_top = 550.0
+offset_right = 503.0
+offset_bottom = 576.0
+theme = ExtResource("8")
 text = "Magic"
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="ButtonItems" type="Button" parent="Node2D"]
-margin_left = 523.0
-margin_top = 550.0
-margin_right = 663.0
-margin_bottom = 576.0
-theme = ExtResource( 8 )
+offset_left = 523.0
+offset_top = 550.0
+offset_right = 663.0
+offset_bottom = 576.0
+theme = ExtResource("8")
 text = "Items"
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="ButtonRun" type="Button" parent="Node2D"]
-margin_left = 683.0
-margin_top = 550.0
-margin_right = 823.0
-margin_bottom = 576.0
-theme = ExtResource( 8 )
+offset_left = 683.0
+offset_top = 550.0
+offset_right = 823.0
+offset_bottom = 576.0
+theme = ExtResource("8")
 text = "Run"
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="SoundWalk" type="AudioStreamPlayer" parent="."]
 volume_db = 4.0

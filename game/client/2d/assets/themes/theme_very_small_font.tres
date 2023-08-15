@@ -1,91 +1,90 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://gw260bpyiu1u"]
 
-[ext_resource path="res://bundles/assets/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://bundles/assets/fonts/xolonium/Xolonium.tres" type="DynamicFont" id=2]
+[ext_resource type="FontFile" uid="uid://dwlpi7uf0ov0c" path="res://bundles/assets/fonts/xolonium/Xolonium.tres" id="2"]
 
-[sub_resource type="DynamicFont" id=14]
-size = 12
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="14"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="StyleBoxLine" id=15]
+[sub_resource type="StyleBoxLine" id="15"]
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 0
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.301961, 0, 0.301961, 0.784314 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.301961, 0, 0.301961, 0.784314)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 0.784314 )
+border_color = Color(0, 0, 0, 0.784314)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-shadow_color = Color( 0, 0, 0, 1 )
+shadow_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Image" id=16]
+[sub_resource type="Image" id="Image_ssqou"]
 data = {
-"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 255, 255, 255, 190, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 190, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 126, 64, 64, 64, 0, 64, 64, 64, 0, 255, 255, 255, 126, 255, 255, 255, 229, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 128, 255, 255, 255, 229, 255, 255, 255, 125, 255, 255, 255, 125, 255, 255, 255, 229, 255, 255, 255, 128, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 0, 255, 255, 255, 129, 255, 255, 255, 229, 255, 255, 255, 229, 255, 255, 255, 129, 128, 128, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 229, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 126, 255, 255, 255, 229, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 126, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 125, 255, 255, 255, 229, 255, 255, 255, 128, 64, 64, 64, 0, 64, 64, 64, 0, 255, 255, 255, 128, 255, 255, 255, 229, 255, 255, 255, 125, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 12, 255, 255, 255, 190, 255, 255, 255, 129, 128, 128, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 0, 255, 255, 255, 129, 255, 255, 255, 190, 191, 191, 191, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 191, 191, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 0, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 255, 255, 255, 190, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 190, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 126, 64, 64, 64, 0, 64, 64, 64, 0, 255, 255, 255, 126, 255, 255, 255, 229, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 128, 255, 255, 255, 229, 255, 255, 255, 125, 255, 255, 255, 125, 255, 255, 255, 229, 255, 255, 255, 128, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 0, 255, 255, 255, 129, 255, 255, 255, 229, 255, 255, 255, 229, 255, 255, 255, 129, 128, 128, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 229, 255, 255, 255, 127, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 126, 255, 255, 255, 229, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 229, 255, 255, 255, 126, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 0, 255, 255, 255, 125, 255, 255, 255, 229, 255, 255, 255, 128, 64, 64, 64, 0, 64, 64, 64, 0, 255, 255, 255, 128, 255, 255, 255, 229, 255, 255, 255, 125, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 12, 255, 255, 255, 190, 255, 255, 255, 129, 128, 128, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 0, 255, 255, 255, 129, 255, 255, 255, 190, 191, 191, 191, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 13, 191, 191, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 191, 191, 0, 191, 191, 191, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "format": "RGBA8",
 "height": 12,
 "mipmaps": false,
 "width": 12
 }
 
-[sub_resource type="ImageTexture" id=11]
-image = SubResource( 16 )
-size = Vector2( 12, 12 )
+[sub_resource type="ImageTexture" id="11"]
+image = SubResource("Image_ssqou")
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id="12"]
 content_margin_left = 6.0
-content_margin_right = 6.0
 content_margin_top = 6.0
+content_margin_right = 6.0
 content_margin_bottom = 6.0
-bg_color = Color( 0, 0, 0.27451, 1 )
+bg_color = Color(0, 0, 0.27451, 1)
 border_width_left = 1
 border_width_top = 18
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0, 0, 0.172549, 1 )
+border_color = Color(0, 0, 0.172549, 1)
 expand_margin_top = 18.0
-shadow_color = Color( 0, 0, 0, 0.3 )
+shadow_color = Color(0, 0, 0, 0.3)
 shadow_size = 3
 
 [resource]
-default_font = ExtResource( 2 )
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+default_font = ExtResource("2")
+Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+Button/colors/font_color_focus = Color(0.94, 0.94, 0.94, 1)
+Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+Button/colors/font_color_pressed = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
-Button/fonts/font = ExtResource( 2 )
+Button/fonts/font = ExtResource("2")
 Button/styles/disabled = null
 Button/styles/focus = null
 Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
-Label/colors/font_color = Color( 1, 1, 1, 1 )
-Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
-Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_color_shadow = Color(0, 0, 0, 1)
+Label/colors/font_outline_modulate = Color(1, 1, 1, 1)
 Label/constants/line_spacing = 0
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = SubResource( 14 )
-Label/styles/normal = SubResource( 15 )
-Panel/styles/panel = SubResource( 1 )
-WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
-WindowDialog/constants/close_h_ofs = 16
-WindowDialog/constants/close_v_ofs = 15
-WindowDialog/constants/scaleborder_size = 4
-WindowDialog/constants/title_height = 18
-WindowDialog/fonts/title_font = ExtResource( 2 )
-WindowDialog/icons/close = SubResource( 11 )
-WindowDialog/icons/close_highlight = SubResource( 11 )
-WindowDialog/styles/panel = SubResource( 12 )
+Label/fonts/font = SubResource("14")
+Label/styles/normal = SubResource("15")
+Panel/styles/panel = SubResource("1")
+Window/colors/title_color = Color(1, 1, 1, 1)
+Window/constants/close_h_ofs = 16
+Window/constants/close_v_ofs = 15
+Window/constants/scaleborder_size = 4
+Window/constants/title_height = 18
+Window/fonts/title_font = ExtResource("2")
+Window/icons/close = SubResource("11")
+Window/icons/close_highlight = SubResource("11")
+Window/styles/panel = SubResource("12")

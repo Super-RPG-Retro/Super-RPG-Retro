@@ -12,6 +12,7 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
+
 func _ready():
 	Variables._scene_title = "Credits."
 
@@ -19,8 +20,8 @@ func _input(event):
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
-			var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 
 func _on_ButtonExit_pressed():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")

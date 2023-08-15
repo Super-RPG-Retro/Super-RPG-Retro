@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-const _artifacts = []
+
+const _artifacts:= []
 
 func _ready():
 	Builder_playing._dictionary_artifacts.data.owned[0] = false
@@ -25,7 +26,8 @@ func draw_Artifacts_icons():
 	if Variables._child_scene_open == true:
 		return
 	
-	_artifacts.clear()
+	if !_artifacts.is_empty():
+		_artifacts.clear()
 		
 	var _i = -1
 	# loop through all Artifacts.
@@ -34,21 +36,21 @@ func draw_Artifacts_icons():
 		
 		if Builder_playing._dictionary_artifacts.data.file_name[_r] != "":
 			# set each image texture to a node. the node is TextureRect. the reason is to get the mouse entering/exiting events.			
-			get_node("Artifacts/Sprite" + str(_r + 1)).texture = Filesystem._load_external_image(Builder_playing._dictionary_artifacts.data.image_texture[_r])
+			get_node("Artifacts/Sprite2D" + str(_r + 1)).texture = Filesystem._load_external_image(Builder_playing._dictionary_artifacts.data.image_texture[_r])
 			
 			if bool(Builder_playing._dictionary_artifacts.data.owned[_r]) == false:
-				get_node("Artifacts/Sprite" + str(_r + 1)).modulate = Color(0, 0, 3, 20) # blue shade
+				get_node("Artifacts/Sprite2D" + str(_r + 1)).modulate = Color(0, 0, 3, 20) # blue shade
 			
 			# remove signals because we are about to add new signals for this group.
-			if get_node("Artifacts/Sprite" + str(_i + 1)).is_connected("mouse_entered", self, "_on_mouse_entered"):
-				get_node("Artifacts/Sprite" + str(_i + 1)).disconnect("mouse_entered", self, "_on_mouse_entered")
+			if get_node("Artifacts/Sprite2D" + str(_i + 1)).is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
+				get_node("Artifacts/Sprite2D" + str(_i + 1)).disconnect("mouse_entered", Callable(self, "_on_mouse_entered"))
 				
-				get_node("Artifacts/Sprite" + str(_i + 1)).disconnect("mouse_exited", self, "_on_mouse_exited")
+				get_node("Artifacts/Sprite2D" + str(_i + 1)).disconnect("mouse_exited", Callable(self, "_on_mouse_exited"))
 				
 			# create the signals for the mouse entering /exiting the nodes.
-			var _y = get_node("Artifacts/Sprite" + str(_i + 1)).connect("mouse_entered", self, "_on_mouse_entered", [_i])
+			var _y = get_node("Artifacts/Sprite2D" + str(_i + 1)).connect("mouse_entered", Callable(self, "_on_mouse_entered").bind(_i))
 
-			var _z = get_node("Artifacts/Sprite" + str(_i + 1)).connect("mouse_exited", self, "_on_mouse_exited")
+			var _z = get_node("Artifacts/Sprite2D" + str(_i + 1)).connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 			
 			if _i == 23:
 				break

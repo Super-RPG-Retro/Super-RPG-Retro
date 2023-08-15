@@ -12,27 +12,28 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _sprite = Sprite.new()
 
-onready var _item_list_select_dictionary = $Container/Grid/Grid5/ItemListSelectDictionary
+var _sprite := Sprite2D.new()
+
+@onready var _item_list_select_dictionary := $Container/Grid/Grid5/ItemListSelectDictionary
 
 # this is the target for the event.
-onready var _item_list_remove = $Container/Grid/Grid7/ItemListRemove
+@onready var _item_list_remove := $Container/Grid/Grid7/ItemListRemove
 
-onready var _event_number = $Container/Grid/Grid1/EventSpinbox
+@onready var _event_number := $Container/Grid/Grid1/EventSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid4/EventEnabled
+@onready var _event_enabled := $Container/Grid/Grid4/EventEnabled
 
-onready var _dungeon_number = $Container/Grid/Grid3/DungeonSpinbox
+@onready var _dungeon_number := $Container/Grid/Grid3/DungeonSpinbox
 
 # total available levels for each dungeon. this var is passed to Builder._event_puzzles.data.event_number
-onready var _level_number = $Container/Grid/Grid2/LevelSpinbox
+@onready var _level_number := $Container/Grid/Grid2/LevelSpinbox
 
 # this is the story about the event before you are asked if you accept the event. this story could be about the dungeon, level, an npc talking to you, etc.
-onready var _story = $Container/Grid/StoryTextEdit
+@onready var _story := $Container/Grid/StoryTextEdit
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -44,7 +45,7 @@ func _ready():
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 		
 	_item_list_select_dictionary.select(Variables._dictionary_index, true)
@@ -65,7 +66,7 @@ func _on_event_number_Spinbox_value_changed(value):
 		for _i in range (Builder._event_story.data.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r].size()):
 			
 			# add the textures
-			_sprite.texture = Filesystem._load_external_image(Builder._event_story.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r][_i], 1)
+			_sprite.texture = Filesystem._load_external_image(Builder._event_story.data.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number][_r][_i])
 			_item_list_remove.add_icon_item(_sprite.texture, false)
 			
 			# ItemList task.
@@ -73,9 +74,9 @@ func _on_event_number_Spinbox_value_changed(value):
 		
 		
 	if bool(Builder._event_story.data.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false	
+		_event_enabled.button_pressed = false	
 	
 	_story.text = Builder._event_story.data.story_text[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number]
 	
@@ -98,7 +99,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_Node2D_tree_exiting():
@@ -120,7 +121,6 @@ func _on_level_number_Spinbox_value_changed(value):
 
 func _on_StoryTextEdit_text_changed():
 	Builder._event_story.data.story_text[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_story.data.event_number] = _story.text
-	
 
 
 func _on_dictionary_ItemList_item_selected(index):
@@ -145,7 +145,7 @@ func _on_item_list_add_Button_pressed():
 	Variables.select_json_dictionary_singly = true
 	Variables.select_items_data_to_return = Enum.Select_items.Event_story	
 	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
 	
 	
 func _on_item_list_remove_Button_pressed():

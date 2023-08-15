@@ -12,7 +12,6 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _sprite = $Sprite
 
 func _ready():
 	Filesystem._make_saved_data_directories()
@@ -30,12 +29,8 @@ func _ready():
 	# initiate all builder data.
 	Builder._all_init()
 	
-	var file = File.new()
-	var _err
-
-	if not file.file_exists("user://saved_data/builder_config.txt"):
+	if not FileAccess.file_exists("user://saved_data/builder_config.txt"):
 		Builder.all_array_append()
-
 
 	Filesystem.builder_load_data()
 

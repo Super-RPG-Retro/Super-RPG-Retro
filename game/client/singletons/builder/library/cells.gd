@@ -12,7 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 # remember to delete the settings file at user:// after adding something here, else you will receive a run time error.
 extends Node
-var data = {
+
+
+var data := {
 	# all cell mesh, player and items etc. this var is used to create the library.
 	"cell_item":					[],
 	"player_starting_direction":	0,	# when game first starts.
@@ -33,10 +35,22 @@ func all_array_append():
 			_e += 1
 			if _e >= 10000:
 				break
-				
-			data.cell_item.append(0)
+			
+			# first row and last row in maze.
+			if _y == 0 && _x < 16 || _y == 15 && _x < 16 || _y == 7 && _x < 8:
+				data.cell_item.append(1)
+			
+			# left / right border of maze.
+			elif _y < 16 && _x == 0 || _y < 16 && _x == 15:
+				data.cell_item.append(1)
+			
+			else:
+				data.cell_item.append(0)
 
-
+	# at default maze layout the player starts here.
+	data.cell_item[302] = 96 # player facing north.
+	
+	
 func reset_game():
 	data.cell_item.clear()
 	data.player_starting_direction = 0

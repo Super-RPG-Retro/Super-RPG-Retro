@@ -12,10 +12,21 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends GridMap
 
-onready var _player = $Player
+
+@onready var _player := $Player
 
  
 func _ready():
+	# TODO: use builder var here.
+	var img = preload("res://bundles/assets/images/textures/7.png")
+	
+	get_node("../Floor").get_active_material(0).set("albedo_texture", img)
+	
+	img = preload("res://bundles/assets/images/textures/15.png")
+	
+	get_node("../Ceiling").get_active_material(0).set("albedo_texture", img)
+	
+	
 	var _e = -1
 	
 	# place the blocks on the main map.
@@ -26,10 +37,10 @@ func _ready():
 				break
 			
 			# x, z, y, block id.
-			self.set_cell_item(_x, 0, _y, Builder_playing._library_cell.data.cell_item[_e] - 1)
+			self.set_cell_item(Vector3i(_x, 0, _y), Builder_playing._library_cell.data.cell_item[_e] - 1)
 	
 			if Builder_playing._library_cell.data.cell_item[_e] >= 96 && Builder_playing._library_cell.data.cell_item[_e] <= 99:
-				_player.transform.origin.x = (_x * 2) + 1
-				_player.transform.origin.z = (_y * 2) + 1
+				_player.position.x = _x + 1
+				_player.position.z = _y + 1
 	
 				Variables._player_target_rotation = (Builder_playing._library_cell.data.cell_item[_e] - 96) * 90

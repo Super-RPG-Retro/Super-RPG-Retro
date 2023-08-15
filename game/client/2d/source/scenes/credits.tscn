@@ -18,74 +18,74 @@ __meta__ = {
 }
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_left = 24.0
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 584.0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 584.0
 mouse_filter = 2
 theme = ExtResource( 11 )
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 1000.0
-margin_bottom = 510.0
-rect_min_size = Vector2( 1000, 510 )
+offset_right = 1000.0
+offset_bottom = 510.0
+custom_minimum_size = Vector2( 1000, 510 )
 
 [node name="ProgrammedBy" type="RichTextLabel" parent="Container/Grid"]
-margin_right = 1000.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 100, 60 )
+offset_right = 1000.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 100, 60 )
 theme = ExtResource( 2 )
 text = "Programmers.
 Code copyright (C) 2022-2023 by Kal M. G."
 scroll_active = false
 
 [node name="LinkMainGameArt" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 64.0
-margin_right = 1000.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 100, 80 )
+offset_top = 64.0
+offset_right = 1000.0
+offset_bottom = 144.0
+custom_minimum_size = Vector2( 100, 80 )
 theme = ExtResource( 2 )
 scroll_active = false
 script = ExtResource( 12 )
 
 [node name="LinkCoreRPGcode" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 148.0
-margin_right = 1000.0
-margin_bottom = 208.0
-rect_min_size = Vector2( 1000, 60 )
-rect_clip_content = false
+offset_top = 148.0
+offset_right = 1000.0
+offset_bottom = 208.0
+custom_minimum_size = Vector2( 1000, 60 )
+clip_contents = false
 theme = ExtResource( 2 )
 script = ExtResource( 6 )
 
 [node name="LinkMusic" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 212.0
-margin_right = 1000.0
-margin_bottom = 292.0
-rect_min_size = Vector2( 0, 80 )
+offset_top = 212.0
+offset_right = 1000.0
+offset_bottom = 292.0
+custom_minimum_size = Vector2( 0, 80 )
 theme = ExtResource( 2 )
 script = ExtResource( 7 )
 
 [node name="LinkSound" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 296.0
-margin_right = 1000.0
-margin_bottom = 376.0
-rect_min_size = Vector2( 0, 80 )
+offset_top = 296.0
+offset_right = 1000.0
+offset_bottom = 376.0
+custom_minimum_size = Vector2( 0, 80 )
 theme = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="LinkFonts" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 380.0
-margin_right = 1000.0
-margin_bottom = 440.0
-rect_min_size = Vector2( 0, 60 )
+offset_top = 380.0
+offset_right = 1000.0
+offset_bottom = 440.0
+custom_minimum_size = Vector2( 0, 60 )
 theme = ExtResource( 2 )
 script = ExtResource( 5 )
 
 [node name="LinkMisc" type="RichTextLabel" parent="Container/Grid"]
-margin_top = 444.0
-margin_right = 1000.0
-margin_bottom = 504.0
-rect_min_size = Vector2( 0, 60 )
+offset_top = 444.0
+offset_right = 1000.0
+offset_bottom = 504.0
+custom_minimum_size = Vector2( 0, 60 )
 theme = ExtResource( 2 )
 script = ExtResource( 10 )
 
@@ -97,8 +97,8 @@ __meta__ = {
 }
 
 [node name="Label" parent="SceneHeader" index="1"]
-margin_left = 8.0
-margin_right = 1024.0
+offset_left = 8.0
+offset_right = 1024.0
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": true

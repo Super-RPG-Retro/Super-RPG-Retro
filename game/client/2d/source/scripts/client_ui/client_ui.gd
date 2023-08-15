@@ -12,44 +12,45 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Control
 
-var _tab_pressed = false
 
-onready var _accept_dialog = $AcceptDialog
+var _tab_pressed := false
 
-onready var _listen_button = $Panel/VBoxContainer/Send/ButtonPanel/ListenButton
+@onready var _accept_dialog := $AcceptDialog
+
+@onready var _listen_button := $Panel/VBoxContainer/Send/ButtonPanel/ListenButton
 # this button, when clicked, shows the public room.
-onready var _button_public = $Panel/VBoxContainer/Send/ButtonPanel/ButtonPublic
-onready var _button_private = $Panel/VBoxContainer/Send/ButtonPanel/ButtonPrivate
-onready var _button_commands = $Panel/VBoxContainer/Send/ButtonPanel/ButtonCommands
-onready var _button_game = $Panel/VBoxContainer/Send/ButtonPanel/ButtonGame
+@onready var _button_public := $Panel/VBoxContainer/Send/ButtonPanel/ButtonPublic
+@onready var _button_private := $Panel/VBoxContainer/Send/ButtonPanel/ButtonPrivate
+@onready var _button_commands := $Panel/VBoxContainer/Send/ButtonPanel/ButtonCommands
+@onready var _button_game := $Panel/VBoxContainer/Send/ButtonPanel/ButtonGame
 
 # only you see this room.
-onready var _room_private = $Panel/VBoxContainer/HBoxContainer/RoomPrivate
-onready var _room_public = $Panel/VBoxContainer/HBoxContainer/RoomPublic
+@onready var _room_private := $Panel/VBoxContainer/HBoxContainer/RoomPrivate
+@onready var _room_public := $Panel/VBoxContainer/HBoxContainer/RoomPublic
 
 # this room is used when doing a system command.
-onready var _room_commands = $Panel/VBoxContainer/HBoxContainer/RoomCommands
+@onready var _room_commands := $Panel/VBoxContainer/HBoxContainer/RoomCommands
 
-onready var _item_list = $Panel/VBoxContainer/HBoxContainer/ItemList
+@onready var _item_list := $Panel/VBoxContainer/HBoxContainer/ItemList
 
 # while playing the game, text about the battle or event is placed here.
-onready var _room_game = $Panel/VBoxContainer/HBoxContainer/RoomGame
+@onready var _room_game := $Panel/VBoxContainer/HBoxContainer/RoomGame
 
 # events such as send or connect.
-onready var _client_events = $ClientEvents
+@onready var _client_events := $ClientEvents
 
 # this is the node used to type text at the client.
-onready var _input_client = $Panel/VBoxContainer/Send/InputClient
+@onready var _input_client := $Panel/VBoxContainer/Send/InputClient
 
 # this is the address needed to connect to the server.
-onready var _host_address = $Panel/VBoxContainer/Send/ButtonPanel/HostAddress
+@onready var _host_address := $Panel/VBoxContainer/Send/ButtonPanel/HostAddress
 
 # used to delay the wait a turn feature.
-onready var _timer_wait_turn = $TimerGameTurn
+@onready var _timer_wait_turn := $TimerGameTurn
 
-onready var _hide_tile_top = get_parent().get_parent().get_parent().get_node("PanelTileHideTop")
+@onready var _hide_tile_top := get_parent().get_parent().get_parent().get_node("PanelTileHideTop")
 
-onready var _hide_tile_bottom = get_parent().get_parent().get_parent().get_node("PanelTileHideButtom")
+@onready var _hide_tile_bottom := get_parent().get_parent().get_parent().get_node("PanelTileHideButtom")
 
 
 func _ready():
@@ -74,12 +75,12 @@ func _ready():
 		_input_client.set_editable(false)
 	
 	_item_list.visible = false
-	_room_commands.rect_min_size.x = 650
+	_room_commands.custom_minimum_size.x = 650
 
 func _input(event):	
 	# if child scene is not open and there is a keyboard key pressed...
 	if event is InputEventKey and event.pressed && Variables._child_scene_open == false && _input_client.has_focus() == false:
-		if event.scancode == KEY_SLASH:
+		if event.keycode == KEY_SLASH:
 			Variables._bypass_wait_a_turn = true
 			Variables._keyboard_tab_pressed = true 
 			Variables._wait_a_turn = -2
@@ -88,13 +89,13 @@ func _input(event):
 			_input_client.focus_mode = FOCUS_ALL
 			_input_client.grab_focus()
 			
-		if event.scancode == KEY_UP && _input_client.has_focus() == true:
+		if event.keycode == KEY_UP && _input_client.has_focus() == true:
 			_input_client.focus_mode = FOCUS_NONE 
 			Variables._keyboard_tab_pressed = false	
 		
 		
 	# this will close the accept dialog, which display a general message.
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
 		_accept_dialog.visible = false
 	
 	if Variables._game_over == true:
@@ -160,7 +161,7 @@ func _input(event):
 		_focus_none()
 	
 	if Variables._keyboard_tab_pressed == true && event.is_action_pressed("ui_left") == true:
-		if _input_client.has_focus() && _input_client.caret_position == 0:
+		if _input_client.has_focus() && _input_client.caret_column == 0:
 			_tab_pressed = true
 			
 			_focus_none()
@@ -193,7 +194,7 @@ func _input(event):
 			_input_client.focus_mode = FOCUS_ALL
 			_input_client.grab_focus()
 			
-			if _input_client.caret_position == 0:
+			if _input_client.caret_column == 0:
 				_tab_pressed = false
 			
 	# /c (trigger server connect/disconnect button)
@@ -242,10 +243,10 @@ func _on_listen_button_pressed():
 				
 	if _listen_button.icon == load("res://2d/assets/images/host/host_connect.png"):
 		if _host_address.text != "":
-			_room_public.text += "\n" + "Connecting to host: " + _host_address.text
-			var protocols = PoolStringArray(["binary"])
-			_client_events.connect_to_url(_host_address.text, protocols)
-			Variables._host_is_connected = true
+			_room_public.text += "\n" + "Connecting to host: " + _host_address.text + " feature currently broken since upgrading to godot 4.2."
+			var protocols = PackedStringArray(["binary"])
+			#_client_events.connect_to_url(_host_address.text, protocols)
+			#Variables._host_is_connected = true
 			
 	else:
 		_client_events.disconnect_from_host()
@@ -274,10 +275,10 @@ func hide_all_room_nodes():
 
 
 func reset_all_button_nodes():
-	_button_public.pressed = false
-	_button_private.pressed = false
-	_button_commands.pressed = false
-	_button_game.pressed = false
+	_button_public.button_pressed = false
+	_button_private.button_pressed = false
+	_button_commands.button_pressed = false
+	_button_game.button_pressed = false
 	
 
 func _on_button_public_pressed():
@@ -285,9 +286,9 @@ func _on_button_public_pressed():
 	reset_all_button_nodes()
 	
 	_room_public.visible = true
-	_room_public.rect_min_size.y = _item_list.rect_size.y
-	_room_public.rect_min_size.x = 461
-	_button_public.pressed = true
+	#_room_public.custom_minimum_size.y = _item_list.size.y
+	_room_public.custom_minimum_size.x = 461
+	_button_public.button_pressed = true
 	_item_list.visible = true
 		
 	
@@ -296,9 +297,9 @@ func _on_button_private_pressed():
 	reset_all_button_nodes()
 	
 	_room_private.visible = true
-	_room_private.rect_min_size.y = _item_list.rect_size.y
-	_room_private.rect_min_size.x = 461
-	_button_private.pressed = true
+	#_room_private.custom_minimum_size.y = _item_list.size.y
+	_room_private.custom_minimum_size.x = 461
+	_button_private.button_pressed = true
 	_item_list.visible = true
 	
 	
@@ -307,9 +308,9 @@ func _on_button_commands_pressed():
 	reset_all_button_nodes()
 	
 	_room_commands.visible = true
-	_room_commands.rect_min_size.y = _item_list.rect_size.y
-	_room_commands.rect_min_size.x = 650
-	_button_commands.pressed = true
+	#_room_commands.custom_minimum_size.y = _item_list.size.y
+	_room_commands.custom_minimum_size.x = 650
+	_button_commands.button_pressed = true
 	_item_list.visible = false
 	
 	
@@ -318,8 +319,8 @@ func _on_button_game_pressed():
 	reset_all_button_nodes()
 	
 	_room_game.visible = true
-	_room_game.rect_min_size.y = _item_list.rect_size.y
-	_room_game.rect_min_size.x = 650
-	_button_game.pressed = true
+	#_room_game.custom_minimum_size.y = _item_list.size.y
+	_room_game.custom_minimum_size.x = 650
+	_button_game.button_pressed = true
 	_item_list.visible = false
 	

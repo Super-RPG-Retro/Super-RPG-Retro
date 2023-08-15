@@ -12,7 +12,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _row = 0
+
+var _row := 0
 
 func _ready():
 	Variables._at_scene = Enum.Scene.High_scores
@@ -34,13 +35,13 @@ func _input(event):
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
-			var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 		
 	if event is InputEventMouseMotion:
 		for _i in range (10):
 			# this highlights the row that the mouse is located at.
 			if get_global_mouse_position().y >= 224 + (32 * _i) && get_global_mouse_position().y <= 224 + 32 + (_i * 32):
-				$SelectButton.rect_position.y = 224 + (_i * 32)
+				$SelectButton.position.y = 224 + (_i * 32)
 				
 				_row = _i
 				
@@ -48,7 +49,7 @@ func _input(event):
 		_row += 1
 		
 		if _row < 10:
-				$SelectButton.rect_position.y = 224 + (_row * 32)
+				$SelectButton.position.y = 224 + (_row * 32)
 			
 		else:
 			_row -= 1
@@ -57,12 +58,12 @@ func _input(event):
 		_row -= 1
 		
 		if _row > -1:
-				$SelectButton.rect_position.y = 224 + (_row * 32)
+				$SelectButton.position.y = 224 + (_row * 32)
 			
 		else:
 			_row += 1
 			
 			
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 

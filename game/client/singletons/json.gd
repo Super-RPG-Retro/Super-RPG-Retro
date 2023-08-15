@@ -14,12 +14,14 @@ You should have received a copy of the GNU Affero General Public License along w
 # this file has all none-player dictionaries.
 		
 extends Node
+
+
 # this data is sent to the server when user presses the send button.
 # this data is sent to the client.
 # sender:				either the name "server" or the name of someone at client.
 # text:					the message content.
 # item_list:			a comma separated list of users.
-var _client_text: Dictionary = {
+var _client_text := {
 	"sender": 			{},
 	"text": 			{},
 	"item_list":		{},	
@@ -27,7 +29,7 @@ var _client_text: Dictionary = {
 
 # all mobs are here. json file is at root of project. 
 # this dictionary is not at builder. at builder, clicking the update mobs button will copy all enabled mobs from the mobs1 and mobs2 dictionaries into this dictionary. the result is very fast 2d game loading because only the mobs for that level is loaded.
-var mobs: Dictionary = {} #used in game.
+var mobs := {} #used in game.
 
 
 # Earth Elemental:	Strong against water.	Weak against fire
@@ -46,7 +48,7 @@ var mobs: Dictionary = {} #used in game.
 #				"support" rune is used on object.
 # Level 	 	refers to what level is needed to buy that rune.
 	
-var _magic = {
+var _magic := {
 	"blind":					{},
 	"chaos":					{},
 	"lock":						{},
@@ -112,7 +114,7 @@ var _magic = {
 }
 
 # at builder, items can be added to directories. that will change the structor of it and there will be problems with reusing the same data. a scene could have a directory count of 100 but the correct value is 101. therefore, this clears all directory. at builder, data will be created on the fly.
-var _s:Dictionary = {	 
+var _s	:= {	 
 	"mobs": 	{}, #  this mobs directory must never be coded to be accessed at builder from the menu called directory.
 	"mobs1": 	{},
 	"mobs2": 	{},
@@ -130,20 +132,20 @@ var _s:Dictionary = {
 
 # mobs1 and mobs2 are not used at 2d dungeon. they are only used at builder. they are used at builder only for very fast loading and because they are organized based on difficulty. mobs1 are easier than mobs2.
 # mobs that is enabled to be placed at dungeon level is copied to the mobs dictionary at initiation time at builder.
-var mobs1: Dictionary 	= {} # not used in game. 
-var mobs2: Dictionary 	= {} # not used in game.
-var weapon: Dictionary 	= {}
-var armor: Dictionary 	= {}
-var book: Dictionary 	= {}
-var gold: Dictionary 	= {}
-var scroll: Dictionary 	= {}
-var ring: Dictionary 	= {}
-var food: Dictionary 	= {}
-var wand: Dictionary 	= {}
-var amulet: Dictionary 	= {}
+var mobs1	:= {} # not used in game. 
+var mobs2	:= {} # not used in game.
+var weapon	:= {}
+var armor	:= {}
+var book	:= {}
+var gold	:= {}
+var scroll	:= {}
+var ring	:= {}
+var food	:= {}
+var wand	:= {}
+var amulet	:= {}
 
 # NOTE: also add the new dictionary at Enum.Builder_dictionary and here at func refresh_dictionaries.
-var d:Dictionary = {
+var d := {
 		"0": {},
 		"1": {},
 		"2": {},
@@ -155,28 +157,27 @@ var d:Dictionary = {
 	}
 
 func _ready():
-	var dir = Directory.new()
-	if not dir.dir_exists("res://bundles/builder/magic/data"):
-		dir.make_dir("res://bundles/builder/magic/data")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/magic/data"):
+		DirAccess.make_dir_absolute("res://bundles/builder/magic/data")
 		
-	if not dir.dir_exists("res://bundles/builder/artifacts"):
-		dir.make_dir("res://bundles/builder/artifacts")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/artifacts"):
+		DirAccess.make_dir_absolute("res://bundles/builder/artifacts")
 						
-	if not dir.dir_exists("res://bundles/builder/objects/data"):
-		dir.make_dir("res://bundles/builder/objects/data")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/objects/data"):
+		DirAccess.make_dir_absolute("res://bundles/builder/objects/data")
 		
-	if not dir.dir_exists("res://bundles/builder/objects/images"):
-		dir.make_dir("res://bundles/builder/objects/images")	
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/objects/images"):
+		DirAccess.make_dir_absolute("res://bundles/builder/objects/images")	
 	
-	if not dir.dir_exists("res://bundles/builder/objects/images/dictionaries"):
-		dir.make_dir("res://bundles/builder/objects/images/dictionaries")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/objects/images/dictionaries"):
+		DirAccess.make_dir_absolute("res://bundles/builder/objects/images/dictionaries")
 	
 	# after downloading the archive from the Super-RPG-Retro repository at github, the empty builder folders do not exist so they have to be created here.
-	if not dir.dir_exists("res://bundles/builder/objects/system/data/mobs"):
-		dir.make_dir("res://bundles/builder/objects/system/data/mobs")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/objects/system/data/mobs"):
+		DirAccess.make_dir_absolute("res://bundles/builder/objects/system/data/mobs")
 	
-	if not dir.dir_exists("res://bundles/builder/objects/system/images/dictionaries/mobs"):
-		dir.make_dir("res://bundles/builder/objects/system/images/dictionaries/mobs")
+	if not DirAccess.dir_exists_absolute("res://bundles/builder/objects/system/images/dictionaries/mobs"):
+		DirAccess.make_dir_absolute("res://bundles/builder/objects/system/images/dictionaries/mobs")
 	
 	make_directories()
 	
@@ -215,7 +216,6 @@ func refresh_dictionaries(_path, _get_names:bool = false):
 		# _fn is a duplicate of Variables._file_paths. this cuts the path down so only the folder plus filename remains.
 		Variables._file_names[int(str(_i).pad_zeros(2))] =	Variables._file_names[int(str(_i).pad_zeros(2))].replace(_path, "")
 		Variables._file_names[int(str(_i).pad_zeros(2))] =	Variables._file_names[int(str(_i).pad_zeros(2))].replace(".json", "")
-		
 		
 	# for each filename found at harddrive, load the data from harddrive into that dictionary mobs.
 	for _n in Variables._folder_names:	

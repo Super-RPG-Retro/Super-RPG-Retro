@@ -13,16 +13,18 @@ You should have received a copy of the GNU Affero General Public License along w
 # magic_panel.gd
 extends Node2D
 
+
 # if "inventory" panel is hidded, a value is set to this var so that this scene's RuneSummary node can be moved to its new position.
-var _offset_y:int = 0
-var _rune_current_amount = 0
-const _magic_icons = []
+var _offset_y := 0
+var _rune_current_amount := 0
+var _magic_icons := []
 
 # a value is set to Variables._rune_currently_selected when the mouse clicks a rune location. when mouse hovers an item, a value is set to this var when the mouse enters or leaves a rune location. both vars will be the same value when a rune has been selected to cast it.
-var _rune_currently_selected = -1
+var _rune_currently_selected := -1
 
 # name of the rune currently selected when hovering the rune. for clicking the rune, see: Variables._rune_current_selected_name
-var _rune_current_selected_name = ""
+var _rune_current_selected_name := ""
+
 
 # draw runes to scene.
 func _ready():
@@ -49,7 +51,7 @@ func _input(event):
 		if event is InputEventMouseMotion:	
 			if Variables._mouse_cursor_position.x > 529 && Variables._mouse_cursor_position.y >= 35 + _offset_y  && Variables._mouse_cursor_position.y <= 135 + _offset_y:
 				
-				$Node2D/RuneSummary.rect_position.y = get_global_mouse_position().y + 26
+				$Node2D/RuneSummary.position.y = get_global_mouse_position().y + 26
 					
 				$Node2D/RuneSummary.visible = true
 				
@@ -90,7 +92,7 @@ func _input(event):
 				draw_rune_icons(Variables._rune_current_group_selected);
 			
 		# rune currently selected.
-		if event.button_index == BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") && _rune_currently_selected != -1:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") && _rune_currently_selected != -1:
 			# can only select a rune to cast is the rune amount player has is greater than zero and if player has the required magic points.
 			if _rune_current_amount > 0 && P._mp >= Json._magic[_rune_current_selected_name]["MP"]:
 				# name of rune that was set at _on_mouse_entered func.				
@@ -137,7 +139,7 @@ func player_stats_panel_size():
 		get_node("Runes").position.y = 148
 		_offset_y = 148
 	
-		 
+
 # draw runes to scene.
 func draw_rune_icons(_group: int = 1):
 	if Variables._child_scene_open == true:
@@ -166,15 +168,15 @@ func draw_rune_icons(_group: int = 1):
 			get_node("Runes/Sprite" + str(_i + 1)).expand = true
 			
 			# remove signals because we are about to add new signals for this group.
-			if get_node("Runes/Sprite" + str(_i + 1)).is_connected("mouse_entered", self, "_on_mouse_entered"):
-				get_node("Runes/Sprite" + str(_i + 1)).disconnect("mouse_entered", self, "_on_mouse_entered")
+			if get_node("Runes/Sprite" + str(_i + 1)).is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
+				get_node("Runes/Sprite" + str(_i + 1)).disconnect("mouse_entered", Callable(self, "_on_mouse_entered"))
 				
-				get_node("Runes/Sprite" + str(_i + 1)).disconnect("mouse_exited", self, "_on_mouse_exited")
+				get_node("Runes/Sprite" + str(_i + 1)).disconnect("mouse_exited", Callable(self, "_on_mouse_exited"))
 				
 			# create the signals for the mouse entering/exiting the nodes.
-			var _y = get_node("Runes/Sprite" + str(_i + 1)).connect("mouse_entered", self, "_on_mouse_entered", [_i])
+			var _y = get_node("Runes/Sprite" + str(_i + 1)).connect("mouse_entered", Callable(self, "_on_mouse_entered").bind(_i))
 
-			var _z = get_node("Runes/Sprite" + str(_i + 1)).connect("mouse_exited", self, "_on_mouse_exited")
+			var _z = get_node("Runes/Sprite" + str(_i + 1)).connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 			
 			if _i == 23:
 				break
@@ -183,10 +185,10 @@ func draw_rune_icons(_group: int = 1):
 	for _r in range (_i + 1, 24, 1):
 		get_node("Runes/Sprite" + str(_r + 1)).texture = null
 		
-		if get_node("Runes/Sprite" + str(_r + 1)).is_connected("mouse_entered", self, "_on_mouse_entered"):
-			get_node("Runes/Sprite" + str(_r + 1)).disconnect("mouse_entered", self, "_on_mouse_entered")
+		if get_node("Runes/Sprite" + str(_r + 1)).is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
+			get_node("Runes/Sprite" + str(_r + 1)).disconnect("mouse_entered", Callable(self, "_on_mouse_entered"))
 			
-			get_node("Runes/Sprite" + str(_r + 1)).disconnect("mouse_exited", self, "_on_mouse_exited")
+			get_node("Runes/Sprite" + str(_r + 1)).disconnect("mouse_exited", Callable(self, "_on_mouse_exited"))
 		
 func rune_panel_title(_num: int = -1):
 	if Variables._child_scene_open == true:
@@ -236,8 +238,8 @@ func rune_select(_num = 0):
 		return
 		
 	# the "RuneSelect" is the square image that borders and selected rune. this image flashes in animation.
-	get_node("Runes/RuneSelect").position.x = get_node("Runes/Sprite" + str(_num + 1)).rect_position.x + 18
-	get_node("Runes/RuneSelect").position.y = get_node("Runes/Sprite" + str(_num + 1)).rect_position.y + 18
+	get_node("Runes/RuneSelect").position.x = get_node("Runes/Sprite" + str(_num + 1)).position.x + 18
+	get_node("Runes/RuneSelect").position.y = get_node("Runes/Sprite" + str(_num + 1)).position.y + 18
 	
 	get_node("Runes/RuneSelect").visible = true
 

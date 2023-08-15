@@ -12,8 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _list_rune = []
-var _num = 0
+
+var _list_rune := []
+var _num := 0
 
 
 func _ready():
@@ -31,7 +32,7 @@ func _input(event):
 	if (event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)) && Variables._child_scene_open == true && Variables._trigger_commands != Enum.Trigger_commands.Unit_description && Variables._rune_help.visible == true:
 			# clear event scancode, so elsewhere the keypress will not trigger.
-			event.scancode = 0 
+			event.keycode = 0 
 			Variables._child_scene_open = false
 			self.visible = false
 	
@@ -56,25 +57,25 @@ func overview(_name, num):
 	var _location = Json._magic[_name]["Location"]
 	var _group = Json._magic[_name]["Group"]
 	var _gold = Json._magic[_name]["Gold"]
-	var _discription = Json._magic[_name]["Description"]
+	var _description = Json._magic[_name]["Description"]
 	var _strength = Json._magic[_name]["Strength"]
 	var _defense = Json._magic[_name]["Defense"]
 	var _dice = Json._magic[_name]["Dice"]
 		
-	# display the rune information.
-	get_node("Panel/PanelHelp/Label").bbcode_text = "\r\n                                   " + _name.replace("_", " ") + "\r\n\r\n\r\n" + "\r\n[table=10][cell] Level [/cell][cell][color=#00cc00]" + str(_level) + "[/color][/cell][/table][table=10][cell] Gold [/cell][cell][color=#00cc00]" + str(_gold) + "[/color][/cell][/table][table=10][cell] Element [/cell][cell][color=#00cc00]" + str(_element) + "[/color][/cell][/table][table=10][cell] Turns [/cell][cell][color=#00cc00]" + str(_turns) + "[/color][/cell][/table][table=10][cell] Range [/cell][cell][color=#00cc00]" + str(_range) + "[/color][/cell][/table]" + "\r\n\r\n" + "[table=10][cell] Discription [/cell][cell][color=#00cc00]" + str(_discription) + "[/color][/cell][/table]"
+	get_node("Panel/PanelHelp/Stats").text = "[table=10][cell] Strength [/cell][cell][color=#00cc00]" + str(_strength) + "[/color][/cell][/table][table=10][cell] Defense [/cell][cell][color=#00cc00]" + str(_defense) + "[/color][/cell][/table][table=10][cell] Dice [/cell][cell][color=#00cc00]" + str(_dice) + "[/color][/cell][/table][table=10][cell] Location [/cell][cell][color=#00cc00]" + str(_location) + "[/color][/cell][/table][table=10][cell] Group [/cell][cell][color=#00cc00]" + str(_group) + "[/color][/cell][/table]"
 	
-	get_node("Panel/PanelHelp/Label2").bbcode_text = "\r\n\r\n\r\n\r\n" + "\r\n[table=10][cell] Strength [/cell][cell][color=#00cc00]" + str(_strength) + "[/color][/cell][/table][table=10][cell] Defense [/cell][cell][color=#00cc00]" + str(_defense) + "[/color][/cell][/table][table=10][cell] Dice [/cell][cell][color=#00cc00]" + str(_dice) + "[/color][/cell][/table][table=10][cell] Location [/cell][cell][color=#00cc00]" + str(_location) + "[/color][/cell][/table][table=10][cell] Group [/cell][cell][color=#00cc00]" + str(_group) + "[/color][/cell][/table]"
+	# display the rune description.
+	get_node("Panel/PanelHelp/Description").text =  "[table=10][cell] " + _name.replace("_", " ") + " [/cell] [cell] Level [/cell][cell][color=#00cc00]" + str(_level) + "[/color][/cell][/table][table=10][cell] Gold [/cell][cell][color=#00cc00]" + str(_gold) + "[/color][/cell][/table][table=10][cell] Element [/cell][cell][color=#00cc00]" + str(_element) + "[/color][/cell][/table][table=10][cell] Turns [/cell][cell][color=#00cc00]" + str(_turns) + "[/color][/cell][/table][table=10][cell] Range [/cell][cell][color=#00cc00]" + str(_range) + "[/color][/cell][/table][table=10][cell] Discription [/cell][cell][color=#00cc00]" + str(_description) + "[/color][/cell][/table]"
 	
-	get_node("Panel/PanelHelp/Abbreviation").bbcode_text = "\r\n[table=2][cell]  Abbreviation: [/cell][cell][color=#00cc00]" + str(_abbreviation) + "[/color][/cell][cell][/cell][/table]"
+	get_node("Panel/PanelHelp/Abbreviation").text = "\r\n[table=2][cell]  Abbreviation: [/cell][cell][color=#00cc00]" + str(_abbreviation) + "[/color][/cell][cell][/cell][/table]"
 
 	# display the rune number.
-	get_node("Panel/RuneNumber").bbcode_text = "[table=2][cell]#[color=#00cc00]" + str(_num + 1) + "[/color][/cell][/table]"
+	get_node("Panel/RuneNumber").text = str(_num + 1)
 	
 	get_node("Panel/RuneImage").texture = load("res://bundles/assets/images/magic/" + _name.to_lower().replace(" ", "_") + ".png")
-
+	
 func _on_Arrow_left_data_input(event):
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT and event.pressed || (event.is_action_pressed("ui_left", true)):
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT and event.pressed || (event.is_action_pressed("ui_left", true)):
 			_num -= 1 
 			
 			if _num < 0: 
@@ -84,7 +85,7 @@ func _on_Arrow_left_data_input(event):
 
 
 func _on_Arrow_right_data_input(event):
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT and event.pressed || (event.is_action_pressed("ui_right", true)):
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT and event.pressed || (event.is_action_pressed("ui_right", true)):
 			_num += 1 
 						
 			if _num > _list_rune.size() - 1: 

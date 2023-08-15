@@ -12,6 +12,7 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Control
 
+
 func _ready():
 	Variables._child_scene_open = true
 		
@@ -20,7 +21,7 @@ func _input(event):
 	if (event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)) && Variables._child_scene_open == true && Variables._trigger_commands != Enum.Trigger_commands.Unit_description && Variables._game_help.visible == true:
 			# clear event scancode, so elsewhere the keypress will not trigger.
-			event.scancode = 0 
+			event.keycode = 0 
 			Variables._child_scene_open = false
 			self.visible = false
 

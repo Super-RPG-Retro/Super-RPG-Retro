@@ -13,11 +13,12 @@ You should have received a copy of the GNU Affero General Public License along w
 # when an event is finished, this next event is called. this next event will either end doing nothing, or will go to another event.
 extends ScrollContainer
 
-onready var _dungeon_number = $Grid/Grid1/DungeonNumberSpinbox
 
-onready var _level_number = $Grid/Grid2/LevelNumberSpinbox
+@onready var _dungeon_number := $Grid/Grid1/DungeonNumberSpinbox
 
-onready var _item_list = $Grid/HBoxContainer/ItemList
+@onready var _level_number := $Grid/Grid2/LevelNumberSpinbox
+
+@onready var _item_list := $Grid/HBoxContainer/ItemList
 
 var _item_list_index:int = 0
 
@@ -51,7 +52,7 @@ func _next_event():
 
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && !event.pressed:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
 		_ready()
 
 func _on_dungeon_number_Spinbox_value_changed(value):

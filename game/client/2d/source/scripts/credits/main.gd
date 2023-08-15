@@ -15,9 +15,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "Game Art.\n[color=#bbbbff][url=_link]dungeon crawl stone soup[/url][/color]. Originally programmed by Linley Henzell.\nSome art from [color=#bbbbff][url=_link2]kenney[/url][/color]."
+	text = "Game Art.\n[color=#bbbbff][url=_link]dungeon crawl stone soup[/url][/color]. Originally programmed by Linley Henzell.\nSome art from [color=#bbbbff][url=_link2]kenney[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	OS.shell_open("https://crawl.develz.org/") 

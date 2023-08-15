@@ -12,158 +12,159 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
+
 # how does this object move. follows player, moves in opposite direction of player...
-onready var _movement_type = $Container/Grid/GridContainer27/MovementTypeItemList
+@onready var _movement_type := $Container/Grid/GridContainer27/MovementTypeItemList
 
-var _something_went_wrong_dictionary: String = "Something went wrong with the dictionaries. Was a file manually deleted? Returning you to the builder home scene."
+var _something_went_wrong_dictionary := "Something went wrong with the dictionaries. Was a file manually deleted? Returning you to the builder home scene."
 
-onready var _accept_dialog_rename = $AcceptDialogRename
-onready var _accept_dialog_return_to_builder_home = $AcceptDialogReturnToBuilderHome
+@onready var _accept_dialog_rename := $AcceptDialogRename
+@onready var _accept_dialog_return_to_builder_home := $AcceptDialogReturnToBuilderHome
 
 # select a object group list such as animals or dragons.
-onready var _group_item_list = $Container/Grid/Grid2/ItemList
-var _group_item_list_index = 0
+@onready var _group_item_list := $Container/Grid/Grid2/ItemList
+var _group_item_list_index := 0
 
 # when selecting the sprite with the arrows keys, this var is used to change that sprite texture. the value of 2 will display the third sprite in the Variables._file_paths array.
-onready var _current_sprite_index = 0
+@onready var _current_sprite_index := 0
 
 # image texture.
-onready var _image_sprite 	= $Container/Grid/GridContainer/Sprite
+@onready var _image_sprite 	:= $Container/Grid/GridContainer/Sprite2D
 
-onready var _dictionary_description = $Container/Grid/TextEditDescription
+@onready var _dictionary_description := $Container/Grid/TextEditDescription
 
 
-onready var _spell_poison = $Container/Grid/GridContainer29/SpinBoxSpellPoison
+@onready var _spell_poison := $Container/Grid/GridContainer29/SpinBoxSpellPoison
 
-onready var _spell_slow = $Container/Grid/GridContainer30/SpinBoxSpellSlow
+@onready var _spell_slow := $Container/Grid/GridContainer30/SpinBoxSpellSlow
 
-onready var _spell_sleep = $Container/Grid/GridContainer31/SpinBoxSpellSleep
+@onready var _spell_sleep := $Container/Grid/GridContainer31/SpinBoxSpellSleep
 
-onready var _spell_chaos = $Container/Grid/GridContainer32/SpinBoxSpellChaos
+@onready var _spell_chaos := $Container/Grid/GridContainer32/SpinBoxSpellChaos
 
-onready var _spell_blind = $Container/Grid/GridContainer33/SpinBoxSpellBlind
+@onready var _spell_blind := $Container/Grid/GridContainer33/SpinBoxSpellBlind
 
-onready var _spell_lock = $Container/Grid/GridContainer34/SpinBoxSpellLock
+@onready var _spell_lock := $Container/Grid/GridContainer34/SpinBoxSpellLock
 
-onready var _spell_stop = $Container/Grid/GridContainer35/SpinBoxSpellStop
-
+@onready var _spell_stop := $Container/Grid/GridContainer35/SpinBoxSpellStop
 
 #Charisma aka Presence, Charm, Social.
-onready var _charisma = $Container/Grid/GridContainer14/SpinBoxCharisma
+@onready var _charisma := $Container/Grid/GridContainer14/SpinBoxCharisma
 
 # Constitution aka Stamina, Endurance, Vitality, Recovery.
-onready var _constitution = $Container/Grid/GridContainer2/SpinBoxConstitution
+@onready var _constitution := $Container/Grid/GridContainer2/SpinBoxConstitution
 
 # Defense aka Resistance, Fortitude, Resilience.
-onready var _defense = $Container/Grid/GridContainer3/SpinBoxDefense
+@onready var _defense := $Container/Grid/GridContainer3/SpinBoxDefense
 
 # Dexterity aka Agility, Reflexes, Quickness.
-onready var _dexterity = $Container/Grid/GridContainer4/SpinBoxDexterity
+@onready var _dexterity := $Container/Grid/GridContainer4/SpinBoxDexterity
 # Intelligence aka Intellect, Mind, Knowledge.
-onready var _intelligence = $Container/Grid/GridContainer5/SpinBoxIntelligence
+@onready var _intelligence := $Container/Grid/GridContainer5/SpinBoxIntelligence
 
 # Luck aka Fate, Chance.
-onready var _luck = $Container/Grid/GridContainer6/SpinBoxLuck
+@onready var _luck := $Container/Grid/GridContainer6/SpinBoxLuck
 
 # Perception aka Alertness, Awareness, Cautiousness.
-onready var _perception = $Container/Grid/GridContainer7/SpinBoxPerception
+@onready var _perception := $Container/Grid/GridContainer7/SpinBoxPerception
 
 # Strength aka Body, Might, Brawn, Power.
-onready var _strength = $Container/Grid/GridContainer8/SpinBoxStrength
+@onready var _strength := $Container/Grid/GridContainer8/SpinBoxStrength
 
 # Willpower aka Sanity, Personality, Ego, Resolve.
-onready var _willpower = $Container/Grid/GridContainer9/SpinBoxWillpower
+@onready var _willpower := $Container/Grid/GridContainer9/SpinBoxWillpower
 
 # Wisdom aka Spirit, Wits, Psyche, Sense.
-onready var _wisdom = $Container/Grid/GridContainer10/SpinBoxWisdom
+@onready var _wisdom := $Container/Grid/GridContainer10/SpinBoxWisdom
 
 
 # Maximum amount a player can have is 999 unless set here.
-onready var _stack_amount = $Container/Grid/GridContainer28/SpinBoxAmount
+@onready var _stack_amount := $Container/Grid/GridContainer28/SpinBoxAmount
 
 # the amount of gold the object has.
-onready var _selling_price = $Container/Grid/GridContainer11/SpinBoxSellingPrice
+@onready var _selling_price := $Container/Grid/GridContainer11/SpinBoxSellingPrice
 
 # if this object is at store.
-onready var _purchase_price = $Container/Grid/GridContainer23/SpinBoxPurchasePrice
+@onready var _purchase_price := $Container/Grid/GridContainer23/SpinBoxPurchasePrice
 
 # The amount of gold dropped with this item.
-onready var _drop_gold = $Container/Grid/GridContainer26/SpinBoxDropGold
+@onready var _drop_gold := $Container/Grid/GridContainer26/SpinBoxDropGold
 
 # healing hp for this object will not go beyond this value.
-onready var _hp_max = $Container/Grid/GridContainer12/SpinBoxHpMax
+@onready var _hp_max := $Container/Grid/GridContainer12/SpinBoxHpMax
 
 # current hit points of this object.
-onready var _hp = $Container/Grid/GridContainer13/SpinBoxHp
+@onready var _hp := $Container/Grid/GridContainer13/SpinBoxHp
 
 # magic points. using a mana potion will not give more mana then this value.
-onready var _mp_max = $Container/Grid/GridContainer15/SpinBoxMpMax
+@onready var _mp_max := $Container/Grid/GridContainer15/SpinBoxMpMax
 
 # current mana points.
-onready var _mp = $Container/Grid/GridContainer16/SpinBoxMp
+@onready var _mp := $Container/Grid/GridContainer16/SpinBoxMp
 
 # object will give this value to player.
-onready var _xp_given = $Container/Grid/GridContainer17/SpinBoxXpGiven
+@onready var _xp_given := $Container/Grid/GridContainer17/SpinBoxXpGiven
 
 # the name of the object.
-onready var _dictionary_name = $Container/Grid/GridContainer18/LabelDictionaryName
+@onready var _dictionary_name := $Container/Grid/GridContainer18/LabelDictionaryName
 
 # when renaming a object, this var holds that data.
-onready var _dictionary_rename = $Container/Grid/GridContainer22/LineEditDictionaryRename
+@onready var _dictionary_rename := $Container/Grid/GridContainer22/LineEditDictionaryRename
 
 # an optional SpinBox value added to the end of the object name.
-onready var _dictionary_name_suffix = $Container/Grid/GridContainer22/SpinBoxDictionaryNameSuffix
+@onready var _dictionary_name_suffix := $Container/Grid/GridContainer22/SpinBoxDictionaryNameSuffix
 
-onready var _suffix_checkbox = $Container/Grid/GridContainer22/CheckBoxSuffix
+@onready var _suffix_checkbox := $Container/Grid/GridContainer22/CheckBoxSuffix
 
 # there are 8 dungeons in this game. which dungeon is the object at?
-onready var _at_dungeon_from = $Container/Grid/GridContainer19/SpinBoxAtDungeonFrom
+@onready var _at_dungeon_from := $Container/Grid/GridContainer19/SpinBoxAtDungeonFrom
 
-onready var _at_dungeon_to = $Container/Grid/GridContainer19/SpinBoxAtDungeonTo
+@onready var _at_dungeon_to := $Container/Grid/GridContainer19/SpinBoxAtDungeonTo
 
 # object is seen when this var matches the current dungeon level player is at. this is the starting value.
-onready var _at_level_from = $Container/Grid/GridContainer20/SpinBoxAtLevelFrom
+@onready var _at_level_from := $Container/Grid/GridContainer20/SpinBoxAtLevelFrom
 
 # object is seen when this var matches the current dungeon level player is at. this is the ending value
-onready var _at_level_to = $Container/Grid/GridContainer20/SpinBoxAtLevelTo
+@onready var _at_level_to := $Container/Grid/GridContainer20/SpinBoxAtLevelTo
 
 # true: object is seen at current dungeon level. false: object is not at that dungeon level
-onready var _enabled = $Container/Grid/GridContainer21/CheckButtonEnabled
+@onready var _enabled := $Container/Grid/GridContainer21/CheckButtonEnabled
 
 # Best to disable this object if using it as an artifact.
-onready var _is_artifact = $Container/Grid/GridContainer25/IsArtifactEnabled
+@onready var _is_artifact := $Container/Grid/GridContainer25/IsArtifactEnabled
 
-onready var _task_amount = $Container/Grid/GridContainer36/SpinBoxTaskAmount
+@onready var _task_amount := $Container/Grid/GridContainer36/SpinBoxTaskAmount
 
-onready var _task_gold = $Container/Grid/GridContainer37/SpinBoxTaskGold
+@onready var _task_gold := $Container/Grid/GridContainer37/SpinBoxTaskGold
 
-onready var _healing_power = $Container/Grid/GridContainer38/SpinBoxHealingPower
+@onready var _healing_power := $Container/Grid/GridContainer38/SpinBoxHealingPower
 
-onready var _healing_potions = $Container/Grid/GridContainer39/SpinBoxHealingPotions
+@onready var _healing_potions := $Container/Grid/GridContainer39/SpinBoxHealingPotions
 
-onready var _equipable = $Container/Grid/GridContainer40/CheckButtonEquipable
+@onready var _equipable := $Container/Grid/GridContainer40/CheckButtonEquipable
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 # this is used to change the json object sprite texture.
-onready var _arrow_left = $Container/Grid/GridContainer/ArrowLeft
+@onready var _arrow_left := $Container/Grid/GridContainer/ArrowLeft
 
 # this is used to stop a trigger of a left arrow when the mouse is not at the left arrow image. the problem is that when first clicking the left arrow image, the code will remember that state even when the mouse is no longer at that location.
-var _arrow_left_hover = false
+var _arrow_left_hover := false
 
-onready var _arrow_right = $Container/Grid/GridContainer/ArrowRight
-var _arrow_right_hover = false
+@onready var _arrow_right := $Container/Grid/GridContainer/ArrowRight
+var _arrow_right_hover := false
 
 # gets the file path of this object.
-var _path_file = Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/"
+var _path_file := Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/"
 
 # gets the image path of this object.
-var _path_image = Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/"
+var _path_image := Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/"
 
 # res:// is inaccessible during runtime, when at ready() func. You can't save/load files in it when you run the program. this var stops that attempt from happening. after everything is processed at ready() func, this var will be set to false.
 var _runtime = true
-	
+
+
 func _ready():
 	Variables._at_scene = Enum.Scene.Builder
 	Variables._scene_title = "Builder: Dictionary Edit."
@@ -205,8 +206,8 @@ func _ready():
 func _input(event):
 	# these arrows are used to change to the next dictionary,
 	if _arrow_left.has_focus() == true && _arrow_left_hover == true:
-		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && !event.pressed:
-					 
+		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+			
 			_current_sprite_index -= 1
 			
 			# when clicking the arrow images, this keeps the index within range, so that an invalid error does not occur.
@@ -214,19 +215,19 @@ func _input(event):
 			
 			# display the sprite texture.
 			if _current_sprite_index >= 0:
-				_image_sprite.texture =  Filesystem._load_external_image(Variables._image_textures[_current_sprite_index], 3)
+				_image_sprite.texture =  Filesystem._load_external_image(Variables._image_textures[_current_sprite_index])
 			
 			_runtime = true
 			display_values()
 	
 	if _arrow_right.has_focus() == true && _arrow_right_hover == true:
-		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == BUTTON_LEFT && !event.pressed:
+		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
 			
 			_current_sprite_index += 1
 			_current_sprite_index = clamp(_current_sprite_index, 0, Variables._file_paths.size() - 1)
 			
 			if _current_sprite_index < Variables._file_paths.size():
-				_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[_current_sprite_index], 3)
+				_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[_current_sprite_index])
 			
 			_runtime = true
 			display_values()
@@ -239,7 +240,7 @@ func display_values():
 	# load the sprite texture.
 	# this avoids an invalid get index on base array error.
 	if range(Variables._image_textures.size()).has(_current_sprite_index):
-		_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[_current_sprite_index], 3)
+		_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[_current_sprite_index])
 	
 	else:
 		_accept_dialog_return_to_builder_home.dialog_text = _something_went_wrong_dictionary
@@ -252,19 +253,19 @@ func display_values():
 	
 	
 func refresh_data():	
-	_spell_poison.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"]
+	_spell_poison.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"]
 	
-	_spell_slow.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"]
+	_spell_slow.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"]
 	
-	_spell_sleep.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"]
+	_spell_sleep.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"]
 	
-	_spell_chaos.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"]
+	_spell_chaos.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"]
 	
-	_spell_blind.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"]
+	_spell_blind.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"]
 	
-	_spell_lock.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"]
+	_spell_lock.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"]
 	
-	_spell_stop.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"]
+	_spell_stop.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"]
 	
 	# this is all the values that can be changed. most of them are SpinBox.
 	_dictionary_description.text = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"]
@@ -315,11 +316,11 @@ func refresh_data():
 	
 	_at_level_from.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_from"])
 	
-	_enabled.pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"])
+	_enabled.button_pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"])
 	
 	_movement_type.select(int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"]), true)
 	
-	_is_artifact.pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"])
+	_is_artifact.button_pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"])
 	
 	_task_amount.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"]
 
@@ -329,11 +330,11 @@ func refresh_data():
 	
 	_healing_potions.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"]
 	
-	_equipable.pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"]
+	_equipable.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"]
 
 	
-	if _is_artifact.pressed == true:
-		_enabled.pressed = false
+	if _is_artifact.button_pressed == true:
+		_enabled.button_pressed = false
 		_enabled.disabled = true
 	
 	else:
@@ -426,7 +427,7 @@ func _on_ItemList_item_selected(index):
 	
 	var path_texture = Variables._project_path + "/builder/objects/images/dictionaries/" + str(Builder._config.game_id + 1) + "/" + Variables._dictionary_name + "/"
 		
-	full_path += str(_group_item_list.get_item_text(index)).pad_zeros(2)
+	full_path += str(_group_item_list.get_item_text(index))
 		
 	# gets the filenames from that folder
 	Filesystem.get_dir_files(full_path)
@@ -441,7 +442,7 @@ func _on_ItemList_item_selected(index):
 		_i += 1
 		
 		# Replaces occurrences of a case-sensitive substring with the given one inside the string.
-		Variables._image_textures[_i] = Variables._image_textures[_i].replace(full_path, path_texture + str(_group_item_list.get_item_text(index)).pad_zeros(2))
+		Variables._image_textures[_i] = Variables._image_textures[_i].replace(full_path, path_texture + str(_group_item_list.get_item_text(index)))
 		Variables._image_textures[_i] = Variables._image_textures[_i].replace(".json", "/1.png")
 		
 		Variables._file_names[_i] =	Variables._file_names[_i].replace(full_path + "/", "")
@@ -452,7 +453,7 @@ func _on_ItemList_item_selected(index):
 		
 		# this avoids an invalid get index on base array error.
 		if range(Variables._image_textures.size()).has(0):
-			_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[0], 3)
+			_image_sprite.texture = Filesystem._load_external_image(Variables._image_textures[0])
 			
 			refresh_data()
 		
@@ -464,14 +465,14 @@ func _on_ItemList_item_selected(index):
 			return
 		
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 # this saves all current object data back to its json file.
 func save_stats():
 	if _runtime == false:
 		Filesystem.FILE_PATH = _path_file
-		Filesystem.save_dictionary_json(str(_group_item_list.get_item_text(_group_item_list_index)).pad_zeros(2), Variables._file_names[_current_sprite_index], Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]])
+		Filesystem.save_dictionary_json(str(_group_item_list.get_item_text(_group_item_list_index)), Variables._file_names[_current_sprite_index], Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]])
 
 func _on_text_edit_description_mouse_exited():
 	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"] = _dictionary_description.text
@@ -645,9 +646,9 @@ func _on_Button_dictionary_rename_pressed():
 	
 	# if suffix is greater than zero, remove all numbers from rename text feild since code is adding that number value to the end of the text. basiclly, this code is used when suffix field is not zero. code adds that value to the end of the rename text.
 	var _dn: String = _dictionary_rename.text
-	if _suffix_checkbox.pressed == true && _dictionary_name_suffix.value > 0:
+	if _suffix_checkbox.button_pressed == true && _dictionary_name_suffix.value > 0:
 		_dn = _dictionary_rename.text.lstrip("0123456789")
-		_dn = _dn + "_" + str(_dictionary_name_suffix.value).pad_zeros(2)
+		_dn = _dn + "_" + str(_dictionary_name_suffix.value)
 		
 		_dictionary_rename.text = _dn
 	
@@ -668,8 +669,8 @@ func _on_Button_dictionary_rename_pressed():
 	# make the selected "dictionary rename" text lower case.
 	_dictionary_rename.text = _dictionary_rename.text.to_lower()
 		
-	var _old_filename = str(_path_file) + str(_group_item_list.get_item_text(_group_item_list_index)).pad_zeros(2) + "/" + str(Variables._file_names[_current_sprite_index]) + ".json"
-	var _new_filename = str(_path_file) + str(_group_item_list.get_item_text(_group_item_list_index)).pad_zeros(2) + "/" + _dictionary_rename.text + ".json"
+	var _old_filename = str(_path_file) + str(_group_item_list.get_item_text(_group_item_list_index)) + "/" + str(Variables._file_names[_current_sprite_index]) + ".json"
+	var _new_filename = str(_path_file) + str(_group_item_list.get_item_text(_group_item_list_index)) + "/" + _dictionary_rename.text + ".json"
 	
 	# when searching for dictionary json files at the Filesystem._rename_file_or_directory func, the directories are scanned and all filenames from those directories are populated into these vars. these vars are then used to display the json data in the form of dictionaries and then the Variables._file_names is used to grab the sprite textures.
 	
@@ -677,7 +678,7 @@ func _on_Button_dictionary_rename_pressed():
 	Filesystem._rename_file_or_directory(false, _old_filename, _new_filename)
 	
 	# rename directory.
-	Filesystem._rename_file_or_directory(true, _path_image + str(_group_item_list.get_item_text(_group_item_list_index)).pad_zeros(2) + "/" + str(Variables._file_names[_current_sprite_index]), _path_image + str(_group_item_list.get_item_text(_group_item_list_index)).pad_zeros(2) + "/" + _dictionary_rename.text)
+	Filesystem._rename_file_or_directory(true, _path_image + str(_group_item_list.get_item_text(_group_item_list_index)) + "/" + str(Variables._file_names[_current_sprite_index]), _path_image + str(_group_item_list.get_item_text(_group_item_list_index)) + "/" + _dictionary_rename.text)
 	
 	# update the dictionary name Label to show what it has been renamed to, then clear the dictionary rename LineEdit.
 	_dictionary_name.text = _dictionary_rename.text
@@ -688,14 +689,6 @@ func _on_Button_dictionary_rename_pressed():
 
 
 func _on_AcceptDialog_focus_exited():
-	_accept_dialog_rename.visible = false
-	
-
-func _on_AcceptDialog_popup_hide():
-	_accept_dialog_rename.visible = false
-	
-
-func _on_AcceptDialog_modal_closed():
 	_accept_dialog_rename.visible = false
 
 
@@ -754,14 +747,14 @@ func _on_CheckButton_dictionary_enabled_toggled(value):
 
 
 func _on_AcceptDialog_return_to_builder_home_confirmed():
-	var _s = get_tree().change_scene("res://2d/source/scenes/builder/project_data.tscn")	
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project_data.tscn")	
 
 
 func _on_is_artifact_Enabled_toggled(button_pressed):
 	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"] = button_pressed
 	
-	if _is_artifact.pressed == true:
-		_enabled.pressed = false
+	if _is_artifact.button_pressed == true:
+		_enabled.button_pressed = false
 		_enabled.disabled = true
 	
 	else:

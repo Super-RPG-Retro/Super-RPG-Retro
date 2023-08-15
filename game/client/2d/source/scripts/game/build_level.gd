@@ -12,8 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var game = get_parent()
-onready var reference = get_parent().get_node("Reference")
+
+@onready var game := get_parent()
+@onready var reference := get_parent().get_node("RefCounted")
 
 
 func _ready():
@@ -22,8 +23,6 @@ func _ready():
 
 # start with a blank map. do this also for the first map.
 func build_level():
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/settings_game.txt", Settings._game)
-	
 	game.rooms.clear()
 	game.room_number = -1
 	game.floor_rooms.clear()
@@ -54,7 +53,7 @@ func build_level():
 	game.puzzle_blocks.clear()
 	
 	# start by creating astar for this level. see clear_path()
-	game._mobs_pathfinding = AStar.new()
+	game._mobs_pathfinding = AStar3D.new()
 	
 	# Randomize potion effects
 	game.potion_types = game.POTION_FUNCTIONS.duplicate()
@@ -67,19 +66,19 @@ func build_level():
 		for y in range(game.LEVEL_SIZE):
 			# dungeon level is saved when player uses a ladder. if this value is null then dungeon level has not been saved. make these values zero, which is the default value when first entering a dungeon level.
 			if _temp == null:
-				game.visibility_map_saved.set_cellv(Vector2(x, y), 0)
+				game.visibility_map_saved.set_cell(0, Vector2i(x, y), 0, Vector2i(0,0))
 			else:
-				game.visibility_map_saved.set_cellv(Vector2(x, y), _temp.get_cell(x, y))
+				game.visibility_map_saved.set_cell(0, Vector2i(x, y), _temp.get_cell_source_id(0, Vector2i(x, y)), Vector2i(0,0))
 			
 			#for every x and y coordinate, create the scene filled with stone walls. later other objects will be placed overtop of that wall, such as a room, floor or an empty cell.
 			game.map[x].append(Enum.Tile.Stone)
 			
 			if Settings._system.hide_stone_walls == false:
-				game.tile_map.set_cellv(Vector2(x, y), Enum.Tile.Stone)
+				game.tile_map.set_cell(0, Vector2i(x, y), Enum.Tile.Stone, Vector2i(0,0))
 				
 				
 			# for each tile in the visibility map, set index to the first tile since that is the only tile at its tile map.
-			game.visibility_map.set_cellv(Vector2(x, y), game.visibility_map_saved.get_cellv(Vector2(x, y))) # the third parameter here, if not saving, has a value of zero.
+			game.visibility_map.set_cell(0, Vector2i(x, y), game.visibility_map_saved.get_cell_source_id(0, Vector2i(x, y)), Vector2i(0,0)) # the third parameter, if not saving, has a value of zero.
 	
 			
 	# Rect2 consists of a position, a size, and several utility Common. It is typically used for fast overlap tests. 
@@ -93,17 +92,16 @@ func build_level():
 		game.room_number += 1
 		add_room(free_regions)
 		# stop adding rooms if the remainder free space in level is empty.
-		if free_regions.empty():
+		if free_regions.is_empty():
 			break
 			
 	connect_rooms()
 	
-	# array element 0, room 1, is a puzzle room.
+	# array index 0, room 1, is a puzzle room.
 	var start_room = game.rooms[1]
 	
 	# place player in random room, excluding the outer most tiles because those are walls
-	var player_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
-	
+	var player_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)	
 	var player_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
 	
 	if Variables._at_library == false:
@@ -112,16 +110,16 @@ func build_level():
 	# do not place ladder beside a door.
 	# since ladder_up is set to position of player, changing player's position will change ladder_up.
 	# first check if at position is a door, then check if player moves away from door if that position is a floor.	
-	if Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) == Variables._floor_rooms_tile_value:
+	if Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) == Variables._floor_rooms_tile_value:
 		player_x += 1
 		
-	if Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) == Variables._floor_rooms_tile_value:
+	if Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) == Variables._floor_rooms_tile_value:
 		player_y += 1
 		
-	if Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x + 1, player_y)) && game.tile_map.get_cellv(Vector2(player_x - 1, player_y)) == Variables._floor_rooms_tile_value:
+	if Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x + 1, player_y)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x - 1, player_y)) == Variables._floor_rooms_tile_value:
 		player_x -= 1
 		
-	if Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(player_x, player_y + 1)) && game.tile_map.get_cellv(Vector2(player_x, player_y - 1)) == Variables._floor_rooms_tile_value:
+	if Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(player_x, player_y - 1)) == Variables._floor_rooms_tile_value:
 		player_y -= 1
 	
 	# when game first starts or after going down a ladder, show player standing at the ladder_up.
@@ -144,16 +142,16 @@ func build_level():
 	
 	# do not place ladder_down beside a door.
 	# first check if next to ladder_down is a door, then check if 1 tile from that door is a floor. if door is found then ladder will be 1 tile from that door.	
-	if Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) == Variables._floor_rooms_tile_value:
+	if Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) == Variables._floor_rooms_tile_value:
 		_ladder_move_x += 1
 		
-	elif Enum.Tile.Door ==  game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) == Enum.Tile.Floor || Enum.Tile.Door ==  game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) == Enum.Tile.Ceiling || Enum.Tile.Door ==  game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) == Variables._floor_rooms_tile_value:
+	elif Enum.Tile.Door ==  game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) == Enum.Tile.Floor || Enum.Tile.Door ==  game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) == Enum.Tile.Ceiling || Enum.Tile.Door ==  game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) == Variables._floor_rooms_tile_value:
 		_ladder_move_y += 1
 				
-	elif Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x + 1, ladder_y)) && game.tile_map.get_cellv(Vector2(ladder_x - 1, ladder_y)) == Variables._floor_rooms_tile_value:
+	elif Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x + 1, ladder_y)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x - 1, ladder_y)) == Variables._floor_rooms_tile_value:
 		_ladder_move_x -= 1
 		
-	elif Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cellv(Vector2(ladder_x, ladder_y + 1)) && game.tile_map.get_cellv(Vector2(ladder_x, ladder_y - 1)) == Variables._floor_rooms_tile_value:
+	elif Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) == Enum.Tile.Floor || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) == Enum.Tile.Ceiling || Enum.Tile.Door == game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y + 1)) && game.tile_map.get_cell_source_id(0, Vector2i(ladder_x, ladder_y - 1)) == Variables._floor_rooms_tile_value:
 		_ladder_move_y -= 1
 	
 	# next we set the tile at that coordinate for a ladder.
@@ -163,7 +161,7 @@ func build_level():
 	
 	# set ceiling for ladder_down.
 	if Settings._game.room_ceiling == true && Settings._game.down_ladder_always_shown == false:		
-		game.overlay_map.set_cellv(Variables._ladder_down, Enum.Tile_Overlay.Ceiling)
+		game.overlay_map.set_cell(0, Variables._ladder_down, Enum.Tile_Overlay.Ceiling, Vector2i(0,0))
 			
 	# without this code, you cannot return to the previous level.
 	if Variables._going_down_level == false:
@@ -173,7 +171,7 @@ func build_level():
 		set_tile(player_x, player_y, Enum.Tile.Ladder_down)
 		game._player_tile = Vector2(player_x, player_y)
 	
-		game.overlay_map.set_cellv(Variables._ladder_down, -1)
+		game.overlay_map.set_cell(0, Variables._ladder_down, -1)
 	
 	# Place mobs
 	# look at how many mobs there shall be.
@@ -210,7 +208,7 @@ func build_level():
 					var mobs
 					
 					# do not create mobs at ladder_down location.
-					if Enum.Tile.Ladder_down !=  	get_parent().get_node("TileMap").get_cell(x, y):
+					if Enum.Tile.Ladder_down !=  	get_parent().get_node("TileMap").get_cell_source_id(0, Vector2i(x, y)):
 						mobs = reference.Mobs.new(self, Settings._game.level_number, x, y, game._level_enemies_names, game._total_enemy_at_level)
 						
 						# add it to the mobs list.
@@ -247,7 +245,7 @@ func build_level():
 				if Settings._system.remove_level_border == true:
 					if x == 0 || x == game.LEVEL_SIZE - 1 || y == 0 || y == game.LEVEL_SIZE - 1:
 						game.map[x].append(Enum.Tile.Ceiling)
-						game.tile_map.set_cellv(Vector2(x, y), Enum.Tile.Ceiling)
+						game.tile_map.set_cell(0, Vector2i(x, y), Enum.Tile.Ceiling, Vector2i(0,0))
 				
 		# hide the extra stone walls. only the stone walls that touch the corridor will be displayed.
 		for _n in _neat:
@@ -257,10 +255,10 @@ func build_level():
 	for x in range(game.LEVEL_SIZE):
 		for y in range(game.LEVEL_SIZE):
 			# mobs can walk on floors.
-			if game.tile_map.get_cellv(Vector2(x, y)) == Enum.Tile.Floor:
+			if game.tile_map.get_cell_source_id(0, Vector2i(x, y)) == Enum.Tile.Floor:
 				clear_path(Vector2(x, y)) 
 			
-			if game.tile_map.get_cellv(Vector2(x, y)) == Enum.Tile.Floor_rooms:
+			if game.tile_map.get_cell_source_id(0, Vector2i(x, y)) == Enum.Tile.Floor_rooms:
 				clear_path(Vector2(x, y))
 	
 	if Builder._data.store_items_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] == 1:
@@ -286,10 +284,10 @@ func _add_icons(_id):
 		
 		# don't include the walls of the room.
 		# if size of a room is 7-7 then this output will be 1-6. a value of 0 or 7 would be the wall.
-		var _x = int(rand_range(1, game.rooms[1].size.x))
-		var _y = int(rand_range(1, game.rooms[1].size.y))
+		var _x = int(randf_range(1, game.rooms[1].size.x))
+		var _y = int(randf_range(1, game.rooms[1].size.y))
 		
-		if game.tile_map.get_cellv(Vector2(game.rooms[1].position.x + _x, game.rooms[1].position.y + _y)) == Enum.Tile.Floor || game.tile_map.get_cellv(Vector2(game.rooms[1].position.x + _x, game.rooms[1].position.y + _y)) == Enum.Tile.Floor_rooms:
+		if game.tile_map.get_cell_source_id(0, Vector2i(game.rooms[1].position.x + _x, game.rooms[1].position.y + _y)) == Enum.Tile.Floor || game.tile_map.get_cell_source_id(0, Vector2i(game.rooms[1].position.x + _x, game.rooms[1].position.y + _y)) == Enum.Tile.Floor_rooms:
 			_do_again = false
 			
 			for icon in game.icons:
@@ -308,7 +306,7 @@ func current_room():
 	
 	# change to % (game.rooms.size() - 1 to exclude mobs at down ladder room.
 	if game._puzzle_room_dimension > 0:
-		room = game.rooms[1 + randi() % (game.rooms.size())]
+		room = game.rooms[1 + randi() % (game.rooms.size()) -1] # without the -1 code, the game could crash from a value greater than room size.
 	else:
 		room = game.rooms[randi() % (game.rooms.size())]
 		
@@ -363,7 +361,7 @@ func connect_rooms():
 	# Build an AStar graph of the area where we can add corridors. AStar is used for pathfinding. all that is needed is a list of points that you can make a path through, on how they are all connected and thus defining a graph. AStar can give the shortest path on that graph.
 	# see folder ref/0.9.png
 	
-	var stone_graph = AStar.new()
+	var stone_graph = AStar3D.new()
 	# For all the stones outside the graph is fair game, so add each stone tile as a point.
 	var point_id = 0
 	
@@ -390,7 +388,7 @@ func connect_rooms():
 	# Build an AStar graph of room connections
 	
 	# this time instead of doing tile by tile we check to see if there are rooms connected so we can add a path to all of them.
-	var room_graph = AStar.new()
+	var room_graph = AStar3D.new()
 	point_id = 0
 	
 	# I will add each room as a point but to start with there are no connections.
@@ -406,8 +404,12 @@ func connect_rooms():
 
 # first I will get a list of points that correspond to rooms then pick one to start from because all the connections are bidirectional and i only need to use one starting point. If you can get everywhere from there that means you can get everywhere from anywhere else.  
 func is_everything_connected(graph):
-	var points = graph.get_points()
-	var start = points.pop_back()
+	var points = graph.get_point_ids()
+	
+	# no pop_back yet. so this is used instead. points var is pop. points has that end index removed and then given to start var.
+	var start = points[points.size() - 1]
+	points.remove_at(points.size() - 1)
+	
 	
 	# for every point in points, I will try to get a path. if that failed, something is not connected. If the loop does not fail then everything is connected.
 	for point in points:
@@ -463,7 +465,7 @@ func add_random_connection(stone_graph, room_graph):
 		# Hide a corridor to make the game a bit more difficult but only if set from builder.
 		# for this feature to work, Set hide_stone_walls to true at builder. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors.
 		if end_room_id == 0 && Builder_playing._data.hide_random_corridor[Builder._config.game_id][Builder._data.dungeon_number][Builder._data.level_number] == 1 && Settings._system.hide_stone_walls == true:
-			game.overlay_map.set_cellv(Vector2(position.x, position.y), Enum.Tile_Overlay.Ceiling)
+			game.overlay_map.set_cell(0, Vector2i(position.x, position.y), Enum.Tile_Overlay.Ceiling, Vector2i(0,0))
 				
 	# lastly, i will update the room graph because the two rooms are now connected.
 	room_graph.connect_points(start_room_id, end_room_id)	
@@ -472,7 +474,7 @@ func add_random_connection(stone_graph, room_graph):
 	
 # least connected room (point)
 func get_least_connected_point(graph):
-	var point_ids = graph.get_points()
+	var point_ids = graph.get_point_ids()
 	
 	# we get the least of points which start with the full list of points. least holds the lowest connections seen so far.
 	var least
@@ -498,7 +500,7 @@ func get_least_connected_point(graph):
 # finding the nearest distance between an unconnected point will be very similar to the above func. except instead of finding the connections we want nearest distance.
 func get_nearest_unconnected_point(graph, target_point):
 	var target_position = graph.get_point_position(target_point)
-	var point_ids = graph.get_points()
+	var point_ids = graph.get_point_ids()
 	
 	var nearest
 	var tied_for_nearest = []
@@ -530,7 +532,7 @@ func pick_random_door_location(room):
 	# Top and bottom walls
 	
 	# if a value of 0 then the door will be placed at the right side wall in a room.
-	var _int = rand_range(0, 1)
+	var _int = randf_range(0, 1)
 	
 	if round(_int) == 0:
 		# a will just go along the width and add each tile along the top and bottom to a list of options.
@@ -611,69 +613,69 @@ func add_room(free_regions):
 	
 	# top left - X
 	# if a room is too close to another room then return to this func and try for another random location. this code check for room touching room and room two tiles from another room. there is a bug where when a room is too close to another room, sometimes a door is not drawn.
-	if game.tile_map.get_cell(start_x - 1, start_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x - 1, start_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	# there must be more than one tile seperating each room.
-	if game.tile_map.get_cell(start_x - 2, start_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x - 2, start_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# top right corner
-	if game.tile_map.get_cell(start_x + size_x + 1, start_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x + 1, start_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
-	if game.tile_map.get_cell(start_x + size_x + 2, start_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x + 2, start_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# bottom left
-	if game.tile_map.get_cell(start_x - 1, start_y + size_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x - 1, start_y + size_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
-	if game.tile_map.get_cell(start_x - 2, start_y + size_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x - 2, start_y + size_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# bottom right corner
-	if game.tile_map.get_cell(start_x + size_x + 1, start_y + size_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x + 1, start_y + size_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
-	if game.tile_map.get_cell(start_x + size_x + 2, start_y + size_y) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x + 2, start_y + size_y)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 		
 	# top left - Y
 	# stop rooms touching each other. if there is a room to the right then move this room one tile to the left.
-	if game.tile_map.get_cell(start_x, start_y - 1) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x, start_y - 1)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	# this code moves a room that is too close.
-	if game.tile_map.get_cell(start_x, start_y - 2) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x, start_y - 2)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# top right corner
-	if game.tile_map.get_cell(start_x + size_x, start_y - 1) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x, start_y - 1)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
-	if game.tile_map.get_cell(start_x + size_x, start_y - 2) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x, start_y - 2)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# bottom left corner
-	if game.tile_map.get_cell(start_x, start_y + size_y + 1) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x, start_y + size_y + 1)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return		
-	if game.tile_map.get_cell(start_x, start_y + size_y + 2) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x, start_y + size_y + 2)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 	
 	# bottom right corner
-	if game.tile_map.get_cell(start_x + size_x, start_y + size_y + 1) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x, start_y + size_y + 1)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
-	if game.tile_map.get_cell(start_x + size_x, start_y + size_y + 2) == Enum.Tile.Wall:
+	if game.tile_map.get_cell_source_id(0, Vector2i(start_x + size_x, start_y + size_y + 2)) == Enum.Tile.Wall:
 		add_room(free_regions)
 		return
 		
@@ -682,7 +684,7 @@ func add_room(free_regions):
 	# do this for every room.
 	for x in range (size_x): # current size of room to be made.
 		for y in range (size_y):
-			if game.tile_map.get_cell(start_x + x, start_y + y) == Enum.Tile.Wall:
+			if game.tile_map.get_cell_source_id(0, Vector2i(start_x + x, start_y + y)) == Enum.Tile.Wall:
 				add_room(free_regions)
 				return
 			
@@ -724,7 +726,7 @@ func add_room(free_regions):
 			if Settings._game.room_ceiling == false:
 				set_tile(x, y, Variables._floor_rooms_tile_value)
 			else:
-				if game.room_number != 1 && game.visibility_map_saved.get_cell(x, y) != -1:
+				if game.room_number != 1 && game.visibility_map_saved.get_cell_source_id(0, Vector2i(x, y)) != -1:
 					game.ceiling.append(Vector3(x, y, game.room_number))
 					set_tile(x, y, Enum.Tile.Ceiling)
 				else:
@@ -793,7 +795,7 @@ func set_tile(x, y, type):
 	# TODO if the game crashes here then the size of the map is too small. increase it at builder puzzle and at builder levels.
 	# set the array of arrays for map and tile_map.
 	game.map[x][y] = type
-	game.tile_map.set_cellv(Vector2(x, y), type)
+	game.tile_map.set_cell(0, Vector2i(x, y), type, Vector2i(0,0))
 	
 	if Settings._game.normal_doors_exist == false: 
 		if type == Enum.Tile.Door:

@@ -1,232 +1,163 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://b15q1on4aylgu"]
 
-[ext_resource path="res://2d/source/scenes/builder/menu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://2d/source/scenes/builder/next_event.tscn" type="PackedScene" id=2]
-[ext_resource path="res://2d/source/scenes/builder/status_bar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://2d/source/scripts/builder/events/hunter_tasks.gd" type="Script" id=4]
-[ext_resource path="res://2d/assets/themes/transparent.tres" type="Theme" id=5]
-[ext_resource path="res://2d/assets/themes/transparent_borders.tres" type="Theme" id=6]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.00392157, 0.211765, 0.882353 )
+[ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dwsjq4q12xh8r" path="res://2d/source/scenes/builder/next_event.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="3"]
+[ext_resource type="Script" path="res://2d/source/scripts/builder/events/hunter_tasks.gd" id="4"]
+[ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="5"]
+[ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="6"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
-[node name="HeaderMenu" parent="." instance=ExtResource( 1 )]
+[node name="HeaderMenu" parent="." instance=ExtResource("1")]
 
 [node name="Container" type="ScrollContainer" parent="."]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 464.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 448.0
 mouse_filter = 2
-theme = ExtResource( 6 )
-custom_styles/bg = SubResource( 1 )
-scroll_horizontal_enabled = false
+theme = ExtResource("6")
 
 [node name="Grid" type="GridContainer" parent="Container"]
-margin_right = 968.0
-margin_bottom = 422.0
-rect_min_size = Vector2( 200, 40 )
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
 columns = 2
 
 [node name="EventUsed" type="HBoxContainer" parent="Container/Grid"]
-margin_right = 222.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 222, 0 )
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
 alignment = 2
 
 [node name="EventUsedLabel" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_right = 968.0
-margin_bottom = 22.0
-theme = ExtResource( 5 )
-custom_colors/font_color = Color( 0, 0.329412, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+layout_mode = 2
+theme = ExtResource("5")
+theme_override_colors/font_color = Color(0, 0.329412, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="EventNumber" type="Label" parent="Container/Grid"]
-margin_top = 31.0
-margin_right = 222.0
-margin_bottom = 53.0
+layout_mode = 2
 focus_previous = NodePath("../../../ToTitle")
 text = "Event number."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid9" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 26.0
-margin_right = 968.0
-margin_bottom = 58.0
+layout_mode = 2
 alignment = 2
 
 [node name="EventSpinbox" type="SpinBox" parent="Container/Grid/Grid9"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 min_value = 1.0
 max_value = 801.0
 page = 1.0
 value = 1.0
 
 [node name="LabelDescription5" type="Label" parent="Container/Grid/Grid9"]
-margin_left = 102.0
-margin_top = 5.0
-margin_right = 742.0
-margin_bottom = 27.0
+layout_mode = 2
 mouse_filter = 1
 text = "  Changing the value here will change everything below this option."
 
 [node name="LabelEventEnabled" type="Label" parent="Container/Grid"]
-margin_top = 71.0
-margin_right = 222.0
-margin_bottom = 93.0
+layout_mode = 2
 text = "Event Enabled."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid11" type="HBoxContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 62.0
-margin_right = 968.0
-margin_bottom = 102.0
+layout_mode = 2
 
 [node name="EventEnabled" type="CheckButton" parent="Container/Grid/Grid11"]
-margin_right = 76.0
-margin_bottom = 40.0
-align = 2
+layout_mode = 2
 
 [node name="LabelDescription3" type="Label" parent="Container/Grid/Grid11"]
-margin_left = 80.0
-margin_top = 9.0
-margin_right = 304.0
-margin_bottom = 31.0
+layout_mode = 2
 mouse_filter = 1
 text = "  Is this event enabled?"
 
 [node name="ItemListTitleAdd" type="Label" parent="Container/Grid"]
-margin_top = 138.0
-margin_right = 222.0
-margin_bottom = 185.0
+layout_mode = 2
 mouse_filter = 1
 text = "Select a mob category to hunt."
-align = 2
-autowrap = true
+horizontal_alignment = 2
+autowrap_mode = 2
 
 [node name="Grid4" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 106.0
-margin_right = 968.0
-margin_bottom = 217.0
+layout_mode = 2
 columns = 2
 
 [node name="ItemListSelectDictionary" type="ItemList" parent="Container/Grid/Grid4"]
-margin_right = 500.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 500, 111 )
-items = [ "mobs1", null, false, "mobs2", null, false ]
+custom_minimum_size = Vector2(500, 111)
+layout_mode = 2
 allow_reselect = true
+item_count = 2
+item_0/text = "mobs1"
+item_1/text = "mobs2"
 
 [node name="ItemListBody" type="Label" parent="Container/Grid/Grid4"]
-margin_left = 504.0
-margin_top = 44.0
-margin_right = 504.0
-margin_bottom = 66.0
+layout_mode = 2
 
 [node name="ItemListTitleEmpty3" type="Label" parent="Container/Grid"]
-margin_top = 224.0
-margin_right = 222.0
-margin_bottom = 246.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="Grid3" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 221.0
-margin_right = 968.0
-margin_bottom = 249.0
+layout_mode = 2
 columns = 2
 
 [node name="Padding" type="Label" parent="Container/Grid/Grid3"]
-margin_top = 3.0
-margin_bottom = 25.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="Container/Grid/Grid3"]
-margin_left = 4.0
-margin_right = 54.0
-margin_bottom = 28.0
+layout_mode = 2
 text = "Add"
 
 [node name="EmptyTitle" type="Label" parent="Container/Grid"]
-margin_top = 253.0
-margin_right = 222.0
-margin_bottom = 275.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="EmptyBody" type="Label" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 253.0
-margin_right = 968.0
-margin_bottom = 275.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="ItemListTitleRemove" type="Label" parent="Container/Grid"]
-margin_top = 323.0
-margin_right = 222.0
-margin_bottom = 345.0
+layout_mode = 2
 mouse_filter = 1
 text = "Hunt this mobs."
-align = 2
+horizontal_alignment = 2
 
 [node name="Grid6" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 279.0
-margin_right = 968.0
-margin_bottom = 390.0
+layout_mode = 2
 columns = 2
 
 [node name="ItemListDoThisTask" type="ItemList" parent="Container/Grid/Grid6"]
-margin_right = 500.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 500, 111 )
+custom_minimum_size = Vector2(500, 111)
+layout_mode = 2
 select_mode = 1
 allow_reselect = true
 max_columns = 2
-fixed_icon_size = Vector2( 32, 32 )
+fixed_icon_size = Vector2i(32, 32)
 
 [node name="ItemListBody" type="Label" parent="Container/Grid/Grid6"]
-margin_left = 504.0
-margin_top = 44.0
-margin_right = 504.0
-margin_bottom = 66.0
+layout_mode = 2
 
 [node name="ItemListTitle4" type="Label" parent="Container/Grid"]
-margin_top = 397.0
-margin_right = 222.0
-margin_bottom = 419.0
+layout_mode = 2
 mouse_filter = 1
-align = 2
 
 [node name="Grid7" type="GridContainer" parent="Container/Grid"]
-margin_left = 226.0
-margin_top = 394.0
-margin_right = 968.0
-margin_bottom = 422.0
+layout_mode = 2
 columns = 2
 
 [node name="Padding" type="Label" parent="Container/Grid/Grid7"]
-margin_top = 3.0
-margin_bottom = 25.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="Container/Grid/Grid7"]
-margin_left = 4.0
-margin_right = 92.0
-margin_bottom = 28.0
+layout_mode = 2
 text = "Remove"
 
-[node name="StatusBar" parent="." instance=ExtResource( 3 )]
+[node name="StatusBar" parent="." instance=ExtResource("3")]
 
-[node name="NextEvent" parent="." instance=ExtResource( 2 )]
+[node name="NextEvent" parent="." instance=ExtResource("2")]
 
 [connection signal="tree_exiting" from="." to="." method="_on_Node2D_tree_exiting"]
 [connection signal="value_changed" from="Container/Grid/Grid9/EventSpinbox" to="." method="_on_event_number_Spinbox_value_changed"]

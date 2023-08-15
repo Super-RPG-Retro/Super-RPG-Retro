@@ -22,19 +22,20 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
-var _event_inventory = load("res://singletons/builder/events/inventory.gd").new()
-var _event_locked_doors = load("res://singletons/builder/events/locked_doors.gd").new()
-var _event_puzzles = load("res://singletons/builder/events/puzzles.gd").new()
-var _event_story = load("res://singletons/builder/events/story.gd").new()
-var _event_tasks = load("res://singletons/builder/events/tasks.gd").new()
 
-var _dictionary_artifacts = load("res://singletons/builder/dictionaries/artifacts.gd").new()
-var _audio_music = load("res://singletons/builder/audio/music.gd").new()
+var _event_inventory 		= load("res://singletons/builder/events/inventory.gd").new()
+var _event_locked_doors 	= load("res://singletons/builder/events/locked_doors.gd").new()
+var _event_puzzles 			= load("res://singletons/builder/events/puzzles.gd").new()
+var _event_story 			= load("res://singletons/builder/events/story.gd").new()
+var _event_tasks 			= load("res://singletons/builder/events/tasks.gd").new()
 
-var _library_cell = load("res://singletons/builder/library/cells.gd").new()
+var _dictionary_artifacts 	= load("res://singletons/builder/dictionaries/artifacts.gd").new()
+var _audio_music 			= load("res://singletons/builder/audio/music.gd").new()
+
+var _library_cell 			= load("res://singletons/builder/library/cells.gd").new()
 
 # at the builder home scene, these are the options. the game id is used at Builder._data as a number index, to seperate the builder games from each other. game id 0 has a game title of "Super RPG Retro"
-var _config = {
+var _config := {
 	"game_id": 				0,
 	"game_title": 			["Super RPG Retro", "", "", "", "", "", "", ""],
 	"dungeon_number": 		0,
@@ -49,7 +50,7 @@ var _config = {
 
 
 # _config.game_id is used at part of the file created as Builder._data_##.txt where ## is the value. when changing game_id value at the builder scene, if that value is 5, then the 5th _data file here will be loaded.
-var _data = {
+var _data := {
 	# 1: true. 0: false. refers to the dungeon itself.
 	"dungeon_number": 		0,
 	
@@ -98,14 +99,14 @@ var _data = {
 	
 }
 
-var _next_event = {
+var _next_event := {
 	"dungeon_number":		[],
 	"level_number":			[],
 	# this is the next event for this dungeon and level.
 	"item_list":			[],
 }
 
-var _event_parent = {
+var _event_parent := {
 	"event_number":			0,
 	"category":				[],
 	"dungeon_number":		[],
@@ -132,7 +133,7 @@ var _event_parent = {
 }
 
 
-var _starting_skills = {
+var _starting_skills := {
 	"Charisma": 			[0,0,0,0,0,0,0],
 	"Constitution": 		[0,0,0,0,0,0,0],
 	"Defense": 				[0,0,0,0,0,0,0],
@@ -299,7 +300,6 @@ func all_array_append():
 				_next_event.level_number[x][y].append([])
 				_next_event.item_list[x][y].append([])
 				
-				# these elements that end in [] will be push_back() at builder.
 				_event_parent.event_enabled[x][y].append(0)
 				_event_parent.file_name[x][y].append([])
 				_event_parent.file_path_json[x][y].append([])
@@ -400,7 +400,7 @@ func reset_game(x: int):
 	Filesystem.save("user://saved_data/builder_starting_skills_" + str(Builder._config.game_id) + ".txt", Builder._starting_skills)
 	
 
-# initiates these arrays by creating array elements.	
+# initiates these arrays by creating array indexes.	
 func _all_init():
 	init_vars_data()
 	init_vars_event_parent()

@@ -14,9 +14,10 @@ You should have received a copy of the GNU Affero General Public License along w
 # if changing something here from false to true or true to false, then go to the system.gd or game.gd at settings folder and change it there at the ready function. the value at the ready func should be opposite of the value here.
 extends Node
 
+
 # general settings for the settings_game scene. 
-# NOTE. remember to add the next element also at the bottom of this file, at the _reset_game() func.
-var _game = {
+# NOTE. remember to add the next data also at the bottom of this file, at the _reset_game() func.
+var _game := {
 	"clock": false,
 	
 	# when in a room fighting mobs, after mobs are dead, mobs will never respawn if player is outside of room at some place where mobs does not have direct sight of player.
@@ -65,12 +66,12 @@ var _game = {
 	# Enabled: Continue from saved game. Disabled: All data will be deleted. Player must start from the beginning again. Select this option for a major difficulty score increase.
 	"can_continue_saved_game": true,
 	
-	# NOTE. remember to add the next element also at the bottom of this file, at _reset_game() func.	
+	# NOTE. remember to add the next data also at the bottom of this file, at _reset_game() func.	
 }
 
 # general settings for the settings_system scene. 
-# NOTE. remember to add the next element also at the bottom of this file, at the _reset_system() func.
-var _system = {
+# NOTE. remember to add the next data also at the bottom of this file, at the _reset_system() func.
+var _system := {
 	"music": false,
 	"start_3d": false,
 	"randomize_2d_maze": true,
@@ -124,7 +125,7 @@ var _system = {
 	"hide_chat_features": false,
 	
 	
-	# NOTE. remember to add the next element also at the bottom of this file, at _reset_system() func.
+	# NOTE. remember to add the next data also at the bottom of this file, at _reset_system() func.
 	
 	
 }

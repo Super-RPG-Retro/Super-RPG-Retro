@@ -1,91 +1,76 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dl7whrjibi5vf"]
 
-[ext_resource path="res://source/scripts/main.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/host/host_disconnect.png" type="Texture" id=2]
-[ext_resource path="res://assets/themes/transparent.tres" type="Theme" id=3]
+[ext_resource type="Script" path="res://source/scripts/main.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://f3gnmjckd38r" path="res://assets/images/host/host_disconnect.png" id="2"]
+[ext_resource type="Theme" uid="uid://cygg4stwxtsuv" path="res://assets/themes/transparent.tres" id="3"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0.0392157, 0.0392157, 1 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Background" type="Panel" parent="."]
-margin_right = 1023.0
-margin_bottom = 600.0
-custom_styles/panel = SubResource( 1 )
+offset_right = 1023.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("1")
 
 [node name="Panel" type="Panel" parent="."]
-margin_top = 564.0
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_top = 564.0
+offset_right = 1024.0
+offset_bottom = 600.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 770.0
-margin_bottom = 596.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 770.0
+offset_bottom = 596.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_right = 999.0
-margin_bottom = 549.0
+layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
 [node name="RichTextMessages" type="RichTextLabel" parent="VBoxContainer/GridContainer"]
-margin_right = 800.0
-margin_bottom = 549.0
-rect_min_size = Vector2( 800, 0 )
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
+theme = ExtResource("3")
 scroll_following = true
 
 [node name="ItemList" type="ItemList" parent="VBoxContainer/GridContainer"]
-margin_left = 804.0
-margin_right = 999.0
-margin_bottom = 549.0
-rect_min_size = Vector2( 195, 0 )
+custom_minimum_size = Vector2(195, 0)
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource( 3 )
-custom_constants/hseparation = 10
-custom_styles/bg = SubResource( 2 )
+theme = ExtResource("3")
+theme_override_constants/h_separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 553.0
-margin_right = 999.0
-margin_bottom = 580.0
-theme = ExtResource( 3 )
+layout_mode = 2
+theme = ExtResource("3")
 
 [node name="Port" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
-margin_right = 88.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 80, 0 )
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
 min_value = 1.0
 max_value = 65535.0
 value = 12001.0
 
 [node name="ListenButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_left = 92.0
-margin_right = 132.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 toggle_mode = true
-pressed = true
-icon = ExtResource( 2 )
+icon = ExtResource("2")
 
 [node name="ServerMessage" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
-margin_left = 136.0
-margin_right = 999.0
-margin_bottom = 27.0
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource( 3 )
+theme = ExtResource("3")
 caret_blink = true
 
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/ListenButton" to="." method="_on_Listen_button_toggled"]
-[connection signal="text_entered" from="VBoxContainer/HBoxContainer/ServerMessage" to="." method="_on_server_message_text_entered"]
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer/ServerMessage" to="." method="_on_server_message_text_entered"]

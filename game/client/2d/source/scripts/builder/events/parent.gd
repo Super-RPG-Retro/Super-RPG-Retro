@@ -12,28 +12,27 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-var _group_item_list_index = 0
 
-onready var _group_item_list_add = $Container/Grid/Grid4/ItemListAdd
+@onready var _group_item_list_add := $Container/Grid/Grid4/ItemListAdd
 
-onready var _group_item_list_remove = $Container/Grid/Grid6/ItemListRemove
+@onready var _group_item_list_remove := $Container/Grid/Grid6/ItemListRemove
 
-onready var _event_number = $Container/Grid/Grid8/EventSpinbox
+@onready var _event_number := $Container/Grid/Grid8/EventSpinbox
 
-onready var _dungeon_number = $Container/Grid/Grid10/DungeonNumberSpinbox
+@onready var _dungeon_number := $Container/Grid/Grid10/DungeonNumberSpinbox
 
-onready var _level_number = $Container/Grid/Grid1/LevelNumberSpinbox
+@onready var _level_number := $Container/Grid/Grid1/LevelNumberSpinbox
 
-onready var _event_enabled = $Container/Grid/Grid5/EventEnabled
+@onready var _event_enabled := $Container/Grid/Grid5/EventEnabled
 
 #Ask if player will accept to do this event? Otherwise, event is cancelled.
-onready var _accepting_enabled = $Container/Grid/Grid12/AcceptingEnabled
+@onready var _accepting_enabled := $Container/Grid/Grid12/AcceptingEnabled
 
 # this is the text asking if player accepts this event.
-onready var _accepting_question = $Container/Grid/Grid11/AcceptQuestionTextEdit
+@onready var _accepting_question := $Container/Grid/Grid11/AcceptQuestionTextEdit
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu = null
 
 
 func _ready():
@@ -44,7 +43,7 @@ func _ready():
 	_on_event_number_Spinbox_value_changed(_event_number.value)
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 
 	_group_item_list_add.select(Variables._dictionary_index, true)
@@ -60,25 +59,25 @@ func _on_event_number_Spinbox_value_changed(value):
 	# dictionaries..	
 	for _r in range(20):
 		# add the current prize rewards.
-		if Builder._event_parent.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r].empty() == false:
+		if Builder._event_parent.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r].is_empty() == false:
 			for _i in range (Builder._event_parent.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r].size()):
 				# add the textures
 				var _image = TextureRect.new()
-				_image.texture = Filesystem._load_external_image(Builder._event_parent.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r][_i], 1)
+				_image.texture = Filesystem._load_external_image(Builder._event_parent.image_texture[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r][_i])
 				_group_item_list_remove.add_icon_item(_image.texture, false)
 				
 				_group_item_list_remove.add_item(Builder._event_parent.file_name[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number][_r][_i], null, true)
 		
 	# is this event enabled?
 	if bool(Builder._event_parent.event_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number]) == true:
-		_event_enabled.pressed = true
+		_event_enabled.button_pressed = true
 	else:
-		_event_enabled.pressed = false	
+		_event_enabled.button_pressed = false	
 		
 	if bool(Builder._event_parent.accepting_enabled[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number]) == true:
-		_accepting_enabled.pressed = true
+		_accepting_enabled.button_pressed = true
 	else:
-		_accepting_enabled.pressed = false	
+		_accepting_enabled.button_pressed = false	
 		
 	_dungeon_number.value = Builder._event_parent.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_parent.event_number] + 1
 	
@@ -113,7 +112,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_dictionary_ItemList_item_selected(index):
@@ -138,7 +137,7 @@ func _on_prize_item_list_add_Button_pressed():
 	Variables.select_json_dictionary_singly = false
 	Variables.select_items_data_to_return = Enum.Select_items.Event_prize	
 	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/builder/select_json_dictionary_as_items.tscn")
 	
 
 func _on_prize_item_list_remove_Button_pressed():

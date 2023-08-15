@@ -30,7 +30,7 @@ func _input(event):
 	# button_normal
 	if Variables._dungeon_coordinates == "3,6" && Variables._compass == "E":
 		# button_selected		
-		if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && event.is_action_released("ui_left_mouse_click"):
+		if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_released("ui_left_mouse_click"):
 			get_tree().call_group("button", "hide")
 			
 			Variables._compass_last_known_for_3d = Variables._compass

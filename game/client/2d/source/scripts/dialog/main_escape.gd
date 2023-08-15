@@ -12,7 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node2D
 
-onready var _accept_dialog = $AcceptDialog
+
+@onready var _accept_dialog := $AcceptDialog
+
 
 func _ready():
 	_accept_dialog.grab_focus()
@@ -43,6 +45,6 @@ func _on_ConfirmDialog_confirmed():
 	# this is needed here, so that the player stats panel shows the str, def, con, etc.
 	Variables._at_scene = Enum.Scene.Main_Menu
 	
-	var _scene = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
 
 	

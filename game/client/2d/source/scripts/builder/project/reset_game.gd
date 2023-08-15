@@ -13,9 +13,10 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node2D
 
 
-onready var _game_id_spin_box = $Container/Grid/Grid2/GameIDspinbox
-onready var _confirm_dialog = $ConfirmDialog
-onready var _menu = null
+@onready var _game_id_spin_box := $Container/Grid/Grid2/GameIDspinbox
+@onready var _confirm_dialog := $ConfirmDialog
+@onready var _menu = null
+
 
 func _ready():
 	Variables._at_scene = Enum.Scene.Builder
@@ -27,13 +28,13 @@ func _ready():
 	_game_id_spin_box.value = Builder._config.game_id 
 	
 	if _menu == null:
-		_menu = load("res://2d/source/scenes/builder/menu.tscn").instance()
+		_menu = load("res://2d/source/scenes/builder/menu.tscn").instantiate()
 		add_child( _menu )
 		
 		
 func _input(event):	
 	if event.is_action_pressed("ui_escape", true):
-		var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+		var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_UseCustomGame_toggled(button_pressed):
@@ -55,7 +56,7 @@ func _on_Node2D_tree_exiting():
 	queue_free()
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
 
 
 func _on_Button_reset_pressed():
@@ -65,4 +66,4 @@ func _on_Button_reset_pressed():
 
 func _on_confirm_dialog_confirmed():
 	Builder.reset_game(Builder._config.game_id)
-	var _s = get_tree().change_scene("res://2d/source/scenes/builder/project_data.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project_data.tscn")

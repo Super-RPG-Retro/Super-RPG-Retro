@@ -1,16 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://bujmes7jfhu40"]
 
-[ext_resource path="res://2d/source/scripts/game/game_ui.gd" type="Script" id=2]
-[ext_resource path="res://2d/source/scripts/game/audio.gd" type="Script" id=3]
-[ext_resource path="res://audio/ambient/water.ogg" type="AudioStream" id=4]
-[ext_resource path="res://audio/ambient/wind.ogg" type="AudioStream" id=5]
-[ext_resource path="res://audio/sound/confirm.ogg" type="AudioStream" id=6]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui.gd" id="2"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/audio.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://8xdxjl8i6cbr" path="res://audio/ambient/water.ogg" id="4"]
+[ext_resource type="AudioStream" uid="uid://35cyuvcj4354" path="res://audio/ambient/wind.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://bl8u485iti262" path="res://audio/sound/confirm.ogg" id="6"]
 
 [node name="game_ui" type="Node2D" groups=["game_ui"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Audio" type="Node2D" parent="." groups=["game_audio"]]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="SoundWalkTimer" type="Timer" parent="Audio"]
 wait_time = 0.15
@@ -29,16 +29,16 @@ volume_db = 4.0
 [node name="SoundDoor" type="AudioStreamPlayer" parent="Audio"]
 
 [node name="SoundClick" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 6 )
+stream = ExtResource("6")
 
 [node name="AmbientWater" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 4 )
+stream = ExtResource("4")
 volume_db = -10.0
 
 [node name="SoundPuzzle" type="AudioStreamPlayer" parent="Audio"]
 
 [node name="AmbientWind" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
 volume_db = -10.0
 
 [connection signal="timeout" from="Audio/SoundWalkTimer" to="Audio" method="_on_sound_WalkTimer_timeout"]

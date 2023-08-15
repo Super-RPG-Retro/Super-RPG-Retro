@@ -15,9 +15,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "sounds.\n[color=#bbbbff][url=_link]210 sound effects pack[/url][/color] by phoenix1291, [color=#bbbbff][url=_link2]Ultimate 2017 16 bit Mini pack[/url][/color]\nby rubberduck. RPG sound pack from [color=#bbbbff][url=_link3]artisticdude[/url][/color]."
+	text = "sounds.\n[color=#bbbbff][url=_link]210 sound effects pack[/url][/color] by phoenix1291, [color=#bbbbff][url=_link2]Ultimate 2017 16 bit Mini pack[/url][/color]\nby rubberduck. RPG sound pack from [color=#bbbbff][url=_link3]artisticdude[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	var _s = OS.shell_open("https://opengameart.org/content/sfx-the-ultimate-2017-16-bit-mini-pack/") 

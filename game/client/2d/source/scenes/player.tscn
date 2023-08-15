@@ -1,67 +1,84 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://jvbp0m8x4ujy"]
 
-[ext_resource path="res://bundles/assets/images/player_characters/0.png" type="Texture" id=1]
-[ext_resource path="res://2d/assets/images/light.png" type="Texture" id=2]
-[ext_resource path="res://2d/source/scenes/entity_child_scene.tscn" type="PackedScene" id=3]
-[ext_resource path="res://2d/source/scripts/player/player.gd" type="Script" id=4]
-[ext_resource path="res://2d/assets/images/cursor/mouse_select_object1.png" type="Texture" id=5]
-[ext_resource path="res://2d/assets/images/cursor/mouse_select_object2.png" type="Texture" id=6]
-[ext_resource path="res://2d/assets/animation/hit.tres" type="Animation" id=7]
-[ext_resource path="res://2d/assets/animation/goodbye.tres" type="Animation" id=8]
-[ext_resource path="res://2d/assets/animation/hello.tres" type="Animation" id=9]
-[ext_resource path="res://2d/assets/images/rune_select_object1.png" type="Texture" id=10]
-[ext_resource path="res://2d/assets/images/cursor/rune_select_object2.png" type="Texture" id=11]
+[ext_resource type="Texture2D" uid="uid://dgl4rp02oqq2i" path="res://bundles/assets/images/player_characters/0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dx2cbe3q0oetw" path="res://2d/assets/images/light.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://dfn70hyvybogq" path="res://2d/source/scenes/entity_child_scene.tscn" id="3"]
+[ext_resource type="Script" path="res://2d/source/scripts/player/player.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://bd02kylnba5jd" path="res://2d/assets/images/cursor/mouse_select_object1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://2n814hd3hhh5" path="res://2d/assets/images/cursor/mouse_select_object2.png" id="6"]
+[ext_resource type="Animation" path="res://2d/assets/animation/hit.tres" id="7"]
+[ext_resource type="Animation" path="res://2d/assets/animation/goodbye.tres" id="8"]
+[ext_resource type="Animation" path="res://2d/assets/animation/hello.tres" id="9"]
+[ext_resource type="Texture2D" uid="uid://ct0wr3qkvbrl" path="res://2d/assets/images/rune_select_object1.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bbbnwwfomflen" path="res://2d/assets/images/cursor/rune_select_object2.png" id="11"]
 
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
+[sub_resource type="SpriteFrames" id="7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11")
+}],
 "loop": true,
-"name": "rune",
+"name": &"rune",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}],
 "loop": true,
-"name": "unit",
+"name": &"unit",
 "speed": 5.0
-} ]
+}]
 
-[node name="Player" type="Sprite" groups=["player"]]
-position = Vector2( 532, 160 )
-texture = ExtResource( 1 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v8tb5"]
+_data = {
+"goodbye": ExtResource("8"),
+"hello": ExtResource("9"),
+"hit": ExtResource("7")
+}
+
+[node name="Player" type="Sprite2D" groups=["player"]]
+position = Vector2(532, 160)
+texture = ExtResource("1")
 centered = false
 hframes = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 14, 16 )
-current = true
-zoom = Vector2( 1.5, 1.5 )
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
+position = Vector2(14, 16)
+zoom = Vector2(0.5, 0.5)
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
 
-[node name="Impairment" type="Sprite" parent="."]
+[node name="Impairment" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 16, 16 )
 z_index = 4096
-texture = ExtResource( 2 )
+position = Vector2(16, 16)
+texture = ExtResource("2")
 
-[node name="Cursor" type="AnimatedSprite" parent="."]
-position = Vector2( 16, 15 )
+[node name="Cursor" type="AnimatedSprite2D" parent="."]
 z_index = 4096
-frames = SubResource( 7 )
-animation = "unit"
-playing = true
+position = Vector2(16, 15)
+sprite_frames = SubResource("7")
+animation = &"unit"
 
-[node name="EntityChildScene" parent="." instance=ExtResource( 3 )]
-position = Vector2( 6, 8 )
+[node name="EntityChildScene" parent="." instance=ExtResource("3")]
+position = Vector2(6, 8)
 
 [node name="SleepTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/goodbye = ExtResource( 8 )
-anims/hello = ExtResource( 9 )
-anims/hit = ExtResource( 7 )
+libraries = {
+"": SubResource("AnimationLibrary_v8tb5")
+}

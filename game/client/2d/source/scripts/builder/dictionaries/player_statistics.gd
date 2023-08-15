@@ -10,113 +10,177 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+# Builder._starting_skills holds both the misc keys and skill keys. misc key is used as the title name displayed to the left side of that key value (spinbox) and at the right side is the key description.
+
 extends Node
 
-onready var _grid = $Container/Grid
 
-var _label 			= []
-var _empty 			= []
-var _grid_child 	= []
-var _spin_box 		= []
-var _description 	= []
+@onready var _grid = $Container/Grid
+
+# name of HP Max, MP, Player's level etc.
+var _title_misc := []
+# name of Strength, Luck etc 
+var _title_skills := []
+# grid cosmetic changes to layout, such as, adding padding between players' data.
+var _empty_row := []
+var _empty_column := []
+# HBoxContainer
+var _grid_child_misc := []
+var _grid_child_skill := []
+
+# a spinbox holding a value for every players' statistic.
+var _spin_box_misc := []
+var _spin_box_skill := []
+# a brief description of the statistic.
+var _description_misc := []
+var _description_skill := []
 
 # increments array elements.
-var _e = -1
+var _index_num_misc := -1
+var _index_num_skill := -1
 
 # the builder menu.
-onready var _menu = null
+@onready var _menu := $HeaderMenu
+@onready var _all_children
 
 
+func _init():
+	# at nodes to grid.
+	_title_misc				= []
+	_title_skills			= []
+	_empty_row				= []
+	_empty_column			= []
+	_grid_child_misc 		= []
+	_grid_child_skill	 	= []
+	_description_misc 		= []
+	_description_skill	 	= []
+	
+	_spin_box_skill.clear()
+	
+	# create the array elements.
+	for _i in range (0, 7):
+		_spin_box_misc.append([])
+		_spin_box_skill.append([])
+	
+	
 func _ready():
 	Variables._at_scene = Enum.Scene.Builder
 	Variables._scene_title = "Builder: Starting Statistics."
 	
-	_draw_skill_values()
-		
-
-func _draw_skill_values():
-	# at nodes to grid.
-	_label			= []
-	_empty			= []
-	_grid_child 	= []
-	_spin_box 		= []
-	_description 	= []
-	
-	for _p in range (7): # player
-		# empty.
-		_empty.append([])
-		_empty[_p] = Label.new()
-		_empty[_p].text = ""
-		_empty[_p].rect_size.y = 32
-		_grid.add_child(_empty[_p])
-		
-		# player name
-		_label.append([])
-		_label[_p] = Label.new()
-		_label[_p].text = P.character_name[str(_p)]
-		_label[_p].autowrap = true
-		_label[_p].add_color_override("font_color", Color("#0054ff")) # blue 
-		_grid.add_child(_label[_p])
-		
-		_draw_bar_value("HP_max", _p)
-		_draw_bar_value("HP", _p)
-		_draw_bar_value("MP_max", _p)
-		_draw_bar_value("MP", _p)
-		
-		_draw_level(_p)		
+	for _p in range (0, 7): # all players
+		_draw_misc_title(_p)
+		# draw the stats data for this player _p.
+		_draw_misc("HP_max", _p)
+		_draw_misc("HP", _p)
+		_draw_misc("MP_max", _p)
+		_draw_misc("MP", _p)		
+		_draw_player_level(_p)
 		_draw_skills(_p)		
+		_draw_empty_rows(_p)
 		
-		#used as a padding between player character names.
-		# empty.
-		_empty.append([])
-		_empty[_p] = Label.new()
-		_empty[_p].text = ""
-		_empty[_p].rect_size.y = 32
-		_grid.add_child(_empty[_p])
+		_index_num_misc = -1
+		_index_num_skill = -1
 		
-		# empty.
-		_empty.append([])
-		_empty[_p] = Label.new()
-		_empty[_p].text = ""
-		_empty[_p].rect_size.y = 32
-		_grid.add_child(_empty[_p])
+	call_deferred("_get_all_childrem")
+	
+	
+func _get_all_childrem():
+	_all_children = _get_all_children(get_node("."))
+		
+
+func _get_all_children(in_node, arr: = []):
+	arr.push_back(in_node)
+
+	for _c in in_node.get_children():
+		if _c.get_class() == "SpinBox":
+			_c.focus_mode = Control.FOCUS_ALL
+			_c.mouse_filter = Control.MOUSE_FILTER_PASS
+			
+			_c.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+			_c.connect("value_changed", Callable(self, "_on_gui_input"), _c.value)
+			
+			
+		arr = _get_all_children(_c, arr)
+
+	return arr
 
 
-func _draw_bar_value(_str:String, _p: int):
-	_e += 1
+# this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
+
+# if editing the checkbox then simulate an enter key press, so that updated data can be later saved to the builder var.
+func _on_mouse_exited():
+	Common._parse_input_event()
+	_clamp_hp_and_mp_spinbox_values()
 	
-	# stat name,
-	_label.append([])
-	_label[_e] = Label.new()
-	_label[_e].text = _str.replace("_", " ")
-	_label[_e].autowrap = true
-	_label[_e].align = HALIGN_RIGHT
-	_grid.add_child(_label[_e])
+
+func _on_gui_input(_value):
+	Common._parse_input_event()
+	_clamp_hp_and_mp_spinbox_values()
 	
-	_grid_child.append([])
-	_grid_child[_e] = HBoxContainer.new()
-	_grid_child[_e].rect_min_size.x = 750
-	_grid_child[_e].rect_size.y = 32
-	_grid.add_child(_grid_child[_e])
+	
+# HP and MP values must not be greater then HP_max and MP_max values.
+func _clamp_hp_and_mp_spinbox_values():
+	for _i in range (0, 7):
+		# HP. 
+		if _spin_box_misc[_i][0].value < _spin_box_misc[_i][1].value:
+			_spin_box_misc[_i][1].value = _spin_box_misc[_i][0].value
+		
+		# MP...
+		if _spin_box_misc[_i][2].value < _spin_box_misc[_i][3].value:
+			_spin_box_misc[_i][3].value = _spin_box_misc[_i][2].value
+
+
+func _draw_misc_title(_p: int):
+	_empty_column.append([])
+	_empty_column[_p] = Label.new()
+	_empty_column[_p].text = ""
+	_empty_column[_p].size.y = 32
+	_grid.add_child(_empty_column[_p])
+	
+	# title of a player name.
+	_title_misc.append([])
+	_title_misc[_p] = Label.new()
+	_title_misc[_p].text = P.character_name[str(_p)]
+	_title_misc[_p].set_autowrap_mode(true)
+	_title_misc[_p].add_theme_color_override("font_color", Color("#0054ff")) # blue 
+	_grid.add_child(_title_misc[_p])
+
+
+func _draw_misc(_str:String, _p: int):
+	_index_num_misc += 1
+	
+	# title of a misc key. it is displayed at the left side of the spinbox.
+	_title_misc.append([])
+	_title_misc[_index_num_misc] = Label.new()
+	_title_misc[_index_num_misc].text = _str.replace("_", " ")
+	_title_misc[_index_num_misc].set_autowrap_mode(true)
+	_title_misc[_index_num_misc].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_RIGHT)
+	_grid.add_child(_title_misc[_index_num_misc])
+	
+	_grid_child_misc.append([])
+	_grid_child_misc[_index_num_misc] = HBoxContainer.new()
+	_grid_child_misc[_index_num_misc].custom_minimum_size.x = 750
+	_grid_child_misc[_index_num_misc].size.y = 32
+	_grid.add_child(_grid_child_misc[_index_num_misc])
 	
 	# stat value.
-	_spin_box.append([])
-	_spin_box[_e] = SpinBox.new()
+	_spin_box_misc[_p].append([])
+	_spin_box_misc[_p][_index_num_misc] = SpinBox.new()
 	
 	if _str == "HP_max" || _str == "HP":
-		_spin_box[_e].min_value = 10
+		_spin_box_misc[_p][_index_num_misc].min_value = 1
 	else:
-		_spin_box[_e].min_value = 0
+		_spin_box_misc[_p][_index_num_misc].min_value = 0
 		
-	_spin_box[_e].max_value = 100
-	_spin_box[_e].value = Builder._starting_skills[_str][_p]
-	_spin_box[_e].rect_size.x = 100
-	_spin_box[_e].rect_min_size.x = 50
-	_grid_child[_e].add_child(_spin_box[_e])
+	_spin_box_misc[_p][_index_num_misc].max_value = 100
+	_spin_box_misc[_p][_index_num_misc].value = Builder._starting_skills[_str][_p]
+	_spin_box_misc[_p][_index_num_misc].size.x = 100
+	_spin_box_misc[_p][_index_num_misc].custom_minimum_size.x = 50
+	_grid_child_misc[_index_num_misc].add_child(_spin_box_misc[_p][_index_num_misc])
 	
 	# stat description.
-	_description.append([])
-	_description[_e] = Label.new()
+	_description_misc.append([])
+	_description_misc[_index_num_misc] = Label.new()
 	
 	var _desc_text = ""
 	
@@ -126,155 +190,123 @@ func _draw_bar_value(_str:String, _p: int):
 		"MP_max": _desc_text = "The maximum Magic Points this player can have?"
 		"MP": _desc_text = "The current starting Magic Points this player has?"
 		
-	_description[_e].text = _desc_text
-	_description[_e].autowrap = true
-	_description[_e].rect_min_size.x = 545
-	_description[_e].rect_size.y = 32
-	_description[_e].align = HALIGN_LEFT
-	_grid_child[_e].add_child(_description[_e])
+	_description_misc[_index_num_misc].text = _desc_text
+	_description_misc[_index_num_misc].set_autowrap_mode(true)
+	_description_misc[_index_num_misc].custom_minimum_size.x = 545
+	_description_misc[_index_num_misc].size.y = 32
+	_description_misc[_index_num_misc].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_LEFT)
+	_grid_child_misc[_index_num_misc].add_child(_description_misc[_index_num_misc])
 	
-	# remove the signal..
-	if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
-		_spin_box[_e].disconnect("mouse_exited", self, "_on_bar_mouse_exited", [_str, _p, _e])
-		
-	# create the signal.
-	var _y = _spin_box[_e].connect("mouse_exited", self, "_on_bar_mouse_exited", [_str, _p, _e])
-	
-	
-	if _spin_box[_e].is_connected("value_changed", self, "_on_bar_value_changed"):
-		_spin_box[_e].disconnect("value_changed", self, "_on_bar_value_changed", [_str, _p, _e])
-		
-	# create the signal.
-	var _z = _spin_box[_e].connect("value_changed", self, "_on_bar_value_changed", [_str, _p, _e])
 
-
-func _draw_level(_p: int):
-	_e += 1
+func _draw_player_level(_p: int):
+	_index_num_misc += 1
 	
-	# stat name,
-	_label.append([])
-	_label[_e] = Label.new()
-	_label[_e].text = "Player Level"
-	_label[_e].autowrap = true
-	_label[_e].align = HALIGN_RIGHT
-	_grid.add_child(_label[_e])
+	# level label,
+	_title_misc.append([])
+	_title_misc[_index_num_misc] = Label.new()
+	_title_misc[_index_num_misc].text = "Player Level"
+	_title_misc[_index_num_misc].set_autowrap_mode(true)
+	_title_misc[_index_num_misc].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_RIGHT)
+	_grid.add_child(_title_misc[_index_num_misc])
 	
-	_grid_child.append([])
-	_grid_child[_e] = HBoxContainer.new()
-	_grid_child[_e].rect_min_size.x = 750
-	_grid_child[_e].rect_size.y = 32
-	_grid.add_child(_grid_child[_e])
+	_grid_child_misc.append([])
+	_grid_child_misc[_index_num_misc] = HBoxContainer.new()
+	_grid_child_misc[_index_num_misc].custom_minimum_size.x = 750
+	_grid_child_misc[_index_num_misc].size.y = 32
+	_grid.add_child(_grid_child_misc[_index_num_misc])
 	
-	# stat value.
-	_spin_box.append([])
-	_spin_box[_e] = SpinBox.new()
+	# level spinbox.
+	_spin_box_misc[_p].append([])
+	_spin_box_misc[_p][_index_num_misc] = SpinBox.new()
 	
-	_spin_box[_e].min_value = 1
+	_spin_box_misc[_p][_index_num_misc].min_value = 1
 		
-	_spin_box[_e].max_value = 100
-	_spin_box[_e].value = Builder._starting_skills["Level"][_p] + 1
-	_spin_box[_e].rect_size.x = 100
-	_spin_box[_e].rect_min_size.x = 50
-	_grid_child[_e].add_child(_spin_box[_e])
+	_spin_box_misc[_p][_index_num_misc].max_value = 100
+	_spin_box_misc[_p][_index_num_misc].value = Builder._starting_skills["Level"][_p]
+	_spin_box_misc[_p][_index_num_misc].size.x = 100
+	_spin_box_misc[_p][_index_num_misc].custom_minimum_size.x = 50
+	_grid_child_misc[_index_num_misc].add_child(_spin_box_misc[_p][_index_num_misc])
 	
-	# stat description.
-	_description.append([])
-	_description[_e] = Label.new()
+	# level description.
+	_description_misc.append([])
+	_description_misc[_index_num_misc] = Label.new()
 	
 	var _desc_text = ""
 	
-	_description[_e].text = "Current level of the player."
-	_description[_e].autowrap = true
-	_description[_e].rect_min_size.x = 545
-	_description[_e].rect_size.y = 32
-	_description[_e].align = HALIGN_LEFT
-	_grid_child[_e].add_child(_description[_e])
+	_description_misc[_index_num_misc].text = "Current level of the player."
+	_description_misc[_index_num_misc].set_autowrap_mode(true)
+	_description_misc[_index_num_misc].custom_minimum_size.x = 545
+	_description_misc[_index_num_misc].size.y = 32
+	_description_misc[_index_num_misc].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_LEFT)
+	_grid_child_misc[_index_num_misc].add_child(_description_misc[_index_num_misc])
 	
-	# remove the signal..
-	if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
-		_spin_box[_e].disconnect("mouse_exited", self, "_on_level_mouse_exited", [_p, _e])
-		
-	# create the signal.
-	var _y = _spin_box[_e].connect("mouse_exited", self, "_on_level_mouse_exited", [_p, _e])
 	
-
 func _draw_skills(_p:int):
-	
-		for _s in range (10): # skills.
-			_e += 1
-			
-			# stills name,
-			_label.append([])
-			_label[_e] = Label.new()
-			_label[_e].text = Variables.s[str(_s)]
-			_label[_e].autowrap = true
-			_label[_e].align = HALIGN_RIGHT
-			_grid.add_child(_label[_e])
-			
-			_grid_child.append([])
-			_grid_child[_e] = HBoxContainer.new()
-			_grid_child[_e].rect_min_size.x = 750
-			_grid_child[_e].rect_size.y = 32
-			_grid.add_child(_grid_child[_e])
-			
-			# skills value.
-			_spin_box.append([])
-			_spin_box[_e] = SpinBox.new()
-			_spin_box[_e].min_value = 0
-			_spin_box[_e].max_value = 200
-			_spin_box[_e].value = Builder._starting_skills[Variables.s[str(_s)]][_p]
-			_spin_box[_e].rect_size.x = 100
-			_spin_box[_e].rect_min_size.x = 50
-			_grid_child[_e].add_child(_spin_box[_e])
-			
-			# skills description.
-			_description.append([])
-			_description[_e] = Label.new()
-			_description[_e].text = Variables.s_desc[str(_s)]
-			_description[_e].autowrap = true
-			_description[_e].rect_min_size.x = 545
-			_description[_e].rect_size.y = 32
-			_description[_e].align = HALIGN_LEFT
-			_grid_child[_e].add_child(_description[_e])
-			
-			
-			# remove the signal..
-			if _spin_box[_e].is_connected("mouse_exited", self, "_on_mouse_exited"):
-				_spin_box[_e].disconnect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
-				
-			# create the signal.
-			var _y = _spin_box[_e].connect("mouse_exited", self, "_on_stats_mouse_exited", [_s, _p, _e])
+	for _s in range (0, 10): # skills.
+		_index_num_misc += 1
+		_index_num_skill += 1
 		
-
-# when existing the spin box, this func stores the value of the spin box into the builder var. When exiting this scene the builder data will be saved.
-func _on_stats_mouse_exited(_s, _p, _i):
-	Builder._starting_skills[Variables.s[str(_s)]][_p] = _spin_box[_i].value
-	
-
-# bar:		both health and mana use this func.	
-func _on_bar_mouse_exited(_str, _p, _i):
-	Builder._starting_skills[_str][_p] = _spin_box[_i].value
-
-
-func _on_bar_value_changed(_value, _str, _p, _i):
-	if _i == 1 && _spin_box[1].value > _spin_box[0].value:
-		_spin_box[1].value = _spin_box[0].value
-		return  
-	
-	if _i == 3 && _spin_box[3].value > _spin_box[2].value:
-		_spin_box[3].value = _spin_box[2].value
-		return
+		# stills name,
+		_title_skills.append([])
+		_title_skills[_index_num_skill] = Label.new()
+		_title_skills[_index_num_skill].text = Variables.s[str(_s)]
+		_title_skills[_index_num_skill].set_autowrap_mode(true)
+		_title_skills[_index_num_skill].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_RIGHT)
+		_grid.add_child(_title_skills[_index_num_skill])
 		
-	Builder._starting_skills[_str][_p] = _spin_box[_i].value
+		_grid_child_skill.append([])
+		_grid_child_skill[_index_num_skill] = HBoxContainer.new()
+		_grid_child_skill[_index_num_skill].custom_minimum_size.x = 750
+		_grid_child_skill[_index_num_skill].size.y = 32
+		_grid.add_child(_grid_child_skill[_index_num_skill])
+		
+		# skills value.
+		_spin_box_skill[_p].append([])
+		_spin_box_skill[_p][_index_num_skill] = SpinBox.new()
+		_spin_box_skill[_p][_index_num_skill].min_value = 0
+		_spin_box_skill[_p][_index_num_skill].max_value = 200
+		_spin_box_skill[_p][_index_num_skill].value = Builder._starting_skills[Variables.s[str(_s)]][_p]
+		_spin_box_skill[_p][_index_num_skill].size.x = 100
+		_spin_box_skill[_p][_index_num_skill].custom_minimum_size.x = 50
+		_grid_child_skill[_index_num_skill].add_child(_spin_box_skill[_p][_index_num_skill])
+		
+		# skills description.
+		_description_skill.append([])
+		_description_skill[_index_num_skill] = Label.new()
+		_description_skill[_index_num_skill].text = Variables.s_desc[str(_s)]
+		_description_skill[_index_num_skill].set_autowrap_mode(true)
+		_description_skill[_index_num_skill].custom_minimum_size.x = 545
+		_description_skill[_index_num_skill].size.y = 32
+		_description_skill[_index_num_skill].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_LEFT)
+		_grid_child_skill[_index_num_skill].add_child(_description_skill[_index_num_skill])
 
-
-# player's level
-func _on_level_mouse_exited(_p, _i):
-	Builder._starting_skills["Level"][_p] = _spin_box[_i].value - 1
+	
+func _draw_empty_rows(_p: int):
+	#used as an empty row between player character names.
+	_empty_row.append([])
+	_empty_row[_p] = Label.new()
+	_empty_row[_p].text = ""
+	_empty_row[_p].size.y = 32
+	_grid.add_child(_empty_row[_p])
+	
+	# another empty row is needed here.
+	_empty_row.append([])
+	_empty_row[_p] = Label.new()
+	_empty_row[_p].text = ""
+	_empty_row[_p].size.y = 32
+	_grid.add_child(_empty_row[_p])
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene("res://2d/source/scenes/main_menu.tscn")
+	call_deferred("_prepare_save_data")
+	
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+
+
+# save data when ending task or when clicking the "x" button at top-right corner of app.
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		call_deferred("_prepare_save_data")
 
 
 func _on_Node2D_tree_exiting():
@@ -282,3 +314,28 @@ func _on_Node2D_tree_exiting():
 	call_deferred("queue_free", _menu)
 	
 	queue_free()
+
+
+# populate the Builder._starting_skills dictionary with spinbox values from this scene.
+func _prepare_save_data():
+	_clamp_hp_and_mp_spinbox_values()
+	call_deferred("_save_data")
+
+	
+func _save_data():
+	if _spin_box_skill.size() == 7 && _spin_box_skill[6].size() == 10:
+		for _p in range (0, 7):
+			for _i in range (0, 5):
+				# Variables.s[str(0) is the dictionary key named Charisma.
+				# player HP_max, HP, MP_max and MP
+				Builder._starting_skills[Variables.s[str((_i + 10))]][_p] = _spin_box_misc[_p][_i].value
+			
+			# player level.
+			Builder._starting_skills["Level"][_p] = _spin_box_misc[_p][4].value
+			
+			# player skills.
+			for _i in range (0, 10):
+				Builder._starting_skills[Variables.s[str(_i)]][_p] = _spin_box_skill[_p][_i].value
+			
+		Filesystem.builder_save_data()
+			

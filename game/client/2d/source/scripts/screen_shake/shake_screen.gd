@@ -12,11 +12,12 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Camera2D
 
+
 # used to shake the screen. the bigger the value, the greater the screen shake will be,
-var shake_amount = 0
+var shake_amount := 0
 
 # screen offset value.
-var default_offset = offset
+var default_offset := offset
 
 
 func _ready():
@@ -26,7 +27,7 @@ func _ready():
 
 func _process(delta):
 	if shake_amount > 0:
-		offset = Vector2(rand_range(-shake_amount, shake_amount), rand_range(-shake_amount, shake_amount)) * delta + default_offset
+		offset = Vector2(randf_range(-shake_amount, shake_amount), randf_range(-shake_amount, shake_amount)) * delta + default_offset
 
 # new_shake: 		the distance the screen will shake. the bigger the value, the greater the screen shake.
 # shake_time:		for how long the screen will shake for.

@@ -12,15 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 
 extends Node
 
-# changes the modulate which makes the scene lighter or darker depending on what time this value is. 
-var _raw_value: float = 0
 
-var _full_moon_at_this_number: int = 5
-var _full_moon: int = 0
+# changes the modulate which makes the scene lighter or darker depending on what time this value is. 
+var _raw_value := 0.0
+
+var _full_moon_at_this_number := 5
+var _full_moon := 0
 
 # these ticks are used to determine time of day.
-var _ticks_timestamp: int = -1
-var _time:float = 0
+var _ticks_timestamp := -1
+var _time := 0.0
 
 func cycle():
 	if Variables._child_scene_open == true:

@@ -15,9 +15,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	bbcode_enabled = true
-	bbcode_text = "Font used.\nAuthor [color=#bbbbff][url=_link]Severin Meyer[/url][/color]."
+	text = "Font used.\nAuthor [color=#bbbbff][url=_link]Severin Meyer[/url][/color]."
 	
-	connect("meta_clicked", self, "call")
+	connect("meta_clicked", Callable(self, "call"))
 
 func _link():
 	OS.shell_open("https://www.1001fonts.com/xolonium-font.html") 
