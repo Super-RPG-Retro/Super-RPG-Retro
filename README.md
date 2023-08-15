@@ -2,6 +2,8 @@
 
 Procedurally generated dungeons with a game construction kit. Game inspired by Lufia 2 and legacy of the ancients.
 
+This game is programmed in Godot 4.2 dev1. This game is currently a work in progress.
+
 # [Screenshots](screenshots.md) | [Project Programming](project-programming.md) | [Legal Summary](legal-summary.md)
 
 Join the Super RPG Retro [discord server](https://discord.gg/b8damxvwX8). Get the [source code](https://github.com/Super-RPG-Retro/Super-RPG-Retro), and fork or contribute.
@@ -16,22 +18,17 @@ This image shows a small playable map so that more of the client features are sh
 This 3D maze is called the library. The player can enter any dungeon from the library.
 <br/><br/><br/><br/>
 
-### Summary
-This game is currently a work in progress and programmed in Godot 3.5. Currently, only two dungeon levels work after game installation. Those levels are used to test game features. The idea is to make a challenging game loaded full of events, such as, trap doors, puzzles, and tasks.
-
-The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). 
-
-Game play can be configured to look exactly the same every time you play it or the game play can have randomness added to it. You can change the size of the rooms in each dungeon level. Each dungeon level can have a puzzle room. Six mobs movement type, such as, avoid player and trace walls.
+### Summary.
 
 * In-game construction kit, called builder.
 * Hundreds of customizable features.
-* Every game can have a different "difficulty level" value
+* Every game can have a different "difficulty level" value.
 * Client panel has in-game chat and help commands.
 * 61 magic. 999 maximum runes can be stacked for any magic item.
 * 460 items can be used in inventory. You can add to this list.
 * 678 mobs. You can add to this list.
 * 99 levels in every dungeon.
-* 8 dungeons.
+* 1 to 8 dungeons.
 * 10 player statistics such as str, def and luc.
 * 999 is the maximum value of a statistic.
 * 999 is the maximum level a player can have.
@@ -67,4 +64,20 @@ Game play can be configured to look exactly the same every time you play it or t
 * Option for the player to return to the last level of a dungeon.
 * Option to continue a saved game.
 
-Currently, some features do not work as intended and some places in code are spaghetti. The idea is to update this game to Godot 4.2 dev 1. The code will then be organized using the DRY, KISS and SOLID principles for future programmers. See [project Programming](project-programming.md) for more information.
+# About.
+
+You can configure the game system, game settings, or use the game construction kit called builder. Every feature at game settings will change the difficulty score.
+
+The program has many things fo configure, such as, each dungeon level could have a puzzle room. There are six mob movement type that can be assigned to a mob, such as, avoid player and trace walls. Mobs could be configured to stay in room or follow the player. A room ceiling could be enabled. A random corridor could be hidden. 
+
+The idea is to make a large, challenging game loaded full of events, such as, chat dialogs, many different puzzles, and mob tasks. 
+
+Currently, only two dungeon levels work after game installation. Those levels are used to test game features.
+
+Game play can be configured to look exactly the same every time you play it or the game play can have randomness added to it. You can change the size of the rooms in each dungeon level.
+
+After upgrading the game from Godot 3.2 to 4.2 dev1, some game features do not work as intended. Some features no longer work. Some features such as chat were disabled. After upgrading the game, chat now needs to be rewritten. Minimap was also disabled. An error was discovered in minimap while upgrading to Godot 4.2 dev1 and now that minimap feature needs to be rewritten.
+
+The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Most images, such as, mobs and magic, and the game UI design idea, came from [Dungeon Crawl Stone Soup.](https://crawl.develz.org/)
+
+The game has a fair amount of spaghetti code. Some code jumps from scene to scene. Some code blocks are redundant. The code will now be organized using the [DRY, KISS and SOLID principles.](https://godottutorials.com/courses/design-principles/) See also [project Programming](project-programming.md) for more information.
