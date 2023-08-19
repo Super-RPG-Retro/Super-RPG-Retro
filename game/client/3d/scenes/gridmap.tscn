@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1svbaouhln4a"]
+
+[ext_resource type="Script" path="res://3d/scripts/gridmap.gd" id="1_kcrar"]
+[ext_resource type="Texture2D" uid="uid://b3mllt2wyi5bt" path="res://bundles/assets/images/textures/6.png" id="2_gcwj7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j4di"]
+albedo_color = Color(0.0784314, 0.313726, 0.478431, 1)
+albedo_texture = ExtResource("2_gcwj7")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="2"]
+material = SubResource("StandardMaterial3D_6j4di")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg5cx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2arh"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="6"]
+material = SubResource("StandardMaterial3D_g2arh")
+
+[node name="Spatial" type="Node3D"]
+script = ExtResource("1_kcrar")
+
+[node name="Wall1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -0.4935, -1.2666e-07, 0.0487218)
+mesh = SubResource("2")
+
+[node name="StaticBody" type="StaticBody3D" parent="Wall1"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Wall1/StaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2666e-07, 4.47035e-08)
+shape = SubResource("BoxShape3D_vg5cx")
+
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2, 0, 0)
+mesh = SubResource("6")
+
+[node name="staticBody" type="StaticBody3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65779e-08, 1.2666e-07, 2.35615e-08)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Wall2/staticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.28989e-08)
+shape = SubResource("BoxShape3D_vg5cx")
