@@ -76,7 +76,7 @@ Currently, only two dungeon levels work after game installation. Those levels ar
 
 Game play can be configured to look exactly the same every time you play it or the game play can have randomness added to it. You can change the size of the rooms in each dungeon level.
 
-After upgrading the game from Godot 3.2 to 4.2 dev1, some game features do not work as intended. Some features no longer work. Some features such as chat were disabled. After upgrading the game, chat now needs to be rewritten. Minimap was also disabled. An error was discovered in minimap while upgrading to Godot 4.2 dev1 and now that minimap feature needs to be rewritten.
+After upgrading the game from Godot 3.2 to 4.2 dev1, some game features do not work as intended. Some features no longer work. Some features such as chat were disabled. After upgrading the game, chat now needs to be rewritten. Minimap is not completely working. An error was discovered in minimap while upgrading to Godot 4.2 dev1 and now that minimap feature needs to be rewritten.
 
 The core of this game came from this video, building a Roguelike from Scratch in Godot, [Dungeon of Recycling](https://www.youtube.com/watch?v=vQ1UGbUlzH4). Most images, such as, mobs and magic, and the game UI design idea, came from [Dungeon Crawl Stone Soup.](https://crawl.develz.org/)
 

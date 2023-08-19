@@ -103,7 +103,7 @@ func stats_saved_empty():
 func stats_saved_value_all_update():
 	call_deferred("stats_saved_value_all_update2")
 	
-	if FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+	if FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt"):
 		self.visible = true
 		Variables._is_saved_id_panel_visible = true
 
@@ -119,15 +119,11 @@ func stats_saved_text_all_update():
 	
 	for d in P.character_stats[str(P._number)]["_saved"].keys():
 		i += 1
-		if i <= 5:
-			if d == "Class":
-				d = ""
-							
+		
+		if i >= 8 && i <= 12:
 			_stats_text_all_column1_label.text += "[right]" + str(d) + "[/right]\n"
-		else:
-			if d == "Level":
-				d = ""
-			
+		
+		elif i >= 14 && i <= 18:
 			_stats_text_all_column2_label.text += "[right]" + str(d) + "[/right]\n"
 
 
@@ -158,16 +154,12 @@ func stats_saved_value_all_update2():
 	
 	for d in P.character_stats[str(P._number)]["_saved"].values():
 		i += 1
-		if i <= 5:
-			if i == 0:
-				_stats_value_all_column1_label.text += "\n"
-			else:
-				_stats_value_all_column1_label.text += str(d).pad_zeros(3) + "\n"
-		else:
-			if i == 6:
-				_stats_value_all_column2_label.text += "\n"
-			else:
-				_stats_value_all_column2_label.text += str(d).pad_zeros(3) + "\n"
+		
+		if i >= 8 && i <= 12:
+			_stats_value_all_column1_label.text += str(d).pad_zeros(3) + "\n"
+		
+		elif i >= 14 && i <= 18:
+			_stats_value_all_column2_label.text += str(d).pad_zeros(3) + "\n"
 
 	_health_text.text = str(P.character_stats[str(P._number)]["_saved"].HP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].HP_max).pad_zeros(4)
 	_mana_text.text = str(P.character_stats[str(P._number)]["_saved"].MP).pad_zeros(4) + "/" + str(P.character_stats[str(P._number)]["_saved"].MP_max).pad_zeros(4)

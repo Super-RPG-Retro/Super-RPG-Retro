@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://2d/source/scripts/stats_scene/stats_panel_loaded.gd" id="1_2kr0h"]
 [ext_resource type="Theme" uid="uid://fr1lin3sbs06" path="res://2d/assets/themes/transparent-static.tres" id="2_ose7u"]
-[ext_resource type="Texture2D" uid="uid://b7rva5w4ttxml" path="res://2d/assets/images/healthbar_gray.png" id="3_q00x4"]
-[ext_resource type="Texture2D" uid="uid://b3gecsohpbru2" path="res://2d/assets/images/healthbar_blue.png" id="4_pnhx1"]
+[ext_resource type="Texture2D" uid="uid://5sbu3gjxdk7a" path="res://2d/assets/images/healthbar_gray.png" id="3_q00x4"]
+[ext_resource type="Texture2D" uid="uid://dfv07w837h04m" path="res://2d/assets/images/healthbar_blue.png" id="4_pnhx1"]
 [ext_resource type="FontFile" uid="uid://dwlpi7uf0ov0c" path="res://bundles/assets/fonts/xolonium/Xolonium.tres" id="5_qyo82"]
-[ext_resource type="Texture2D" uid="uid://tj2a17bp22gc" path="res://2d/assets/images/arrows/arrow_small_up.png" id="6_v06ho"]
+[ext_resource type="Texture2D" uid="uid://ca30odk6qvw3x" path="res://2d/assets/images/arrows/arrow_small_up.png" id="6_v06ho"]
 [ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="7_tdusl"]
-[ext_resource type="Texture2D" uid="uid://c1ypn5h3ovbgl" path="res://2d/assets/images/arrows/arrow_small_down.png" id="8_ox8ox"]
-[ext_resource type="AudioStream" uid="uid://bf71a5ukqge7u" path="res://audio/sound/click.ogg" id="9_l7ilq"]
+[ext_resource type="Texture2D" uid="uid://davkfc0ynkspe" path="res://2d/assets/images/arrows/arrow_small_down.png" id="8_ox8ox"]
+[ext_resource type="AudioStream" uid="uid://c0wn3isdward8" path="res://audio/sound/click.ogg" id="9_l7ilq"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.352941, 0, 0, 1)

@@ -38,7 +38,7 @@ func save_game():
 	# put stats into one dictionary then save data in binary format so that nobody can edit that file.
 	Common._update_stats_last_player(P._number)
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/loaded_username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
 		
 	#save stats
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P.character_stats)

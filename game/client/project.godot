@@ -37,6 +37,7 @@ Hud="*res://singletons/hud.gd"
 Inventory="*res://singletons/inventory.gd"
 Tiles="*res://singletons/tiles.gd"
 Preload="*res://singletons/preload.gd"
+Minimap="*res://singletons/minimap.gd"
 
 [debug]
 

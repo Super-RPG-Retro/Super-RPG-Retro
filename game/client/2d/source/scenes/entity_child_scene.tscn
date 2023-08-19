@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfn70hyvybogq"]
 
-[ext_resource type="Texture2D" uid="uid://cutrs7a1oonnc" path="res://2d/assets/images/entity_background.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://di4on4y0graj6" path="res://bundles/assets/images/magic/animation/0b.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://bhrms5o1il7k4" path="res://bundles/assets/images/magic/animation/0c.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://esy6s4d6g2j0" path="res://bundles/assets/images/magic/animation/0a.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cpq6mpvr3mm5d" path="res://2d/assets/images/entity_background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://be5ltopca2f0f" path="res://bundles/assets/images/magic/animation/0b.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bl2wp3ie67evv" path="res://bundles/assets/images/magic/animation/0c.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dmmmlvoffdxe6" path="res://bundles/assets/images/magic/animation/0a.png" id="4"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{

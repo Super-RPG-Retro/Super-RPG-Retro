@@ -78,14 +78,14 @@ func _save_data():
 	var _does_file_exist2 # verification of data.
 	
 	# determine if file exists	
-	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/loaded_username.txt")
 	
 	if _does_file_exist == true:
 		# game is over. it is important to remove game from hard drive so that there are no conflicting visibility maps when playing a new game using the same game id.
 		Filesystem._delete_game_data()
 		
 		# determine if file was removed
-		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt")
 	
 	# if file existed and was removed then show dialog box.
 	if _does_file_exist == true && _does_file_exist2 == false:

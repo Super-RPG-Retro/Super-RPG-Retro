@@ -28,12 +28,13 @@ var _music_stop := false
 # new button
 @onready var _new_confirmation_dialog = $NewConfirmationDialog
 
-# this holds the username data.
+# this is the username input.
 @onready var _username_line_edit = $GameDataPanel/GridContainer/GridContainer/UsernameLineEdit
 
 # saved game id.
 @onready var _saved_id = $GameDataPanel/GridContainer/GridContainer/SpinBoxSavedID
 
+@onready var _play_button = $GameDataPanel/GridContainer/ButtonPlay
 @onready var _node = get_tree().get_current_scene().get_name()
 
 
@@ -44,7 +45,7 @@ func _ready():
 	_saved_id.max_value = Variables._game_id_max_value
 	
 	_empty_username_dialog.visible = false
-	_username_line_edit.grab_focus()
+	_play_button.grab_focus()
 	
 	var _temp = null
 		
@@ -89,6 +90,7 @@ func _ready():
 func _input(event):
 	if (event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):		
+			$GameDataPanel/GridContainer/ButtonPlay
 			_username_line_edit.focus_mode = Control.FOCUS_ALL
 			_username_line_edit.grab_focus()
 		
@@ -131,6 +133,9 @@ func _on_new_confirmation_dialog():
 	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_loaded", "stats_empty")
+	
+	_username_line_edit.set_editable(true)
+		
 		
 # later rename .res to .user. res uses the programs folder while .user uses the system folder. note that user:// will not work everywhere. iOS and Android won't allow it at all. you could define the prefix in a global variable and then use user:// for testing and user:// when exporting.
 func _on_ButtonSave_pressed():
@@ -167,20 +172,13 @@ func _on_ButtonSave_pressed():
 func _save_game():
 	# this is new game data, so delete the saved id before saving the new game data.	
 	if Variables._is_this_new_data == false:
-		# used for verification of deleted data.
-		var _does_file_exist2
-		
 		# determine if file exists	
-		var _does_file_exist =  FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+		var _does_file_exist =  FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/loaded_username.txt")
 		
 		if _does_file_exist == true:
 			# try again to delete data.
 			Filesystem._delete_game_data()
 			Filesystem._copy_game_data()
-			
-			# determine if file was removed.
-			# TODO need to display a message if this fails.
-			_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
 	
 	_save_game_data()
 	
@@ -201,7 +199,7 @@ func _save_game_data():
 		P.character_stats[str(_i)]["_saved"] = P.character_stats[str(_i)]["_loaded"]
 	
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
 	
 	# save stats
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_stats)	
@@ -214,6 +212,8 @@ func _save_game_data():
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
+	_username_line_edit.set_editable(false)
+	
 		
 func _on_ButtonLoad_pressed(_bypass:bool = false):
 	Variables._id_of_loaded_game_temp = -1	
@@ -221,7 +221,7 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	if _bypass == false:
 		
 		# determine if game exists.
-		if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+		if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt"):
 			$NoGameIDexists.dialog_text = "No game exists for Game ID " + str(Variables._id_of_saved_game)
 			
 			$NoGameIDexists.popup_centered()
@@ -282,7 +282,6 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 		
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
-			
 		get_tree().call_group("main_menu", "disable_settings_game_scene")
 	
 	# load settings game file.
@@ -295,13 +294,15 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 		Settings._game.level_number = 0
 	else:
 		Builder._data.level_number = Settings._game.level_number
+		
+	_username_line_edit.set_editable(false)
 	
 		
 func _on_ButtonDelete_pressed():
 	Variables._id_of_saved_game_temp = -1
 	
 	# determine if file was removed
-	var	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+	var	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt")
 	
 	# only show a dialog box if there are data to delete.
 	if _does_file_exist == true:	
@@ -318,24 +319,25 @@ func _on_SavedConfirmationDialog_confirmed():
 	$"../SettingsGame".visible = true
 	
 	# determine if file exists	
-	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/username.txt")
+	_does_file_exist = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_loaded_game) + "/saved_username.txt")
 	
 	if _does_file_exist == true:
 		Filesystem._delete_game_data()
 		
 		# determine if file was removed
-		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt")
+		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt")
 	
 	# if file existed and was removed then show dialog box.
 	if _does_file_exist2 == false:
 		_delete_game_dialog.popup_centered()
 		
 		get_tree().call_group("stats_saved", "stats_saved_empty")
+		_username_line_edit.set_editable(true)
 
 
 func _on_ButtonPlay_pressed():
 	# determine if game exists.
-	if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/username.txt"):
+	if !FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt"):
 		$NoGameIDexists.dialog_text = "No game exists for Game ID " + str(Variables._id_of_saved_game)
 		$NoGameIDexists.popup_centered()
 		return

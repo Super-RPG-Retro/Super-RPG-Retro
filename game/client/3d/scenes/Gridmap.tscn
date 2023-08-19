@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1svbaouhln4a"]
 
 [ext_resource type="Script" path="res://3d/scripts/gridmap.gd" id="1_kcrar"]
-[ext_resource type="Texture2D" uid="uid://djq76f4byt5xi" path="res://bundles/assets/images/textures/6.png" id="2_gcwj7"]
+[ext_resource type="Texture2D" uid="uid://b3mllt2wyi5bt" path="res://bundles/assets/images/textures/6.png" id="2_gcwj7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j4di"]
 albedo_color = Color(0.0784314, 0.313726, 0.478431, 1)

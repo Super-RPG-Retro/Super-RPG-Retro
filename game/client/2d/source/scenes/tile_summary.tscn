@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://brymas4up5s80"]
 
-[ext_resource type="Texture2D" uid="uid://dgl4rp02oqq2i" path="res://bundles/assets/images/player_characters/0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c31wg8syn5xs7" path="res://bundles/assets/images/player_characters/0.png" id="1"]
 [ext_resource type="Script" path="res://2d/source/scripts/mouse_commands/tiles.gd" id="2"]
 [ext_resource type="Theme" uid="uid://gw260bpyiu1u" path="res://2d/assets/themes/theme_very_small_font.tres" id="3"]
 [ext_resource type="Theme" uid="uid://c5jg8sho14qvp" path="res://2d/assets/themes/theme_small_font.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/scene_header.tscn" id="5"]
 [ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="6"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="7"]
-[ext_resource type="Texture2D" uid="uid://cjwym5pj170tk" path="res://2d/assets/images/black.png" id="7_8j7r4"]
+[ext_resource type="Texture2D" uid="uid://dmgicbawq3jpk" path="res://2d/assets/images/black.png" id="7_8j7r4"]
 
 [sub_resource type="StyleBoxFlat" id="4"]
 bg_color = Color(0, 0, 0.172549, 0.843137)

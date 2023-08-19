@@ -99,7 +99,7 @@ func _on_StatusBar_tree_exiting():
 
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 
 
 func _on_Node2D_tree_exiting():

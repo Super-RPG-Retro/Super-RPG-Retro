@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://cl6kqe7r4gvey"]
 
 [ext_resource type="Script" path="res://2d/source/scripts/screen_shake/battle.gd" id="1"]
-[ext_resource type="PackedScene" path="res://2d/source/scenes/battle/screen_shake.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://cpik5it1q2neu" path="res://bundles/assets/images/battle_background/1.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dgl4rp02oqq2i" path="res://bundles/assets/images/player_characters/0.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://bjw8gxjo27vpq" path="res://2d/source/scenes/battle/screen_shake.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://btgxj0k1c3mpq" path="res://bundles/assets/images/battle_background/1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://c31wg8syn5xs7" path="res://bundles/assets/images/player_characters/0.png" id="4"]
 [ext_resource type="Theme" uid="uid://c5jg8sho14qvp" path="res://2d/assets/themes/theme_small_font.tres" id="5"]
 [ext_resource type="Animation" path="res://2d/assets/animation/slash.tres" id="6"]
 [ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="7"]
 [ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://wh5o1brjmhvp" path="res://bundles/assets/images/hit_effects/fight.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dbslmisnjc1my" path="res://bundles/assets/images/hit_effects/fight.png" id="9"]
 [ext_resource type="Animation" path="res://2d/assets/animation/fight.tres" id="10"]
 [ext_resource type="Animation" path="res://2d/assets/animation/hit.tres" id="11"]
 

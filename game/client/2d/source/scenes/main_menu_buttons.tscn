@@ -42,8 +42,10 @@ layout_mode = 2
 focus_neighbor_bottom = NodePath("../SpinBoxSavedID")
 focus_next = NodePath("../SpinBoxSavedID")
 max_length = 11
+middle_mouse_paste_enabled = false
 caret_blink = true
 caret_blink_interval = 0.5
+metadata/_edit_group_ = true
 
 [node name="LabelGameID" type="Label" parent="GameDataPanel/GridContainer/GridContainer"]
 layout_mode = 2

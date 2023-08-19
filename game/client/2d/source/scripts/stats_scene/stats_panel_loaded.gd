@@ -169,15 +169,11 @@ func stats_text_all_update():
 	
 	for d in P.character_stats[str(P._number)]["_loaded"].keys():
 		i += 1
-		if i <= 5:
-			if d == "Class":
-				d = ""
-							
+		
+		if i >= 8 && i <= 12:
 			_stats_text_all_column1_label.text += "[right]" + str(d) + "[/right]\n"
-		else:
-			if d == "Level":
-				d = ""
-			
+		
+		elif i >= 14 && i <= 18:
 			_stats_text_all_column2_label.text += "[right]" + str(d) + "[/right]\n"
 	
 	_on_HealthBar_value_changed(P.character_stats[str(P._number)]["_loaded"].HP)
@@ -252,16 +248,12 @@ func stats_value_all_update(_x: int = 0): #_p = player number.
 	# add the stats values, such as, str value, def value.
 	for d in P.character_stats[str(P._number)]["_loaded"].values():
 		i += 1
-		if i <= 5:
-			if i == 0:
-				_stats_value_all_column1_label.text += "\n"
-			else:
-				_stats_value_all_column1_label.text += str(d).pad_zeros(3) + "\n"
-		else:
-			if i == 6:
-				_stats_value_all_column2_label.text += "\n"
-			else:
-				_stats_value_all_column2_label.text += str(d).pad_zeros(3) + "\n"
+		
+		if i >= 8 && i <= 12:
+			_stats_value_all_column1_label.text += str(d).pad_zeros(3) + "\n"
+		
+		elif i >= 14 && i <= 18:
+			_stats_value_all_column2_label.text += str(d).pad_zeros(3) + "\n"
 				
 	# display the health and health max.
 	if get_node("Background/HealthText") != null:

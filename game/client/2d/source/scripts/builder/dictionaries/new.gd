@@ -132,4 +132,4 @@ func _on_AcceptDialog_focus_exited():
 
 	
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")

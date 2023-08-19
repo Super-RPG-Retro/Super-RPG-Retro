@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://2d/source/scripts/scene_header/scene_header.gd" id="5"]
 [ext_resource type="Script" path="res://2d/source/scripts/runes/rune_buying.gd" id="6"]
 [ext_resource type="Theme" uid="uid://bwxso8a50xc5l" path="res://2d/assets/themes/panel_blue.tres" id="7"]
-[ext_resource type="Texture2D" uid="uid://bii1te02er04y" path="res://bundles/assets/images/hud/gold.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://stjrtwq4sv3r" path="res://2d/assets/images/sum.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://d3dxpo6ovq0pr" path="res://bundles/assets/images/hud/gold.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://by5c2rtbcrr2" path="res://2d/assets/images/sum.png" id="9"]
 
 [sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(0.290196, 0, 0.407843, 0.831373)

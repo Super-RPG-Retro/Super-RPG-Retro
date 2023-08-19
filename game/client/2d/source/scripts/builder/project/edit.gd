@@ -43,7 +43,7 @@ func _ready():
 		
 func _input(event):	
 	if event.is_action_pressed("ui_escape", true):
-		var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+		var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 			
 	
 func _on_UseCustomGame_toggled(button_pressed):
@@ -96,7 +96,7 @@ func _on_Node2D_tree_exiting():
 	queue_free()
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 
 
 func _on_UpdateMobsButton_pressed():

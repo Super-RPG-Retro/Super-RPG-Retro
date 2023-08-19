@@ -300,7 +300,7 @@ func _draw_empty_rows(_p: int):
 func _return_to_main_menu():
 	call_deferred("_prepare_save_data")
 	
-	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 
 
 # save data when ending task or when clicking the "x" button at top-right corner of app.

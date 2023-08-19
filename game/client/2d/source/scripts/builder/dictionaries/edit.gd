@@ -465,7 +465,7 @@ func _on_ItemList_item_selected(index):
 			return
 		
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://3d/scenes/Gridmap.tscn")
+	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 
 
 # this saves all current object data back to its json file.

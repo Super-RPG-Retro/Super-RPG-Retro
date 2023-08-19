@@ -1,8 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://cupwku7ga8cm"]
+[gd_scene load_steps=35 format=3 uid="uid://cupwku7ga8cm"]
 
 [ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://260f2cqe7tfn" path="res://2d/assets/themes/rounded_button.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://dsy3cf3n67m68" path="res://bundles/assets/images/foundation/stone1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://e0vfqn8o86wr" path="res://bundles/assets/images/foundation/stone1.png" id="3"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/unit_description.gd" id="4"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/try_move.gd" id="5"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/build_level.gd" id="6"]
@@ -11,14 +11,14 @@
 [ext_resource type="Script" path="res://2d/source/scripts/game/reference.gd" id="9"]
 [ext_resource type="Script" path="res://2d/source/scripts/runes/rune_casted.gd" id="10"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/game_world.gd" id="11"]
-[ext_resource type="Texture2D" uid="uid://c31k6r5ijymou" path="res://bundles/assets/images/foundation/ceiling.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://6lsnrt2yoi84" path="res://bundles/assets/images/foundation/floor_rooms1.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://bh26dpa7f0qtp" path="res://bundles/assets/images/foundation/ladder_up1.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://c47n1q0qrjkcd" path="res://bundles/assets/images/foundation/door1.png" id="15"]
-[ext_resource type="Texture2D" uid="uid://8wmikatoqief" path="res://bundles/assets/images/foundation/ladder_down1.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://bl644d6odl2ff" path="res://bundles/assets/images/foundation/wall1.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://cvqxd1ti11j7o" path="res://bundles/assets/images/foundation/floor1.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://cjwym5pj170tk" path="res://2d/assets/images/black.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://doqxpxf13ahcf" path="res://bundles/assets/images/foundation/ceiling.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bmhp2pfp35dhg" path="res://bundles/assets/images/foundation/floor_rooms1.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://cnsjwi2klr7x5" path="res://bundles/assets/images/foundation/ladder_up1.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://dc4yx3c1k4x3d" path="res://bundles/assets/images/foundation/door1.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://c2r35p33ipt6e" path="res://bundles/assets/images/foundation/ladder_down1.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bagaynl1wno8y" path="res://bundles/assets/images/foundation/wall1.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://b5flkg62r886x" path="res://bundles/assets/images/foundation/floor1.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://dmgicbawq3jpk" path="res://2d/assets/images/black.png" id="19"]
 [ext_resource type="PackedScene" uid="uid://jvbp0m8x4ujy" path="res://2d/source/scenes/player.tscn" id="20"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qhd7"]
@@ -531,15 +531,12 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.231373, 0.0313726, 0.470588, 0.913725)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0737j"]
-viewport_path = NodePath("WorldViewport")
-
 [node name="SubViewportContainer" type="SubViewportContainer"]
 custom_minimum_size = Vector2(608, 352)
-offset_left = 38.0
-offset_top = 38.0
-offset_right = 646.0
-offset_bottom = 390.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 648.0
+offset_bottom = 392.0
 
 [node name="WorldViewport" type="SubViewport" parent="."]
 process_mode = 3
@@ -614,12 +611,6 @@ theme = ExtResource("1")
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_styles/panel = SubResource("StyleBoxFlat_gqywc")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
-texture = SubResource("ViewportTexture_0737j")
-expand_mode = 1
-stretch_mode = 1
 
 [node name="MiniMapCenterIndicator" type="Panel" parent="."]
 visible = false

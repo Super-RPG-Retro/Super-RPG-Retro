@@ -1,16 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://jvbp0m8x4ujy"]
 
-[ext_resource type="Texture2D" uid="uid://dgl4rp02oqq2i" path="res://bundles/assets/images/player_characters/0.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://dx2cbe3q0oetw" path="res://2d/assets/images/light.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c31wg8syn5xs7" path="res://bundles/assets/images/player_characters/0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dopc6bwpqbqk6" path="res://2d/assets/images/light.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dfn70hyvybogq" path="res://2d/source/scenes/entity_child_scene.tscn" id="3"]
 [ext_resource type="Script" path="res://2d/source/scripts/player/player.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://bd02kylnba5jd" path="res://2d/assets/images/cursor/mouse_select_object1.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://2n814hd3hhh5" path="res://2d/assets/images/cursor/mouse_select_object2.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://0xdm7wod2uwt" path="res://2d/assets/images/cursor/mouse_select_object1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ca0qbm17jg2ku" path="res://2d/assets/images/cursor/mouse_select_object2.png" id="6"]
 [ext_resource type="Animation" path="res://2d/assets/animation/hit.tres" id="7"]
 [ext_resource type="Animation" path="res://2d/assets/animation/goodbye.tres" id="8"]
 [ext_resource type="Animation" path="res://2d/assets/animation/hello.tres" id="9"]
-[ext_resource type="Texture2D" uid="uid://ct0wr3qkvbrl" path="res://2d/assets/images/rune_select_object1.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://bbbnwwfomflen" path="res://2d/assets/images/cursor/rune_select_object2.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://ba8ah3tetj186" path="res://2d/assets/images/rune_select_object1.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://p3ypd111lysm" path="res://2d/assets/images/cursor/rune_select_object2.png" id="11"]
 
 [sub_resource type="SpriteFrames" id="7"]
 animations = [{

@@ -301,7 +301,6 @@ func scene_3d():
 	if Variables._at_library == true:
 		if _3d_library == null:
 			_3d_library = Preload._3d_scene.instantiate()
-			#_2d_mini_map.get_node("TextureRect").visible = true
 			add_child(_3d_library)
 			
 		_3d_library.visible = true
@@ -309,7 +308,7 @@ func scene_3d():
 		Variables._compass = Variables._compass_last_known_for_3d
 		
 		_2d_main_map.visible = false
-		#_2d_mini_map.visible = false
+		_2d_mini_map.visible = false
 		_tile_summary.visible = false
 		_artifacts.visible = true
 		
@@ -328,7 +327,7 @@ func scene_2d():
 			_3d_library.visible = false	
 				
 		_2d_main_map.visible = true
-		#_2d_mini_map.visible = true
+		_2d_mini_map.visible = true
 		_tile_summary.visible = true
 		_artifacts.visible = false
 		
@@ -368,20 +367,16 @@ func add_scenes():
 	
 	toggle_client_chat_panel()
 		
-	#if _2d_mini_map == null:
-		#_2d_mini_map = _2d_main_map.duplicate()
-		#_2d_mini_map.set_position(Vector2( 672, 419 ))
+	if _2d_mini_map == null:
+		_2d_mini_map = _2d_main_map.duplicate(15)
+		add_child(_2d_mini_map)
 		
-		#_2d_mini_map.get_node("TextureRect").set_position(Vector2( 672, 419 ))
-		#_2d_mini_map.get_node("TextureRect").visible = false
 		
-		#_2d_mini_map.set_size(Vector2( 173, 85 ))
-		#_2d_mini_map.get_node("WorldViewport").set_size(Vector2( 344, 170 ))
+		_2d_mini_map.set_position(Vector2( 672, 414 ))
+		_2d_mini_map.set_size(Vector2( 173, 80 ))
+		_2d_mini_map.get_node("WorldViewport").set_size(Vector2( 344, 170 ))
+		_2d_mini_map.get_node("WorldViewport/GameWorld/Player/Camera2D").set_zoom(Vector2( 0.25, 0.25 ))
 		
-		#add_child(#_2d_mini_map)
-		#_2d_mini_map.get_node("WorldViewport/GameWorld/Player/Camera2D").set_zoom(Vector2( 0.2, 0.2 ))
-		#_2d_mini_map.visible = true
-	
 	
 	if _artifacts == null:
 		_artifacts = Preload._artifacts_scene.instantiate()
@@ -485,13 +480,10 @@ func toggle_client_chat_panel():
 		_client.get_node(_client_size).custom_minimum_size.y = 84
 		_client.get_node(_client_size).size.y = 84
 		
-		_2d_main_map.get_node("TextureRect").position = Vector2( -365, -76)
-		
 	else:
 		_client.get_node("MarginContainer").offset_top = 418
 		_client.get_node(_client_size).custom_minimum_size.y = 164
 		_client.get_node("MarginContainer/VBoxContainer/Client/Panel/VBoxContainer").size.y = 164
-		_2d_main_map.get_node("TextureRect").position = Vector2( -365, -116)
 		
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/settings_game.txt", Settings._game)
 	

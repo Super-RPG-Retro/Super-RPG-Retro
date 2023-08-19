@@ -2,10 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="1"]
 [ext_resource type="Script" path="res://2d/source/scripts/runes/rune_help.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://lpefj48b7wqp" path="res://2d/assets/images/arrows/arrow_small_right.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dl2llhah32hdi" path="res://2d/assets/images/arrows/arrow_small_left.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://chym0tkywvuks" path="res://2d/assets/images/arrows/arrow_small_right.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://boqxdm04wt8ml" path="res://2d/assets/images/arrows/arrow_small_left.png" id="4"]
 [ext_resource type="Theme" uid="uid://dce5wod4p186f" path="res://2d/assets/themes/transparent-child.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://chbay3rh21fae" path="res://bundles/assets/images/magic/minor_healing.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://clrdp1n5kt0w5" path="res://bundles/assets/images/magic/minor_healing.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/scene_header.tscn" id="7"]
 
 [node name="node" type="Node2D" groups=["rune_help"]]

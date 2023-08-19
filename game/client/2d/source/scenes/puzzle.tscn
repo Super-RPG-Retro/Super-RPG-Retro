@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bo2qvjtbg6flc"]
 
-[ext_resource path="res://2d/assets/images/events/puzzles/block.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://dmu6aqhom0qp8" path="res://2d/assets/images/events/puzzles/block.png" id="1"]
 
 [node name="Puzzle" type="Sprite2D" groups=["mobs"]]
-position = Vector2( 288, 224 )
 z_index = -1
+position = Vector2(288, 224)
 centered = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
-offset = Vector2( 16, 16 )
+texture = ExtResource("1")
+offset = Vector2(16, 16)
 hframes = 3

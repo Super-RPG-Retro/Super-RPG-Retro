@@ -1,13 +1,13 @@
 [gd_scene load_steps=19 format=3 uid="uid://xdqr5oagg0bt"]
 
-[ext_resource type="MeshLibrary" uid="uid://d1c2wue4v05bv" path="res://3d/assets/meshlibs/library.meshlib" id="1"]
-[ext_resource type="Texture2D" uid="uid://brxli4120bms0" path="res://bundles/assets/images/textures/7.png" id="1_cphlo"]
-[ext_resource type="Texture2D" uid="uid://ck7hcc06mhod2" path="res://bundles/assets/images/textures/15.png" id="2_1gp3k"]
+[ext_resource type="MeshLibrary" uid="uid://cnth8iwvlxeit" path="res://3d/assets/meshlibs/library.meshlib" id="1"]
+[ext_resource type="Texture2D" uid="uid://822my66gfora" path="res://bundles/assets/images/textures/7.png" id="1_cphlo"]
+[ext_resource type="Texture2D" uid="uid://dqci2e0lkgccl" path="res://bundles/assets/images/textures/15.png" id="2_1gp3k"]
 [ext_resource type="Script" path="res://3d/scripts/camera_movement.gd" id="3"]
 [ext_resource type="Script" path="res://3d/scripts/mouse_coordinates.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://bx2874uhmk2ak" path="res://3d/scenes/dungeon_door.tscn" id="6_tt7m0"]
 [ext_resource type="PackedScene" uid="uid://6vja344wdwgc" path="res://3d/scenes/torch.tscn" id="7_yxakl"]
-[ext_resource type="AudioStream" uid="uid://djsp5hrtwv4sd" path="res://audio/sound/teleport.ogg" id="12"]
+[ext_resource type="AudioStream" uid="uid://c6p4kavw1jk44" path="res://audio/sound/teleport.ogg" id="12"]
 [ext_resource type="Script" path="res://3d/scripts/main_map.gd" id="13"]
 
 [sub_resource type="Environment" id="Environment_ffuqr"]
@@ -15,7 +15,6 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 3
 glow_enabled = true
-fog_enabled = true
 fog_density = 0.1
 volumetric_fog_enabled = true
 

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://2d/source/scripts/game/game_ui.gd" id="2"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/audio.gd" id="3"]
-[ext_resource type="AudioStream" uid="uid://8xdxjl8i6cbr" path="res://audio/ambient/water.ogg" id="4"]
-[ext_resource type="AudioStream" uid="uid://35cyuvcj4354" path="res://audio/ambient/wind.ogg" id="5"]
-[ext_resource type="AudioStream" uid="uid://bl8u485iti262" path="res://audio/sound/confirm.ogg" id="6"]
+[ext_resource type="AudioStream" uid="uid://b5drjdty1csrs" path="res://audio/ambient/water.ogg" id="4"]
+[ext_resource type="AudioStream" uid="uid://c3jp1ujs05yx8" path="res://audio/ambient/wind.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://cdlqf1jnhvdbj" path="res://audio/sound/confirm.ogg" id="6"]
 
 [node name="game_ui" type="Node2D" groups=["game_ui"]]
 script = ExtResource("2")
