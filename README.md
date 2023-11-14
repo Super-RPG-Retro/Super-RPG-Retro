@@ -43,10 +43,9 @@ This 3D maze is called the library. The player can enter any dungeon from the li
 * Customize the client panel.
 * Show guide images on the map where a rune can be casted.
 * Cast the rune at the main map or have instant rune casting.
-* Hide the dungeon corridor stone walls?
+* Show the dungeon corridor stone walls?
 * Try to show only the stone walls that parameter the corridor?
 * Remove every one tile wide stone tile that borders the level.
-* Should the graphics at the dungeon map be displayed larger?
 * Higher values can increase the corridor distance between rooms.
 * Trigger events based on time. Dungeons can get dark at night.
 * Game difficulty. 1: Easy. 5: Extremely difficult.
