@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="2"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="3"]
 [ext_resource type="Theme" uid="uid://fr1lin3sbs06" path="res://2d/assets/themes/transparent-static.tres" id="4"]
-[ext_resource type="Texture2D" uid="uid://c47n1q0qrjkcd" path="res://bundles/assets/images/foundation/door1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dc4yx3c1k4x3d" path="res://bundles/assets/images/foundation/door1.png" id="5"]
 [ext_resource type="Script" path="res://2d/source/scripts/builder/dictionaries/new.gd" id="6"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]

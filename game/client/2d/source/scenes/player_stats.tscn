@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfy4p73d1v7dt"]
-
-[ext_resource type="PackedScene" uid="uid://c7tytvtg0adnx" path="res://2d/source/scenes/player_stats_parent.tscn" id="1_6n3me"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="GameDataLoaded" parent="." groups=["stats_loaded"] instance=ExtResource("1_6n3me")]
-
-[editable path="GameDataLoaded"]

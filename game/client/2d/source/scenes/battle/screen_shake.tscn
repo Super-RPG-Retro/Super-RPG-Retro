@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjw8gxjo27vpq"]
 
-[ext_resource type="Script" path="res://2d/source/scripts/screen_shake/shake_screen.gd" id="1"]
+[ext_resource type="Script" path="res://2d/source/scripts/battle/shake_screen.gd" id="1"]
 
 [node name="Camera2D" type="Camera2D"]
 offset = Vector2(512, 300)

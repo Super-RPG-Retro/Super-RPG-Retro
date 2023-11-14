@@ -74,7 +74,7 @@ func _process(_delta):
 
 
 func _input(_event):
-	if _menu_rooms.has_focus() == true || _menu_rooms_sub.has_focus() == true || _menu_rooms_sub2.has_focus() == true:
+	if _menu_rooms.has_focus() == true or _menu_rooms_sub.has_focus() == true or _menu_rooms_sub2.has_focus() == true:
 		Variables.a.keycode = 0
 		
 

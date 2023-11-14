@@ -39,7 +39,7 @@ var _extra_room_size := 0
 @onready var _mobs_total := $Container/Grid/Grid7/MobsTotalSpinbox
 @onready var _item_total := $Container/Grid/Grid8/ItemTotalSpinbox
 
-# for this feature to work, Set hide_stone_walls to true. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors.
+# for this feature to work, set show_stone_walls to false. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors.
 @onready var _hide_random_corridor := $Container/Grid/Grid13/CheckButtonHideRandomCorridor
 
 #Is the store that sells only items enabled?
@@ -139,11 +139,11 @@ func _on_LevelSpinbox_value_changed(value):
 
 func _on_StartingLevel_toggled(button_pressed):
 	# update the builder starting_level data. 	
-	if button_pressed == false && Builder._data.starting_level == _level_number.value:
+	if button_pressed == false and Builder._data.starting_level == _level_number.value:
 		Builder._data.starting_level = 0
 	
 	elif button_pressed == true:
-		if Builder._data.starting_level == 0 || Builder._data.starting_level != _level_number.value:
+		if Builder._data.starting_level == 0 or Builder._data.starting_level != _level_number.value:
 			Builder._data.starting_level = _level_number.value
 
 	

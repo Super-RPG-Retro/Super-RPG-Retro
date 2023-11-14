@@ -49,11 +49,17 @@ func _ready():
 	else:
 		_on_Ambient_toggled(true)
 	
-	if Settings._system.small_client_panel == false:
-		get_node("Container/Grid/MiniClient").set_pressed(false)
+	if Settings._system.small_main_map == false:
+		get_node("Container/Grid/SmallMainMap").set_pressed(false)
 		
-	if Settings._system.hide_chat_features == true:
-		get_node("Container/Grid/HideChatFeatures").set_pressed(true)
+	if Settings._system.show_player_controls == false:
+		get_node("Container/Grid/ShowPlayerControls").set_pressed(false)
+	
+	if Settings._system.show_chat_features == false:
+		get_node("Container/Grid/ShowChatFeatures").set_pressed(false)
+		
+	if Settings._system.show_client_panel == false:
+		get_node("Container/Grid/ShowClientPanel").set_pressed(false)
 				
 	if Settings._system.rune_guides == false:
 		get_node("Container/Grid/RuneGuides").set_pressed(false)
@@ -61,16 +67,13 @@ func _ready():
 	if Settings._system.automatic_rune_casting == true:
 		get_node("Container/Grid/AutomaticRuneCasting").set_pressed(true)
 	
-	if Settings._system.use_large_tiles == false:
-		get_node("Container/Grid/UseLargeTiles").set_pressed(false)
-		
 	if Settings._system.remove_extra_stone_walls == false:
 		get_node("Container/Grid/RemoveExtraStoneWalls").set_pressed(false)
 
 	if Settings._system.remove_level_border == true:
 		get_node("Container/Grid/RemoveLevelBorder").set_pressed(true)
 		
-	hide_stone_wall()
+	show_stone_wall()
 	
 	get_node("Container/Grid/GridChild3/PlayerStatsPanelSizeSpinbox").value = Settings._system.player_stats_panel_size
 	
@@ -79,7 +82,7 @@ func _ready():
 	
 	
 func _process(_delta):
-	if Variables._stop_settings_music == true || Variables._game_over == false:
+	if Variables._stop_settings_music == true or Variables._game_over == false:
 		Variables._stop_settings_music = false
 		
 		Common._music_stop()
@@ -90,7 +93,7 @@ func _input(event):
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
-			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 
 func _gui_input(event):	
@@ -132,7 +135,7 @@ func _on_Ambient_toggled(button_pressed):
 		$AmbientWind.stream = load("res://audio/ambient/wind.ogg")
 		$AmbientWater.stream = load("res://audio/ambient/water.ogg")
 		
-		if $AmbientWind.playing == false || $AmbientWater.playing == false:
+		if $AmbientWind.playing == false or $AmbientWater.playing == false:
 			randomize()
 			
 			# these random values after % are in seconds. this statement says to play either from the beginning of the sound to the track that is 175 seconds from the start. before adding the seconds value, determine if that sound have a length that long.
@@ -144,12 +147,27 @@ func _on_Ambient_toggled(button_pressed):
 		$AmbientWater.stop()
 
 
-func _on_mini_client_Enabled_toggled(button_pressed):
-	Settings._system.small_client_panel = button_pressed	
+func _on_small_main_map_Enabled_toggled(button_pressed):
+	Settings._system.small_main_map = button_pressed
 	
 
-func _on_hide_chat_features_Enabled_toggled(button_pressed):
-	Settings._system.hide_chat_features = button_pressed	
+func _on_show_player_controls_Enabled_toggled(button_pressed):
+	Settings._system.show_player_controls = button_pressed
+
+
+func _on_show_client_panel_Enabled_toggled(button_pressed):
+	Settings._system.show_client_panel = button_pressed
+	
+	if Settings._system.show_client_panel == false:
+		get_node("Container/Grid/SmallMainMap").set_pressed(false)
+		get_node("Container/Grid/SmallMainMap").disabled = true
+		
+	else:
+		get_node("Container/Grid/SmallMainMap").disabled = false
+		
+
+func _on_show_chat_features_Enabled_toggled(button_pressed):
+	Settings._system.show_chat_features = button_pressed
 	
 	
 func _on_GameSeedSpinbox_value_changed(value):
@@ -161,22 +179,22 @@ func _on_rune_guides_Enabled_toggled(button_pressed):
 	
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 
 func _on_automatic_rune_casting_Enabled_toggled(button_pressed):
 	Settings._system.automatic_rune_casting = button_pressed
 	
 
-func _on_hide_stone_walls_Enabled_toggled(button_pressed):
-	Settings._system.hide_stone_walls = button_pressed
-	hide_stone_wall()
+func _on_show_stone_walls_Enabled_toggled(button_presse):
+	Settings._system.show_stone_walls = button_presse
+	show_stone_wall()
 	
 
 # when stone walls toggle button is enabled, other settings need their values changed. for example, no need to toggle the "remove extra stone walls" feature when this feature is enabled.
-func hide_stone_wall():
-	if Settings._system.hide_stone_walls == true:
-		get_node("Container/Grid/HideStoneWalls").set_pressed(true)
+func show_stone_wall():
+	if Settings._system.show_stone_walls == false:
+		get_node("Container/Grid/ShowStoneWalls").set_pressed(false)
 		
 		get_node("Container/Grid/RemoveExtraStoneWalls").set_pressed(false)
 		
@@ -198,11 +216,7 @@ func _on_remove_extra_stone_walls_Enabled_toggled(button_pressed):
 
 func _on_remove_level_border_Enabled_toggled(button_pressed):
 	Settings._system.remove_level_border = button_pressed
-	
 
-func _on_use_large_tiles_Enabled_toggled(button_pressed):
-	Settings._system.use_large_tiles = button_pressed
-	
 
 func _on_corridor_length_between_rooms_SpinBox_value_changed(button_pressed):
 	Settings._system.corridor_length_between_rooms = button_pressed
@@ -214,3 +228,5 @@ func _on_player_stats_panel_size_Spinbox_value_changed(button_pressed):
 
 func _on_Node2D_tree_exiting():
 	Filesystem.save("user://saved_data/settings_system.txt", Settings._system)
+
+

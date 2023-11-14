@@ -48,7 +48,7 @@ var _start_button_clicked := 0
 
 func _ready():
 	# if this is true then all directories have been created, there is no need to do anything else. go to main menu.
-	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magic/data/1") == true && FileAccess.file_exists("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt") == true: # && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/8"):
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magic/data/1") == true and FileAccess.file_exists("user://saved_data/builder_magic_" + str(Builder._config.game_id) + ".txt") == true: # and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/2") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/3") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/4") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/5") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/6") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/7") and DirAccess.dir_exists_absolute(Variables._project_path + "/builder/magics/data/8"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 		
 		_show_start_button()
@@ -59,14 +59,14 @@ func _ready():
 		
 	
 func _process_objects_directory():
-	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/1"): #&& DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/8"):
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/data/1"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 		
 	else:
 		_timer_objects_display_panel.start()
 	
 	
-	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/1"): #&& DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/2") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/3") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/4") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/5") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/6") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/7") && DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/8"):
+	if DirAccess.dir_exists_absolute(Variables._project_path + "/builder/objects/images/dictionaries/1"):
 		$Panel.modulate = Color(1, 1, 1, 0)
 	
 	else:
@@ -90,14 +90,14 @@ func _physics_process(_delta):
 	
 	if _do_magic_directory == true:
 		# show the progress of magic by updating the progress bar.
-		if _timer_magic_display_panel.time_left > 0 && _modulate < 1:
+		if _timer_magic_display_panel.time_left > 0 and _modulate < 1:
 			_modulate += 0.025
 			
 			$Panel.modulate = Color(1, 1, 1, _modulate)
 		
 		# if there are no more files for magic to process then the json object files will be processed.
 		# use this value for magic.
-		elif _progress_bar.value >= 400 && _total_magic_files_in_directory == Json._magic.size():
+		elif _progress_bar.value >= 400 and _total_magic_files_in_directory == Json._magic.size():
 			_next_builder_data_directory = 0
 			#_progress_bar.value = 0
 			_modulate = 0
@@ -117,12 +117,12 @@ func _physics_process(_delta):
 			_process_objects_directory()
 		
 			
-	if _next_builder_data_directory == 2 && _progress_bar.value >= 402: # 402 = progress bar at 100 percent. don't change this value.
+	if _next_builder_data_directory == 2 and _progress_bar.value >= 402: # 402 = progress bar at 100 percent. don't change this value.
 		# this is needed so that _process() func does not read this code block again.
 		_next_builder_data_directory += 1
 		_show_start_button()
 
-	if _can_go_to_main_menu == true && _start_button_clicked == 0:
+	if _can_go_to_main_menu == true and _start_button_clicked == 0:
 		if _pressed_start_modulate > 0:
 			_pressed_start_modulate -= 0.1
 			
@@ -133,7 +133,7 @@ func _physics_process(_delta):
 	
 	
 func _input(event):	
-	if event is InputEventScreenTouch || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || event.is_action_pressed("ui_accept", true):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT or event.is_action_pressed("ui_accept", true):
 		if _can_go_to_main_menu == true:
 			$PressStart.modulate = Color(1, 1, 1, 1)
 		
@@ -141,7 +141,7 @@ func _input(event):
 
 
 func _go_to_main_menu():
-		var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+		var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 # for the json files...
 # copy a res:// directory plus all files inside that directory to the same directory at user://
@@ -161,7 +161,7 @@ func copy_directory_recursively(_dir_from: String, _dir_to: String) -> void:
 		var file_name = directory.get_next()
 		
 		# continue if file or directory exists.
-		while (file_name != "" && file_name != "." && file_name != ".." && file_name != "desktop.ini"):
+		while (file_name != "" and file_name != "." and file_name != ".." and file_name != "desktop.ini"):
 			
 			var _timer = Timer.new()
 			_timer.wait_time = 0.001
@@ -244,7 +244,7 @@ func copy_image_directory_recursively(_dir_from: String, _dir_to: String) -> voi
 		var file_name = directory.get_next()
 		
 		# continue if file or directory exists.
-		while (file_name != "" && file_name != "." && file_name != ".."):
+		while (file_name != "" and file_name != "." and file_name != ".."):
 			
 			var _timer = Timer.new()
 			_timer.wait_time = 0.001

@@ -111,7 +111,7 @@ func _on_event_number_Spinbox_value_changed(value):
 		
 func _input(event):
 	# this changes the puzzle block appearence.
-	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click"):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if _is_mouse_selecting_block_s_location == true:
 			Builder._event_puzzles.data.coordinates_s_location[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number][_selected_block_number_s_location] += 1
 			if Builder._event_puzzles.data.coordinates_s_location[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number][_selected_block_number_s_location] == 3:
@@ -123,7 +123,7 @@ func _input(event):
 			_update_coordinates_static()
 			
 	
-	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click"):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if _is_mouse_selecting_block_e_location == true:
 			Builder._event_puzzles.data.coordinates_e_location[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number][_selected_block_number_e_location] += 1
 			if Builder._event_puzzles.data.coordinates_e_location[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_puzzles.data.event_number][_selected_block_number_e_location] == 3:

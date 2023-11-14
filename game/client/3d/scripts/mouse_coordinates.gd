@@ -22,19 +22,18 @@ func _ready():
 	
 		
 func _process(_delta):
-	Variables._mouse_cursor_position.x = get_global_mouse_position().x - 32 * 4    
-	Variables._mouse_cursor_position.y = get_global_mouse_position().y - 32 * 4
+	Variables._mouse_cursor_position.x = get_global_mouse_position().x
+	Variables._mouse_cursor_position.y = get_global_mouse_position().y
 
 func _input(event):
 	# first dungeon. first level.
 	# button_normal
-	if Variables._dungeon_coordinates == "3,6" && Variables._compass == "E":
+	if Variables._dungeon_coordinates == "3,6" and Variables._compass == "E":
 		# button_selected		
-		if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_released("ui_left_mouse_click"):
+		if event is InputEventMouseButton and event.released and event.button_index == MOUSE_BUTTON_LEFT:
 			get_tree().call_group("button", "hide")
 			
 			Variables._compass_last_known_for_3d = Variables._compass
-			Variables._child_scene_open = false
 			Variables._at_library = false				
 			Variables._game_over = false
 			

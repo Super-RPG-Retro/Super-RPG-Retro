@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cn0p0o8giw1sd"]
 
-[ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/scene_header.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/common/scene_header.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="2"]
-[ext_resource type="AudioStream" uid="uid://djsp5hrtwv4sd" path="res://audio/sound/teleport.ogg" id="3"]
-[ext_resource type="PackedScene" uid="uid://bm5tpl0ppabiw" path="res://2d/source/scenes/difficulty_level.tscn" id="5"]
-[ext_resource type="Texture2D" uid="uid://cnpb6y06urx4t" path="res://2d/assets/images/title_background.jpg" id="6"]
+[ext_resource type="AudioStream" uid="uid://c6p4kavw1jk44" path="res://audio/sound/teleport.ogg" id="3"]
+[ext_resource type="PackedScene" uid="uid://bm5tpl0ppabiw" path="res://2d/source/scenes/common/difficulty_level.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://djjuu5owuj4t8" path="res://2d/assets/images/title_background.jpg" id="6"]
 [ext_resource type="Script" path="res://2d/source/scripts/settings/system.gd" id="7"]
 
 [node name="Node2D" type="Node2D" groups=["settings_system"]]
@@ -42,6 +42,7 @@ custom_minimum_size = Vector2(355, 0)
 layout_mode = 2
 button_pressed = true
 text = "Music"
+alignment = 2
 
 [node name="Label1" type="Label" parent="Container/Grid"]
 custom_minimum_size = Vector2(600, 0)
@@ -52,6 +53,7 @@ text = "Enable music globally."
 layout_mode = 2
 button_pressed = true
 text = "Sound"
+alignment = 2
 
 [node name="Label3" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -61,6 +63,7 @@ text = "Enable Sound globally."
 layout_mode = 2
 button_pressed = true
 text = "Ambient"
+alignment = 2
 
 [node name="Label4" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -70,6 +73,7 @@ text = "Enable wind and water drop sounds."
 layout_mode = 2
 button_pressed = true
 text = "Random 2D Mazes"
+alignment = 2
 
 [node name="Label6" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -117,18 +121,42 @@ max_value = 3.0
 layout_mode = 2
 text = "The size of the player stats panel. 0:Magic panel and Inventory panel shown. 1:Magic panel hidden. 2:Inventory panel hidden. 3:Both magic panel and inventory panel are hidden."
 
-[node name="MiniClient" type="CheckButton" parent="Container/Grid"]
+[node name="SmallMainMap" type="CheckButton" parent="Container/Grid"]
 layout_mode = 2
 button_pressed = true
-text = "Mini Client"
+text = "Small Main Map"
+alignment = 2
 
 [node name="Label10" type="Label" parent="Container/Grid"]
 layout_mode = 2
-text = "Show more of the main map by showing less of the client panel."
+text = "Show more of the main map by showing less of the client panel? ShowPlayerControls is ignored when ClientPanel is false."
 
-[node name="HideChatFeatures" type="CheckButton" parent="Container/Grid"]
+[node name="ShowPlayerControls" type="CheckButton" parent="Container/Grid"]
 layout_mode = 2
-text = "Hide Chat Features"
+button_pressed = true
+text = "Show Player Controls"
+alignment = 2
+
+[node name="Label13" type="Label" parent="Container/Grid"]
+layout_mode = 2
+text = "Should the navigation panel, displaying the WASD buttons and A, B, C, D buttons be shown?"
+
+[node name="ShowClientPanel" type="CheckButton" parent="Container/Grid"]
+layout_mode = 2
+button_pressed = true
+text = "Show Client Panel"
+alignment = 2
+
+[node name="Label14" type="Label" parent="Container/Grid"]
+layout_mode = 2
+text = "# Display the panel that shows user text, output text, username, server button, public room button, private room button, commands button and game button?
+"
+
+[node name="ShowChatFeatures" type="CheckButton" parent="Container/Grid"]
+layout_mode = 2
+button_pressed = true
+text = "Show Chat Features"
+alignment = 2
 
 [node name="Label11" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -139,6 +167,7 @@ layout_mode = 2
 theme = ExtResource("2")
 button_pressed = true
 text = "Rune Guides"
+alignment = 2
 
 [node name="Label12" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -148,25 +177,29 @@ text = "Show guide images on map where a rune can be casted."
 layout_mode = 2
 theme = ExtResource("2")
 text = "Automatic Rune Casting"
+alignment = 2
 
 [node name="Label15" type="Label" parent="Container/Grid"]
 layout_mode = 2
 text = "Off: Cast the rune at the main map. On: Instant rune casting"
 
-[node name="HideStoneWalls" type="CheckButton" parent="Container/Grid"]
+[node name="ShowStoneWalls" type="CheckButton" parent="Container/Grid"]
 layout_mode = 2
 theme = ExtResource("2")
-text = "Hide Stone Walls"
+button_pressed = true
+text = "Show Stone Walls"
+alignment = 2
 
 [node name="Label19" type="Label" parent="Container/Grid"]
 layout_mode = 2
-text = "Hide the dungeon corridor stone walls?"
+text = "Show  the dungeon corridor stone walls?"
 
 [node name="RemoveExtraStoneWalls" type="CheckButton" parent="Container/Grid"]
 layout_mode = 2
 theme = ExtResource("2")
 button_pressed = true
 text = "Remove Extra Stone Walls"
+alignment = 2
 
 [node name="Label20" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -176,20 +209,11 @@ text = "Try to show only the stone walls that parameter the corridor?"
 layout_mode = 2
 theme = ExtResource("2")
 text = "Remove Level Border"
+alignment = 2
 
 [node name="Label21" type="Label" parent="Container/Grid"]
 layout_mode = 2
 text = "Remove every one tile wide Stone tile that borders the level."
-
-[node name="UseLargeTiles" type="CheckButton" parent="Container/Grid"]
-layout_mode = 2
-theme = ExtResource("2")
-button_pressed = true
-text = "Use Large Tiles"
-
-[node name="Label22" type="Label" parent="Container/Grid"]
-layout_mode = 2
-text = "Should the graphics at the dungeon map be displayed larger?"
 
 [node name="GridChild2" type="HBoxContainer" parent="Container/Grid"]
 layout_mode = 2
@@ -229,14 +253,15 @@ text = ""
 [connection signal="toggled" from="Container/Grid/Randomize2dMaze" to="." method="_on_randomize_2d_maze_Enabled_toggled"]
 [connection signal="value_changed" from="Container/Grid/GridChild/GameSeedSpinbox" to="." method="_on_GameSeedSpinbox_value_changed"]
 [connection signal="value_changed" from="Container/Grid/GridChild3/PlayerStatsPanelSizeSpinbox" to="." method="_on_player_stats_panel_size_Spinbox_value_changed"]
-[connection signal="toggled" from="Container/Grid/MiniClient" to="." method="_on_mini_client_Enabled_toggled"]
-[connection signal="toggled" from="Container/Grid/HideChatFeatures" to="." method="_on_hide_chat_features_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/SmallMainMap" to="." method="_on_small_main_map_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/ShowPlayerControls" to="." method="_on_show_player_controls_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/ShowClientPanel" to="." method="_on_show_client_panel_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/ShowChatFeatures" to="." method="_on_show_chat_features_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/RuneGuides" to="." method="_on_rune_guides_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/AutomaticRuneCasting" to="." method="_on_automatic_rune_casting_Enabled_toggled"]
-[connection signal="toggled" from="Container/Grid/HideStoneWalls" to="." method="_on_hide_stone_walls_Enabled_toggled"]
+[connection signal="toggled" from="Container/Grid/ShowStoneWalls" to="." method="_on_show_stone_walls_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/RemoveExtraStoneWalls" to="." method="_on_remove_extra_stone_walls_Enabled_toggled"]
 [connection signal="toggled" from="Container/Grid/RemoveLevelBorder" to="." method="_on_remove_level_border_Enabled_toggled"]
-[connection signal="toggled" from="Container/Grid/UseLargeTiles" to="." method="_on_use_large_tiles_Enabled_toggled"]
 [connection signal="value_changed" from="Container/Grid/GridChild2/CorridorLengthSpinBox" to="." method="_on_corridor_length_between_rooms_SpinBox_value_changed"]
 
 [editable path="SceneHeader"]

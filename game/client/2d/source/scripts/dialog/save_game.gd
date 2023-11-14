@@ -26,25 +26,22 @@ func _ready():
 # without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
 func _process(_delta):
 	if visible == true:
-		get_tree().call_group("magic_panel", "rune_summary_visible_false")
-		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
-		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("game_ui", "hide_cursor")
+		get_tree().call_group("game_ui", "hide_tile_summary")
 		get_tree().call_group("tile_summary", "unit_text_clear")
 		
 
 func save_game():
-	Variables._child_scene_open = false
-	
 	# put stats into one dictionary then save data in binary format so that nobody can edit that file.
-	Common._update_stats_last_player(P._number)
+	Common._update_stats_last_player(PC._number)
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/loaded_username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/loaded_username.txt", PC.character_stats[str(PC._number)]["_loaded"].Username)
 		
 	#save stats
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P.character_stats)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", PC.character_stats)
 	
 	for _i in range (7):
-		P.character_stats[str(_i)]["_saved"] = P.character_stats[str(_i)]["_loaded"]
+		PC.character_stats[str(_i)]["_saved"] = PC.character_stats[str(_i)]["_loaded"]
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/hud.txt", Hud._loaded)	
 	Hud._saved = Hud._loaded
@@ -61,12 +58,8 @@ func _on_ConfirmationDialog_confirmed():
 		_confirmation_dialog.visible = false
 
 	save_game()
-	Variables._child_scene_open = false
+	
 	get_tree().call_group("input_client", "_on_LineEdit_mouse_entered")
 
-func _on_ConfirmationDialog_hide():
-	Variables._child_scene_open = false
-	# focus the line edit node.
-	get_tree().call_group("input_client", "_on_LineEdit_mouse_entered")
-	
+
 

@@ -1,15 +1,16 @@
-[gd_scene load_steps=35 format=3 uid="uid://cupwku7ga8cm"]
+[gd_scene load_steps=36 format=3 uid="uid://cupwku7ga8cm"]
 
 [ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="1"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/world_viewport.gd" id="1_c0thb"]
 [ext_resource type="Theme" uid="uid://260f2cqe7tfn" path="res://2d/assets/themes/rounded_button.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://e0vfqn8o86wr" path="res://bundles/assets/images/foundation/stone1.png" id="3"]
-[ext_resource type="Script" path="res://2d/source/scripts/game/unit_description.gd" id="4"]
-[ext_resource type="Script" path="res://2d/source/scripts/game/try_move.gd" id="5"]
-[ext_resource type="Script" path="res://2d/source/scripts/game/build_level.gd" id="6"]
-[ext_resource type="Script" path="res://2d/source/scripts/runes/rune_casting.gd" id="7"]
-[ext_resource type="Script" path="res://2d/source/scripts/game/player_damage.gd" id="8"]
-[ext_resource type="Script" path="res://2d/source/scripts/game/reference.gd" id="9"]
-[ext_resource type="Script" path="res://2d/source/scripts/runes/rune_casted.gd" id="10"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/unit_description.gd" id="4"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/try_move.gd" id="5"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/build_level.gd" id="6"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/runes/rune_casting.gd" id="7"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/player_damage.gd" id="8"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/reference.gd" id="9"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_world_sub/runes/rune_casted.gd" id="10"]
 [ext_resource type="Script" path="res://2d/source/scripts/game/game_world.gd" id="11"]
 [ext_resource type="Texture2D" uid="uid://doqxpxf13ahcf" path="res://bundles/assets/images/foundation/ceiling.png" id="12"]
 [ext_resource type="Texture2D" uid="uid://bmhp2pfp35dhg" path="res://bundles/assets/images/foundation/floor_rooms1.png" id="13"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bagaynl1wno8y" path="res://bundles/assets/images/foundation/wall1.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://b5flkg62r886x" path="res://bundles/assets/images/foundation/floor1.png" id="18"]
 [ext_resource type="Texture2D" uid="uid://dmgicbawq3jpk" path="res://2d/assets/images/black.png" id="19"]
-[ext_resource type="PackedScene" uid="uid://jvbp0m8x4ujy" path="res://2d/source/scenes/player.tscn" id="20"]
+[ext_resource type="PackedScene" uid="uid://jvbp0m8x4ujy" path="res://2d/source/scenes/sprites/player.tscn" id="20"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qhd7"]
 texture = ExtResource("17")
@@ -532,11 +533,14 @@ border_width_bottom = 2
 border_color = Color(0.231373, 0.0313726, 0.470588, 0.913725)
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
-custom_minimum_size = Vector2(608, 352)
+z_index = -4096
+custom_minimum_size = Vector2(608, 0)
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 648.0
 offset_bottom = 392.0
+focus_mode = 2
+script = ExtResource("1_c0thb")
 
 [node name="WorldViewport" type="SubViewport" parent="."]
 process_mode = 3
@@ -616,6 +620,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gqywc")
 visible = false
 layout_mode = 2
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="WorldViewport/GameWorld/Unit/Timer" to="WorldViewport/GameWorld/Unit" method="_on_Timer_timeout"]
 [connection signal="timeout" from="WorldViewport/GameWorld/TimerDelayMove" to="WorldViewport/GameWorld" method="_on_timer_delay_move_timeout"]
 [connection signal="timeout" from="WorldViewport/GameWorld/TimerRuneZorder" to="WorldViewport/GameWorld/RuneCasting" method="_on_TimerRuneZorder_timeout"]

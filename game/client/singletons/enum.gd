@@ -32,10 +32,11 @@ enum Movement_type {Target_player, Stationary, Avoid_player, Run_away_from_playe
 enum Builder_dictionary {mobs, mobs1, mobs2, weapon, armor, book, gold, scroll, ring, food, wand, amulet}
 
 # each scene uses one of these values as a scene id, to determine where player is at.
-enum Scene {Main_Menu, High_scores, Settings_system, Settings_game, Builder, Game_UI, Game_help, Rune_buying}
+enum Scene {Main_Menu, High_scores, Settings_system, Settings_game, Builder, Game_UI}
+enum Scene_sub {Game_help, Rune_buying}
 
 # client commands, using the "/" key at input_client.
-enum Trigger_commands {Nothing, Debug, Host_connect_disconnect, Game_help, Wait_a_turn, Client_panel_toggle_size, Unit_description}
+enum Trigger_commands {Nothing, Debug, Host_connect_disconnect, Game_help, Wait_a_turn, small_main_map_toggle_size, Unit_description}
 
 # when someone drops an item, this enum is used to selected an item from the available list. see random drop item at reference constructor at game.scene
 enum selected {Paper, Potion}

@@ -94,35 +94,33 @@ func _process(_delta):
 	_scroll.scroll_horizontal = _scroll2.scroll_horizontal
 	
 	# current position of the mouse cursor.
-	Variables._mouse_cursor_position.x = get_global_mouse_position().x - 128
-	Variables._mouse_cursor_position.y = get_global_mouse_position().y - 128
+	Variables._mouse_cursor_position.x = get_global_mouse_position().x
+	Variables._mouse_cursor_position.y = get_global_mouse_position().y
 	
-	if Variables._mouse_cursor_position.y > 442: # bottom of screen.
+	if Variables._mouse_cursor_position.y > 570: # bottom of screen.
 		# this is the button that follows the cursor.
 		_select_button.position.y = 556
 		
-	elif Variables._mouse_cursor_position.y >= 81: # current starting location.
-		_select_button.position.y = Variables._mouse_cursor_position.y + 114
+	elif Variables._mouse_cursor_position.y >= 209: # current starting location.
+		_select_button.position.y = Variables._mouse_cursor_position.y + 242
 	else:
 		_select_button.position.y = 194
 		
 
 func _input(event):
-	if Variables._child_scene_open == false:
-		return
-	
 	if(event.is_pressed()):
 		if event.is_action_pressed("ui_escape", true):
 			_on_ButtonExit_pressed()
 	
 	# this stops setting more than one radio button to active simultaneously.
-	if event is InputEventKey && event.pressed && Variables.select_json_dictionary_singly == true:
-		if event.keycode == KEY_SPACE || event.keycode == KEY_ENTER:
+	if event is InputEventKey and event.pressed and Variables.select_json_dictionary_singly == true:
+		if event.keycode == KEY_SPACE or event.keycode == KEY_ENTER:
 			for _i in _check_button.size():
 				_check_button[_i].button_pressed = false
 					
-	if event is InputEventMouseButton && event.is_action_released("ui_left_mouse_click") && Variables._mouse_cursor_position.x <= 868 && Variables._mouse_cursor_position.y >= 61 && Variables._mouse_cursor_position.y <= 460:
+	if event is InputEventMouseButton and event.released and event.button_index == MOUSE_BUTTON_LEFT and Variables._mouse_cursor_position.x <= 996 and Variables._mouse_cursor_position.y >= 189 and Variables._mouse_cursor_position.y <= 588:
 		_mouse_clicked = true
+		
 		# clear all other CheckBox if using singly item mode.
 		if Variables.select_json_dictionary_singly == true:
 			#looping through the group node children and uncheck every one except the sender checkbox
@@ -140,8 +138,8 @@ func _input(event):
 				break
 								
 			# 41 is the offset value between SelectButton at the first CheckBox. 32 is the width of the SelectButton.
-			if Variables._mouse_cursor_position.y >= 61:
-				if Variables._mouse_cursor_position.y - 41 - 32 + _scroll2.scroll_vertical <= _check_button[_i].position.y:
+			if Variables._mouse_cursor_position.y >= 189:
+				if Variables._mouse_cursor_position.y + 55 + _scroll2.scroll_vertical <= _check_button[_i].position.y:
 					_selected_item_name = _split[1]
 					
 					if Variables.select_json_dictionary_singly == false:
@@ -208,7 +206,7 @@ func _sort():
 	Variables._image_textures = Variables._file_paths.duplicate(true)
 	
 	
-	_d_column = Common._sort(Json.d[str(Builder._config.game_id)][Variables._dictionary_name], _current_item_selected, _item_list_current_index)
+	_d_column = Common._sort(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name], _current_item_selected, _item_list_current_index)
 	
 	var _do_once = true
 			
@@ -227,7 +225,7 @@ func _sort():
 		_draw_dictionary_items(_key, _i)
 		
 		# this code is needed so that the first item in the list, which might not have a value of 0, is set to focused.
-		if _found_first_item == true && _do_once == true:
+		if _found_first_item == true and _do_once == true:
 			_do_once = false
 			
 			_set_focus_to_nodes()
@@ -409,7 +407,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_cha[_i])
 		if _event == 1:
 			_cha[_i].visible = false
-	_cha[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Charisma).pad_zeros(2)
+	_cha[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Charisma).pad_zeros(2)
 	
 	
 	if _nodes_added_to_scene == false:
@@ -419,7 +417,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_con[_i])
 		if _event == 1:
 			_con[_i].visible = false
-	_con[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Constitution).pad_zeros(2)
+	_con[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Constitution).pad_zeros(2)
 	
 	
 	if _nodes_added_to_scene == false:
@@ -429,7 +427,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_def[_i])
 		if _event == 1:
 			_def[_i].visible = false
-	_def[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Defense).pad_zeros(2)
+	_def[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Defense).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -439,7 +437,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_dex[_i])
 		if _event == 1:
 			_dex[_i].visible = false
-	_dex[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Dexterity).pad_zeros(2)
+	_dex[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Dexterity).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -449,7 +447,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_int[_i])
 		if _event == 1:
 			_int[_i].visible = false
-	_int[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Intelligence).pad_zeros(2)
+	_int[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Intelligence).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -459,7 +457,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_luc[_i])
 		if _event == 1:
 			_luc[_i].visible = false
-	_luc[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Luck).pad_zeros(2)
+	_luc[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Luck).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -469,7 +467,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_per[_i])
 		if _event == 1:
 			_per[_i].visible = false
-	_per[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Perception).pad_zeros(2)
+	_per[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Perception).pad_zeros(2)
 		
 
 	if _nodes_added_to_scene == false:
@@ -479,7 +477,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_str[_i])
 		if _event == 1:
 			_str[_i].visible = false
-	_str[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Strength).pad_zeros(2)
+	_str[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Strength).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -489,7 +487,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_wis[_i])
 		if _event == 1:
 			_wis[_i].visible = false
-	_wis[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Wisdom).pad_zeros(2)
+	_wis[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Wisdom).pad_zeros(2)
 	
 
 	if _nodes_added_to_scene == false:
@@ -499,7 +497,7 @@ func _draw_dictionary_items(_key, _i:int):
 		_grid_dynamic.add_child(_wil[_i])
 		if _event == 1:
 			_wil[_i].visible = false
-	_wil[_i].text = str(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][_key].Willpower).pad_zeros(2)
+	_wil[_i].text = str(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][_key].Willpower).pad_zeros(2)
 	
 	
 	if _event == 0:
@@ -717,7 +715,7 @@ func _on_focus_exited():
 
 # this is entered when the checkbox is toggled using the arrow keys.
 func _on_item_toggled(_state):
-	if _nodes_added_to_scene == false || _mouse_clicked == true:
+	if _nodes_added_to_scene == false or _mouse_clicked == true:
 		_mouse_clicked = false
 		return
 	

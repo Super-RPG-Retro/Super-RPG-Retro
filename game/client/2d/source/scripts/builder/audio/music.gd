@@ -107,20 +107,20 @@ func _ready():
 
 func _process(_delta):
 	# current position of the mouse cursor.
-	Variables._mouse_cursor_position.x = get_global_mouse_position().x + 128
-	Variables._mouse_cursor_position.y = get_global_mouse_position().y + 128
+	Variables._mouse_cursor_position.x = get_global_mouse_position().x
+	Variables._mouse_cursor_position.y = get_global_mouse_position().y
 	
-	if Variables._mouse_cursor_position.y <= 263: # bottom of screen.
+	if Variables._mouse_cursor_position.y <= 391: # bottom of screen.
 		# this is the button that follows the cursor.
 		_select_button.position.y = 135
 		
-	elif Variables._mouse_cursor_position.y >= 663: # bottom of screen.
+	elif Variables._mouse_cursor_position.y >= 791: # bottom of screen.
 		# this is the button that follows the cursor.
 		_select_button.position.y = 535
 		
 	else:
 		# -16 -128 will center button to tip of cursor.
-		_select_button.position.y = Variables._mouse_cursor_position.y - 144
+		_select_button.position.y = Variables._mouse_cursor_position.y - 16
 		
 	
 	# hide the _select_button when clicked, so that the OptionButton can show the options for that _music_text. Once a selection is made, the OptionButton will close and then the _select_button will be set back to visible. 
@@ -132,13 +132,13 @@ func _process(_delta):
 			_found = true
 			
 			
-	if _found == false && _select_button.visible == false:
+	if _found == false and _select_button.visible == false:
 		_select_button.visible = true
 		_save_builder_data()
 		
 	
 func _input(event):
-	if event is InputEventMouseButton && event.is_action_pressed("ui_left_mouse_click"):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_select_button.visible = false
 		
 	

@@ -37,11 +37,11 @@ func all_array_append():
 				break
 			
 			# first row and last row in maze.
-			if _y == 0 && _x < 16 || _y == 15 && _x < 16 || _y == 7 && _x < 8:
+			if _y == 0 and _x < 16 or _y == 15 and _x < 16 or _y == 7 and _x < 8:
 				data.cell_item.append(1)
 			
 			# left / right border of maze.
-			elif _y < 16 && _x == 0 || _y < 16 && _x == 15:
+			elif _y < 16 and _x == 0 or _y < 16 and _x == 15:
 				data.cell_item.append(1)
 			
 			else:

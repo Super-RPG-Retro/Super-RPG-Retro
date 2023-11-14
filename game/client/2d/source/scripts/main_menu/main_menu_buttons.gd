@@ -39,17 +39,17 @@ var _music_stop := false
 
 
 func _ready():
-	P._number = 0
-	P._number = int(clamp(P._number, 0, 6))
+	PC._number = 0
+	PC._number = int(clamp(PC._number, 0, 6))
 	
 	_saved_id.max_value = Variables._game_id_max_value
 	
 	_empty_username_dialog.visible = false
-	_play_button.grab_focus()
+	_saved_id.grab_focus()
 	
 	var _temp = null
 		
-	P.character_stats[str(P._number)]["_saved"].Username = P.character_stats[str(P._number)]["_loaded"].Username
+	PC.character_stats[str(PC._number)]["_saved"].Username = PC.character_stats[str(PC._number)]["_loaded"].Username
 	
 	get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 	
@@ -124,12 +124,12 @@ func _on_new_confirmation_dialog():
 	
 	Filesystem.save("user://saved_data/is_this_new_data.txt", true)	
 	
-	P._update_character_stats_loaded()
+	PC._update_character_stats_loaded()
 	
-	P._xp_next = P._xp_level[P._level + 1]
-	P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
-	P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
-	P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	
+	PC._xp_next = PC._xp_level[PC._level + 1]
+	PC.character_stats[str(PC._number)]["_loaded"].XP_next = PC._xp_next
+	PC.character_stats[str(PC._number)]["_loaded"].Username = _username_line_edit.text
+	PC.character_stats[str(PC._number)]["_saved"].Username = _username_line_edit.text	
 	
 	get_tree().call_group("stats_loaded", "stats_value_all_update")
 	get_tree().call_group("stats_loaded", "stats_empty")
@@ -149,15 +149,15 @@ func _on_ButtonSave_pressed():
 		Variables._is_this_new_data = _temp
 	
 	if Variables._is_loaded_id_panel_visible == false:
-		P._xp_next = P._xp_level[P._level + 1]
-		P.character_stats[str(P._number)]["_loaded"].XP_next = P._xp_next
-		P.character_stats[str(P._number)]["_loaded"].Username = _username_line_edit.text
-		P.character_stats[str(P._number)]["_saved"].Username = _username_line_edit.text	
+		PC._xp_next = PC._xp_level[PC._level + 1]
+		PC.character_stats[str(PC._number)]["_loaded"].XP_next = PC._xp_next
+		PC.character_stats[str(PC._number)]["_loaded"].Username = _username_line_edit.text
+		PC.character_stats[str(PC._number)]["_saved"].Username = _username_line_edit.text	
 		
 		_save_game_data()
 		
 	# saving to a different id so save it as new data.
-	elif Variables._is_loaded_id_panel_visible == true && Variables._is_saved_id_panel_visible == false:
+	elif Variables._is_loaded_id_panel_visible == true and Variables._is_saved_id_panel_visible == false:
 		Variables._is_this_new_data = false
 		
 		Filesystem.save("user://saved_data/is_this_new_data.txt", false)
@@ -196,13 +196,13 @@ func _save_game_data():
 	Filesystem.save("user://saved_data/is_this_new_data.txt", false)
 	
 	for _i in range (7):
-		P.character_stats[str(_i)]["_saved"] = P.character_stats[str(_i)]["_loaded"]
+		PC.character_stats[str(_i)]["_saved"] = PC.character_stats[str(_i)]["_loaded"]
 	
 	
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt", P.character_stats[str(P._number)]["_loaded"].Username)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt", PC.character_stats[str(PC._number)]["_loaded"].Username)
 	
 	# save stats
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", P.character_stats)	
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt", PC.character_stats)	
 	
 	Filesystem.save("user://saved_data/" + str(Variables._id_of_saved_game) + "/hud.txt", Hud._loaded)	
 		
@@ -264,7 +264,7 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt")
 	
 	if _temp != null:		
-		P.character_stats[str(P._number)]["_loaded"] = _temp[str(P._number)]["_loaded"]	
+		PC.character_stats[str(PC._number)]["_loaded"] = _temp[str(PC._number)]["_loaded"]	
 			
 	_temp = null
 	
@@ -272,13 +272,13 @@ func _on_ButtonLoad_pressed(_bypass:bool = false):
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 		
 	if _temp != null:
-		P.character_stats[str(P._number)]["_saved"] = _temp[str(P._number)]["_saved"]
+		PC.character_stats[str(PC._number)]["_saved"] = _temp[str(PC._number)]["_saved"]
 			
-		P._hp_max = P.character_stats[str(P._number)]["_loaded"].HP_max
-		P._hp = P.character_stats[str(P._number)]["_loaded"].HP
-		P._level = P.character_stats[str(P._number)]["_loaded"].Level
-		P._xp = P.character_stats[str(P._number)]["_loaded"].XP
-		P._xp_next = P.character_stats[str(P._number)]["_loaded"].XP_next
+		PC._hp_max = PC.character_stats[str(PC._number)]["_loaded"].HP_max
+		PC._hp = PC.character_stats[str(PC._number)]["_loaded"].HP
+		PC._level = PC.character_stats[str(PC._number)]["_loaded"].Level
+		PC._xp = PC.character_stats[str(PC._number)]["_loaded"].XP
+		PC._xp_next = PC.character_stats[str(PC._number)]["_loaded"].XP_next
 		
 		get_tree().call_group("stats_loaded", "stats_value_all_update")
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
@@ -352,13 +352,13 @@ func _on_ButtonPlay_pressed():
 	Variables._game_over = false
 	
 	get_tree().call_group("settings_system", "_music_stop")		
-	P.reset()
+	PC.reset()
 	
 	# these saved visibility_map files created from the save game scene needs to be copied over other files so to correctly display the visibility map when restarting or starting a game. the reason is the visibility map is updated when using ladders or after saving a game.
 	Filesystem._load_visibility_maps()
 	
 	# clear this because it will be populated at game.gd, once it is populated, the list will not be read again unless you reenter the game from this file.
-	Json.d[str(Builder._config.game_id)]["mobs"] = {}
+	Json._directory_number[str(Builder._config.game_id)]["mobs"] = {}
 	
 	var _temp = null
 	
@@ -389,7 +389,7 @@ func _on_LineEdit_text_changed(_text):
 
 	_username_line_edit.caret_column = old_caret_position
 	
-	P.character_stats[str(P._number)]["_saved"].Username = _text
+	PC.character_stats[str(PC._number)]["_saved"].Username = _text
 	
 
 func _on_SaveConfirmationDialog_confirmed():
@@ -414,7 +414,7 @@ func _on_saved_ID_spinBox_value_changed(_value):
 	# save stats dictionary
 	_temp = Filesystem.load_saved_dictionary("user://saved_data/" + str(Variables._id_of_saved_game) + "/stats.txt")
 	if _temp != null:
-		P.character_stats[str(P._number)]["_saved"] = _temp[str(P._number)]["_saved"]
+		PC.character_stats[str(PC._number)]["_saved"] = _temp[str(PC._number)]["_saved"]
 		
 		get_tree().call_group("stats_saved", "stats_saved_value_all_update")
 		

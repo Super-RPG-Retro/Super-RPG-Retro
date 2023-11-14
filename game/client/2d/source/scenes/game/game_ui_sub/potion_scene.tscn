@@ -1,0 +1,157 @@
+[gd_scene load_steps=6 format=3 uid="uid://y8jcx17wksgm"]
+
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/potion_scene.gd" id="1_st2q8"]
+[ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="2_15cm6"]
+[ext_resource type="Texture2D" uid="uid://bi24v766kdipu" path="res://bundles/assets/images/potions/potions.png" id="10_6083s"]
+[ext_resource type="Theme" uid="uid://fr1lin3sbs06" path="res://2d/assets/themes/transparent-static.tres" id="11_a0ym7"]
+
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D" groups=["potion_panel"]]
+script = ExtResource("1_st2q8")
+metadata/_edit_horizontal_guides_ = [323.0]
+metadata/_edit_vertical_guides_ = [21.0]
+
+[node name="Background" type="Panel" parent="."]
+z_index = -1000
+z_as_relative = false
+offset_top = 40.0
+offset_right = 42.0
+offset_bottom = 600.0
+theme = ExtResource("2_15cm6")
+theme_override_styles/panel = SubResource("2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = -5.0
+offset_right = 45.0
+offset_bottom = 35.0
+scale = Vector2(0.41, 0.41)
+
+[node name="Potion1" type="Sprite2D" parent="Control"]
+position = Vector2(10, 124)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+
+[node name="Label1" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 180.0
+offset_right = 56.0
+offset_bottom = 203.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion2" type="Sprite2D" parent="Control"]
+position = Vector2(10, 220)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 1
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 276.0
+offset_right = 56.0
+offset_bottom = 299.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion3" type="Sprite2D" parent="Control"]
+position = Vector2(10, 316)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 2
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 372.0
+offset_right = 56.0
+offset_bottom = 395.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion4" type="Sprite2D" parent="Control"]
+position = Vector2(10, 412)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 3
+
+[node name="Label4" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 468.0
+offset_right = 56.0
+offset_bottom = 491.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion5" type="Sprite2D" parent="Control"]
+position = Vector2(10, 508)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 4
+
+[node name="Label5" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 564.0
+offset_right = 56.0
+offset_bottom = 587.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion6" type="Sprite2D" parent="Control"]
+position = Vector2(10, 604)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 5
+
+[node name="Label6" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 660.0
+offset_right = 56.0
+offset_bottom = 683.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"
+
+[node name="Potion7" type="Sprite2D" parent="Control"]
+position = Vector2(10, 700)
+scale = Vector2(2, 2)
+texture = ExtResource("10_6083s")
+offset = Vector2(16, 16)
+hframes = 7
+frame = 6
+
+[node name="Label7" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 756.0
+offset_right = 56.0
+offset_bottom = 779.0
+scale = Vector2(2, 2)
+theme = ExtResource("11_a0ym7")
+text = "00"

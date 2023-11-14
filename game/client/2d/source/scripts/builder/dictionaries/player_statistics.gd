@@ -140,7 +140,7 @@ func _draw_misc_title(_p: int):
 	# title of a player name.
 	_title_misc.append([])
 	_title_misc[_p] = Label.new()
-	_title_misc[_p].text = P.character_name[str(_p)]
+	_title_misc[_p].text = PC.character_name[str(_p)]
 	_title_misc[_p].set_autowrap_mode(true)
 	_title_misc[_p].add_theme_color_override("font_color", Color("#0054ff")) # blue 
 	_grid.add_child(_title_misc[_p])
@@ -167,7 +167,7 @@ func _draw_misc(_str:String, _p: int):
 	_spin_box_misc[_p].append([])
 	_spin_box_misc[_p][_index_num_misc] = SpinBox.new()
 	
-	if _str == "HP_max" || _str == "HP":
+	if _str == "HP_max" or _str == "HP":
 		_spin_box_misc[_p][_index_num_misc].min_value = 1
 	else:
 		_spin_box_misc[_p][_index_num_misc].min_value = 0
@@ -249,7 +249,7 @@ func _draw_skills(_p:int):
 		# stills name,
 		_title_skills.append([])
 		_title_skills[_index_num_skill] = Label.new()
-		_title_skills[_index_num_skill].text = Variables.s[str(_s)]
+		_title_skills[_index_num_skill].text = Variables._stats_name[str(_s)]
 		_title_skills[_index_num_skill].set_autowrap_mode(true)
 		_title_skills[_index_num_skill].set_horizontal_alignment(HORIZONTAL_ALIGNMENT_RIGHT)
 		_grid.add_child(_title_skills[_index_num_skill])
@@ -265,7 +265,7 @@ func _draw_skills(_p:int):
 		_spin_box_skill[_p][_index_num_skill] = SpinBox.new()
 		_spin_box_skill[_p][_index_num_skill].min_value = 0
 		_spin_box_skill[_p][_index_num_skill].max_value = 200
-		_spin_box_skill[_p][_index_num_skill].value = Builder._starting_skills[Variables.s[str(_s)]][_p]
+		_spin_box_skill[_p][_index_num_skill].value = Builder._starting_skills[Variables._stats_name[str(_s)]][_p]
 		_spin_box_skill[_p][_index_num_skill].size.x = 100
 		_spin_box_skill[_p][_index_num_skill].custom_minimum_size.x = 50
 		_grid_child_skill[_index_num_skill].add_child(_spin_box_skill[_p][_index_num_skill])
@@ -273,7 +273,7 @@ func _draw_skills(_p:int):
 		# skills description.
 		_description_skill.append([])
 		_description_skill[_index_num_skill] = Label.new()
-		_description_skill[_index_num_skill].text = Variables.s_desc[str(_s)]
+		_description_skill[_index_num_skill].text = Variables._stats_desc[str(_s)]
 		_description_skill[_index_num_skill].set_autowrap_mode(true)
 		_description_skill[_index_num_skill].custom_minimum_size.x = 545
 		_description_skill[_index_num_skill].size.y = 32
@@ -299,13 +299,16 @@ func _draw_empty_rows(_p: int):
 
 func _return_to_main_menu():
 	call_deferred("_prepare_save_data")
+	call_deferred("_back_to_main_menu")
 	
+	
+func _back_to_main_menu():
 	var _s = get_tree().change_scene_to_file("res://3d/scenes/gridmap.tscn")
 
 
 # save data when ending task or when clicking the "x" button at top-right corner of app.
 func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_WM_GO_BACK_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		call_deferred("_prepare_save_data")
 
 
@@ -323,19 +326,19 @@ func _prepare_save_data():
 
 	
 func _save_data():
-	if _spin_box_skill.size() == 7 && _spin_box_skill[6].size() == 10:
+	if _spin_box_skill.size() == 7 and _spin_box_skill[6].size() == 10:
 		for _p in range (0, 7):
 			for _i in range (0, 5):
-				# Variables.s[str(0) is the dictionary key named Charisma.
+				# Variables._stats_name[str(0) is the dictionary key named Charisma.
 				# player HP_max, HP, MP_max and MP
-				Builder._starting_skills[Variables.s[str((_i + 10))]][_p] = _spin_box_misc[_p][_i].value
+				Builder._starting_skills[Variables._stats_name[str((_i + 10))]][_p] = _spin_box_misc[_p][_i].value
 			
 			# player level.
 			Builder._starting_skills["Level"][_p] = _spin_box_misc[_p][4].value
 			
 			# player skills.
 			for _i in range (0, 10):
-				Builder._starting_skills[Variables.s[str(_i)]][_p] = _spin_box_skill[_p][_i].value
+				Builder._starting_skills[Variables._stats_name[str(_i)]][_p] = _spin_box_skill[_p][_i].value
 			
 		Filesystem.builder_save_data()
 			

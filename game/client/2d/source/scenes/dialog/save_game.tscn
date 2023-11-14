@@ -1,24 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dgsgalc4bmvsg"]
 
-[ext_resource path="res://2d/source/scripts/dialog/save_game.gd" type="Script" id=1]
-[ext_resource path="res://2d/assets/themes/transparent-child.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://2d/source/scripts/dialog/save_game.gd" id="1"]
+[ext_resource type="Theme" uid="uid://dce5wod4p186f" path="res://2d/assets/themes/transparent-child.tres" id="2"]
 
 [node name="Node2D" type="Node2D"]
 z_index = 4096
 z_as_relative = false
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-offset_right = 550.0
-offset_bottom = 130.0
-custom_minimum_size = Vector2( 550, 130 )
-focus_mode = 2
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 dialog_text = "Save game?"
 dialog_autowrap = true
-__meta__ = {
-"_editor_description_": ""
-}
 
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
-[connection signal="hide" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_hide"]

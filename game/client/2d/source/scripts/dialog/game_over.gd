@@ -28,14 +28,9 @@ func _ready():
 # without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
 func _process(_delta):
 	if visible == true:
-		get_tree().call_group("magic_panel", "rune_summary_visible_false")
-		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
-		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("game_ui", "hide_cursor")
+		get_tree().call_group("game_ui", "hide_tile_summary")
 		get_tree().call_group("tile_summary", "unit_text_clear")
-		
-
-func _on_AcceptDialog_modal_closed():
-	close()
 
 
 func close():
@@ -59,7 +54,7 @@ func _save_data():
 	# if user's stats score is within the top 10 high scores.
 	for _i in range (10):
 		if Hud._loaded.Score > Variables._high_score_scores[_i]:
-			Variables._high_score_names.insert(_i, P.character_stats[str(P._number)]["_loaded"].Username)
+			Variables._high_score_names.insert(_i, PC.character_stats[str(PC._number)]["_loaded"].Username)
 			Variables._high_score_scores.insert(_i, Hud._loaded.Score)
 			Variables._high_score_turns.insert(_i, Hud._loaded.Turns)
 			
@@ -88,7 +83,7 @@ func _save_data():
 		_does_file_exist2 = FileAccess.file_exists("user://saved_data/" + str(Variables._id_of_saved_game) + "/saved_username.txt")
 	
 	# if file existed and was removed then show dialog box.
-	if _does_file_exist == true && _does_file_exist2 == false:
+	if _does_file_exist == true and _does_file_exist2 == false:
 		_timer.wait_time = 0.2
 		_timer.connect("timeout", Callable(self, "_on_timer_timeout")) 
 		add_child(_timer)
@@ -118,13 +113,13 @@ func _save_data():
 
 func _on_DataRemoved_AcceptDialog_popup_hide():
 	Variables.reset_vars()
-	P.reset_var()
+	PC.reset_var()
 	Clock.reset_vars()
 	
 	# this is needed to show the stats_loaded panel correctly.
 	Variables._at_scene = Enum.Scene.Main_Menu
 
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 
 func _on_timer_timeout():

@@ -76,7 +76,7 @@ func load_saved_dictionary (path : String):
 		file.close()
 			
 	else:
-		P._update_character_stats_saved()
+		PC._update_character_stats_saved()
 		_theDict = null
 		
 	return _theDict
@@ -150,7 +150,7 @@ func load_visibility_map(_size, visibility_map) -> TileMap:
 				visibility_map.set_cell(0, Vector2i(x, y), int(file.get_line()), Vector2i(0,0))
 			
 		_err = file.get_error()
-		if _err != 0 &&	_err != 18:
+		if _err != 0 and _err != 18:
 			printerr(path + "visibility_map_" + str(Variables._dungeon_number) + "-" + str(Variables._level_number) + "_" + str(Settings._system.seed_current) + "_" + str(Settings._game.level_number) + ".txt. Could not load file. Error code " + str(_err) + ".")
 			
 		file.close()
@@ -394,20 +394,20 @@ func _add_dir_contents(_dir: DirAccess, files: Array, directories: Array):
 func populate_json_dictionaries(_load:bool = false):
 	Json.make_directories()
 	
-	# if that one file exists then load that data into the json Json.d which holds all builder object dictionary data.
+	# if that one file exists then load that data into the json Json._directory_number which holds all builder object dictionary data.
 	var _path = "user://saved_data/builder_dictionaries_" + str(Builder._config.game_id) + ".txt"
 	
 	if _load == true:
 		if FileAccess.file_exists(_path):
-			Json.d = Filesystem.load_dictionary_json2(_path)
+			Json._directory_number = Filesystem.load_dictionary_json2(_path)
 			_path = ""
 		
 	if _path != "":
-		# populate all json directories except the mobs directory, placing the json data into the Json.d var.
-		for _i in Json.d[str(Builder._config.game_id)].keys():
+		# populate all json directories except the mobs directory, placing the json data into the Json._directory_number var.
+		for _i in Json._directory_number[str(Builder._config.game_id)].keys():
 			Json.refresh_dictionaries(Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/" + _i + "/")
 		
-		Filesystem.save_dictionary_json3("user://saved_data/builder_dictionaries_" + str(Builder._config.game_id) + ".txt", Json.d)
+		Filesystem.save_dictionary_json3("user://saved_data/builder_dictionaries_" + str(Builder._config.game_id) + ".txt", Json._directory_number)
 
 
 func delete_builder_playing_data(path):

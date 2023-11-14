@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctknb0lymanwg"]
 
 [ext_resource type="Theme" uid="uid://c5jg8sho14qvp" path="res://2d/assets/themes/theme_small_font.tres" id="1"]
-[ext_resource type="Script" path="res://2d/source/scripts/status_bar/status_bar.gd" id="2"]
+[ext_resource type="Script" path="res://2d/source/scripts/common/status_bar.gd" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(0.117647, 0.117647, 0.117647, 1)

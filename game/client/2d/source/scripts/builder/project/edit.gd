@@ -159,8 +159,8 @@ func _copy_files_to_mobs_directory():
 					var _file_name = Variables._file_names[_fn].split("/")
 					
 					# if this mobs should be at this dungeon and at this level of the dungeon.
-					if _dn >= Json.d[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_dungeon_from && _dn <= Json.d[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_dungeon_to && _ln >= Json.d[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_level_from && _ln <= Json.d[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_level_to:
-						if Json.d[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].Enabled == true:
+					if _dn >= Json._directory_number[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_dungeon_from and _dn <= Json._directory_number[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_dungeon_to and _ln >= Json._directory_number[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_level_from and _ln <= Json._directory_number[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].At_level_to:
+						if Json._directory_number[str(Builder._config.game_id)]["mobs"+ str(_dictionary_number)][_file_name[1]].Enabled == true:
 							Variables._image_textures = Variables._file_paths.duplicate()
 							
 							# THIS FILE CANNOT BE SHORTENED ANYMORE BECAUSE THE DATA AND IMAGE DIRECTORIES EACH HAVE A DIFFERENT DIRECTORY STRUCTURE
@@ -270,7 +270,7 @@ func _copy_files_to_artifacts_directory():
 		Builder._dictionary_artifacts.data.Willpower[_i] = 0
 		Builder._dictionary_artifacts.data.Wisdom[_i] = 0
 		
-	for _dictionary_number in Json._s.keys():
+	for _dictionary_number in Json._directory_name.keys():
 		if _dictionary_number != "mobs":
 			
 			Json.refresh_dictionaries(Variables._project_path + "/builder/objects/data/" + str(Builder._config.game_id + 1) + "/"+ str(_dictionary_number) +"/")
@@ -279,7 +279,7 @@ func _copy_files_to_artifacts_directory():
 				
 				var _file_directory
 				# does this dictionary have the is_artifact var set to true?
-				if Json.d[str(Builder._config.game_id)][str(_dictionary_number)][_file_name[1]].Is_artifact == true:
+				if Json._directory_number[str(Builder._config.game_id)][str(_dictionary_number)][_file_name[1]].Is_artifact == true:
 					_num += 1
 					Variables._image_textures = Variables._file_paths.duplicate()
 					

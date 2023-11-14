@@ -13,7 +13,7 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node3D
 
 # Get the 3D model
-@export @onready var wall1 = get_node("Wall1")
+@onready var wall1 = get_node("Wall1")
 
 
 func _ready():
@@ -32,4 +32,4 @@ func _ready():
 	meshlib.set_item_mesh(0, wall1.mesh)
 	ResourceSaver.save(meshlib, "res://3d/assets/meshlibs/library.meshlib")
 
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")

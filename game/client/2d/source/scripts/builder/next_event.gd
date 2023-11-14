@@ -52,7 +52,7 @@ func _next_event():
 
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 		_ready()
 
 func _on_dungeon_number_Spinbox_value_changed(value):

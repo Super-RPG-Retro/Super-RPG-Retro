@@ -1,0 +1,233 @@
+[gd_scene load_steps=17 format=3 uid="uid://b1dl1rpchwip"]
+
+[ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://dce5wod4p186f" path="res://2d/assets/themes/transparent-child.tres" id="2"]
+[ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://b33tfda257avg" path="res://2d/assets/images/host/private.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://byqoipnpnbwev" path="res://2d/assets/images/host/public.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://gvuqy4ctgtlq" path="res://bundles/assets/images/host/game.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bactlu5lmufat" path="res://2d/assets/images/host/host_connect.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dfocq2wd5r5rx" path="res://2d/assets/images/host/commands.png" id="8"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/client_ui/client_ui.gd" id="9"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/client_ui/client_events.gd" id="10"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/client_ui/input_client.gd" id="11"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1h27"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0.113725, 0.113725, 0.113725, 1)
+
+[sub_resource type="StyleBoxEmpty" id="4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hr76"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.266667, 0.0745098, 0.219608, 1)
+
+[node name="client" type="Node2D"]
+position = Vector2(0, 10)
+metadata/_edit_horizontal_guides_ = [600.0]
+metadata/_edit_vertical_guides_ = [651.0]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(645, 100)
+offset_top = 456.0
+offset_right = 645.0
+offset_bottom = 556.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Client" type="Control" parent="MarginContainer/VBoxContainer" groups=["client"]]
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="Panel" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Client"]
+custom_minimum_size = Vector2(645, 0)
+layout_mode = 0
+offset_right = 649.0
+offset_bottom = 133.0
+
+[node name="PanelHorizontalPadding" type="Panel" parent="MarginContainer/VBoxContainer/Client/Panel"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1h27")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Client/Panel"]
+custom_minimum_size = Vector2(638, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RoomPublic" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(445, 103)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("1")
+theme_override_constants/line_separation = 1
+scroll_following = true
+selection_enabled = true
+
+[node name="RoomPrivate" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(445, 103)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1")
+theme_override_constants/line_separation = 1
+scroll_following = true
+
+[node name="RoomCommands" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(444, 103)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("1")
+theme_override_constants/line_separation = 1
+scroll_following = true
+selection_enabled = true
+
+[node name="RoomGame" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(445, 103)
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("1")
+theme_override_constants/line_separation = 1
+scroll_following = true
+selection_enabled = true
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(189, 20)
+layout_mode = 2
+theme = ExtResource("3")
+
+[node name="Send" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer"]
+z_index = -2
+layout_mode = 2
+
+[node name="ButtonPanel" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send"]
+layout_mode = 2
+
+[node name="HostAddress" type="LineEdit" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ws://localhost:12001/test/"
+placeholder_text = "ws://my.server/path/"
+
+[node name="ListenButton" type="Button" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("3")
+toggle_mode = true
+icon = ExtResource("7")
+icon_alignment = 1
+
+[node name="ButtonPublic" type="Button" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../ListenButton")
+focus_neighbor_right = NodePath("../ButtonPrivate")
+focus_next = NodePath("../ButtonPrivate")
+focus_previous = NodePath("../ListenButton")
+focus_mode = 0
+theme = ExtResource("3")
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource("5")
+icon_alignment = 1
+
+[node name="ButtonPrivate" type="Button" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../ButtonPublic")
+focus_neighbor_right = NodePath("../ButtonCommands")
+focus_next = NodePath("../ButtonCommands")
+focus_previous = NodePath("../ButtonPublic")
+focus_mode = 0
+theme = ExtResource("3")
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource("4")
+icon_alignment = 1
+
+[node name="ButtonCommands" type="Button" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../ButtonPrivate")
+focus_neighbor_right = NodePath("../ButtonGame")
+focus_next = NodePath("../ButtonGame")
+focus_previous = NodePath("../ButtonPrivate")
+focus_mode = 0
+theme = ExtResource("3")
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource("8")
+icon_alignment = 1
+
+[node name="ButtonGame" type="Button" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../ButtonCommands")
+focus_neighbor_right = NodePath("../../InputClient")
+focus_next = NodePath("../../InputClient")
+focus_previous = NodePath("../ButtonCommands")
+focus_mode = 0
+theme = ExtResource("3")
+toggle_mode = true
+shortcut_in_tooltip = false
+icon = ExtResource("6")
+icon_alignment = 1
+
+[node name="InputClient" type="LineEdit" parent="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send" groups=["input_client"]]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme = ExtResource("1")
+theme_override_styles/normal = SubResource("3")
+theme_override_styles/focus = SubResource("2")
+theme_override_styles/read_only = SubResource("4")
+placeholder_text = "Type /? for help. press enter to send text."
+script = ExtResource("11")
+
+[node name="ClientEvents" type="Node" parent="MarginContainer/VBoxContainer/Client" groups=["client_events"]]
+script = ExtResource("10")
+
+[node name="TimerGameTurn" type="Timer" parent="MarginContainer/VBoxContainer/Client"]
+wait_time = 0.15
+
+[node name="AcceptDialog" type="AcceptDialog" parent="MarginContainer/VBoxContainer/Client"]
+theme = ExtResource("2")
+dialog_autowrap = true
+
+[node name="PanelBorder" type="Panel" parent="."]
+visible = false
+z_index = -1
+offset_left = 10.0
+offset_top = 455.0
+offset_right = 650.0
+offset_bottom = 560.0
+theme = ExtResource("1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hr76")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel/ListenButton" to="MarginContainer/VBoxContainer/Client" method="_on_listen_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel/ButtonPublic" to="MarginContainer/VBoxContainer/Client" method="_on_button_public_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel/ButtonPrivate" to="MarginContainer/VBoxContainer/Client" method="_on_button_private_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel/ButtonCommands" to="MarginContainer/VBoxContainer/Client" method="_on_button_commands_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/ButtonPanel/ButtonGame" to="MarginContainer/VBoxContainer/Client" method="_on_button_game_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/InputClient" to="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/InputClient" method="_on_mouse_entered"]
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/InputClient" to="MarginContainer/VBoxContainer/Client/Panel/VBoxContainer/Send/InputClient" method="_on_text_entered"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/Client/TimerGameTurn" to="MarginContainer/VBoxContainer/Client" method="_on_TimerGameTurn_timeout"]

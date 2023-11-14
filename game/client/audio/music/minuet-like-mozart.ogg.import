@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://bgi4j5md35gv3"
-path="res://.godot/imported/minuet-like-mozart.ogg-5da8d862a09f0a5800a5b520e3106b01.oggvorbisstr"
+path="res://.godot/imported/Minuet-like-Mozart.ogg-ad0666c5b20e97e6df93a2beecf27494.oggvorbisstr"
 
 [deps]
 
-source_file="res://audio/music/minuet-like-mozart.ogg"
-dest_files=["res://.godot/imported/minuet-like-mozart.ogg-5da8d862a09f0a5800a5b520e3106b01.oggvorbisstr"]
+source_file="res://audio/music/Minuet-like-Mozart.ogg"
+dest_files=["res://.godot/imported/Minuet-like-Mozart.ogg-ad0666c5b20e97e6df93a2beecf27494.oggvorbisstr"]
 
 [params]
 

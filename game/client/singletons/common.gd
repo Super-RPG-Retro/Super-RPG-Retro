@@ -29,7 +29,7 @@ func _process(_delta):
 
 # this registers a keypress in case the user is at a spinbox and editing that spinbox value using the keyboard. The problem is that without this code, changing the value without pressing enter key would not save that new value when exiting that scene.
 func _scancode_if_pressed_enter(event):
-	if event is InputEventScreenTouch || event is InputEventMouseButton:
+	if event is InputEventScreenTouch or event is InputEventMouseButton:
 		Variables.a.pressed = true # change to false to simulate a key release
 		Variables.a.keycode = KEY_ENTER
 		
@@ -46,13 +46,13 @@ func _parse_input_event():
 
 
 func _skills_loaded_total():
-	var _str = str(P.character_stats[str(P._number)]["_loaded"].Strength + P.character_stats[str(P._number)]["_loaded"].Defense + P.character_stats[str(P._number)]["_loaded"].Constitution + P.character_stats[str(P._number)]["_loaded"].Dexterity + P.character_stats[str(P._number)]["_loaded"].Intelligence + P.character_stats[str(P._number)]["_loaded"].Charisma + P.character_stats[str(P._number)]["_loaded"].Wisdom + P.character_stats[str(P._number)]["_loaded"].Willpower + P.character_stats[str(P._number)]["_loaded"].Perception + P.character_stats[str(P._number)]["_loaded"].Luck).pad_zeros(4) + "/9990."
+	var _str = str(PC.character_stats[str(PC._number)]["_loaded"].Strength + PC.character_stats[str(PC._number)]["_loaded"].Defense + PC.character_stats[str(PC._number)]["_loaded"].Constitution + PC.character_stats[str(PC._number)]["_loaded"].Dexterity + PC.character_stats[str(PC._number)]["_loaded"].Intelligence + PC.character_stats[str(PC._number)]["_loaded"].Charisma + PC.character_stats[str(PC._number)]["_loaded"].Wisdom + PC.character_stats[str(PC._number)]["_loaded"].Willpower + PC.character_stats[str(PC._number)]["_loaded"].Perception + PC.character_stats[str(PC._number)]["_loaded"].Luck).pad_zeros(4) + "/9990."
 	
 	return 	_str
 
 
 func _skills_saved_total():
-	var _str = str(P.character_stats[str(P._number)]["_saved"].Strength + P.character_stats[str(P._number)]["_saved"].Defense + P.character_stats[str(P._number)]["_saved"].Constitution + P.character_stats[str(P._number)]["_saved"].Dexterity + P.character_stats[str(P._number)]["_saved"].Intelligence + P.character_stats[str(P._number)]["_saved"].Charisma + P.character_stats[str(P._number)]["_saved"].Wisdom + P.character_stats[str(P._number)]["_saved"].Willpower + P.character_stats[str(P._number)]["_saved"].Perception + P.character_stats[str(P._number)]["_saved"].Luck).pad_zeros(4) + "/9990."
+	var _str = str(PC.character_stats[str(PC._number)]["_saved"].Strength + PC.character_stats[str(PC._number)]["_saved"].Defense + PC.character_stats[str(PC._number)]["_saved"].Constitution + PC.character_stats[str(PC._number)]["_saved"].Dexterity + PC.character_stats[str(PC._number)]["_saved"].Intelligence + PC.character_stats[str(PC._number)]["_saved"].Charisma + PC.character_stats[str(PC._number)]["_saved"].Wisdom + PC.character_stats[str(PC._number)]["_saved"].Willpower + PC.character_stats[str(PC._number)]["_saved"].Perception + PC.character_stats[str(PC._number)]["_saved"].Luck).pad_zeros(4) + "/9990."
 	
 	return _str
 	
@@ -124,99 +124,99 @@ func _game_title():
 
 
 func _update_stats_last_player(_i):
-	P.character_stats[str(_i)]["_loaded"].HP = P._hp
-	P.character_stats[str(_i)]["_loaded"].HP_max = P._hp_max
+	PC.character_stats[str(_i)]["_loaded"].HP = PC._hp
+	PC.character_stats[str(_i)]["_loaded"].HP_max = PC._hp_max
 	
-	P.character_stats[str(_i)]["_loaded"].MP = P._mp
-	P.character_stats[str(_i)]["_loaded"].MP_max = P._mp_max
+	PC.character_stats[str(_i)]["_loaded"].MP = PC._mp
+	PC.character_stats[str(_i)]["_loaded"].MP_max = PC._mp_max
 	
-	P.character_stats[str(_i)]["_loaded"].XP = P._xp
-	P.character_stats[str(_i)]["_loaded"].XP_next = P._xp_next
+	PC.character_stats[str(_i)]["_loaded"].XP = PC._xp
+	PC.character_stats[str(_i)]["_loaded"].XP_next = PC._xp_next
 	
-	P.character_stats[str(_i)]["_loaded"].Level = P._level
+	PC.character_stats[str(_i)]["_loaded"].Level = PC._level
 	
-	P.character_stats[str(_i)]["_loaded"].Charisma = P._cha
-	P.character_stats[str(_i)]["_loaded"].Constitution = P._con
-	P.character_stats[str(_i)]["_loaded"].Defense = P._def
-	P.character_stats[str(_i)]["_loaded"].Dexterity = P._dex
-	P.character_stats[str(_i)]["_loaded"].Intelligence = P._int
-	P.character_stats[str(_i)]["_loaded"].Luck = P._luc
-	P.character_stats[str(_i)]["_loaded"].Perception = P._per
-	P.character_stats[str(_i)]["_loaded"].Strength = P._str
-	P.character_stats[str(_i)]["_loaded"].Willpower = P._wil
-	P.character_stats[str(_i)]["_loaded"].Wisdom = P._wis
+	PC.character_stats[str(_i)]["_loaded"].Charisma = PC._cha
+	PC.character_stats[str(_i)]["_loaded"].Constitution = PC._con
+	PC.character_stats[str(_i)]["_loaded"].Defense = PC._def
+	PC.character_stats[str(_i)]["_loaded"].Dexterity = PC._dex
+	PC.character_stats[str(_i)]["_loaded"].Intelligence = PC._int
+	PC.character_stats[str(_i)]["_loaded"].Luck = PC._luc
+	PC.character_stats[str(_i)]["_loaded"].Perception = PC._per
+	PC.character_stats[str(_i)]["_loaded"].Strength = PC._str
+	PC.character_stats[str(_i)]["_loaded"].Willpower = PC._wil
+	PC.character_stats[str(_i)]["_loaded"].Wisdom = PC._wis
 
 
 func _init_stats_player_characters():
 	for _i in range (6):
-		P._hp = P.character_stats[str(_i)]["_loaded"].HP
-		P._hp_max = P.character_stats[str(_i)]["_loaded"].HP_max
+		PC._hp = PC.character_stats[str(_i)]["_loaded"].HP
+		PC._hp_max = PC.character_stats[str(_i)]["_loaded"].HP_max
 		
-		P._mp = P.character_stats[str(_i)]["_loaded"].MP
-		P._mp_max = P.character_stats[str(_i)]["_loaded"].MP_max
+		PC._mp = PC.character_stats[str(_i)]["_loaded"].MP
+		PC._mp_max = PC.character_stats[str(_i)]["_loaded"].MP_max
 		
-		P._xp = P.character_stats[str(_i)]["_loaded"].XP
-		P._xp_next = P.character_stats[str(_i)]["_loaded"].XP_next
+		PC._xp = PC.character_stats[str(_i)]["_loaded"].XP
+		PC._xp_next = PC.character_stats[str(_i)]["_loaded"].XP_next
 		
-		P._level = P.character_stats[str(_i)]["_loaded"].Level
+		PC._level = PC.character_stats[str(_i)]["_loaded"].Level
 		
-		P._cha = P.character_stats[str(_i)]["_loaded"].Charisma
-		P._con = P.character_stats[str(_i)]["_loaded"].Constitution
-		P._def = P.character_stats[str(_i)]["_loaded"].Defense
-		P._dex = P.character_stats[str(_i)]["_loaded"].Dexterity
-		P._int = P.character_stats[str(_i)]["_loaded"].Intelligence
-		P._luc = P.character_stats[str(_i)]["_loaded"].Luck
-		P._per = P.character_stats[str(_i)]["_loaded"].Perception
-		P._str = P.character_stats[str(_i)]["_loaded"].Strength
-		P._wil = P.character_stats[str(_i)]["_loaded"].Willpower
-		P._wis = P.character_stats[str(_i)]["_loaded"].Wisdom
+		PC._cha = PC.character_stats[str(_i)]["_loaded"].Charisma
+		PC._con = PC.character_stats[str(_i)]["_loaded"].Constitution
+		PC._def = PC.character_stats[str(_i)]["_loaded"].Defense
+		PC._dex = PC.character_stats[str(_i)]["_loaded"].Dexterity
+		PC._int = PC.character_stats[str(_i)]["_loaded"].Intelligence
+		PC._luc = PC.character_stats[str(_i)]["_loaded"].Luck
+		PC._per = PC.character_stats[str(_i)]["_loaded"].Perception
+		PC._str = PC.character_stats[str(_i)]["_loaded"].Strength
+		PC._wil = PC.character_stats[str(_i)]["_loaded"].Willpower
+		PC._wis = PC.character_stats[str(_i)]["_loaded"].Wisdom
 
 	_update_stats_player_characters(0)
 	
 	
 func _update_stats_player_characters(_i):
-	P._hp = P.character_stats[str(_i)]["_loaded"].HP				
-	P._hp_max = P.character_stats[str(_i)]["_loaded"].HP_max
+	PC._hp = PC.character_stats[str(_i)]["_loaded"].HP				
+	PC._hp_max = PC.character_stats[str(_i)]["_loaded"].HP_max
 	
-	P._mp = P.character_stats[str(_i)]["_loaded"].MP	
-	P._mp_max = P.character_stats[str(_i)]["_loaded"].MP_max
+	PC._mp = PC.character_stats[str(_i)]["_loaded"].MP	
+	PC._mp_max = PC.character_stats[str(_i)]["_loaded"].MP_max
 	
-	P._xp = P.character_stats[str(_i)]["_loaded"].XP	
-	P._xp_next = P.character_stats[str(_i)]["_loaded"].XP_next
+	PC._xp = PC.character_stats[str(_i)]["_loaded"].XP	
+	PC._xp_next = PC.character_stats[str(_i)]["_loaded"].XP_next
 	
-	P._level = P.character_stats[str(_i)]["_loaded"].Level
+	PC._level = PC.character_stats[str(_i)]["_loaded"].Level
 	
-	P._cha = P.character_stats[str(_i)]["_loaded"].Charisma
-	P._con = P.character_stats[str(_i)]["_loaded"].Constitution
-	P._def = P.character_stats[str(_i)]["_loaded"].Defense
-	P._dex = P.character_stats[str(_i)]["_loaded"].Dexterity
-	P._int = P.character_stats[str(_i)]["_loaded"].Intelligence
-	P._luc = P.character_stats[str(_i)]["_loaded"].Luck
-	P._per = P.character_stats[str(_i)]["_loaded"].Perception
-	P._str = P.character_stats[str(_i)]["_loaded"].Strength
-	P._wil = P.character_stats[str(_i)]["_loaded"].Willpower
-	P._wis = P.character_stats[str(_i)]["_loaded"].Wisdom
+	PC._cha = PC.character_stats[str(_i)]["_loaded"].Charisma
+	PC._con = PC.character_stats[str(_i)]["_loaded"].Constitution
+	PC._def = PC.character_stats[str(_i)]["_loaded"].Defense
+	PC._dex = PC.character_stats[str(_i)]["_loaded"].Dexterity
+	PC._int = PC.character_stats[str(_i)]["_loaded"].Intelligence
+	PC._luc = PC.character_stats[str(_i)]["_loaded"].Luck
+	PC._per = PC.character_stats[str(_i)]["_loaded"].Perception
+	PC._str = PC.character_stats[str(_i)]["_loaded"].Strength
+	PC._wil = PC.character_stats[str(_i)]["_loaded"].Willpower
+	PC._wis = PC.character_stats[str(_i)]["_loaded"].Wisdom
 
 
 # Clamps value: returns a value not less than min and not more than max.
 func clamp_p_vars():
-	P._hp = clamp(P._hp, 0, 9999)
-	P.character_stats[str(P._number)]["_loaded"].HP = clamp(P.character_stats[str(P._number)]["_loaded"].HP, 0, 9999)	
-	P._hp_max = clamp(P._hp_max, 0, 9999)
-	P.character_stats[str(P._number)]["_loaded"].HP_max = clamp(P.character_stats[str(P._number)]["_loaded"].HP_max, 0, 9999)
+	PC._hp = clamp(PC._hp, 0, 9999)
+	PC.character_stats[str(PC._number)]["_loaded"].HP = clamp(PC.character_stats[str(PC._number)]["_loaded"].HP, 0, 9999)	
+	PC._hp_max = clamp(PC._hp_max, 0, 9999)
+	PC.character_stats[str(PC._number)]["_loaded"].HP_max = clamp(PC.character_stats[str(PC._number)]["_loaded"].HP_max, 0, 9999)
 	
-	P._mp = clamp(P._mp, 0, 9999)
-	P.character_stats[str(P._number)]["_loaded"].MP = clamp(P.character_stats[str(P._number)]["_loaded"].MP, 0, 9999)
-	P._mp_max = clamp(P._mp_max, 0, 9999)
-	P.character_stats[str(P._number)]["_loaded"].MP_max = clamp(P.character_stats[str(P._number)]["_loaded"].MP_max, 0, 9999)
+	PC._mp = clamp(PC._mp, 0, 9999)
+	PC.character_stats[str(PC._number)]["_loaded"].MP = clamp(PC.character_stats[str(PC._number)]["_loaded"].MP, 0, 9999)
+	PC._mp_max = clamp(PC._mp_max, 0, 9999)
+	PC.character_stats[str(PC._number)]["_loaded"].MP_max = clamp(PC.character_stats[str(PC._number)]["_loaded"].MP_max, 0, 9999)
 	
-	P._xp = clamp(P._xp, 0, 99999999999999)	
-	P.character_stats[str(P._number)]["_loaded"].XP = clamp(P.character_stats[str(P._number)]["_loaded"].XP, 0, 99999999999999)
+	PC._xp = clamp(PC._xp, 0, 99999999999999)	
+	PC.character_stats[str(PC._number)]["_loaded"].XP = clamp(PC.character_stats[str(PC._number)]["_loaded"].XP, 0, 99999999999999)
 	
-	P._xp_next = clamp(P._xp_next, 0, 99999999999999)
-	P.character_stats[str(P._number)]["_loaded"].XP_next = clamp(P.character_stats[str(P._number)]["_loaded"].XP_next, 0, 99999999999999)
+	PC._xp_next = clamp(PC._xp_next, 0, 99999999999999)
+	PC.character_stats[str(PC._number)]["_loaded"].XP_next = clamp(PC.character_stats[str(PC._number)]["_loaded"].XP_next, 0, 99999999999999)
 	
-	P.character_stats[str(P._number)]["_loaded"].Strength = clamp(P.character_stats[str(P._number)]["_loaded"].Strength, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Strength = clamp(PC.character_stats[str(PC._number)]["_loaded"].Strength, 0, 999)
 	
 	Hud._loaded.Gold = clamp(Hud._loaded.Gold, 0, 9999999999)
 	
@@ -224,51 +224,51 @@ func clamp_p_vars():
 	
 	Hud._loaded.Turns = clamp(Hud._loaded.Turns, 0, 99999999999999)
 			
-	P._cha = clamp(P._cha, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Charisma = clamp(P.character_stats[str(P._number)]["_loaded"].Charisma, 0, 999)
+	PC._cha = clamp(PC._cha, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Charisma = clamp(PC.character_stats[str(PC._number)]["_loaded"].Charisma, 0, 999)
 	
-	P._con = clamp(P._con, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Constitution = clamp(P.character_stats[str(P._number)]["_loaded"].Constitution, 0, 999)
+	PC._con = clamp(PC._con, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Constitution = clamp(PC.character_stats[str(PC._number)]["_loaded"].Constitution, 0, 999)
 	
-	P._def = clamp(P._def, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Defense = clamp(P.character_stats[str(P._number)]["_loaded"].Defense, 0, 999)
+	PC._def = clamp(PC._def, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Defense = clamp(PC.character_stats[str(PC._number)]["_loaded"].Defense, 0, 999)
 		
-	P._dex = clamp(P._dex, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Dexterity = clamp(P.character_stats[str(P._number)]["_loaded"].Dexterity, 0, 999)
+	PC._dex = clamp(PC._dex, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Dexterity = clamp(PC.character_stats[str(PC._number)]["_loaded"].Dexterity, 0, 999)
 			
-	P._int = clamp(P._int, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Intelligence = clamp(P.character_stats[str(P._number)]["_loaded"].Intelligence, 0, 999)
+	PC._int = clamp(PC._int, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Intelligence = clamp(PC.character_stats[str(PC._number)]["_loaded"].Intelligence, 0, 999)
 			
-	P._luc = clamp(P._luc, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Luck = clamp(P.character_stats[str(P._number)]["_loaded"].Luck, 0, 999)
+	PC._luc = clamp(PC._luc, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Luck = clamp(PC.character_stats[str(PC._number)]["_loaded"].Luck, 0, 999)
 			
-	P._per = clamp(P._per, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Perception = clamp(P.character_stats[str(P._number)]["_loaded"].Perception, 0, 999)
+	PC._per = clamp(PC._per, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Perception = clamp(PC.character_stats[str(PC._number)]["_loaded"].Perception, 0, 999)
 	
-	P._str = clamp(P._str, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Strength = clamp(P.character_stats[str(P._number)]["_loaded"].Strength, 0, 999)
+	PC._str = clamp(PC._str, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Strength = clamp(PC.character_stats[str(PC._number)]["_loaded"].Strength, 0, 999)
 			
-	P._wil = clamp(P._wil, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Willpower = clamp(P.character_stats[str(P._number)]["_loaded"].Willpower, 0, 999)
+	PC._wil = clamp(PC._wil, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Willpower = clamp(PC.character_stats[str(PC._number)]["_loaded"].Willpower, 0, 999)
 	
-	P._wis = clamp(P._wis, 0, 999)
-	P.character_stats[str(P._number)]["_loaded"].Wisdom = clamp(P.character_stats[str(P._number)]["_loaded"].Wisdom, 0, 999)
+	PC._wis = clamp(PC._wis, 0, 999)
+	PC.character_stats[str(PC._number)]["_loaded"].Wisdom = clamp(PC.character_stats[str(PC._number)]["_loaded"].Wisdom, 0, 999)
 	
 
 func clamp_p_vars_saved():
-	P.character_stats[str(P._number)]["_saved"].HP = clamp(P.character_stats[str(P._number)]["_saved"].HP, 0, 9999)
+	PC.character_stats[str(PC._number)]["_saved"].HP = clamp(PC.character_stats[str(PC._number)]["_saved"].HP, 0, 9999)
 	
-	P.character_stats[str(P._number)]["_saved"].HP_max = clamp(P.character_stats[str(P._number)]["_saved"].HP_max, 0, 9999)
+	PC.character_stats[str(PC._number)]["_saved"].HP_max = clamp(PC.character_stats[str(PC._number)]["_saved"].HP_max, 0, 9999)
 	
-	P.character_stats[str(P._number)]["_saved"].MP = clamp(P.character_stats[str(P._number)]["_saved"].MP, 0, 9999)
+	PC.character_stats[str(PC._number)]["_saved"].MP = clamp(PC.character_stats[str(PC._number)]["_saved"].MP, 0, 9999)
 	
-	P.character_stats[str(P._number)]["_saved"].MP_max = clamp(P.character_stats[str(P._number)]["_saved"].MP_max, 0, 9999)
+	PC.character_stats[str(PC._number)]["_saved"].MP_max = clamp(PC.character_stats[str(PC._number)]["_saved"].MP_max, 0, 9999)
 		
-	P.character_stats[str(P._number)]["_saved"].XP = clamp(P.character_stats[str(P._number)]["_saved"].XP, 0, 99999999999999)
+	PC.character_stats[str(PC._number)]["_saved"].XP = clamp(PC.character_stats[str(PC._number)]["_saved"].XP, 0, 99999999999999)
 	
-	P.character_stats[str(P._number)]["_saved"].XP_next = clamp(P.character_stats[str(P._number)]["_saved"].XP_next, 0, 99999999999999)
+	PC.character_stats[str(PC._number)]["_saved"].XP_next = clamp(PC.character_stats[str(PC._number)]["_saved"].XP_next, 0, 99999999999999)
 	
-	P.character_stats[str(P._number)]["_saved"].Level = clamp(P.character_stats[str(P._number)]["_saved"].Level, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Level = clamp(PC.character_stats[str(PC._number)]["_saved"].Level, 0, 999)
 	
 	Hud._saved.Gold = clamp(Hud._saved.Gold, 0, 9999999999)
 	
@@ -276,25 +276,25 @@ func clamp_p_vars_saved():
 	
 	Hud._saved.Turns = clamp(Hud._saved.Turns, 0, 99999999999999)
 	
-	P.character_stats[str(P._number)]["_saved"].Strength = clamp(P.character_stats[str(P._number)]["_saved"].Strength, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Strength = clamp(PC.character_stats[str(PC._number)]["_saved"].Strength, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Defense = clamp(P.character_stats[str(P._number)]["_saved"].Defense, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Defense = clamp(PC.character_stats[str(PC._number)]["_saved"].Defense, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Constitution = clamp(P.character_stats[str(P._number)]["_saved"].Constitution, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Constitution = clamp(PC.character_stats[str(PC._number)]["_saved"].Constitution, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Dexterity = clamp(P.character_stats[str(P._number)]["_saved"].Dexterity, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Dexterity = clamp(PC.character_stats[str(PC._number)]["_saved"].Dexterity, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Intelligence = clamp(P.character_stats[str(P._number)]["_saved"].Intelligence, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Intelligence = clamp(PC.character_stats[str(PC._number)]["_saved"].Intelligence, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Charisma = clamp(P.character_stats[str(P._number)]["_saved"].Charisma, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Charisma = clamp(PC.character_stats[str(PC._number)]["_saved"].Charisma, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Wisdom = clamp(P.character_stats[str(P._number)]["_saved"].Wisdom, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Wisdom = clamp(PC.character_stats[str(PC._number)]["_saved"].Wisdom, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Willpower = clamp(P.character_stats[str(P._number)]["_saved"].Willpower, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Willpower = clamp(PC.character_stats[str(PC._number)]["_saved"].Willpower, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Perception = clamp(P.character_stats[str(P._number)]["_saved"].Perception, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Perception = clamp(PC.character_stats[str(PC._number)]["_saved"].Perception, 0, 999)
 	
-	P.character_stats[str(P._number)]["_saved"].Luck = clamp(P.character_stats[str(P._number)]["_saved"].Luck, 0, 999)
+	PC.character_stats[str(PC._number)]["_saved"].Luck = clamp(PC.character_stats[str(PC._number)]["_saved"].Luck, 0, 999)
 
 
 # tile position of player.
@@ -317,7 +317,7 @@ func get_random_number():
 func _music_play(_filename:String = "ballad.ogg", _id:int = 0, _at_main_menu:bool = true):
 	if Settings._system.music == true:
 		# this is needed so that when returning from high score or settings, the music from main menu will continue to play. this code will fail when returning from builder or from playing the game because the last known id will not be 0.
-		if Variables._last_known_music_id == 0 && _at_main_menu == true && player != null && player.playing == true:
+		if Variables._last_known_music_id == 0 and _at_main_menu == true and player != null and player.playing == true:
 			return
 			
 		var _path = "res://audio/music/" + str(_filename)
@@ -331,7 +331,7 @@ func _music_play(_filename:String = "ballad.ogg", _id:int = 0, _at_main_menu:boo
 		player = AudioStreamPlayer.new()
 		add_child(player)
 		
-		if Variables._last_known_music_id != _id || _at_main_menu == true:
+		if Variables._last_known_music_id != _id or _at_main_menu == true:
 			player.stream = _music
 			player.play()
 		

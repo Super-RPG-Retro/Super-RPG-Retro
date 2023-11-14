@@ -16,12 +16,12 @@ extends Node2D
 func _ready():
 	Filesystem._make_saved_data_directories()
 
-	P._update_character_stats_loaded()
-	P._update_character_stats_saved()
-	P.reset()
+	PC._update_character_stats_loaded()
+	PC._update_character_stats_saved()
+	PC.reset()
 
 	# generate the xp levels.
-	P.xp_table()
+	PC.xp_table()
 
 	Common._game_title()
 	Builder.reset_config()
@@ -33,4 +33,3 @@ func _ready():
 		Builder.all_array_append()
 
 	Filesystem.builder_load_data()
-

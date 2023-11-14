@@ -1,1 +1,0 @@
-taskkill -im super_rpg_retro_fullscreen.exe

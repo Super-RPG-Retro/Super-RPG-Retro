@@ -159,7 +159,7 @@ func _ready():
 	# events could also be triggered when talking to someone or when opening a chest.
 	# __i = event_number
 	for _i in range (99):
-		if Builder_playing._data.dungeon_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][_i] && Builder_playing._data.level_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.level_number][_i] && bool(Builder_playing._event_puzzles.data.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][_i]) == true:
+		if Builder_playing._data.dungeon_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][_i] and Builder_playing._data.level_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.level_number][_i] and bool(Builder_playing._event_puzzles.data.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][_i]) == true:
 			Builder_playing._event_puzzles.data.event_number = _i
 			break
 	
@@ -208,7 +208,7 @@ func game_seed():
 		print("2-seed", Settings._system.seed_current)
 			
 	# else if path to exit ladder could not be found then these vars will not match.
-	elif Settings._system.dungeon_level_seed.has(Settings._game.level_number) == true && Settings._system.seed_current != Settings._system.dungeon_level_seed[Settings._game.level_number]:
+	elif Settings._system.dungeon_level_seed.has(Settings._game.level_number) == true and Settings._system.seed_current != Settings._system.dungeon_level_seed[Settings._game.level_number]:
 		seed(Settings._system.dungeon_level_seed[Settings._game.level_number])
 		print("3-seed", Settings._system.dungeon_level_seed[Settings._game.level_number])
 	
@@ -301,7 +301,7 @@ func pickup_items():
 		if item.tile == _player_tile:
 			# do any event after an item is picked up.
 			if item._item_id == 0:
-				P._hp += 2
+				PC._hp += 2
 				Hud._loaded.Score += 1
 				player.get_node("Damage").damage_player(0)
 				
@@ -371,7 +371,7 @@ func update_visuals():
 				var occlusion = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(player_center, test_point))
 				
 				# if no occlusion then we can see the tile. However, here is one complication. For tiles that block vision, we always get hit when casting a ray at it, but that does not mean we should not see it, just means we should not see past it. so we need to check the distance between the point of the hit to the point that we were just testing. A value of 1 give a 1 margin error to the tile.
-				if !occlusion || (occlusion.position - test_point).length() < 1:
+				if !occlusion or (occlusion.position - test_point).length() < 1:
 					# a value of -1 clears the tile.
 					visibility_map.set_cell(0, Vector2i(x, y), -1)
 					
@@ -381,7 +381,7 @@ func update_visuals():
 			var mob_center = tile_to_pixel_center(mob.tile.x, mob.tile.y)
 			var occlusion = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(player_center, mob_center))
 			
-			if !occlusion && mob.dead == false:
+			if !occlusion and mob.dead == false:
 				mob._sprite_scene.visible = true
 				
 				

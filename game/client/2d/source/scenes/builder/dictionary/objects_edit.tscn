@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bplgfilxf1ekq"]
 
 [ext_resource type="Script" path="res://2d/source/scripts/builder/dictionaries/edit.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://lpefj48b7wqp" path="res://2d/assets/images/arrows/arrow_small_right.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://dl2llhah32hdi" path="res://2d/assets/images/arrows/arrow_small_left.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://chym0tkywvuks" path="res://2d/assets/images/arrows/arrow_small_right.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://boqxdm04wt8ml" path="res://2d/assets/images/arrows/arrow_small_left.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="5"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="6"]

@@ -94,7 +94,7 @@ var _data := {
 	# should a save point be enabled for this level.
 	"save_point_enabled":	[],
 	
-	# for this feature to work, Set hide_stone_walls to true at builder. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors.
+	# for this feature to work, Set show_stone_walls to false at builder. Hide a corridor from room one and a random room. Only a random value from 0 to 3 is used. When creating the corridors, The last preset room is excluded since that room is used to create the corridors.
 	"hide_random_corridor":	[],
 	
 }

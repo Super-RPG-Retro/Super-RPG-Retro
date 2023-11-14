@@ -183,7 +183,7 @@ func _ready():
 		
 		for _f in Variables._file_names:
 			# if folder_name is part of the filename but not an exact dupicate of that filename then enter code. remember that the file_names var has part of the folder as that name.
-			if _i in _f && _i != _f:
+			if _i in _f and _i != _f:
 				var _found2 = false
 				
 				# if duplicate...
@@ -205,8 +205,8 @@ func _ready():
 	
 func _input(event):
 	# these arrows are used to change to the next dictionary,
-	if _arrow_left.has_focus() == true && _arrow_left_hover == true:
-		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+	if _arrow_left.has_focus() == true and _arrow_left_hover == true:
+		if (event.is_action_released("ui_left", true)) or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			
 			_current_sprite_index -= 1
 			
@@ -220,8 +220,8 @@ func _input(event):
 			_runtime = true
 			display_values()
 	
-	if _arrow_right.has_focus() == true && _arrow_right_hover == true:
-		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+	if _arrow_right.has_focus() == true and _arrow_right_hover == true:
+		if (event.is_action_released("ui_right", true)) or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			
 			_current_sprite_index += 1
 			_current_sprite_index = clamp(_current_sprite_index, 0, Variables._file_paths.size() - 1)
@@ -253,84 +253,84 @@ func display_values():
 	
 	
 func refresh_data():	
-	_spell_poison.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"]
+	_spell_poison.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"]
 	
-	_spell_slow.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"]
+	_spell_slow.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"]
 	
-	_spell_sleep.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"]
+	_spell_sleep.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"]
 	
-	_spell_chaos.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"]
+	_spell_chaos.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"]
 	
-	_spell_blind.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"]
+	_spell_blind.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"]
 	
-	_spell_lock.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"]
+	_spell_lock.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"]
 	
-	_spell_stop.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"]
+	_spell_stop.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"]
 	
 	# this is all the values that can be changed. most of them are SpinBox.
-	_dictionary_description.text = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"]
+	_dictionary_description.text = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"]
 	
-	_charisma.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Charisma"])	
+	_charisma.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Charisma"])	
 	
-	_constitution.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Constitution"])
+	_constitution.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Constitution"])
 	
-	_defense.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Defense"])
+	_defense.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Defense"])
 	
-	_dexterity.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Dexterity"])
+	_dexterity.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Dexterity"])
 	
-	_intelligence.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Intelligence"])
+	_intelligence.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Intelligence"])
 	
-	_luck.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Luck"])
+	_luck.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Luck"])
 	
-	_perception.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Perception"])
+	_perception.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Perception"])
 	
-	_strength.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Strength"])
+	_strength.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Strength"])
 	
-	_willpower.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Willpower"])
+	_willpower.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Willpower"])
 	
-	_wisdom.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Wisdom"])
+	_wisdom.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Wisdom"])
 	
-	_stack_amount.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Stack_amount"])
+	_stack_amount.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Stack_amount"])
 	
-	_selling_price.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Selling_price"])
+	_selling_price.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Selling_price"])
 	
-	_purchase_price.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"])
+	_purchase_price.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"])
 	
-	_drop_gold.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Drop_gold"])
+	_drop_gold.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Drop_gold"])
 	
-	_hp_max.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP_max"])
+	_hp_max.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP_max"])
 	
-	_hp.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP"])
+	_hp.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP"])
 	
-	_mp_max.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP_max"])
+	_mp_max.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP_max"])
 	
-	_mp.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP"])
+	_mp.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP"])
 	
-	_xp_given.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["XP_given"])
+	_xp_given.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["XP_given"])
 	
-	_at_dungeon_to.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_to"])
+	_at_dungeon_to.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_to"])
 	
-	_at_dungeon_from.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_from"])
+	_at_dungeon_from.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_from"])
 	
-	_at_level_to.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_to"])
+	_at_level_to.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_to"])
 	
-	_at_level_from.value = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_from"])
+	_at_level_from.value = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_from"])
 	
-	_enabled.button_pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"])
+	_enabled.button_pressed = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"])
 	
-	_movement_type.select(int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"]), true)
+	_movement_type.select(int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"]), true)
 	
-	_is_artifact.button_pressed = int(Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"])
+	_is_artifact.button_pressed = int(Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"])
 	
-	_task_amount.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"]
+	_task_amount.value = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"]
 
-	_task_gold.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"]
+	_task_gold.value = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"]
 
-	_healing_power.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"]
+	_healing_power.value = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"]
 	
-	_healing_potions.value = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"]
+	_healing_potions.value = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"]
 	
-	_equipable.button_pressed = Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"]
+	_equipable.button_pressed = Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"]
 
 	
 	if _is_artifact.button_pressed == true:
@@ -472,101 +472,101 @@ func _return_to_main_menu():
 func save_stats():
 	if _runtime == false:
 		Filesystem.FILE_PATH = _path_file
-		Filesystem.save_dictionary_json(str(_group_item_list.get_item_text(_group_item_list_index)), Variables._file_names[_current_sprite_index], Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]])
+		Filesystem.save_dictionary_json(str(_group_item_list.get_item_text(_group_item_list_index)), Variables._file_names[_current_sprite_index], Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]])
 
 func _on_text_edit_description_mouse_exited():
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"] = _dictionary_description.text
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Description"] = _dictionary_description.text
 		
 	if _runtime == false:
 		save_stats()
 
 
 func _on_SpinBox_charisma_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Charisma"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Charisma"] = value
 
 	if _runtime == false:
 		save_stats()
 		
 		
 func _on_SpinBox_Constitution_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Constitution"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Constitution"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Defense_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Defense"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Defense"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Dexterity_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Dexterity"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Dexterity"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Intelligence_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Intelligence"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Intelligence"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Luck_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Luck"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Luck"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Perception_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Perception"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Perception"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Strength_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Strength"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Strength"] = value
 	
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Willpower_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Willpower"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Willpower"] = value
 	
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Wisdom_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Wisdom"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Wisdom"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_Amount_changed(index):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Stack_amount"] = index
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Stack_amount"] = index
 	
 	if _runtime == false:
 		save_stats()
 		
 
 func _on_SpinBox_selling_price_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Selling_price"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Selling_price"] = value
 
 	if _runtime == false:
 		save_stats()
 	
 	
 func _on_SpinBox_purchase_price_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Purchase_price"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -578,7 +578,7 @@ func _on_SpinBox_HP_max_changed(value):
 		_hp.value = value		
 	_hp.max_value = value
 	
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP_max"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP_max"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -586,7 +586,7 @@ func _on_SpinBox_HP_max_changed(value):
 	
 func _on_SpinBox_HP_changed(value):
 	if value <= _hp_max.value:
-		Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP"] = value
+		Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["HP"] = value
 	
 		if _runtime == false:
 			save_stats()
@@ -601,7 +601,7 @@ func _on_SpinBox_MP_max_changed(value):
 		_mp.value = value		
 	_mp.max_value = value
 	
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP_max"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP_max"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -609,7 +609,7 @@ func _on_SpinBox_MP_max_changed(value):
 
 func _on_SpinBox_MP_changed(value):
 	if value <= _mp_max.value:
-		Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP"] = value
+		Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["MP"] = value
 	
 		if _runtime == false:
 			save_stats()
@@ -619,7 +619,7 @@ func _on_SpinBox_MP_changed(value):
 
 
 func _on_SpinBox_XP_Given_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["XP_given"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["XP_given"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -646,7 +646,7 @@ func _on_Button_dictionary_rename_pressed():
 	
 	# if suffix is greater than zero, remove all numbers from rename text feild since code is adding that number value to the end of the text. basiclly, this code is used when suffix field is not zero. code adds that value to the end of the rename text.
 	var _dn: String = _dictionary_rename.text
-	if _suffix_checkbox.button_pressed == true && _dictionary_name_suffix.value > 0:
+	if _suffix_checkbox.button_pressed == true and _dictionary_name_suffix.value > 0:
 		_dn = _dictionary_rename.text.lstrip("0123456789")
 		_dn = _dn + "_" + str(_dictionary_name_suffix.value)
 		
@@ -694,7 +694,7 @@ func _on_AcceptDialog_focus_exited():
 
 func _on_SpinBox_at_dungeon_from_changed(value):
 	if value <= _at_dungeon_to.value:
-		Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_from"] = value
+		Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_from"] = value
 	
 		if _runtime == false:
 			save_stats()
@@ -709,7 +709,7 @@ func _on_SpinBox_at_dungeon_to_changed(value):
 		_at_dungeon_from.value = value		
 	_at_dungeon_from.max_value = value
 	
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_to"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_dungeon_to"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -717,7 +717,7 @@ func _on_SpinBox_at_dungeon_to_changed(value):
 
 func _on_SpinBox_at_level_from_changed(value):
 	if value <= _at_level_to.value:
-		Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_from"] = value
+		Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_from"] = value
 	
 		if _runtime == false:
 			save_stats()
@@ -732,7 +732,7 @@ func _on_SpinBox_at_level_to_changed(value):
 		_at_level_from.value = value		
 	_at_level_from.max_value = value
 	
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_to"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["At_level_to"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -740,7 +740,7 @@ func _on_SpinBox_at_level_to_changed(value):
 
 # is dictionary enabled, displayed at dungeon?
 func _on_CheckButton_dictionary_enabled_toggled(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Enabled"] = value
 
 	if _runtime == false:
 		save_stats()
@@ -751,7 +751,7 @@ func _on_AcceptDialog_return_to_builder_home_confirmed():
 
 
 func _on_is_artifact_Enabled_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Is_artifact"] = button_pressed
 	
 	if _is_artifact.button_pressed == true:
 		_enabled.button_pressed = false
@@ -765,98 +765,98 @@ func _on_is_artifact_Enabled_toggled(button_pressed):
 
 
 func _on_SpinBox_drop_gold_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Drop_gold"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Drop_gold"] = value
 
 	if _runtime == false:
 		save_stats()
 
 
 func _on_movement_type_ItemList_item_selected(index):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"] = index
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Movement_type"] = index
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Poison_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_poison"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Slow_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_slow"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Sleep_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_sleep"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Chaos_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_chaos"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Blind_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_blind"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Lock_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_lock"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Spell_Stop_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Spell_stop"] = button_pressed
 	
 	if _runtime == false:
 		save_stats()
 	
 
 func _on_SpinBox_Task_Amount_value_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_amount"] = value
 
 	if _runtime == false:
 		save_stats()
 
 
 func _on_SpinBox_Task_Gold_value_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Task_gold"] = value
 
 	if _runtime == false:
 		save_stats()
 
 
 func _on_SpinBox_Healing_Power_value_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_power"] = value
 
 	if _runtime == false:
 		save_stats()
 
 
 func _on_SpinBox_Healing_Potions_value_changed(value):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"] = value
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Healing_potions"] = value
 
 	if _runtime == false:
 		save_stats()
 
 
 func _on_CheckButton_Equipable_toggled(button_pressed):
-	Json.d[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"] = button_pressed
+	Json._directory_number[str(Builder._config.game_id)][Variables._dictionary_name][Variables._file_names[_current_sprite_index]]["Equipable"] = button_pressed
 
 	if _runtime == false:
 		save_stats()

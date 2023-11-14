@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="2"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="3"]
 [ext_resource type="Theme" uid="uid://dce5wod4p186f" path="res://2d/assets/themes/transparent-child.tres" id="4"]
-[ext_resource type="Script" path="res://2d/source/scripts/scene_header/scene_header.gd" id="5"]
+[ext_resource type="Script" path="res://2d/source/scripts/common/scene_header.gd" id="5"]
 [ext_resource type="Script" path="res://2d/source/scripts/builder/select_json_dictionary_as_items.gd" id="6"]
 [ext_resource type="Theme" uid="uid://bwxso8a50xc5l" path="res://2d/assets/themes/panel_blue.tres" id="7"]
 

@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://c28g7dbc50vdn"]
+
+[ext_resource type="Texture2D" uid="uid://ca0qbm17jg2ku" path="res://2d/assets/images/cursor/mouse_select_object2.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://0xdm7wod2uwt" path="res://2d/assets/images/cursor/mouse_select_object1.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://dfn70hyvybogq" path="res://2d/source/scenes/entity_common.tscn" id="4"]
+[ext_resource type="Animation" path="res://2d/assets/animation/hit.tres" id="5"]
+[ext_resource type="Animation" path="res://2d/assets/animation/goodbye.tres" id="6"]
+[ext_resource type="Animation" path="res://2d/assets/animation/hello.tres" id="7"]
+
+[sub_resource type="SpriteFrames" id="6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jmgc"]
+_data = {
+"goodbye": ExtResource("6"),
+"hello": ExtResource("7"),
+"hit": ExtResource("5")
+}
+
+[node name="Mobs" type="Sprite2D" groups=["mobs"]]
+visible = false
+z_index = 3000
+position = Vector2(288, 224)
+centered = false
+
+[node name="MouseSelectObjectEntity" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(16, 16)
+sprite_frames = SubResource("6")
+frame = 1
+
+[node name="EntityChildScene" parent="." instance=ExtResource("4")]
+position = Vector2(6, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5jmgc")
+}
+

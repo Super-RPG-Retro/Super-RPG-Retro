@@ -10,7 +10,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-# for player's stats, P._stats_data. 
+# for player's stats, PC._stats_data. 
 # this file has all none-player dictionaries.
 		
 extends Node
@@ -114,7 +114,7 @@ var _magic := {
 }
 
 # at builder, items can be added to directories. that will change the structor of it and there will be problems with reusing the same data. a scene could have a directory count of 100 but the correct value is 101. therefore, this clears all directory. at builder, data will be created on the fly.
-var _s	:= {	 
+var _directory_name := {	 
 	"mobs": 	{}, #  this mobs directory must never be coded to be accessed at builder from the menu called directory.
 	"mobs1": 	{},
 	"mobs2": 	{},
@@ -145,7 +145,7 @@ var wand	:= {}
 var amulet	:= {}
 
 # NOTE: also add the new dictionary at Enum.Builder_dictionary and here at func refresh_dictionaries.
-var d := {
+var _directory_number := {
 		"0": {},
 		"1": {},
 		"2": {},
@@ -184,11 +184,11 @@ func _ready():
 	
 # at builder, items can be added to directories. that will change the structor of it and there will be problems with reusing the same data. a scene could have a directory count of 100 but the correct value is 101. therefore, this clears all directory. at builder, data will be created on the fly.
 func make_directories():
-	# id is the dictionary number. d is the dictionary. there are Variables._total_builder_data_directories dictionaries at directory builder_data at hard drive.
+	# id is the dictionary number. _directory_number is the dictionary. there are Variables._total_builder_data_directories dictionaries at directory builder_data at hard drive.
 	for _id in range (Variables._total_builder_data_directories):
-		d[str(_id)] = {}
+		_directory_number[str(_id)] = {}
 		
-		d[str(_id)].merge(_s)
+		_directory_number[str(_id)].merge(_directory_name)
 			
 		
 # dictionaries are loaded one level at a time.
@@ -220,21 +220,21 @@ func refresh_dictionaries(_path, _get_names:bool = false):
 	# for each filename found at harddrive, load the data from harddrive into that dictionary mobs.
 	for _n in Variables._folder_names:	
 		for _f in Variables._file_names:
-			if _n in _f && _f.replace(_n + "/", "") != "":
+			if _n in _f and _f.replace(_n + "/", "") != "":
 				for _id in range (Variables._total_builder_data_directories):
 					
 					if _path == Variables._project_path + "/builder/objects/data/"+ str(Builder._config.game_id + 1) +"/mobs/" + str(Builder._data.dungeon_number + 1) + "/" + str(Builder._data.level_number + 1) + "/":
-						d[str(_id)].mobs[_f.replace(_n + "/", "")] = Filesystem.load_dictionary_json(_f)
+						_directory_number[str(_id)].mobs[_f.replace(_n + "/", "")] = Filesystem.load_dictionary_json(_f)
 												
 						if _get_names == true:
 							_mobs_names.push_back(_f.replace(_n + "/", ""))
 									
 					#_id is the json directory where the items are in, such as, book, gold, ring and weapon.
 					else:				
-						for _q in d[str(_id)].keys():
-							# d refers to the dictionary var. _f is the folder inside of _id such as animals/adders.
+						for _q in _directory_number[str(_id)].keys():
+							# _directory_number refers to the dictionary var. _f is the folder inside of _id such as animals/adders.
 							if _path == Variables._project_path + "/builder/objects/data/"+ str(Builder._config.game_id + 1) +"/" + str(_q) + "/":
-								d[str(_id)][str(_q)][_f.replace(_n + "/", "")] = Filesystem.load_dictionary_json(_f)
+								_directory_number[str(_id)][str(_q)][_f.replace(_n + "/", "")] = Filesystem.load_dictionary_json(_f)
 				
 	# remove a file name without a folder.
 	for _file in Variables._file_names:

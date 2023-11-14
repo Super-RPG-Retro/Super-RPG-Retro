@@ -20,11 +20,11 @@ func _ready():
 
 
 func _gui_input(event):
-	if $SceneHeader/ButtonExit.has_focus() == true || $MenuProject.has_focus() == true || $MenuDictionaries.has_focus() == true || $MenuEvents.has_focus() == true || $MenuAudio.has_focus() == true || $MenuLibrary.has_focus() == true:
+	if $SceneHeader/ButtonExit.has_focus() == true or $MenuProject.has_focus() == true or $MenuDictionaries.has_focus() == true or $MenuEvents.has_focus() == true or $MenuAudio.has_focus() == true or $MenuLibrary.has_focus() == true:
 		Variables.a.keycode = 0
 	
 	
-	if(event.is_pressed()) && Variables._child_scene_open == false:
+	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
 			
 			Filesystem.populate_json_dictionaries()
@@ -64,7 +64,7 @@ func _on_Node2D_tree_exiting():
 
 
 func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_WM_GO_BACK_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		Common._parse_input_event()
 		Filesystem.builder_save_data()
 	

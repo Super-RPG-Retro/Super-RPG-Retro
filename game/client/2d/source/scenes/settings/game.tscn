@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfv3ab1de3hyr"]
 
-[ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/scene_header.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/common/scene_header.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="2"]
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="3"]
-[ext_resource type="PackedScene" uid="uid://bm5tpl0ppabiw" path="res://2d/source/scenes/difficulty_level.tscn" id="4"]
-[ext_resource type="Texture2D" uid="uid://cnpb6y06urx4t" path="res://2d/assets/images/title_background.jpg" id="5"]
+[ext_resource type="PackedScene" uid="uid://bm5tpl0ppabiw" path="res://2d/source/scenes/common/difficulty_level.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://djjuu5owuj4t8" path="res://2d/assets/images/title_background.jpg" id="5"]
 [ext_resource type="Script" path="res://2d/source/scripts/settings/game.gd" id="6"]
 
 [node name="Node2D" type="Node2D" groups=["settings_game"]]
@@ -27,7 +27,6 @@ offset_left = 16.0
 offset_top = 135.0
 offset_right = 1008.0
 offset_bottom = 585.0
-mouse_filter = 2
 theme = ExtResource("3")
 follow_focus = true
 
@@ -42,6 +41,7 @@ custom_minimum_size = Vector2(355, 0)
 layout_mode = 2
 button_pressed = true
 text = "Time System"
+alignment = 2
 
 [node name="Label1" type="Label" parent="Container/Grid"]
 custom_minimum_size = Vector2(600, 0)
@@ -73,6 +73,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Respawn Direct Sight"
+alignment = 2
 
 [node name="Label3" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -82,6 +83,7 @@ text = "On: Mobs chase when they see you: Off: Chase anytime."
 layout_mode = 2
 theme = ExtResource("3")
 text = "Visibility Map"
+alignment = 2
 
 [node name="Label4" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -92,6 +94,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Show Mobs Door Closed"
+alignment = 2
 
 [node name="Label5" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -102,6 +105,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Show Item Door Closed"
+alignment = 2
 
 [node name="Label6" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -154,6 +158,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Normal Doors Exists"
+alignment = 2
 
 [node name="Label8" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -164,6 +169,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Room Ceiling"
+alignment = 2
 
 [node name="Label7" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -174,6 +180,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Different Floor Tiles"
+alignment = 2
 
 [node name="Label9" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -184,6 +191,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Keep Mobs In Room"
+alignment = 2
 
 [node name="Label10" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -194,6 +202,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Use Battle System"
+alignment = 2
 
 [node name="Label11" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -204,6 +213,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Down Ladder Always Shown"
+alignment = 2
 
 [node name="Label14" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -214,6 +224,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Return To Last Level"
+alignment = 2
 
 [node name="Label23" type="Label" parent="Container/Grid"]
 layout_mode = 2
@@ -224,6 +235,7 @@ layout_mode = 2
 theme = ExtResource("3")
 button_pressed = true
 text = "Can Continue Saved Game"
+alignment = 2
 
 [node name="Label24" type="Label" parent="Container/Grid"]
 layout_mode = 2

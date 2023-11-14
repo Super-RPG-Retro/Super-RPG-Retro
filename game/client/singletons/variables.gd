@@ -13,6 +13,7 @@ You should have received a copy of the GNU Affero General Public License along w
 # vars are placed here when they cannot be placed in amy other singleton. they are used game wide, simular to triggers.
 extends Node
 
+var mouse_at_viewport := false
 
 # stops player from moving when player first enters the library.
 var _player_stop_moving := true
@@ -64,8 +65,7 @@ var _music := {
 	"14": "game-music2.mid",
 }
 
-# stats name.
-var s := {
+var _stats_name := {
 	"0": "Charisma",
 	"1": "Constitution",
 	"2": "Defense",
@@ -85,8 +85,7 @@ var s := {
 	"16": "Level",
 }
 
-# stats description.
-var s_desc := {
+var _stats_desc := {
 	"0": "Charisma aka Presence, Charm, Social.",
 	"1": "Constitution aka Stamina, Endurance, Vitality, Recovery.",
 	"2": "Defense aka Resistance, Fortitude, Resilience.",
@@ -151,8 +150,6 @@ var select_json_dictionary_singly := false
 var _is_build_mode := false
 
 # set this value no greater than 8. this is the number of games that can be created at builder. data/images dirs at builder_data dir will be created until this number is reached. see builder_data where project.godot file is located at file explorer. games total is minus 1 from this value. so at builder, you can change which game you want to edit.
-
-# remember to add "&& directory.dir_exists(Variables._project_path + "/builder/objects/data/#") to the booy_splash_progress_bar .gd file at func _ready, where # is the value, if you change this value. if changing this value to 5 then there needs to be 5 condition checks at func _ready. also change GameIDspinbox node at prject.home.gd file
 var _total_builder_data_directories := 1
 
 # this is the path to the root of project. path does not start with res:// but instead the hard drive letter that the project is located at. path does not end with a slash.
@@ -225,9 +222,6 @@ var _stop_settings_music := false
 # this is used to toggle the focus of the _input_client
 var _keyboard_tab_pressed := false
 
-# is child scene open? When a child scene is open, this var needs to be set to true. it is set to false when child scene closes. The reason is because without this var, pressing the ESC key will close program instead of child scene.
-var _child_scene_open := false;
-
 # when true the listen button will be triggered.
 var _trigger_listen_button := false;
 
@@ -269,6 +263,7 @@ var select_items_data_to_return := 0
 
 # the value of Enum.Scene is assigned to this var. When closing the child header, which is shared by many scene, using the mouse we can jump to the correct code by using this var.
 var _at_scene := 0
+var _at_scene_sub := 0
 
 # if true, code using this var can ignore a wait_a_turn.
 var _bypass_wait_a_turn := false
@@ -293,7 +288,7 @@ var _scene_title := ""
 var _trigger_escape_dialog := false
 
 # if different_floor_tiles var is true, corridor will use floor tile and rooms will use floor_rooms. when different_floor_tiles is false, both corridor and rooms will use floor tile. therefore, this value will either be 2 for floor or 7 for floor_rooms. note that if changing the id of these tiles at timemap (no need to do so) then these values will need to be changed. values are set to this var at game_ui ready() func.
-var _floor_rooms_tile_value := 0
+var _floor_rooms_tile_value := Enum.Tile.Floor
 
 # when searching for json files at the Filesystem._rename_file_or_directory func, the directories are scanned and all filenames from those directories are populated into these vars. these vars are then used to display the json data in the form of a dictionaries and then the Variables._file_names is used to grab the sprite textures.
 # get all files within path and including all files within subfolders.
@@ -370,7 +365,6 @@ func reset_vars():
 	_wait_a_turn = 0
 	_stop_settings_music = false
 	_keyboard_tab_pressed = false
-	_child_scene_open = false;
 	_trigger_listen_button = false
 	_mouse_cursor_position = Vector2(0, 0)
 	#_id_of_loaded_game = 1 # reset at boot splash.

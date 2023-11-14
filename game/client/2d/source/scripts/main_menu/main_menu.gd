@@ -25,7 +25,6 @@ func _ready():
 	Variables._at_scene = Enum.Scene.Main_Menu
 	Variables._scene_title = "Welcome to Super RPG Retro."
 	
-	Variables._child_scene_open = true
 	Variables._at_library =  Settings._system.start_3d
 	Variables._dungeon_coordinates = "0,0"
 	Variables._compass = "N"
@@ -81,7 +80,7 @@ func _input(event):
 
 
 func _quit():
-	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", P.character_stats)
+	Filesystem.save("user://saved_data/" + str(Variables._id_of_loaded_game) + "/stats.txt", PC.character_stats)
 	
 	var _s = OS.execute(".//super_rpg_retro_end_task.bat", [], [], false)
 	#get_tree().quit() 
@@ -93,7 +92,7 @@ func _on_SpinBox_value_changed(value):
 
 
 func _on_high_scores_Button_pressed():
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/high_scores.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/high_scores.tscn")
 
 
 func _on_builder_data_Button_pressed():
@@ -101,7 +100,7 @@ func _on_builder_data_Button_pressed():
 	
 
 func _on_credits_Button_pressed():
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/credits.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/credits.tscn")
 
 	
 func enable_settings_game_scene():

@@ -25,17 +25,14 @@ func _ready():
 # without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
 func _process(_delta):
 	if visible == true:
-		get_tree().call_group("magic_panel", "rune_summary_visible_false")
-		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
-		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("game_ui", "hide_cursor")
+		get_tree().call_group("game_ui", "hide_tile_summary")
 		get_tree().call_group("tile_summary", "unit_text_clear")
 		
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_action_pressed("ui_left_mouse_click") || (event.is_action_pressed("ui_accept", true)):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT or (event.is_action_pressed("ui_accept", true)):
 		if _accept_dialog.visible == true:
-			Variables._child_scene_open = false
-			
 			get_tree().call_group("magic_panel", "_on_timer_rune_select_visibility")
 		
 			_accept_dialog.visible = false

@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://brymas4up5s80"]
+
+[ext_resource type="Texture2D" uid="uid://c31wg8syn5xs7" path="res://bundles/assets/images/player_characters/0.png" id="1"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/child_scene/tiles.gd" id="2"]
+[ext_resource type="Theme" uid="uid://gw260bpyiu1u" path="res://2d/assets/themes/theme_very_small_font.tres" id="3"]
+[ext_resource type="Theme" uid="uid://c5jg8sho14qvp" path="res://2d/assets/themes/theme_small_font.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://dd5wl3rf5exwl" path="res://2d/source/scenes/common/scene_header.tscn" id="5"]
+[ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="6"]
+[ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="7"]
+[ext_resource type="Texture2D" uid="uid://dmgicbawq3jpk" path="res://2d/assets/images/black.png" id="7_8j7r4"]
+
+[sub_resource type="StyleBoxFlat" id="4"]
+bg_color = Color(0, 0, 0.172549, 0.843137)
+
+[node name="Overview" type="Control" groups=["tile_summary"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2")
+
+[node name="MarginPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = 35.0
+offset_right = 8.0
+offset_bottom = 600.0
+theme = ExtResource("6")
+theme_override_styles/panel = SubResource("4")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 525)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 35.0
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 668.0
+offset_bottom = 600.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(660, 565)
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(660, 565)
+layout_mode = 2
+theme = ExtResource("6")
+bbcode_enabled = true
+autowrap_mode = 2
+
+[node name="TileImage" type="Sprite2D" parent="ScrollContainer/GridContainer/Label"]
+z_index = 4096
+position = Vector2(588, 34)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1")
+centered = false
+hframes = 3
+
+[node name="TileSummary" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 440.0
+offset_top = 288.0
+offset_right = 480.0
+offset_bottom = 310.0
+theme = ExtResource("4")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 2
+
+[node name="Timer" type="Timer" parent="TileSummary"]
+
+[node name="MouseSummary" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 633.0
+offset_top = 260.0
+offset_right = 855.0
+offset_bottom = 331.0
+theme = ExtResource("7")
+
+[node name="Label" type="Label" parent="MouseSummary"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 27.0
+theme = ExtResource("3")
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/line_spacing = 1
+uppercase = true
+
+[node name="RightSidePanel" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(846.5, 319)
+scale = Vector2(11.0938, 17.5625)
+texture = ExtResource("7_8j7r4")
+
+[node name="SceneHeader" parent="." instance=ExtResource("5")]
+visible = false
+
+[node name="Label" parent="SceneHeader" index="2"]
+text = "Tile Summary"
+
+[editable path="SceneHeader"]

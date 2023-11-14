@@ -104,7 +104,7 @@ func _input(event):
 	# listen for ESC to exit app
 	if(event.is_pressed()):
 		if (event.is_action_pressed("ui_escape", true)):
-			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+			var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 
 func _gui_input(event):
@@ -122,7 +122,7 @@ func _on_visibility_Map_Enabled_toggled(button_pressed):
 	
 
 func _return_to_main_menu():
-	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 
 func _on_difficulty_spinbox_value_changed(value):

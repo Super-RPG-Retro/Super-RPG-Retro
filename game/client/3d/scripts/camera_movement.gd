@@ -50,7 +50,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	# Variables._at_library is used to change between library and dungeon while Settings._system.start_3d sets this value when game loads.So return if window is open if not at 3d scene and if tab was pressed because we do not want to walk when these things happen.
-	if Variables._at_library == false || Variables._child_scene_open == true || Variables._keyboard_tab_pressed == true:
+	if Variables._at_library == false or Variables._keyboard_tab_pressed == true:
 		return
 			
 	if Input.is_action_pressed("ui_down") and _camera_movement == 0 and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
@@ -116,19 +116,19 @@ func _physics_process(_delta):
 			Variables._player_stop_moving = false
 			
 	# if player is requesting to move left, set moveLeft var to true so that anymore movement requests are ignore so that the player can finish moving from one block to the next.
-	if Variables._compass_update == false && _camera_movement == 0 && Input.is_action_pressed("ui_left") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
+	if Variables._compass_update == false and _camera_movement == 0 and Input.is_action_pressed("ui_left") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._player_target_rotation += amountAngle
 		moveLeft = true
 		
-	if Variables._compass_update == false && _camera_movement == 0 && Input.is_action_pressed("ui_right") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
+	if Variables._compass_update == false and _camera_movement == 0 and Input.is_action_pressed("ui_right") and moveUp == false and moveDown == false and moveLeft == false and moveRight == false:
 		Variables._player_target_rotation -= amountAngle
 		moveRight = true
 			
-	if _camera_movement < 10 and moveDown == true || _camera_movement < 10 and moveUp == true:
+	if _camera_movement < 10 and moveDown == true or _camera_movement < 10 and moveUp == true:
 		_camera_movement += 1
 		
 		# move player if cell is empty or a player cell.
-		if $"..".get_cell_item(Vector3i(_dx, 0, _dz)) == -1 || $"..".get_cell_item(Vector3i(_dx, 0, _dz)) >= 90:
+		if $"..".get_cell_item(Vector3i(_dx, 0, _dz)) == -1 or $"..".get_cell_item(Vector3i(_dx, 0, _dz)) >= 90:
 			set_velocity(_movement_direction)
 			set_up_direction(Vector3(0,1,0))
 			move_and_slide()

@@ -84,7 +84,7 @@ var _system := {
 	# if this var is different than seed_current, "dungeon_level_seed", var will then be reset back to default because a new dungeon seed is used.
 	"seed_previous": 0,
 	
-	# sometimes a dungeon will not have any path for the player to take to the exit ladder. the bug happens when there are rooms touching each other without a corridor. the simple fix is just to use a working seed. however, instead, another try to build the dungeon by reentering game/build_level.gd is made. a check is made to determine if the path exists.
+	# sometimes a dungeon will not have any path for the player to take to the exit ladder. the bug happens when there are rooms touching each other without a corridor. the simple fix is just to use a working seed. however, instead, another try to build the dungeon by reentering game/game_world/build_level.gd is made. a check is made to determine if the path exists.
 
 	# this var will be saved everytime entry to the main scene is made. the values in this var will only change when player is at a new scene. if you have never been to dungeon level 4 then this index of 3 will check for its value. if this var has no value at that index then the value from the main menu is used. if that value is already in that index then no changes to that value is given. if however, a new seed is needed because the path to ladder cannot be made then that value will be recorded and then another try to build the dungeon will be made.
 
@@ -92,7 +92,10 @@ var _system := {
 	"dungeon_level_seed": {},
 	
 	# when this value is true, the client panel will be smaller in height, showing more of the map. This feature is useful for people that want to see more of the main game map.
-	"small_client_panel": false,
+	"small_main_map": false,
+	
+	# Should the navigation panel, displaying the WASD buttons and A, B, C, D buttons be shown?
+	"show_player_controls": true,
 	
 	# play a looped sound of wind and water.
 	"ambient": false,
@@ -104,16 +107,13 @@ var _system := {
 	"automatic_rune_casting": false,
 	
 	# the stone wall are the dungeon corridor walls not the room walls.
-	"hide_stone_walls": false,
+	"show_stone_walls": true,
 	
 	# Try to show only the stone walls that parameter the corridor.
 	"remove_extra_stone_walls": true,
 	
 	# remove every one tile wide stone tile that borders the level.
 	"remove_level_border": false,
-	
-	# Should the graphics at the dungeon map be displayed larger?
-	"use_large_tiles": true,
 	
 	# higher value can increase the corridor distance between rooms.
 	"corridor_length_between_rooms": 6,
@@ -122,8 +122,10 @@ var _system := {
 	"player_stats_panel_size": 0,
 	
 	# Show the connect to server buttom, public room buttom and the private room button at the client panel?
-	"hide_chat_features": false,
+	"show_chat_features": true,
 	
+	# Display the panel that shows user text, output text, username, server button, public room button, private room button, commands button and game button?
+	"show_client_panel": true,
 	
 	# NOTE. remember to add the next data also at the bottom of this file, at _reset_system() func.
 	
@@ -163,16 +165,17 @@ func _reset_system():
 		"seed_current": 639971417,
 		"seed_previous": 0,
 		"dungeon_level_seed": {},
-		"small_client_panel": false,
+		"small_main_map": false,
+		"show_player_controls": true,
 		"ambient": false,
 		"rune_guides": true,
 		"automatic_rune_casting": false,
-		"hide_stone_walls": false,
+		"show_stone_walls": true,
 		"remove_extra_stone_walls": true,
 		"remove_level_border": false,
-		"use_large_tiles": true,
 		"corridor_length_between_rooms": 6,
 		"player_stats_panel_size": 0,
-		"hide_chat_features": false,
-			
+		"show_chat_features": true,
+		"show_client_panel": true,
+		
 	}

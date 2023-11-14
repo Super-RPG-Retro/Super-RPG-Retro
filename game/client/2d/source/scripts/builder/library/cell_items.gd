@@ -68,7 +68,7 @@ func _on_pressed(_e_current):
 			if _e >= 10000:
 				break
 			
-			if _b >= 96 && _b <= 99 && Builder._library_cell.data.cell_item[_e] >= 96 && Builder._library_cell.data.cell_item[_e] <= 99:
+			if _b >= 96 and _b <= 99 and Builder._library_cell.data.cell_item[_e] >= 96 and Builder._library_cell.data.cell_item[_e] <= 99:
 				Builder._library_cell.data.cell_item[_e] = 0
 				_image[_e].icon = load("res://3d/assets/images/cells/0.png")
 			

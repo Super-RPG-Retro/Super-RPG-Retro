@@ -1,0 +1,139 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4n20t76352sp"]
+
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/player_controls.gd" id="1_1q3lh"]
+[ext_resource type="Theme" uid="uid://5ovu4gos36og" path="res://2d/assets/themes/transparent.tres" id="2_xqi08"]
+[ext_resource type="Texture2D" uid="uid://byiw4xml3ffc4" path="res://2d/assets/images/arrows/wasd.png" id="3_dffgt"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-60, 0)
+script = ExtResource("1_1q3lh")
+metadata/_edit_vertical_guides_ = [650.0]
+metadata/_edit_horizontal_guides_ = [459.0]
+
+[node name="ArrowUP" type="Button" parent="."]
+offset_left = 324.0
+offset_top = 399.0
+offset_right = 364.0
+offset_bottom = 426.0
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+icon = ExtResource("3_dffgt")
+icon_alignment = 1
+
+[node name="ArrowRight" type="Button" parent="."]
+offset_left = 398.0
+offset_top = 410.0
+offset_right = 438.0
+offset_bottom = 437.0
+rotation = 1.5708
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+icon = ExtResource("3_dffgt")
+icon_alignment = 1
+
+[node name="ArrowDown" type="Button" parent="."]
+offset_left = 364.0
+offset_top = 459.0
+offset_right = 404.0
+offset_bottom = 486.0
+rotation = 3.14159
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+icon = ExtResource("3_dffgt")
+icon_alignment = 1
+
+[node name="ArrowLeft" type="Button" parent="."]
+offset_left = 290.0
+offset_top = 450.0
+offset_right = 330.0
+offset_bottom = 477.0
+rotation = 4.71239
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+icon = ExtResource("3_dffgt")
+icon_alignment = 1
+
+[node name="ButtonA" type="Button" parent="."]
+offset_left = 444.0
+offset_top = 399.0
+offset_right = 484.0
+offset_bottom = 426.0
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+text = "A"
+icon_alignment = 1
+
+[node name="ButtonB" type="Button" parent="."]
+offset_left = 444.0
+offset_top = 432.0
+offset_right = 484.0
+offset_bottom = 459.0
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+text = "C"
+icon_alignment = 1
+
+[node name="ButtonC" type="Button" parent="."]
+offset_left = 490.0
+offset_top = 399.0
+offset_right = 530.0
+offset_bottom = 426.0
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+text = "B"
+icon_alignment = 1
+
+[node name="ButtonD" type="Button" parent="."]
+offset_left = 490.0
+offset_top = 432.0
+offset_right = 530.0
+offset_bottom = 459.0
+focus_neighbor_left = NodePath("../../InputClient")
+focus_neighbor_right = NodePath("../ButtonPublic")
+focus_next = NodePath("../ButtonPublic")
+focus_previous = NodePath("../../InputClient")
+focus_mode = 0
+theme = ExtResource("2_xqi08")
+action_mode = 0
+text = "D"
+icon_alignment = 1
+
+[connection signal="pressed" from="ArrowUP" to="." method="_on_arrow_up_pressed"]
+[connection signal="pressed" from="ArrowRight" to="." method="_on_arrow_right_pressed"]
+[connection signal="pressed" from="ArrowDown" to="." method="_on_arrow_down_pressed"]
+[connection signal="pressed" from="ArrowLeft" to="." method="_on_arrow_left_pressed"]

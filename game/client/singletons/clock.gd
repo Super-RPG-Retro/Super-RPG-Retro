@@ -24,9 +24,6 @@ var _ticks_timestamp := -1
 var _time := 0.0
 
 func cycle():
-	if Variables._child_scene_open == true:
-		return
-	
 	if Settings._game.clock == false:
 		reset_vars()
 		return
@@ -41,9 +38,9 @@ func cycle():
 	# 0.0005 (12h = 2000 _ticks_timestamp)
 	# 0.00005 (12h - 10000 _ticks_timestamp)
 		
-	if Variables._time_is_day == false && _raw_value > 0:
+	if Variables._time_is_day == false and _raw_value > 0:
 		_raw_value -= 0.0005 * 2
-	elif Variables._time_is_day == true && _raw_value < 1:
+	elif Variables._time_is_day == true and _raw_value < 1:
 		_raw_value += 0.0005 * 2
 	
 	# midnight	
@@ -63,9 +60,6 @@ func cycle():
 	
 # display the time of day at a node.
 func convertSectoDay(_n:int):
-	if Variables._child_scene_open == true:
-		return
-	
 	if Settings._game.clock == false:
 		reset_vars()
 		return
@@ -104,7 +98,7 @@ func convertSectoDay(_n:int):
 	if Variables._time_is_day == true:
 		Variables._time += "A"
 	else:
-		Variables._time += "P"
+		Variables._time += "PC"
 
 func reset_vars():
 	_raw_value = 0

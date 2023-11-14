@@ -39,7 +39,7 @@ func _ready():
 			# x, z, y, block id.
 			self.set_cell_item(Vector3i(_x, 0, _y), Builder_playing._library_cell.data.cell_item[_e] - 1)
 	
-			if Builder_playing._library_cell.data.cell_item[_e] >= 96 && Builder_playing._library_cell.data.cell_item[_e] <= 99:
+			if Builder_playing._library_cell.data.cell_item[_e] >= 96 and Builder_playing._library_cell.data.cell_item[_e] <= 99:
 				_player.position.x = _x + 1
 				_player.position.z = _y + 1
 	

@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cehvroolrl2gh" path="res://2d/assets/images/rune_select1.png" id="8"]
 [ext_resource type="AudioStream" uid="uid://c0wn3isdward8" path="res://audio/sound/click.ogg" id="9"]
 [ext_resource type="Texture2D" uid="uid://davkfc0ynkspe" path="res://2d/assets/images/arrows/arrow_small_down.png" id="10"]
-[ext_resource type="Script" path="res://2d/source/scripts/artifacts/artifacts_scene.gd" id="11"]
+[ext_resource type="Script" path="res://2d/source/scripts/game/game_ui_sub/artifacts_scene.gd" id="11"]
 
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{

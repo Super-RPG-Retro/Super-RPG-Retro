@@ -73,8 +73,8 @@ func _ready():
 
 func _input(event):
 	# these arrows are used to change to the next dictionary,
-	if _arrow_left.has_focus() == true && _arrow_left_hover == true:
-		if (event.is_action_released("ui_left", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+	if _arrow_left.has_focus() == true and _arrow_left_hover == true:
+		if (event.is_action_released("ui_left", true)) or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			
 			_sprite_index -= 1
 			_sprite_index = clamp(_sprite_index, 0, 9)
@@ -88,8 +88,8 @@ func _input(event):
 					
 			Builder._event_locked_doors.data.sprite_index[Builder._config.game_id][Builder._data.dungeon_number][Builder._event_locked_doors.data.event_number] = _sprite_index
 	
-	if _arrow_right.has_focus() == true && _arrow_right_hover == true:
-		if (event.is_action_released("ui_right", true)) || event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed:
+	if _arrow_right.has_focus() == true and _arrow_right_hover == true:
+		if (event.is_action_released("ui_right", true)) or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			
 			_sprite_index += 1
 			_sprite_index = clamp(_sprite_index, 0, 9)

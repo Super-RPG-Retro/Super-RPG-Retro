@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://xdqr5oagg0bt"]
 
-[ext_resource type="MeshLibrary" uid="uid://cnth8iwvlxeit" path="res://3d/assets/meshlibs/library.meshlib" id="1"]
+[ext_resource type="MeshLibrary" path="res://3d/assets/meshlibs/library.meshlib" id="1"]
 [ext_resource type="Texture2D" uid="uid://822my66gfora" path="res://bundles/assets/images/textures/7.png" id="1_cphlo"]
 [ext_resource type="Texture2D" uid="uid://dqci2e0lkgccl" path="res://bundles/assets/images/textures/15.png" id="2_1gp3k"]
 [ext_resource type="Script" path="res://3d/scripts/camera_movement.gd" id="3"]
@@ -16,7 +16,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 3
 glow_enabled = true
 fog_density = 0.1
-volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eg7wx"]
 albedo_texture = ExtResource("1_cphlo")

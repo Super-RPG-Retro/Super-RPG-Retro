@@ -25,9 +25,8 @@ func _ready():
 # without this code the rune summary panel would be seen above this dialog when the mouse cursor moves.
 func _process(_delta):
 	if visible == true:
-		get_tree().call_group("magic_panel", "rune_summary_visible_false")
-		get_tree().call_group("inventory_panel", "inventory_summary_visible_false")
-		get_tree().call_group("game_ui", "hide_parent_nodes")
+		get_tree().call_group("game_ui", "hide_cursor")
+		get_tree().call_group("game_ui", "hide_tile_summary")
 		get_tree().call_group("tile_summary", "unit_text_clear")
 		
 
@@ -39,12 +38,12 @@ func _on_ConfirmDialog_confirmed():
 		Settings._system.seed_current = Common.get_random_number()
 	
 	Variables.reset_vars()
-	P.reset_var()
+	PC.reset_var()
 	Clock.reset_vars()
 	
 	# this is needed here, so that the player stats panel shows the str, def, con, etc.
 	Variables._at_scene = Enum.Scene.Main_Menu
 	
-	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu.tscn")
+	var _scene = get_tree().change_scene_to_file("res://2d/source/scenes/main_menu/main_menu.tscn")
 
 	

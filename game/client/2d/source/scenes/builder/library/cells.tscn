@@ -2,15 +2,15 @@
 
 [ext_resource type="Theme" uid="uid://c6r0evvw6xarl" path="res://2d/assets/themes/transparent_borders.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://bqp0rlaj5w25g" path="res://2d/source/scenes/builder/menu.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://c0gkvslwfwugl" path="res://3d/assets/images/cells/2.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://c6pey78io7pnm" path="res://3d/assets/images/cells/96.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://p2k8orbm4qcw" path="res://3d/assets/images/cells/1.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://bkf8ssjfvspho" path="res://3d/assets/images/cells/0.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bfj7sid5i80k6" path="res://3d/assets/images/cells/2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://chc0gncsb8bow" path="res://3d/assets/images/cells/96.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cje7p3i2yncmb" path="res://3d/assets/images/cells/1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bm377a67qp216" path="res://3d/assets/images/cells/0.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://ctknb0lymanwg" path="res://2d/source/scenes/builder/status_bar.tscn" id="7"]
 [ext_resource type="Script" path="res://2d/source/scripts/builder/library/cell_items.gd" id="8"]
-[ext_resource type="Texture2D" uid="uid://e80jy7tst2vp" path="res://3d/assets/images/cells/99.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://qiv4ynrql2hc" path="res://3d/assets/images/cells/98.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://drmvmsxx230la" path="res://3d/assets/images/cells/97.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://cy83ki1cf7sud" path="res://3d/assets/images/cells/99.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://henk1yklhx62" path="res://3d/assets/images/cells/98.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://congrty0txjeu" path="res://3d/assets/images/cells/97.png" id="11"]
 
 [node name="Node2D" type="Node2D" groups=["builder"]]
 script = ExtResource("8")
