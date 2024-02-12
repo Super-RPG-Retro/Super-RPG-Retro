@@ -32,7 +32,7 @@ func _ready():
 	Variables._compass_update = true
 	Variables._host_is_connected = false
 	
-	Filesystem.builder_load_data()
+	#Filesystem.builder_load_data()
 	Common._game_title()
 	Common._init_stats_player_characters() 
 	
@@ -45,6 +45,7 @@ func _ready():
 	if Settings._system.randomize_2d_maze == true:
 			Settings._system.seed_current = Common.get_random_number()
 	
+	Filesystem.load_music_data()
 	Common._music_play(Builder._audio_music.data.file_name[0], 0, true)
 	
 	
@@ -96,6 +97,8 @@ func _on_high_scores_Button_pressed():
 
 
 func _on_builder_data_Button_pressed():
+	Filesystem.builder_load_data()
+
 	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/builder/project/home.tscn")
 	
 

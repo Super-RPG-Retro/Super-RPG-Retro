@@ -735,15 +735,15 @@ func add_room(free_regions):
 			
 			# room 0 (puzzle)
 			# place the puzzle sprites on the map at room 0.
-			if game.room_number == 0 and bool(Builder_playing._event_puzzles.data.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number]) == true:
+			if game.room_number == 0 and bool(Builder_playing._event_puzzles.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number]) == true:
 				# continue if color of the puzzle block is not 0.
-				if Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_frame] != 0:
-					var _puzzle_blocks = reference.Puzzle.new(self, x, y, Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_frame], _frame)
+				if Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_frame] != 0:
+					var _puzzle_blocks = reference.Puzzle.new(self, x, y, Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_frame], _frame)
 					
 					game.puzzle_blocks.append(_puzzle_blocks)
 					
 					# place the puzzle in this 2 dimentional var, so that it is easier to process later when player moves puzzle blocks at reference.gd.
-					Variables._puzzle_room_block_values[x - start_x - 1][y - start_y - 1] = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_frame]
+					Variables._puzzle_room_block_values[x - start_x - 1][y - start_y - 1] = Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_frame]
 	
 	
 	cut_regions(free_regions, room)

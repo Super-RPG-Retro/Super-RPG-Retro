@@ -58,45 +58,35 @@ func init():
 	
 func all_array_append():
 	for x in range (Variables._total_builder_data_directories):
-		data.dungeon_number.append([])
-		data.level_number.append([])
-		data.event_enabled.append([])
 		data.coordinates_static_location.append([])
-		data.coordinates_s_location.append([])
-		data.coordinates_e_location.append([])
-		data.move_total.append([])
-		data.color_when_solved.append([])
-		data.is_finished.append([])
 		
 		# dungeon number.
 		for y in range (8):
-			data.dungeon_number[x].append([])	
-			data.level_number[x].append([])	
-			data.event_enabled[x].append([])
 			data.coordinates_static_location[x].append([])
-			data.coordinates_s_location[x].append([])
-			data.coordinates_e_location[x].append([])
-			data.move_total[x].append([])
-			data.color_when_solved[x].append([])
-			data.is_finished[x].append([])
 			
 			# 8 dungeons times 100 levels is the total events. 803 value is plenty of events for the game.
 			for z in range (803):		
-				data.dungeon_number[x][y].append(0)
-				data.level_number[x][y].append(0)
-				data.event_enabled[x][y].append(0)
 				data.coordinates_static_location[x][y].append([])
-				data.coordinates_s_location[x][y].append([])
-				data.coordinates_e_location[x][y].append([])
-				data.move_total[x][y].append(0)
-				data.color_when_solved[x][y].append(0)
-				data.is_finished[x][y].append(0)
 				
 				# 169 is 13 rows starting at 1 times 13 columns starting at 1. 13 x 13 = 169.
 				for _p in range (170):
 					data.coordinates_static_location[x][y][z].append(0)
-					data.coordinates_s_location[x][y][z].append(0)
-					data.coordinates_e_location[x][y][z].append(0)
+					
+
+	# 800
+	data.dungeon_number = Builder._data.level_size.duplicate(true)
+	data.level_number = Builder._data.level_size.duplicate(true)
+	data.event_enabled = Builder._data.level_size.duplicate(true)
+	data.move_total = Builder._data.level_size.duplicate(true)
+	data.color_when_solve = Builder._data.level_size.duplicate(true)
+	data.is_finished = Builder._data.level_size.duplicate(true)
+	
+	# array not listed here will have a value of zero.
+	# nothing here yet
+
+	# 169
+	data.coordinates_s_location = data.coordinates_static_location.duplicate(true)
+	data.coordinates_e_location = data.coordinates_static_location.duplicate(true)
 					
 		
 func reset_game():

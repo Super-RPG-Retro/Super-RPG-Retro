@@ -217,111 +217,68 @@ func all_array_append():
 	for x in range (Variables._total_builder_data_directories):
 		# game id.
 		_data.level_size.append([])
-		_data.room_total.append([])
-		_data.room_size_max.append([])
-		_data.room_size_min.append([])
-		_data.mobs_total.append([])
-		_data.item_total.append([])
-		_data.event_room_size.append([])
-		_data.event_enabled.append([])
-		_data.store_items_enabled.append([])
-		_data.store_armor_enabled.append([])
-		_data.store_weapons_enabled.append([])
-		_data.save_point_enabled.append([])
-		_data.hide_random_corridor.append([])
-					
-		_next_event.dungeon_number.append([])
-		_next_event.level_number.append([])
-		_next_event.item_list.append([])
-		
-		_event_parent.category.append([])
-		_event_parent.dungeon_number.append([])
-		_event_parent.level_number.append([])
-		_event_parent.event_enabled.append([])
-		_event_parent.file_name.append([])
-		_event_parent.file_path_json.append([])
-		_event_parent.image_texture.append([])
-		_event_parent.directory_name.append([])
-		_event_parent.accepting_enabled.append([])
 		_event_parent.accepting_text.append([])
+		_next_event.level_number.append([])	
+		_event_parent.file_name.append([])
+		_next_event.dungeon_number.append([])
 				
 		# dungeon number.
 		for y in range (8):
 			_data.level_size[x].append([])
-			_data.room_total[x].append([])
-			_data.room_size_max[x].append([])
-			_data.room_size_min[x].append([])
-			_data.mobs_total[x].append([])
-			_data.item_total[x].append([])
-			_data.event_room_size[x].append([])
-			_data.event_enabled[x].append([])
-			_data.store_items_enabled[x].append([])
-			_data.store_armor_enabled[x].append([])
-			_data.store_weapons_enabled[x].append([])
-			_data.save_point_enabled[x].append([])
-			_data.hide_random_corridor[x].append([])
-					
-			_next_event.dungeon_number[x].append([])
-			_next_event.level_number[x].append([])
-			_next_event.item_list[x].append([])
-			
-			_event_parent.category[x].append([])
-			_event_parent.dungeon_number[x].append([])
-			_event_parent.level_number[x].append([])
-			_event_parent.event_enabled[x].append([])
-			_event_parent.file_name[x].append([])
-			_event_parent.file_path_json[x].append([])
-			_event_parent.image_texture[x].append([])
-			_event_parent.directory_name[x].append([])
-			_event_parent.accepting_enabled[x].append([])
 			_event_parent.accepting_text[x].append([])
+			_next_event.level_number[x].append([])
+			_event_parent.file_name[x].append([])
+			_next_event.dungeon_number[x].append([])
 			
 			# dungeon level number.
 			for z in range (803):			
-				_data.level_size[x][y].append(71)
-				_data.room_total[x][y].append(5)
-				_data.room_size_max[x][y].append(5)
-				_data.room_size_min[x][y].append(5)
-				_data.mobs_total[x][y].append(1)
-				_data.item_total[x][y].append(1)
-				_data.event_room_size[x][y].append(0)
-				_data.event_enabled[x][y].append(0)
-				_data.store_items_enabled[x][y].append(0)
-				_data.store_armor_enabled[x][y].append(0)
-				_data.store_weapons_enabled[x][y].append(0)
-				_data.save_point_enabled[x][y].append(0)
-				_data.hide_random_corridor[x][y].append(0)
-				
-				_event_parent.category[x][y].append(0)
-				_event_parent.dungeon_number[x][y].append(0)
-				_event_parent.level_number[x][y].append(0)
-				
-				_next_event.dungeon_number[x][y].append([])
-				_next_event.level_number[x][y].append([])
-				_next_event.item_list[x][y].append([])
-				
-				_event_parent.event_enabled[x][y].append(0)
-				_event_parent.file_name[x][y].append([])
-				_event_parent.file_path_json[x][y].append([])
-				_event_parent.image_texture[x][y].append([])
-				_event_parent.directory_name[x][y].append([])
-				_event_parent.accepting_enabled[x][y].append(0)
+				_data.level_size[x][y].append(0)
 				_event_parent.accepting_text[x][y].append("")
+				_next_event.level_number[x][y].append([])
+				_event_parent.file_name[x][y].append([])
+				_next_event.dungeon_number[x][y].append([])
 				
 				# directory index
 				for _z in range (20):
 					_event_parent.file_name[x][y][z].append([])
-					_event_parent.file_path_json[x][y][z].append([])
-					_event_parent.image_texture[x][y][z].append([])
-					_event_parent.directory_name[x][y][z].append([])
 				
 				# 40 possible events at builder. increase if you get an error here.
 				for _q in range (40): 
 					_next_event.dungeon_number[x][y][z].append(0)
-					_next_event.level_number[x][y][z].append(0)
-					_next_event.item_list[x][y][z].append(0)
-	
-	
+
+
+	_data.room_total = _data.level_size.duplicate(true)
+	_data.room_size_max = _data.level_size.duplicate(true)
+	_data.room_size_min = _data.level_size.duplicate(true)
+	_data.mobs_total = _data.level_size.duplicate(true)
+	_data.item_total = _data.level_size.duplicate(true)
+	_data.event_room_size = _data.level_size.duplicate(true)
+	_data.event_enabled = _data.level_size.duplicate(true)
+	_data.store_items_enabled = _data.level_size.duplicate(true)
+	_data.store_armor_enabled = _data.level_size.duplicate(true)
+	_data.store_weapons_enabled = _data.level_size.duplicate(true)
+	_data.save_point_enabled = _data.level_size.duplicate(true)
+	_data.hide_random_corridor = _data.level_size.duplicate(true)
+	_event_parent.category = _data.level_size.duplicate(true)
+	_event_parent.dungeon_number = _data.level_size.duplicate(true)
+	_event_parent.level_number = _data.level_size.duplicate(true)
+	_event_parent.event_enabled = _data.level_size.duplicate(true)
+	_event_parent.accepting_enabled = _data.level_size.duplicate(true)
+
+	_next_event.item_list = _next_event.level_number.duplicate(true)
+	_next_event.dungeon_number = _next_event.level_number.duplicate(true)
+	_event_parent.file_name = _next_event.level_number.duplicate(true)
+	_event_parent.file_path_json = _next_event.level_number.duplicate(true)
+	_event_parent.image_texture = _next_event.level_number.duplicate(true)
+	_event_parent.directory_name = _next_event.level_number.duplicate(true)
+
+	_event_parent.file_path_json = _event_parent.file_name.duplicate(true)
+	_event_parent.image_texture = _event_parent.file_name.duplicate(true)
+	_event_parent.directory_name = _event_parent.file_name.duplicate(true)
+
+	_next_event.level_number = _next_event.dungeon_number.duplicate(true)
+	_next_event.item_list = _next_event.dungeon_number.duplicate(true)
+
 	_event_inventory.all_array_append()
 	_event_locked_doors.all_array_append()
 	_event_puzzles.all_array_append()
@@ -331,7 +288,15 @@ func all_array_append():
 	_dictionary_artifacts.all_array_append()
 	_audio_music.all_array_append()
 	_library_cell.all_array_append()
-	
+
+	# default values for the first level.
+	_data.level_size[0][0].append(71)
+	_data.room_total[0][0].append(5)
+	_data.room_size_max[0][0].append(5)
+	_data.room_size_min[0][0].append(5)
+	_data.mobs_total[0][0].append(1)
+	_data.item_total[0][0].append(1)
+
 		
 # at builder project menu, request to reset game data has been made. the id of the game is passed to this constructor.
 func reset_game(x: int):

@@ -249,7 +249,7 @@ func scene_3d():
 		
 func play_library_music():
 	if Settings._system.music == true:
-		Common._music_play(Builder_playing._audio_music.data.file_name[6], 6, false)
+		Common._music_play(Builder_playing._audio_music.file_name[6], 6, false)
 		Variables._last_known_music_id = 6
 			
 func scene_2d():
@@ -591,7 +591,7 @@ func _music_stop():
 # play the music when entering this scene. music is looped.
 func play_game_ui_music():
 	if Settings._system.music == true:
-		Common._music_play(Builder_playing._audio_music.data.file_name[1], 1, false)
+		Common._music_play(Builder_playing._audio_music.file_name[1], 1, false)
 			
 
 # clean memory. user is either quitting to windows or returning to main menu.	

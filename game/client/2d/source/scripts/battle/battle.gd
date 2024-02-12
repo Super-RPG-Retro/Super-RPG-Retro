@@ -214,6 +214,6 @@ func _on_run_Button_pressed():
 
 func _music_play():
 	if Settings._system.music == true:
-		Common._music_play(Builder_playing._audio_music.data.file_name[1], 1, false)
+		Common._music_play(Builder_playing._audio_music.file_name[1], 1, false)
 		Variables._last_known_music_id = 1
 		

@@ -45,38 +45,17 @@ func init():
 	}	
 	
 
-func all_array_append():	
-	for x in range (Variables._total_builder_data_directories):
-		data.dungeon_number.append([])
-		data.level_number.append([])
-		data.unlock_at_dungeon_number.append([])
-		data.unlock_at_level_number.append([])
-		data.event_enabled.append([])
-		data.sprite_index.append([])
-		data.story_text.append([])
-		data.is_finished.append([])
-		
-		# dungeon number.
-		for y in range (8):
-			data.dungeon_number[x].append([])
-			data.level_number[x].append([])
-			data.unlock_at_dungeon_number[x].append([])
-			data.unlock_at_level_number[x].append([])
-			data.event_enabled[x].append([])
-			data.sprite_index[x].append([])
-			data.story_text[x].append([])
-			data.is_finished[x].append([])
-			
-			# 8 dungeons times 100 levels is the total events. 803 value is plenty of events for the game.
-			for _z in range (803):			
-				data.dungeon_number[x][y].append(0)
-				data.level_number[x][y].append(0)
-				data.unlock_at_dungeon_number[x][y].append(0)
-				data.unlock_at_level_number[x][y].append(0)
-				data.event_enabled[x][y].append(0)
-				data.sprite_index[x][y].append(0)
-				data.story_text[x][y].append("")
-				data.is_finished[x][y].append(0)
+func all_array_append():
+	# 800
+	# array not listed here will have a value of zero.
+	data.dungeon_number = Builder._data.level_size.duplicate(true)
+	data.level_number = Builder._data.level_size.duplicate(true)
+	data.unlock_at_dungeon_number = Builder._data.level_size.duplicate(true)
+	data.unlock_at_level_number = Builder._data.level_size.duplicate(true)
+	data.event_enabled = Builder._data.level_size.duplicate(true)
+	data.sprite_index = Builder._data.level_size.duplicate(true)
+	data.is_finished = Builder._data.level_size.duplicate(true)
+	data.story_text = Builder._data.accepting_text.duplicate(true)
 	
 
 func reset_game():

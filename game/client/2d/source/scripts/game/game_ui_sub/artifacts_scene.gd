@@ -16,9 +16,9 @@ class_name ArtifactsScene
 const _artifacts:= []
 
 func _ready():
-	Builder_playing._dictionary_artifacts.data.owned[0] = false
-	Builder_playing._dictionary_artifacts.data.owned[1] = true
-	Builder_playing._dictionary_artifacts.data.owned[2] = false
+	Builder_playing._dictionary_artifacts.owned[0] = false
+	Builder_playing._dictionary_artifacts.owned[1] = true
+	Builder_playing._dictionary_artifacts.owned[2] = false
 	draw_Artifacts_icons()
 
 # draw Artifacts to scene.
@@ -31,11 +31,11 @@ func draw_Artifacts_icons():
 	for _r in range (50):
 		_i += 1
 		
-		if Builder_playing._dictionary_artifacts.data.file_name[_r] != "":
+		if Builder_playing._dictionary_artifacts.file_name[_r] != "":
 			# set each image texture to a node. the node is TextureRect. the reason is to get the mouse entering/exiting events.			
-			get_node("Artifacts/Sprite2D" + str(_r + 1)).texture = Filesystem._load_external_image(Builder_playing._dictionary_artifacts.data.image_texture[_r])
+			get_node("Artifacts/Sprite2D" + str(_r + 1)).texture = Filesystem._load_external_image(Builder_playing._dictionary_artifacts.image_texture[_r])
 			
-			if bool(Builder_playing._dictionary_artifacts.data.owned[_r]) == false:
+			if bool(Builder_playing._dictionary_artifacts.owned[_r]) == false:
 				get_node("Artifacts/Sprite2D" + str(_r + 1)).modulate = Color(0, 0, 3, 20) # blue shade
 			
 			# remove signals because we are about to add new signals for this group.

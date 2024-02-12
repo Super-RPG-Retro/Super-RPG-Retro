@@ -15,37 +15,52 @@ You should have received a copy of the GNU Affero General Public License along w
 extends Node
 
 
-var _event_inventory 		= load("res://singletons/builder/events/inventory.gd").new()
-var _event_locked_doors 	= load("res://singletons/builder/events/locked_doors.gd").new()
-var _event_puzzles 			= load("res://singletons/builder/events/puzzles.gd").new()
-var _event_story 			= load("res://singletons/builder/events/story.gd").new()
-var _event_tasks 			= load("res://singletons/builder/events/tasks.gd").new()
+var _event_inventory 				= null
+var _event_locked_doors 			= null
+var _event_puzzles 					= null
+var _event_story 					= null
+var _event_tasks 					= null
+var _dictionary_artifacts 			= null
+var _audio_music 					= null
+var _library_cell	 				= null
+var _config 						= null
+var _data 							= null
+var _next_event						= null
+var _event_parent					= null
+var _starting_skills 				= null
 
-var _dictionary_artifacts 	= load("res://singletons/builder/dictionaries/artifacts.gd").new()
-var _audio_music 			= load("res://singletons/builder/audio/music.gd").new()
 
-var _library_cell 			= load("res://singletons/builder/library/cells.gd").new()
-
-var _config 					:= Builder._config.duplicate(true)
-
-var _data 						:= Builder._data.duplicate(true)
-
-var _next_event 				:= Builder._next_event.duplicate(true)
-
-var _event_parent 				:= Builder._event_parent.duplicate(true)
-
-var _starting_skills 				:= Builder._starting_skills.duplicate(true)
+func all_array_append():
+	_event_inventory 	 		= Builder._event_inventory.data.duplicate(true)
+	_event_locked_doors 		= Builder._event_locked_doors.data.duplicate(true)
+	_event_puzzles 				= Builder._event_puzzles.data.duplicate(true)
+	_event_story				= Builder._event_story.data.duplicate(true)
+	_event_tasks 				= Builder._event_tasks.data.duplicate(true)
+	_dictionary_artifacts 		= Builder._dictionary_artifacts.data.duplicate(true)
+	_audio_music 				= Builder._audio_music.data.duplicate(true)
+	_library_cell 				= Builder._library_cell.data.duplicate(true)
+	_config 					= Builder._config.duplicate(true)
+	_data 						= Builder._data.duplicate(true)
+	_next_event 				= Builder._next_event.duplicate(true)
+	_event_parent 				= Builder._event_parent.duplicate(true)
+	_starting_skills 			= Builder._starting_skills.duplicate(true)
 
 
 func _exit_tree():
-	_event_inventory.queue_free()
-	_event_locked_doors.queue_free()
-	_event_puzzles.queue_free()
-	_event_story.queue_free()
-	_event_tasks.queue_free()
+	_event_inventory.clear()
+	_event_locked_doors.clear()
+	_event_puzzles.clear()
+	_event_story.clear()
+	_event_tasks.clear()
 	
-	_dictionary_artifacts.queue_free()	
-	_audio_music.queue_free()
-	_library_cell.queue_free()
+	_dictionary_artifacts.clear()
+	_audio_music.clear()
+	_library_cell.clear()
+
+	_config.clear()
+	_data.clear()
+	_next_event.clear()
+	_event_parent.clear()
+	_starting_skills.clear() 	
 	
 	queue_free()

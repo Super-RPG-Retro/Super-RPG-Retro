@@ -609,7 +609,7 @@ class Puzzle extends RefCounted:
 				_i += 1
 				# place the puzzle in this 2 dimentional var, so that it is easier to process later when player moves puzzle blocks at reference.gd.
 				if Variables._block_id == _default_id:
-					Variables._puzzle_room_block_values[xx][yy] = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i]
+					Variables._puzzle_room_block_values[xx][yy] = Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_i]
 		"""
 						
 	# this func is used to move the block in the direction the player is moving, so the block stays overtop of the player's head.			
@@ -630,14 +630,14 @@ class Puzzle extends RefCounted:
 							
 							Variables._puzzle_room_block_values[_block_grabbed_at.x][_block_grabbed_at.y] = 0
 						
-							Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i] = Variables._puzzle_room_block_values[xx][yy]
+							Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_i] = Variables._puzzle_room_block_values[xx][yy]
 				
 				if dx == 1:
 					blocks._sprite_scene.get_node("Sprite2D").position.x += 32
 					blocks.tile.x += 1
 					
 					# the position of the block might have changed, so update the id which refers to the location of that block on the main map.					
-					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
+					Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id] = 0
 					
 					Variables._block_id += 1
 										
@@ -645,7 +645,7 @@ class Puzzle extends RefCounted:
 					blocks._sprite_scene.get_node("Sprite2D").position.x -= 32
 					blocks.tile.x -= 1
 					
-					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
+					Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id] = 0
 					
 					Variables._block_id -= 1
 					
@@ -653,7 +653,7 @@ class Puzzle extends RefCounted:
 					blocks._sprite_scene.get_node("Sprite2D").position.y += 32
 					blocks.tile.y += 1
 					
-					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
+					Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id] = 0
 					
 					Variables._block_id += 13
 					
@@ -661,7 +661,7 @@ class Puzzle extends RefCounted:
 					blocks._sprite_scene.get_node("Sprite2D").position.y -= 32
 					blocks.tile.y -= 1
 					
-					Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] = 0
+					Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id] = 0
 					
 					Variables._block_id -= 13
 					
@@ -699,7 +699,7 @@ class Puzzle extends RefCounted:
 					if Variables._block_id_old == _i:
 						Variables._puzzle_room_block_values[xx][yy] = 0		
 						
-						Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i] = 0	
+						Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_i] = 0	
 			
 					
 			_sprite_scene.get_tree().call_group("game_audio", "play_puzzle_sound", 
@@ -713,7 +713,7 @@ class Puzzle extends RefCounted:
 			
 			game._player_holding_puzzle_block = false
 			
-			Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][Variables._block_id] = _block_placed_on_ground
+			Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][Variables._block_id] = _block_placed_on_ground
 			
 			blocks._id = Variables._block_id
 			_redraw_blocks(game)
@@ -721,7 +721,7 @@ class Puzzle extends RefCounted:
 			game._event_puzzle_move_total -= 1
 				
 			# if current puzzle matches the layout of what the end layout looks like then play a success sound.
-			if Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number] == Builder_playing._event_puzzles.data.coordinates_e_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number]:
+			if Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number] == Builder_playing._event_puzzles.coordinates_e_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number]:
 				_sprite_scene.get_tree().call_group("game_audio", "play_puzzle_sound", 
 			Enum.Puzzle_sounds.Puzzle_success)
 				
@@ -731,7 +731,7 @@ class Puzzle extends RefCounted:
 			elif game._event_puzzle_move_total == 0:
 				game._event_puzzle_move_total = -1
 				
-				if Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number] != Builder_playing._event_puzzles.data.coordinates_e_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number]:
+				if Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number] != Builder_playing._event_puzzles.coordinates_e_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number]:
 					_sprite_scene.get_tree().call_group("game_audio", "play_puzzle_sound", 
 			Enum.Puzzle_sounds.Puzzle_failed)
 					
@@ -753,7 +753,7 @@ class Puzzle extends RefCounted:
 				_i += 1
 				# place the puzzle in this 2 dimentional var, so that it is easier to process later when player moves puzzle blocks.
 				if Variables._block_id == _i:
-					Variables._puzzle_room_block_values[xx][yy] = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i]
+					Variables._puzzle_room_block_values[xx][yy] = Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_i]
 		
 
 		# this is the location of the block when block is placed back on the map.
@@ -762,12 +762,12 @@ class Puzzle extends RefCounted:
 			for xx in range (13):
 				_i += 1
 				
-				Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][_i] = Variables._puzzle_room_block_values[xx][yy]
+				Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][_i] = Variables._puzzle_room_block_values[xx][yy]
 		
 		# update all the sprites textures.
 		for blocks in game.puzzle_blocks:		
-			if Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id] > 0:
-				blocks._sprite_scene.get_node("Sprite2D").frame = Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number][blocks._id]
+			if Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id] > 0:
+				blocks._sprite_scene.get_node("Sprite2D").frame = Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number][blocks._id]
 						
 		Variables._block_id = -1
 					
@@ -815,7 +815,7 @@ class Puzzle extends RefCounted:
 			print(str(Variables._puzzle_room_block_values[0][y]) + " " + str(Variables._puzzle_room_block_values[1][y]) + " " + str(Variables._puzzle_room_block_values[2][y]) + " " + str(Variables._puzzle_room_block_values[3][y]) + " " + str(Variables._puzzle_room_block_values[4][y]) + " " + str(Variables._puzzle_room_block_values[5][y]) + " " + str(Variables._puzzle_room_block_values[6][y]) + " " + str(Variables._puzzle_room_block_values[7][y]) + " " + str(Variables._puzzle_room_block_values[8][y]) + " " + str(Variables._puzzle_room_block_values[9][y]) + " " + str(Variables._puzzle_room_block_values[10][y]) + " " + str(Variables._puzzle_room_block_values[11][y]) + " " + str(Variables._puzzle_room_block_values[12][y]))
 				
 		print("")
-		print(Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number])
+		print(Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number])
 		"""
 		
 		# rx = top left coodinates of room,

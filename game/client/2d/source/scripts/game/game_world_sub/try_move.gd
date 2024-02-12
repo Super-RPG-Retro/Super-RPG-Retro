@@ -362,6 +362,6 @@ func _on_TimerYield_timeout():
 
 func _music_play():
 	if Settings._system.music == true:
-		Common._music_play(Builder_playing._audio_music.data.file_name[3], 3, false)
+		Common._music_play(Builder_playing._audio_music.file_name[3], 3, false)
 		Variables._last_known_music_id = 3
 	

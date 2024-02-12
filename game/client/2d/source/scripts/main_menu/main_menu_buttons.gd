@@ -368,8 +368,7 @@ func _on_ButtonPlay_pressed():
 	if _temp == null:
 		Settings._game.level_number = Builder._data.starting_level - 1
 	
-	Filesystem.builder_playing_load_data()
-	
+	Builder_playing.all_array_append()
 	var _s = get_tree().change_scene_to_file("res://2d/source/scenes/game/game_ui.tscn")
 		
 

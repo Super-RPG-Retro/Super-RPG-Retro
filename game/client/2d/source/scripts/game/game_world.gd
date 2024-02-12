@@ -106,10 +106,10 @@ func _ready():
 	_total_level_enemy = Builder_playing._data.mobs_total[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._data.level_number]
 	_total_level_item = Builder_playing._data.item_total[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._data.level_number]
 	
-	_event_puzzle_move_total = Builder_playing._event_puzzles.data.move_total[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number] + 1
+	_event_puzzle_move_total = Builder_playing._event_puzzles.move_total[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number] + 1
 	
 	# always start with the static puzzle layout for the room.
-	Builder_playing._event_puzzles.data.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number] = Builder_playing._event_puzzles.data.coordinates_static_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.data.event_number]
+	Builder_playing._event_puzzles.coordinates_s_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number] = Builder_playing._event_puzzles.coordinates_static_location[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][Builder_playing._event_puzzles.event_number]
 	
 	Variables._block_id = -1
 	Variables._block_id_old = -1
@@ -152,15 +152,15 @@ func _ready():
 	tiles_change_on_level_load()	
 	
 	# the true value of the event may be set below if there is an event to be set.
-	Builder_playing._event_puzzles.data.event_number = 802
+	Builder_playing._event_puzzles.event_number = 802
 	
 	# 800 events total. 8 dungeons times 99 levels is the total events. 800 value is plenty of events for the game.
 	# get the event number for this dungeon number and level number.
 	# events could also be triggered when talking to someone or when opening a chest.
 	# __i = event_number
 	for _i in range (99):
-		if Builder_playing._data.dungeon_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][_i] and Builder_playing._data.level_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.level_number][_i] and bool(Builder_playing._event_puzzles.data.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][_i]) == true:
-			Builder_playing._event_puzzles.data.event_number = _i
+		if Builder_playing._data.dungeon_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.dungeon_number][_i] and Builder_playing._data.level_number == Builder._event_puzzles.data.dungeon_number[Builder._config.game_id][Builder._data.level_number][_i] and bool(Builder_playing._event_puzzles.event_enabled[Builder_playing._config.game_id][Builder_playing._data.dungeon_number][_i]) == true:
+			Builder_playing._event_puzzles.event_number = _i
 			break
 	
 	build.build_level()

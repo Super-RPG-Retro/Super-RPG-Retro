@@ -45,44 +45,19 @@ func init():
 	
 
 func all_array_append():
-	# id
-	for w in range (Variables._total_builder_data_directories):
-		data.event_enabled.append([])
-		data.file_name.append([])
-		data.file_path_json.append([])
-		data.image_texture.append([])
-		data.directory_name.append([])
-		data.amount.append([])
-		data.is_finished.append([])
-		
-		# dungeon number.
-		for x in range (8):
-			data.event_enabled[w].append([])
-			data.file_name[w].append([])
-			data.file_path_json[w].append([])
-			data.image_texture[w].append([])
-			data.directory_name[w].append([])	
-			data.amount[w].append([])
-			data.is_finished[w].append([])
-			
-			# 8 dungeons times 100 levels is the total events. 803 value is plenty of events for the game.
-			for y in range (803):			
-				# amount of items in inventory for the current event and dungeon. builder inventory takes this data and places it in a single list.
-				data.event_enabled[w][x].append(0)
-				data.file_name[w][x].append([])
-				data.file_path_json[w][x].append([])
-				data.image_texture[w][x].append([])
-				data.directory_name[w][x].append([])
-				data.amount[w][x].append(1)	
-				data.is_finished[w][x].append(0)
-			
-				# directory index
-				for _z in range (20):
-					data.file_name[w][x][y].append([])
-					data.file_path_json[w][x][y].append([])
-					data.image_texture[w][x][y].append([])
-					data.directory_name[w][x][y].append([])
-				
+	# 800
+	data.event_enabled = Builder._data.level_size.duplicate(true)
+	data.is_finished = Builder._data.level_size.duplicate(true)
+	data.amount = Builder._data.level_size.duplicate(true)
+
+	# array not listed here will have a value of zero.
+	data.amount[0][0] = 1
+
+	# 20
+	data.file_name = Builder._event_parent.file_name.duplicate(true)
+	data.file_path_json = Builder._event_parent.file_name.duplicate(true)
+	data.image_texture = Builder._event_parent.file_name.duplicate(true)
+	data.directory_name = Builder._event_parent.file_name.duplicate(true)
 
 func reset_game():
 	data.event_enabled.clear()	

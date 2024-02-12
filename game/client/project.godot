@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Super RPG Retro client"
 run/main_scene="res://2d/source/scenes/boot_splash/splash.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.1")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/image="res://2d/assets/images/title.png"
@@ -23,16 +23,16 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+Variables="*res://singletons/variables.gd"
 Builder="*res://singletons/builder/builder.gd"
 Builder_playing="*res://singletons/builder/builder_playing.gd"
-Variables="*res://singletons/variables.gd"
 Settings="*res://singletons/settings.gd"
 Enum="*res://singletons/enum.gd"
 Filesystem="*res://singletons/filesystem.gd"
 Common="*res://singletons/common.gd"
 Json="*res://singletons/json.gd"
 Clock="*res://singletons/clock.gd"
-P="*res://singletons/p.gd"
+PC="*res://singletons/pc.gd"
 Hud="*res://singletons/hud.gd"
 Inventory="*res://singletons/inventory.gd"
 Tiles="*res://singletons/tiles.gd"
@@ -41,6 +41,9 @@ Minimap="*res://singletons/minimap.gd"
 
 [debug]
 
+file_logging/enable_file_logging=true
+file_logging/log_path="res://godot.log"
+file_logging/max_log_files=1
 gdscript/warnings/onready_with_export=0
 
 [display]
@@ -50,7 +53,6 @@ window/size/viewport_height=600
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
-window/vsync/vsync_mode=0
 window/stretch/shrink=1.0
 
 [filesystem]
@@ -170,16 +172,6 @@ ui_delete={
 ui_play={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":true,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":80,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-ui_right_mouse_click={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
-]
-}
-ui_left_mouse_click={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
 

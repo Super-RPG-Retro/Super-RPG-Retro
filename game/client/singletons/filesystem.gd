@@ -420,7 +420,7 @@ func delete_builder_playing_data(path):
 				printerr("could not remove " + str(path))
 				
 
-# this creates the sub-directories where the game id are saved abd kiaded from.
+# this creates the sub-directories where the game id are saved and readed from.
 func _make_saved_data_directories():
 	if !DirAccess.dir_exists_absolute("user://saved_data"):
 		DirAccess.make_dir_absolute("user://saved_data")
@@ -436,14 +436,13 @@ func _make_saved_data_directories():
 			break
 
 
-# this calls a func to load the builder data then a builder var is assigned to that loaded data.
+# get new builder data if possible then store builder default or new data into the builder_playing file.
 func builder_load_data():	
 	var _temp = Filesystem.load_dictionary("user://saved_data/builder_data_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
 	
 	if _temp != null:
 		Builder._data = _temp
 	
-	Builder_playing._data = Builder._data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_config.txt")
@@ -451,7 +450,6 @@ func builder_load_data():
 	if _temp != null:
 		Builder._config = _temp
 	
-	Builder_playing._config = Builder._config.duplicate(true)
 	
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_puzzles_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -459,7 +457,6 @@ func builder_load_data():
 	if _temp != null:
 		Builder._event_puzzles.data = _temp
 	
-	Builder_playing._event_puzzles.data = Builder._event_puzzles.data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_tasks_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -467,7 +464,6 @@ func builder_load_data():
 	if _temp != null:
 		Builder._event_tasks.data = _temp
 	
-	Builder_playing._event_tasks.data = Builder._event_tasks.data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_parent_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -475,7 +471,6 @@ func builder_load_data():
 	if _temp != null:
 		Builder._event_parent = _temp
 	
-	Builder_playing._event_parent = Builder._event_parent.duplicate(true)
 				
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_story_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -483,7 +478,6 @@ func builder_load_data():
 	if _temp != null:
 		Builder._event_story.data = _temp
 	
-	Builder_playing._event_story.data = Builder._event_story.data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_next_event_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -491,15 +485,13 @@ func builder_load_data():
 	if _temp != null:
 		Builder._next_event = _temp
 	
-	Builder_playing._next_event = Builder._next_event.duplicate(true)
-		
+
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_locked_doors_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
 	
 	if _temp != null:
 		Builder._event_locked_doors.data = _temp
 	
-	Builder_playing._event_locked_doors.data = Builder._event_locked_doors.data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_event_inventory_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt")
@@ -507,23 +499,12 @@ func builder_load_data():
 	if _temp != null:
 		Builder._event_inventory.data = _temp
 	
-	Builder_playing._event_inventory.data = Builder._event_inventory.data.duplicate(true)
 		
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_dictionary_artifacts_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
 		Builder._dictionary_artifacts.data = _temp
-	
-	Builder_playing._dictionary_artifacts.data = Builder._dictionary_artifacts.data.duplicate(true)
-		
-	_temp = null
-	_temp = Filesystem.load_dictionary("user://saved_data/builder_audio_music_" + str(Builder._config.game_id) + ".txt")
-	
-	if _temp != null:
-		Builder._audio_music.data = _temp
-	
-	Builder_playing._audio_music.data = Builder._audio_music.data.duplicate(true)
 	
 	
 	_temp = null
@@ -532,37 +513,40 @@ func builder_load_data():
 	if _temp != null:
 		Builder._starting_skills = _temp 
 		
-	Builder_playing._starting_skills = Builder._starting_skills.duplicate(true)	
-		
 	
 	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/builder_library_cells_" + str(Builder._config.game_id) + ".txt")
 	
 	if _temp != null:
 		Builder._library_cell.data = _temp 
-		
-	Builder_playing._library_cell.data = Builder._library_cell.data.duplicate(true)	
+
+	load_music_data()
+
+
+func load_music_data():
+	var _temp = null
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_audio_music_" + str(Builder._config.game_id) + ".txt")
 	
-	
-	
-	Builder_playing._event_inventory.data 				= Builder._event_inventory.data.duplicate(true)
-
-	Builder_playing._event_locked_doors.data 			= Builder._event_locked_doors.data.duplicate(true)
-
-	Builder_playing._event_puzzles.data 				= Builder._event_puzzles.data.duplicate(true)
-
-	Builder_playing._event_story.data 					= Builder._event_story.data.duplicate(true)
-
-	Builder_playing._event_tasks.data					= Builder._event_tasks.data.duplicate(true)
-
-	Builder_playing._dictionary_artifacts.data			= Builder._dictionary_artifacts.data.duplicate(true)
-
-	Builder_playing._audio_music.data					= Builder._audio_music.data.duplicate(true)
+	if _temp != null:
+		Builder._audio_music.data = _temp
 
 
 # these are the builder vars used while playing. these vars are loaded here from disk.
-func builder_playing_load_data():	
-	var _temp = null
+func builder_playing_load_data():
+	# instead of Builder._data.dungeon_number, maybe all dungeon should be loaded/saved at all code that use this var.
+	var _temp = Filesystem.load_dictionary("user://saved_data/builder_data_" + str(Variables._id_of_loaded_game) + "_" + str(Builder._data.dungeon_number) + ".txt")
+	
+	if _temp != null:
+		Builder_playing._data = _temp
+	
+		
+	_temp = null
+	_temp = Filesystem.load_dictionary("user://saved_data/builder_config.txt")
+	
+	if _temp != null:
+		Builder_playing._config = _temp
+
+	_temp = null
 	_temp = Filesystem.load_dictionary("user://saved_data/" + str(Variables._id_of_loaded_game) + "/builder/event_puzzles.txt")
 	
 	if _temp != null:
@@ -632,6 +616,10 @@ func builder_playing_load_data():
 
 # save all builder data.
 func builder_save_data():
+	Filesystem.save("user://saved_data/builder_data_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._data)
+	
+	Filesystem.save("user://saved_data/builder_config.txt", Builder._config)
+
 	Filesystem.save("user://saved_data/builder_event_tasks_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_tasks.data)	
 	
 	Filesystem.save("user://saved_data/builder_event_story_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_story.data)
@@ -641,10 +629,6 @@ func builder_save_data():
 	Filesystem.save("user://saved_data/builder_event_locked_doors_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_locked_doors.data)
 	
 	Filesystem.save("user://saved_data/builder_event_inventory_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_inventory.data)
-	
-	Filesystem.save("user://saved_data/builder_data_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._data)
-	
-	Filesystem.save("user://saved_data/builder_config.txt", Builder._config)
 		
 	Filesystem.save("user://saved_data/builder_event_parent_" + str(Builder._config.game_id) + "_" + str(Builder._data.dungeon_number) + ".txt", Builder._event_parent)
 	

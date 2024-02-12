@@ -13,6 +13,14 @@ You should have received a copy of the GNU Affero General Public License along w
 # vars are placed here when they cannot be placed in amy other singleton. they are used game wide, simular to triggers.
 extends Node
 
+
+var label_above_progress_bar_current_value := ""
+
+# this value is set to zero when this value equals the max_value of the progress_bar scene. when that happens, a 1 second await will be used in case another progress_bar code is used so that the progress_bar 100 percent complete is seen. the progress_bar.value always equals this value. both the await code and progress_bar.value are run at the _process func.
+var _progress_bar_current_value = 0
+var _progress_bar_max_value = 0
+
+
 var mouse_at_viewport := false
 
 # stops player from moving when player first enters the library.

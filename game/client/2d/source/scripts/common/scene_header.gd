@@ -42,7 +42,7 @@ func _on_ButtonExit_pressed():
 		return
 		
 	if Variables._at_scene == Enum.Scene.Builder:
-		Filesystem.populate_json_dictionaries()
+		#Filesystem.populate_json_dictionaries()
 		
 		get_tree().call_group("builder", "_return_to_main_menu")	
 		return

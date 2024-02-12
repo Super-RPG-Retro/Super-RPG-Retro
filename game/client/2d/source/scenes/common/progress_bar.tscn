@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnfsx638ft3wl"]
+
+[ext_resource type="Theme" uid="uid://b1mllftlbva2u" path="res://2d/assets/themes/theme.tres" id="2"]
+[ext_resource type="Script" path="res://2d/source/scripts/common/progress_bar.gd" id="2_nono1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4o16"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxdfb"]
+bg_color = Color(0.113725, 0.0117647, 0.87451, 1)
+
+[node name="ProgressBar" type="ProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -18.0
+offset_right = 192.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+theme_override_styles/background = SubResource("StyleBoxFlat_i4o16")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bxdfb")
+min_value = 1.0
+max_value = 402.0
+value = 1.0
+script = ExtResource("2_nono1")
